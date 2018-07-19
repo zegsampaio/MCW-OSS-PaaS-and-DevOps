@@ -47,9 +47,11 @@ In this task, you will create an Azure resource group for the resources used thr
 
 In this task, you will provision a Linux virtual machine (VM) running Ubuntu Server 16.04 LTS, which will be used as your development machine throughout this lab. The VM will be created using an Azure Resource Manager (ARM) template from a GitHub repository. The ARM template includes a custom extension script which installs Docker, Visual Studio Code (VS Code), MongoDB, and other required software on the VM. The ARM template also adds an inbound port rule that opens port 3389 on the network security group for the VM to allow RDP connections. To review the steps to manually provision the VM and installed software, see [Appendix A](#_Appendix_A:_Lab).
 
-1.  To open a custom deployment screen in the Azure portal click the following link
+1.  To open a custom deployment screen in the Azure portal select the Deploy to Azure button below
 
-    <https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FZoinerTejada%2Fmcw-oss-paas-devops%2Fmaster%2FLabVM%2Fazure-deploy.json>
+    <a href ="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FZoinerTejada%2Fmcw-oss-paas-devops%2Fmaster%2FLabVM%2Fazure-deploy.json" target="_blank" title="Deploy to Azure">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+    </a>
 
 2.  On the custom deployment screen in the Azure portal, enter the following:
 
