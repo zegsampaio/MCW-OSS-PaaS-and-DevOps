@@ -74,7 +74,7 @@ Each whiteboard design session uses the following flow:
 
 **Step 1: Review the customer case study (15 minutes)**
 
-Outcome: Analyze your customer's needs
+Outcome: Analyze your customer's needs.
 
 - Customer's background, situation, needs and technical requirements
 - Current customer infrastructure and architecture
@@ -82,7 +82,7 @@ Outcome: Analyze your customer's needs
 
 **Step 2: Design a proof of concept solution (60 minutes)**
 
-Outcome: Prepare to present a solution for your target customer audience
+Outcome: Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
 
 - Determine your target customer audience
 - Determine customer's business needs to address your solution
@@ -91,7 +91,7 @@ Outcome: Prepare to present a solution for your target customer audience
 
 **Step 3: Present the solution (30 minutes)**
 
-Outcome: Present solution to your customer
+Outcome: Present solution to your customer.
 
 - Present solution
 - Respond to customer objections
@@ -120,7 +120,7 @@ Before conducting your first whiteboard design session:
 When participants are doing activities, you can **look ahead to refresh your memory**.
 
 - **Adjust activity and whiteboard design session pace** as needed to allow time for presenting, feedback, and sharing
-- **Add examples, points, and stories** from your own experience. Think about stories you can share that help you make your points clearly and effectively
+- **Add examples, points, and stories** from your own experience. Think about stories you can share that help you make your points clearly and effectively.
 - **Consider creating a "parking lot"** to record issues or questions raised that are outside the scope of the whiteboard design session or can be answered later. Decide how you will address these issues, so you can acknowledge them without being derailed by them.
 
 ***Have fun**! Encourage participants to have fun and share!*
@@ -153,7 +153,9 @@ Attendees will learn how to:
 **Outcome** 
 
 Analyze your customer’s needs.
-Time frame: 15 minutes
+
+Timeframe: 15 minutes
+
 Directions: With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
 
 1. Meet your table participants and trainer
@@ -222,9 +224,10 @@ Best For You Organics is optimistic about the benefits of moving to a PaaS solut
 ## Step 2: Design a proof of concept solution
 
 **Outcome**
+
 Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
 
-Time frame: 60 minutes
+Timeframe: 60 minutes
 
 **Business needs**
 
@@ -234,6 +237,7 @@ Directions: With all participants at your table, answer the following questions 
 2. What customer business needs do you need to address with your solution?
 
 **Design**
+
 Directions: With all participants at your table, respond to the following questions on a flip chart.
 
 *High-level architecture*
@@ -288,7 +292,7 @@ Prepare a 15-minute chalk-talk style presentation to the customer.
  
 Present a solution to the target customer audience in a 15-minute chalk-talk format.
 
-Time frame: 30 minutes
+Timeframe: 30 minutes
 
 **Presentation** 
 
@@ -304,9 +308,9 @@ Directions:
 
 ## Wrap-up
 
-Time frame: 15 minutes
+Timeframe: 15 minutes
 
-- Tables reconvene with the larger group to hear a SME share the preferred solution for the case study
+Directions: Tables reconvene with the larger group to hear the facilitator/SME share the preferred solution for the case study.
 
 ## Additional references
 
@@ -350,14 +354,12 @@ Time frame: 15 minutes
 - For the first round, assign one table as the Microsoft team and the other table as the customer
 - Have the Microsoft team present their solution to the customer team
   - Have the customer team provide one objection for the Microsoft team to respond to
-  - The presentation and objections should be no longer than 10 minutes
-- Have participants on the customer team give feedback to the Microsoft team
-  - The feedback should be no longer than 5 minutes
+  - The presentation, objections, and feedback should take no longer than 15 minutes
   - If needed, the trainer may also provide feedback
 
 ## Wrap-up
 
-- Have the table participants reconvene with the larger session group to hear a SME share the following preferred solution
+-   Have the table participants reconvene with the larger session group to hear the facilitator/SME share the following preferred solution
 
 ## Preferred target audience
 
@@ -545,8 +547,10 @@ After reviewing the available options for transitioning their applications to a 
     A Serverless Architecture, as the name implies, aims to provide a solution architecture where concern for individual servers is minimized. While the term "Serverless" has varying interpretations, it typically includes the following characteristics:
 
     - The extensive use of ephemeral services, including and especially the processing capability (e.g., it can be started nearly instantaneously without pre-provisioning on your part)
+    
     - A focus entirely on scaling the capabilities that support the business logic
     - The capability is scaled transparently at a very granular level (e.g. scaling occurs on a per request or function invocation basis and not on an all up server load basis)
+    
     - Cost is typically associated with time spent supporting business logic computation, not on the time server resources are available to handle requests
 
     In Azure, Functions is a prime component of a serverless architecture, but not the only service that may be utilized in one. Other Azure Services that, by this definition, can be composed into a serverless architecture include: Logic Apps, Azure Storage Blobs, Tables and Queues, Azure Data Lake Store, API Management, CDN, Media Services, Notification Hubs, IoT Hub, and Service Bus.
