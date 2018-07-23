@@ -104,7 +104,7 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
 
 In this task, you will provision an Azure Linux VM, which will serve as your Jenkins server for this hands-on lab.
 
-1.  In the Azure portal, select **+Create a resource**, enter "Jenkins" into the **Search the Marketplace** box, then select the **Jenkins** compute item from the results.
+1.  In the Azure portal, select **+Create a resource**, enter "Jenkins" into the **Search the Marketplace** box, then select the **Jenkins** compute item from the results
 
     ![+ Create a resource is highlighted in the navigation pane of the Azure portal, and Everything is highlighted to the right. On the Everything blade to the right, jenkins is highlighted in the search box, and the Jenkins row is highlighted in the search results.](images/Setup/image5.png "Azure Portal")
 
@@ -144,10 +144,11 @@ In this task, you will provision an Azure Linux VM, which will serve as your Jen
     
     ![Additional Settings is selected on the Create Jenkins blade, SSD and Subnets are selected on the Additional Settings blade in the middle, and OK is selected on the Subnets blade at right.](images/Setup/image8.png "Proceed to the summary screen")
 
-6.  On the **Integration Settings** blade, select **OK**. 
+6.  On the **Integration Settings** blade, select **OK**
+
     ![Integration Settings is selected on the Create Jenkins blade. On the Jenkins Integration Settings blade to the right, VM is selected, and OK is selected at the bottom.](images/Setup/image9.png "Select OK on the Jenkins Integration Settings blade")
 
-7.  On the **Summary** blade, ensure validation passed, and select **OK**.
+7.  On the **Summary** blade, ensure validation passed, and select **OK**
 
     ![Summary is selected on the Create Jenkins blade. Validation information is displayed on the Summary blade to the right, and OK is selected at the bottom.](images/Setup/image10.png "Ensure that validation passed")
 
@@ -167,11 +168,11 @@ In this task, you will sign up for a free GitHub account, which will be used for
 
     ![This is a screenshot of the sign-up form on github.com.](images/Setup/image12.png "Sign up for GitHub")
 
-3.  On the Welcome to GitHub screen, select **Unlimited public repositories free** under **Choose your personal plan**, and select **Continue**.
+3.  On the Welcome to GitHub screen, select **Unlimited public repositories free** under **Choose your personal plan**, and select **Continue**
 
     ![Unlimited public repositories free is selected under Choose your personal plan on the Welcome to GitHub screen.](images/Setup/image13.png "Select Unlimited public repositories free")
 
-4.  On the next screen, you can select options to tailor your experience and select **Submit**, or select **skip this step**, next to **Submit,** to complete your registration.
+4.  On the next screen, you can select options to tailor your experience and select **Submit**, or select **skip this step**, next to **Submit,** to complete your registration
 
     ![Very experienced, Development, and I'm a professional are selected in Step 2 on the Welcome to GitHub screen.](images/Setup/image14.png "Select options in Step 2")
 
