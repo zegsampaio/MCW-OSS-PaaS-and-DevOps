@@ -56,7 +56,9 @@ Attendees will learn how to:
 **Outcome** 
 
 Analyze your customer’s needs.
-Time frame: 15 minutes
+
+Timeframe: 15 minutes
+
 Directions: With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
 
 1. Meet your table participants and trainer
@@ -127,7 +129,7 @@ Best For You Organics is optimistic about the benefits of moving to a PaaS solut
 **Outcome**
 Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
 
-Time frame: 60 minutes
+Timeframe: 60 minutes
 
 **Business needs**
 
@@ -191,7 +193,7 @@ Prepare a 15-minute chalk-talk style presentation to the customer.
  
 Present a solution to the target customer audience in a 15-minute chalk-talk format.
 
-Time frame: 30 minutes
+Timeframe: 30 minutes
 
 **Presentation** 
 
@@ -207,9 +209,9 @@ Directions:
 
 ## Wrap-up
 
-Time frame: 15 minutes
+Timeframe: 15 minutes
 
-- Tables reconvene with the larger group to hear a SME share the preferred solution for the case study
+Directions: Tables reconvene with the larger group to hear the facilitator/SME share the preferred solution for the case study.
 
 ## Additional references
 
