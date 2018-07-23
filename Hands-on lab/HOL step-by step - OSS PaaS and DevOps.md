@@ -17,11 +17,12 @@ Information in this document, including URL and other Internet Web site referenc
 Microsoft may have patents, patent applications, trademarks, copyrights, or other intellectual property rights covering subject matter in this document. Except as expressly provided in any written license agreement from Microsoft, the furnishing of this document does not give you any license to these patents, trademarks, copyrights, or other intellectual property.
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
+
 © 2018 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
-## Contents
+**Contents**
 
 - [OSS PaaS and DevOps hands-on lab step-by-step](#oss-paas-and-devops-hands-on-lab-step-by-step)
   - [Abstract and learning objectives](#abstract-and-learning-objectives)
@@ -152,7 +153,7 @@ In this task, you will create an RDP connection to your Lab VM. If you are alrea
 
         ![The credentials above are entered in the Login to xrdp dialog box.](images/Hands-onlabstep-bystep-OSSPaaSandDevOpsimages/media/image21.png "Login to xrdp dialog box")
 
-8. Select **OK** to log into the Lab VM.
+8. Select **OK** to log into the Lab VM
 
 ### Task 2: Grant permissions to Docker
 
@@ -727,7 +728,9 @@ In this task, you will run the app from the container you built in the previous 
 
     ![The docker run command is highlighted in the Interactive terminal window.](images/Hands-onlabstep-bystep-OSSPaaSandDevOpsimages/media/image85.png "Interactive terminal window")
 
-3. Verify the web app and container are functioning by opening a browser window and navigating to <http://localhost:3000>. ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the web app, and localhost:3000/ is highlighted.](images/Hands-onlabstep-bystep-OSSPaaSandDevOpsimages/media/image86.png "View the web app")
+3. Verify the web app and container are functioning by opening a browser window and navigating to <http://localhost:3000>
+
+    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the web app, and localhost:3000/ is highlighted.](images/Hands-onlabstep-bystep-OSSPaaSandDevOpsimages/media/image86.png "View the web app")
 
 4. In the Integrated terminal of VS Code, for the interactive session, press **CTRL+C** to stop the container
 
@@ -1550,7 +1553,7 @@ In this task, you will create a function that will be triggered whenever a docum
 
 ### Task 4: Create Queue function
 
-In this task, you will create a second function which will be triggered the output of the OrdersCosmosTrigger function. This will simulate the order processing and will add items to the notificationqueue if the order processing is complete and sendNotifications is true for the order.
+In this task, you will create a second function which will be triggered by the output of the OrdersCosmosTrigger function. This will simulate the order processing and will add items to the notificationqueue if the order processing is complete and sendNotifications is true for the order.
 
 This will use an Azure Storage Queue trigger, and an input dataset from Cosmos DB, pulling in customers. Output dataset will be Azure Cosmos DB orders table, and an update to set processed = true, and the processedDate to today.
 
