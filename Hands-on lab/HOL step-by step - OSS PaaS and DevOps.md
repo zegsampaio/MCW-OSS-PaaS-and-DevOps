@@ -76,16 +76,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives
 
-This workshop is designed to help students gain a better understanding of how to integrate and deploy complex Open Source Software (OSS) workloads into Azure PaaS. Attendees will migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure PaaS services, and fully embrace modern DevOps tools.
+In this hands-on lab, you will implement a solution for integrating and deploying complex Open Source Software (OSS) workloads into Azure PaaS. You will migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers, migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
 
-Attendees will learn how to:
-
-- Provision Web App for Containers for hosting OSS applications
-- Migrate a MongoDB instance into Cosmos DB
-- Implement serverless technologies, such as Logic Apps and Azure Functions, to enhance OSS app functionality
-- Provision an Azure Container Registry
-- Build Docker images and push them into the Azure Container Registry
-- Enable continuous deployment with Jenkins and the [Azure App Service Jenkins plugin](https://plugins.jenkins.io/azure-app-service)
+At the end of this hands-on lab, you will be better able to migrate and deploy OSS applications into Azure PaaS using modern DevOps methodologies and Docker containers.
 
 ## Overview
 
