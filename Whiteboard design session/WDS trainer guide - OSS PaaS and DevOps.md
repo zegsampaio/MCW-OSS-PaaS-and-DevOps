@@ -212,7 +212,7 @@ Best For You Organics is optimistic about the benefits of moving to a PaaS solut
 
 ### Infographic for common scenarios
 
-![This data flow diagram illustrates how to build highly scalable e-commerce websites with catalog, checkout, analysis, and forecasting. Fifteen components in this diagram interact with each other between end users and the enterprise, and the components are organized in three tiers: the internet tier, the services tier, and the data tier.](images/Whiteboarddesignsessiontrainerguide-OSSPaaSandDevOpsimages/media/image2.png "Common E-Commerce Website scenarios infographic")
+![This data flow diagram illustrates how to build highly scalable e-commerce websites with catalog, checkout, analysis, and forecasting. Fifteen components in this diagram interact with each other between end users and the enterprise, and the components are organized in three tiers: the internet tier, the services tier, and the data tier.](media/image2.png "Common E-Commerce Website scenarios infographic")
 
 ## Step 2: Design a proof of concept solution
 
@@ -434,7 +434,7 @@ After reviewing the available options for transitioning their applications to a 
 
     Azure Storage Queues should be for the queueing technology. Given the customers need to process orders daily, the lifetime of the messages in the queue will be less than a day; should the queue fail, a subsequent worker can continue from where the prior worker left off. They do not require some of the more advanced queueing features offered by Service Bus.
 
-    ![Arrows that point right connect four icons, which are labeled Change feed stream from Azure Cosmos DB, Azure Cosmos DB trigger, Azure Function, and Output.](images/Whiteboarddesignsessiontrainerguide-OSSPaaSandDevOpsimages/media/image4.png "Serverless architecture diagram")
+    ![Arrows that point right connect four icons, which are labeled Change feed stream from Azure Cosmos DB, Azure Cosmos DB trigger, Azure Function, and Output.](media/image4.png "Serverless architecture diagram")
 
 2. How would you recommend Best For You Organics Company handle notifying customers that their order has been processed? Are there specific Azure services that can be used?
 
@@ -444,7 +444,7 @@ After reviewing the available options for transitioning their applications to a 
 
     A Twilio connector could act as the action to perform, which sends an SMS message when the trigger fires. The Best For You Organics Company would sign up for a Twilio account to get an API key, and would then provision a Twilio connector within the logic app, and add the credentials. Next, they would select a Send Message action using data provided in the queue message, specifically the customer's phone number and first name to include in the message, such as "Hello Steve, your Best For Your Organics weekly order has shipped!"
 
-    ![Arrows that point right connect three icons, which are labeled Trigger, Azure Function, and Output. Two arrows point to and from the Azure Function icon and the Azure Cosmos DB input binding icon below.](images/Whiteboarddesignsessiontrainerguide-OSSPaaSandDevOpsimages/media/image5.png "Logic App implementation diagram")
+    ![Arrows that point right connect three icons, which are labeled Trigger, Azure Function, and Output. Two arrows point to and from the Azure Function icon and the Azure Cosmos DB input binding icon below.](media/image5.png "Logic App implementation diagram")
 
 *Identity management*
 

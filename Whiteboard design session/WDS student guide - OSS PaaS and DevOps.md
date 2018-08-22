@@ -115,7 +115,7 @@ Best For You Organics is optimistic about the benefits of moving to a PaaS solut
 
 ### Infographic for common scenarios
 
-![This data flow diagram illustrates how to build highly scalable e-commerce websites with catalog, checkout, analysis, and forecasting. Fifteen components in this diagram interact with each other between end users and the enterprise, and the components are organized in three tiers: the internet tier, the services tier, and the data tier.](images/Whiteboarddesignsessiontrainerguide-OSSPaaSandDevOpsimages/media/image2.png "Common E-Commerce Website scenarios infographic")
+![This data flow diagram illustrates how to build highly scalable e-commerce websites with catalog, checkout, analysis, and forecasting. Fifteen components in this diagram interact with each other between end users and the enterprise, and the components are organized in three tiers: the internet tier, the services tier, and the data tier.](media/image2.png "Common E-Commerce Website scenarios infographic")
 
 ## Step 2: Design a proof of concept solution
 

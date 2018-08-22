@@ -181,7 +181,7 @@ In this task, you will seed the MongoDB with sample data, then run the applicati
 
 - You can view the starter application by navigating to <http://localhost:3000>
 
-    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the starter application.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image17.png "View the starter application")
+    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the starter application.](media/unguided-image17.png "View the starter application")
 
 ## Exercise 2: Migrate the database to Cosmos DB
 
@@ -215,7 +215,7 @@ In this task, you will retrieve the connection string for your Azure Cosmos DB d
 
 - Your app is connected to a database named best-for-you-organics, in your Azure Cosmos DB account. The plans will be gone from the home page since no data has been added to the Cosmos DB yet.
 
-    ![The plans are no longer visible in this screenshot of the starter application; best-for-you-organics information is displayed.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image18.png "Starter application screenshot")
+    ![The plans are no longer visible in this screenshot of the starter application; best-for-you-organics information is displayed.](media/unguided-image18.png "Starter application screenshot")
 
 ### Task 3: Pre-create and scale collections
 
@@ -300,7 +300,7 @@ The Docker extension for VS Code is used to simplify the management of local Doc
 
 - You can view your Azure Container Registry in the Docker extension in VS Code
 
-    ![The Azure Container Registry is selected in the Docker extension in VS Code.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image19.png "View your Azure Container Registry")
+    ![The Azure Container Registry is selected in the Docker extension in VS Code.](media/unguided-image19.png "View your Azure Container Registry")
 
 ### Task 3: Create Docker image and run the app
 
@@ -316,7 +316,7 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
 
 - View the image in the Docker extension in VS Code
 
-    ![The image is selected in the Docker extension in VS Code.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image20.png "View the image ")
+    ![The image is selected in the Docker extension in VS Code.](media/unguided-image20.png "View the image ")
 
 ### Task 4: Run the containerized App
 
@@ -342,7 +342,7 @@ In this task, you are going to push the image to your Azure Container Registry.
 
 - You can view your image in your Azure Container Registry's repositories
 
-    ![In your Azure Container Registry's repository, Repositories is selected and highlighted under Services, and best-for-you-organics is highlighted under Repositories.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image21.png "View your image")
+    ![In your Azure Container Registry's repository, Repositories is selected and highlighted under Services, and best-for-you-organics is highlighted under Repositories.](media/unguided-image21.png "View your image")
 
 ## Exercise 4: Set up Web App for Containers
 
@@ -376,7 +376,7 @@ In this task, you will navigate to the deployed app, and log in to verify it is 
   - <demouser@bfyo.com>
   - Password.1!!
 
-    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the deployed application.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image22.png "View the deployed application")
+    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the deployed application.](media/unguided-image22.png "View the deployed application")
 
 ## Exercise 5: Configure CI/CD pipeline
 
@@ -413,7 +413,7 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
 - You can navigate to <http://localhost:8080> on your Lab VM, and login to Jenkins
 
-    ![Log in is selected and highlighted on the Jenkins login page.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image23.png "Log in to Jenkins")
+    ![Log in is selected and highlighted on the Jenkins login page.](media/unguided-image23.png "Log in to Jenkins")
 
 ### Task 3: Configure Continuous Integration with Jenkins
 
@@ -446,7 +446,7 @@ In this task you will commit your pending changes in VS Code to you GitHub repo,
 
 - You can see the commit and associated build job in Jenkins
 
-    ![The commit and associated build job is displayed in this Jenkins screenshot.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image24.png "View the commit and associated build job")
+    ![The commit and associated build job is displayed in this Jenkins screenshot.](media/unguided-image24.png "View the commit and associated build job")
 
 ### Task 5: Install Docker on the Jenkins VM
 
@@ -512,7 +512,7 @@ In this task, you will commit changes to the `mcw-oss-paas-devops` starter appli
 - The CI/CD pipeline completes successfully, and your app is updated
 - You can see the updated header in the browser window
 
-    ![Welcome to Best for You Organics Company! is highlighted above the Two Person Plan, Four Person Plan, and High-Pro Plan boxes in this screenshot of the starter application.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image26.png "Commit a change to the starter application")
+    ![Welcome to Best for You Organics Company! is highlighted above the Two Person Plan, Four Person Plan, and High-Pro Plan boxes in this screenshot of the starter application.](media/unguided-image26.png "Commit a change to the starter application")
 
 ## Exercise 6: Create Azure Function for order processing
 
@@ -569,11 +569,11 @@ In this task, you will create a function that will be triggered whenever a docum
 
 - You can see items processing through the OrdersCosmosTrigger function logs
 
-    ![Two items are highlighted in the OrdersCosmosTrigger function logs.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image27.png "View items processing through the function logs")
+    ![Two items are highlighted in the OrdersCosmosTrigger function logs.](media/unguided-image27.png "View items processing through the function logs")
 
 - Verify items are being written to the order queue in the Azure Storage account
 
-    ![Refresh is highlighted on the Messages blade, and two items are displayed under Message Text.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image28.png "Verify that items are being written to the order queue")
+    ![Refresh is highlighted on the Messages blade, and two items are displayed under Message Text.](media/unguided-image28.png "Verify that items are being written to the order queue")
 
 ### Task 4: Create Queue function
 
@@ -599,7 +599,7 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
 - Verify you can see the ProcessOrders Function processing records in the Azure portal
 
-    ![One item is highlighted in this screenshot of the ProcessOrders Function processing records.](images/Hands-onlabunguided-OSSPaaSandDevOpsimages/media/image29.png "Verify that you can see processing records")
+    ![One item is highlighted in this screenshot of the ProcessOrders Function processing records.](media/unguided-image29.png "Verify that you can see processing records")
 
 ## Exercise 7: Create Logic App for sending SMS notifications
 

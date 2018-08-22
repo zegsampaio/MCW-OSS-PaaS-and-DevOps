@@ -64,7 +64,7 @@ In this task, you will create an Azure resource group for the resources used thr
 
     c.  **Resource group location**: Select either **East US**, **West US 2**, **West Europe**, or **Southeast Asia**, as these are currently the only regions which offer Dv3 and Ev3 VMs. Remember this location for other resources in this hands-on lab 
     
-    ![Resource groups is highlighted in the navigation pane of the Azure portal, + Add is highlighted in the Resource groups blade, and \"hands-on-labs\" is entered into the Resource group name textbox on the Resource Group, Create an empty resource group blade.](images/Setup/image3.png "Azure Portal")
+    ![Resource groups is highlighted in the navigation pane of the Azure portal, + Add is highlighted in the Resource groups blade, and \"hands-on-labs\" is entered into the Resource group name textbox on the Resource Group, Create an empty resource group blade.](media/b4-image3.png "Azure Portal")
 
 2.  Select **Create**
 
@@ -96,7 +96,7 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
 
     h.  Select **Purchase**
     
-    ![The Custom deployment blade displays, and the information above is entered on the Custom deployment blade.](images/Setup/image4.png "Custom deployment blade")
+    ![The Custom deployment blade displays, and the information above is entered on the Custom deployment blade.](media/b4-image4.png "Custom deployment blade")
 
 3.  It takes about 20 minutes to deploy the Lab VM. Move on to the next task while the VM is deploying.
 
@@ -106,11 +106,11 @@ In this task, you will provision an Azure Linux VM, which will serve as your Jen
 
 1.  In the Azure portal, select **+Create a resource**, enter "Jenkins" into the **Search the Marketplace** box, then select the **Jenkins** compute item from the results
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, and Everything is highlighted to the right. On the Everything blade to the right, jenkins is highlighted in the search box, and the Jenkins row is highlighted in the search results.](images/Setup/image5.png "Azure Portal")
+    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, and Everything is highlighted to the right. On the Everything blade to the right, jenkins is highlighted in the search box, and the Jenkins row is highlighted in the search results.](media/b4-image5.png "Azure Portal")
 
 2.  On the **Jenkins** blade, select **Create** to configure the Jenkins server
 
-    ![Create is highlighted on the Jenkins blade.](images/Setup/image6.png "Create button")
+    ![Create is highlighted on the Jenkins blade.](media/b4-image6.png "Create button")
 
 3.  On the **Create** **Jenkins Basics** blade, enter the following:
 
@@ -130,7 +130,7 @@ In this task, you will provision an Azure Linux VM, which will serve as your Jen
 
     h.  Select **OK** to proceed to the **Settings** blade
     
-    ![Basics is selected on the Create Jenkins blade, and the information above is entered on the Basics blade at right.](images/Setup/image7.png "Configure settings on the Create Jenkins Basics blade")
+    ![Basics is selected on the Create Jenkins blade, and the information above is entered on the Basics blade at right.](media/b4-image7.png "Configure settings on the Create Jenkins Basics blade")
 
 4.  On the **Additional Settings** blade:
 
@@ -142,19 +142,19 @@ In this task, you will provision an Azure Linux VM, which will serve as your Jen
 
 5.  Select **OK** to proceed to the Integration Settings screen 
     
-    ![Additional Settings is selected on the Create Jenkins blade, SSD and Subnets are selected on the Additional Settings blade in the middle, and OK is selected on the Subnets blade at right.](images/Setup/image8.png "Proceed to the summary screen")
+    ![Additional Settings is selected on the Create Jenkins blade, SSD and Subnets are selected on the Additional Settings blade in the middle, and OK is selected on the Subnets blade at right.](media/b4-image8.png "Proceed to the summary screen")
 
 6.  On the **Integration Settings** blade, select **OK**
 
-    ![Integration Settings is selected on the Create Jenkins blade. On the Jenkins Integration Settings blade to the right, VM is selected, and OK is selected at the bottom.](images/Setup/image9.png "Select OK on the Jenkins Integration Settings blade")
+    ![Integration Settings is selected on the Create Jenkins blade. On the Jenkins Integration Settings blade to the right, VM is selected, and OK is selected at the bottom.](media/b4-image9.png "Select OK on the Jenkins Integration Settings blade")
 
 7.  On the **Summary** blade, ensure validation passed, and select **OK**
 
-    ![Summary is selected on the Create Jenkins blade. Validation information is displayed on the Summary blade to the right, and OK is selected at the bottom.](images/Setup/image10.png "Ensure that validation passed")
+    ![Summary is selected on the Create Jenkins blade. Validation information is displayed on the Summary blade to the right, and OK is selected at the bottom.](media/b4-image10.png "Ensure that validation passed")
 
 8.  Select **Create** on the **Buy** screen to provision the Jenkins server 
 
-    ![Buy is selected on the Create Jenkins blade. Provisioning information is displayed on the Create blade to the right, and Create is selected at the bottom.](images/Setup/image11.png "Provision the Jenkins server")
+    ![Buy is selected on the Create Jenkins blade. Provisioning information is displayed on the Create blade to the right, and Create is selected at the bottom.](media/b4-image11.png "Provision the Jenkins server")
 
 9.  It can take 10+ minutes for the VM to provision. You can move on to the next task while you wait.
 
@@ -166,15 +166,15 @@ In this task, you will sign up for a free GitHub account, which will be used for
 
 2.  In the form on the page, enter a **username**, your **email** address, and a **password**, then select **Sign up for GitHub** 
 
-    ![This is a screenshot of the sign-up form on github.com.](images/Setup/image12.png "Sign up for GitHub")
+    ![This is a screenshot of the sign-up form on github.com.](media/b4-image12.png "Sign up for GitHub")
 
 3.  On the Welcome to GitHub screen, select **Unlimited public repositories free** under **Choose your personal plan**, and select **Continue**
 
-    ![Unlimited public repositories free is selected under Choose your personal plan on the Welcome to GitHub screen.](images/Setup/image13.png "Select Unlimited public repositories free")
+    ![Unlimited public repositories free is selected under Choose your personal plan on the Welcome to GitHub screen.](media/b4-image13.png "Select Unlimited public repositories free")
 
 4.  On the next screen, you can select options to tailor your experience and select **Submit**, or select **skip this step**, next to **Submit,** to complete your registration
 
-    ![Very experienced, Development, and I'm a professional are selected in Step 2 on the Welcome to GitHub screen.](images/Setup/image14.png "Select options in Step 2")
+    ![Very experienced, Development, and I'm a professional are selected in Step 2 on the Welcome to GitHub screen.](media/b4-image14.png "Select options in Step 2")
 
 ### Task 5: Fork the starter app
 
@@ -184,7 +184,7 @@ In this task, you will fork the starter application to create a copy in your Git
 
 2.  At the top right of the projects GitHub page, select **Fork**
 
-    ![Fork is highlighted at the top right of the projects GitHub page.](images/Setup/image15.png "Select Fork")
+    ![Fork is highlighted at the top right of the projects GitHub page.](media/b4-image15.png "Select Fork")
 
 3.  If you have more than one GitHub account, select the account to which the project should be forked
 
@@ -192,6 +192,6 @@ In this task, you will fork the starter application to create a copy in your Git
 
 5.  Once completed the project page will open
 
-    ![The Code tab is highlighted on this screenshot of the project page. At this time, we are unable to capture all of the information in the window. Future versions of this course should address this.](images/Setup/image16.png "Screenshot of the project page")
+    ![The Code tab is highlighted on this screenshot of the project page. At this time, we are unable to capture all of the information in the window. Future versions of this course should address this.](media/b4-image16.png "Screenshot of the project page")
 
 You should follow all steps provided *before* attending the Hands-on lab.
