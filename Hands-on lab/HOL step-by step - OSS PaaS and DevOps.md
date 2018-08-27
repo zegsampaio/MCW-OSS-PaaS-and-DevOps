@@ -700,11 +700,11 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
 
 14. Enter your value, and press **Enter**, which will trigger the build of the image
 
-    ![The Tag image as value is highlighted in the Command Palette.](media/image81.png "Enter the Tag image as value")
+    ![The Tag image as value is highlighted in the Command Palette.](media/build-command-terminal-screenshot.png "Enter the Tag image as value")
 
 15. In the terminal window, you will see the following docker build commands execute:
 
-    ![This is a screenshot of Docker build command's output in the terminal window.](media/build-command-terminal-screenshot.png "Build Command window")
+    ![This is a screenshot of Docker build command's output in the terminal window.](media/image82.png "Build Command window")
     
 16. Once the build completes, you will see the image show up in the **DOCKER** extension explorer, under **Images**
 
