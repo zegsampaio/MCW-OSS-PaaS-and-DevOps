@@ -154,7 +154,7 @@ In this task, you will provision an Azure Linux VM, which will serve as your Jen
 
     c.  Ensure the **Jenkins release type** is set to LTS.
 
-5.  Select **OK** to proceed to the Integration Settings screen .
+5.  Select **OK** to proceed to the Integration Settings screen.
     
     ![Additional Settings is selected on the Create Jenkins blade, SSD and Subnets are selected on the Additional Settings blade in the middle, and OK is selected on the Subnets blade at right.](media/b4-image8.png "Proceed to the summary screen")
 
@@ -166,7 +166,7 @@ In this task, you will provision an Azure Linux VM, which will serve as your Jen
 
     ![Summary is selected on the Create Jenkins blade. Validation information is displayed on the Summary blade to the right, and OK is selected at the bottom.](media/b4-image10.png "Ensure that validation passed")
 
-8.  Select **Create** on the **Buy** screen to provision the Jenkins server .
+8.  Select **Create** on the **Buy** screen to provision the Jenkins server.
 
     ![Buy is selected on the Create Jenkins blade. Provisioning information is displayed on the Create blade to the right, and Create is selected at the bottom.](media/b4-image11.png "Provision the Jenkins server")
 
@@ -178,7 +178,7 @@ In this task, you will sign up for a free GitHub account, which will be used for
 
 1.  Open a browser and navigate to <https://github.com>.
 
-2.  In the form on the page, enter a **username**, your **email** address, and a **password**, then select **Sign up for GitHub** .
+2.  In the form on the page, enter a **username**, your **email** address, and a **password**, then select **Sign up for GitHub**.
 
     ![This is a screenshot of the sign-up form on github.com.](media/b4-image12.png "Sign up for GitHub")
 
