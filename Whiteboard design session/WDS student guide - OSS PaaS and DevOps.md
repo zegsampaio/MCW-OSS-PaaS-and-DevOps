@@ -144,7 +144,7 @@ Directions: With all participants at your table, respond to the following questi
 
 1. Without getting into the details, (the following sections will address the details), diagram your initial vision for handling the top-level requirements for the OSS app migration, serverless architecture integration, search integration, Azure AD B2C implementation, and DevOps pipeline. You will refine this diagram as you proceed.
 
-*PaaS Solution*
+*PaaS solution*
 
 1. What PaaS solution would you propose to Best For You Organics Company for moving their application into Azure? Will this solution minimize the number of application code changes required to migrate the application? How with container orchestration be handled?
 
