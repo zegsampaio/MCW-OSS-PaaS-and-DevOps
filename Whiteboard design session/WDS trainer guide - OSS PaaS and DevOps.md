@@ -612,6 +612,6 @@ After reviewing the available options for transitioning their applications to a 
 
 ## Customer quote (to be read back to the attendees at the end)
 
-    "The successful, and seamless, transition of our OSS application to Microsoft Azure demonstrates the flexibility and range of Azure's capabilities. Without being tied to a sunk cost in an enterprise system, this open source on Azure model provides us with the flexibility to address future business needs."
+   "The successful, and seamless, transition of our OSS application to Microsoft Azure demonstrates the flexibility and range of Azure's capabilities. Without being tied to a sunk cost in an enterprise system, this open source on Azure model provides us with the flexibility to address future business needs."
 
 Holly Franklin, CIO of Best For You Organics Company
