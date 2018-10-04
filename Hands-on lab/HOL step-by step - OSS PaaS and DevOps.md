@@ -1002,7 +1002,7 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
         ![The Create First Admin User page, with the values specified above entered into the appropriate fields, and Save and Finish highlighted.](media/create-first-admin-user-jenkins.png "Create First Admin User page")
         
-15. Select **Start using Jenkins** on the Jenkins is ready screen
+15. Select **Start using Jenkins** on the Jenkins is ready screen.
 
     ![Screenshot of the Jenkins is ready page, with the Start using Jenkins button highlighted.](media/image120.png "Jenkins is ready page")
 
@@ -1320,9 +1320,9 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
 
             ![In the Container Registry Access keys blade, ](media/azure-container-registry-access-keys.png "Container Registry Access keys")
 
-        - **ID**: Enter acrCreds
-        - **Description**: Leave blank, or enter a description if you like
-        - Select **Add**
+        - **ID**: Enter acrCreds.
+        - **Description**: Leave blank, or enter a description if you like.
+        - Select **Add**.
 
             ![In the Jenkins Credential Provider dialog, the values specified above are entered into the appropriate fields.](media/jenkins-credentials-provider-username-with-password.png "Add credentials")
 
@@ -1384,7 +1384,7 @@ In this task, you will create an Azure Function that will be triggered by orders
 
 ### Task 1: Provision a Function App
 
-In this task, you will create a Function App in Azure, which will host your Functions
+In this task, you will create a Function App in Azure, which will host your Functions.
 
 1. In the Azure portal, select **+Create a resource**, enter "function app" in to the **Search the marketplace** box, and select **Function App** from the results.
 
@@ -1720,7 +1720,11 @@ In this task, you will use a free Twilio account to send SMS notifications to cu
 
 12. Select **Home**.
 
-    ![Done is highlighted on the Congratulations! screen.](media/image229.png "Congratulations screen")on your **Account Dashboard**, and leave this page up, as you will be referencing the **Account SID** and **Auth Token** in the next task to configure the Twilio Connector.![The Home icon is highlighted on your Account Dashboard.](media/image230.png "Account dashboard")
+    ![Done is highlighted on the Congratulations! screen.](media/image229.png "Congratulations screen")
+    
+13. On your **Account Dashboard**, and leave this page up, as you will be referencing the **Account SID** and **Auth Token** in the next task to configure the Twilio Connector.
+
+    ![The Home icon is highlighted on your Account Dashboard.](media/image230.png "Account dashboard")
 
 ### Task 2: Create Logic App
 
