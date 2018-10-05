@@ -1,4 +1,4 @@
-![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
 OSS PaaS and DevOps
@@ -9,7 +9,7 @@ Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-April 2018
+August 2018
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -17,6 +17,7 @@ Information in this document, including URL and other Internet Web site referenc
 Microsoft may have patents, patent applications, trademarks, copyrights, or other intellectual property rights covering subject matter in this document. Except as expressly provided in any written license agreement from Microsoft, the furnishing of this document does not give you any license to these patents, trademarks, copyrights, or other intellectual property.
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
+
 © 2018 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
@@ -57,59 +58,85 @@ Thank you for taking time to support the whiteboard design sessions as a trainer
 
 An amazing trainer:
 
-- Creates a safe environment in which learning can take place
-- Stimulates the participant's thinking
-- Involves the participant in the learning process
-- Manages the learning process (on time, on topic, and adjusting to benefit participants)
-- Ensures individual participant accountability
-- Ties it all together for the participant
-- Provides insight and experience to the learning process
-- Effectively leads the whiteboard design session discussion
-- Monitors quality and appropriateness of participant deliverables
-- Effectively leads the feedback process
+-   Creates a safe environment in which learning can take place.
 
-## Whiteboard design session flow
+-   Stimulates the participant's thinking.
+
+-   Involves the participant in the learning process.
+
+-   Manages the learning process (on time, on topic, and adjusting to benefit participants).
+
+-   Ensures individual participant accountability.
+
+-   Ties it all together for the participant.
+
+-   Provides insight and experience to the learning process.
+
+-   Effectively leads the whiteboard design session discussion.
+
+-   Monitors quality and appropriateness of participant deliverables.
+
+-   Effectively leads the feedback process.
+
+## Whiteboard design session flow 
 
 Each whiteboard design session uses the following flow:
 
 **Step 1: Review the customer case study (15 minutes)**
 
-Outcome: Analyze your customer's needs.
+**Outcome**
 
-- Customer's background, situation, needs and technical requirements
-- Current customer infrastructure and architecture
-- Potential issues, objectives and blockers
+Analyze your customer's needs.
+
+-   Customer's background, situation, needs and technical requirements
+
+-   Current customer infrastructure and architecture
+
+-   Potential issues, objectives and blockers
 
 **Step 2: Design a proof of concept solution (60 minutes)**
 
-Outcome: Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
+**Outcome**
 
-- Determine your target customer audience
-- Determine customer's business needs to address your solution
-- Design and diagram your solution
-- Prepare to present your solution
+Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
+
+-   Determine your target customer audience.
+
+-   Determine customer's business needs to address your solution.
+
+-   Design and diagram your solution.
+
+-   Prepare to present your solution.
 
 **Step 3: Present the solution (30 minutes)**
 
-Outcome: Present solution to your customer.
+**Outcome**
 
-- Present solution
-- Respond to customer objections
-- Receive feedback
+Present solution to your customer:
+
+-   Present solution
+
+-   Respond to customer objections
+
+-   Receive feedback
 
 **Wrap-up (15 minutes)**
 
-- Review preferred solution
+-   Review preferred solution
 
 ## Before the whiteboard design session: How to prepare
 
 Before conducting your first whiteboard design session:
 
-- Read the Student guide (including the case study) and Trainer guide
-- Become familiar with all key points and activities.
-- Plan the point you want to stress, which questions you want to drive, transitions, and be ready to answer questions
-- Prior to the whiteboard design session, discuss the case study to pick up more ideas
-- Make notes for later
+-   Read the Student guide (including the case study) and Trainer guide.
+
+-   Become familiar with all key points and activities.
+
+-   Plan the point you want to stress, which questions you want to drive, transitions, and be ready to answer questions.
+
+-   Prior to the whiteboard design session, discuss the case study to pick up more ideas.
+
+-   Make notes for later.
 
 ## During the whiteboard design session: Tips for an effective whiteboard design session
 
@@ -119,9 +146,11 @@ Before conducting your first whiteboard design session:
 
 When participants are doing activities, you can **look ahead to refresh your memory**.
 
-- **Adjust activity and whiteboard design session pace** as needed to allow time for presenting, feedback, and sharing
-- **Add examples, points, and stories** from your own experience. Think about stories you can share that help you make your points clearly and effectively.
-- **Consider creating a "parking lot"** to record issues or questions raised that are outside the scope of the whiteboard design session or can be answered later. Decide how you will address these issues, so you can acknowledge them without being derailed by them.
+-   **Adjust activity and whiteboard design session pace** as needed to allow time for presenting, feedback, and sharing.
+
+-   **Add examples, points, and stories** from your own experience. Think about stories you can share that help you make your points clearly and effectively.
+
+-   **Consider creating a "parking lot"** to record issues or questions raised that are outside the scope of the whiteboard design session or can be answered later. Decide how you will address these issues, so you can acknowledge them without being derailed by them.
 
 ***Have fun**! Encourage participants to have fun and share!*
 
@@ -141,19 +170,21 @@ In this whiteboard design session, you will work with a group to build a solutio
 
 At the end of this whiteboard design session, you will be better able to design solutions for migrating OSS applications into Azure PaaS using modern DevOps methodologies.
 
-## Step 1: Review the customer case study
+## Step 1: Review the customer case study 
 
-**Outcome** 
+**Outcome**
 
-Analyze your customer’s needs.
+Analyze your customer's needs.
 
 Timeframe: 15 minutes
 
-Directions: With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
+Directions:  With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
 
-1. Meet your table participants and trainer
-2. Read all of the directions for steps 1–3 in the student guide
-3. As a table team, review the following customer case study
+1.  Meet your table participants and trainer.
+
+2.  Read all of the directions for steps 1-3 in the student guide.
+
+3.  As a table team, review the following customer case study.
 
 ### Customer situation
 
@@ -212,7 +243,7 @@ Best For You Organics is optimistic about the benefits of moving to a PaaS solut
 
 ### Infographic for common scenarios
 
-![This data flow diagram illustrates how to build highly scalable e-commerce websites with catalog, checkout, analysis, and forecasting. Fifteen components in this diagram interact with each other between end users and the enterprise, and the components are organized in three tiers: the internet tier, the services tier, and the data tier.](images/Whiteboarddesignsessiontrainerguide-OSSPaaSandDevOpsimages/media/image2.png "Common E-Commerce Website scenarios infographic")
+![This data flow diagram illustrates how to build highly scalable e-commerce websites with catalog, checkout, analysis, and forecasting. Fifteen components in this diagram interact with each other between end users and the enterprise, and the components are organized in three tiers: the internet tier, the services tier, and the data tier.](media/image2.png "Common E-Commerce Website scenarios infographic")
 
 ## Step 2: Design a proof of concept solution
 
@@ -224,20 +255,21 @@ Timeframe: 60 minutes
 
 **Business needs**
 
-Directions: With all participants at your table, answer the following questions and list the answers on a flip chart.
+Directions: With all participants at your table, answer the following questions and list the answers on a flip chart:
 
-1. Who should you present this solution to? Who is your target customer audience? Who are the decision makers?
-2. What customer business needs do you need to address with your solution?
+1.  Who should you present this solution to? Who is your target customer audience? Who are the decision makers?
+
+2.  What customer business needs do you need to address with your solution?
 
 **Design**
 
-Directions: With all participants at your table, respond to the following questions on a flip chart.
+Directions: With all participants at your table, respond to the following questions on a flip chart:
 
 *High-level architecture*
 
 1. Without getting into the details, (the following sections will address the details), diagram your initial vision for handling the top-level requirements for the OSS app migration, serverless architecture integration, search integration, Azure AD B2C implementation, and DevOps pipeline. You will refine this diagram as you proceed.
 
-*PaaS Solution*
+*PaaS solution*
 
 1. What PaaS solution would you propose to Best For You Organics Company for moving their application into Azure? Will this solution minimize the number of application code changes required to migrate the application? How with container orchestration be handled?
 
@@ -273,33 +305,41 @@ Directions: With all participants at your table, respond to the following questi
 
 Directions: With all participants at your table:
 
-1. Identify any customer needs that are not addressed with the proposed solution
-2. Identify the benefits of your solution
-3. Determine how you will respond to the customer’s objections
+1.  Identify any customer needs that are not addressed with the proposed solution.
+
+2.  Identify the benefits of your solution.
+
+3.  Determine how you will respond to the customer's objections.
 
 Prepare a 15-minute chalk-talk style presentation to the customer.
 
 ## Step 3: Present the solution
 
 **Outcome**
- 
+
 Present a solution to the target customer audience in a 15-minute chalk-talk format.
 
 Timeframe: 30 minutes
 
-**Presentation** 
+**Presentation**
 
 Directions:
 
-1. Pair with another table
-2. One table is the Microsoft team and the other table is the customer
-3. The Microsoft team presents their proposed solution to the customer
-4. The customer makes one of the objections from the list of objections
-5. The Microsoft team responds to the objection
-6. The customer team gives feedback to the Microsoft team
-7. Tables switch roles and repeat Steps 2–6
+1.  Pair with another table.
 
-## Wrap-up
+2.  One table is the Microsoft team and the other table is the customer.
+
+3.  The Microsoft team presents their proposed solution to the customer.
+
+4.  The customer makes one of the objections from the list of objections.
+
+5.  The Microsoft team responds to the objection.
+
+6.  The customer team gives feedback to the Microsoft team.
+
+7.  Tables switch roles and repeat Steps 2-6.
+
+##  Wrap-up 
 
 Timeframe: 15 minutes
 
@@ -322,37 +362,48 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | Azure Search in Node.js | <https://docs.microsoft.com/azure/search/search-get-started-nodejs> |
 | Visual Studio (VS) cCode for OSS | <https://code.visualstudio.com/docs/nodejs/reactjs-tutorial> |
 | Web App for containers | <https://azure.microsoft.com/blog/webapp-for-containers-overview/> |
-|
 
 # OSS PaaS and DevOps whiteboard design session trainer guide
 
 ## Step 1: Review the customer case study
 
-- Check in with your table participants to introduce yourself as the trainer
-- Ask, "What questions do you have about the customer case study?"
-- Briefly review the steps and time frames of the whiteboard design session
-- Ready, set, go! Let the table participants begin
+-   Check in with your table participants to introduce yourself as the trainer.
+
+-   Ask, "What questions do you have about the customer case study?"
+
+-   Briefly review the steps and timeframes of the whiteboard design session.
+
+-   Ready, set, go! Let the table participants begin.
 
 ## Step 2: Design a proof of concept solution
 
-- Check in with your tables to ensure that they are transitioning from step to step on time
-- Provide some feedback on their responses to the business needs and design
-  - Try asking questions first that will lead the participants to discover the answers on their own
-- Provide feedback for their responses to the customer's objections.
-  - Try asking questions first that will lead the participants to discover the answers on their own
+-   Check in with your tables to ensure that they are transitioning from step to step on time.
+
+-   Provide some feedback on their responses to the business needs and design.
+
+    -   Try asking questions first that will lead the participants to discover the answers on their own.
+
+-   Provide feedback for their responses to the customer's objections.
+
+    -   Try asking questions first that will lead the participants to discover the answers on their own.
 
 ## Step 3: Present the solution
 
-- Determine which table will be paired with your table before Step 3 begins
-- For the first round, assign one table as the Microsoft team and the other table as the customer
-- Have the Microsoft team present their solution to the customer team
-  - Have the customer team provide one objection for the Microsoft team to respond to
-  - The presentation, objections, and feedback should take no longer than 15 minutes
-  - If needed, the trainer may also provide feedback
+-   Determine which table will be paired with your table before Step 3 begins.
+
+-   For the first round, assign one table as the presenting team and the other table as the customer.
+
+-   Have the presenting team present their solution to the customer team.
+
+    -   Have the customer team provide one objection for the presenting team to respond to.
+
+    -   The presentation, objections, and feedback should take no longer than 15 minutes.
+
+    -   If needed, the trainer may also provide feedback.
 
 ## Wrap-up
 
--   Have the table participants reconvene with the larger session group to hear the facilitator/SME share the following preferred solution
+-   Have the table participants reconvene with the larger session group to hear the facilitator/SME share the following preferred solution.
 
 ## Preferred target audience
 
@@ -420,9 +471,9 @@ After reviewing the available options for transitioning their applications to a 
 
     Things to consider:
 
-    - Throughput: The duration of your data migration depends on the amount of throughput you set up for your collections. For larger data migrations, you should increase the throughput to speed up the process. After the migration is complete, you can decrease the throughput to save costs.
+    - **Throughput**: The duration of your data migration depends on the amount of throughput you set up for your collections. For larger data migrations, you should increase the throughput to speed up the process. After the migration is complete, you can decrease the throughput to save costs.
 
-    - SSL: Azure Cosmos DB has strict security requirements and standards. Be sure to enable SSL when you interact with your account.
+    - **SSL**: Azure Cosmos DB has strict security requirements and standards. Be sure to enable SSL when you interact with your account.
 
 *Serverless architecture*
 
@@ -434,7 +485,7 @@ After reviewing the available options for transitioning their applications to a 
 
     Azure Storage Queues should be for the queueing technology. Given the customers need to process orders daily, the lifetime of the messages in the queue will be less than a day; should the queue fail, a subsequent worker can continue from where the prior worker left off. They do not require some of the more advanced queueing features offered by Service Bus.
 
-    ![Arrows that point right connect four icons, which are labeled Change feed stream from Azure Cosmos DB, Azure Cosmos DB trigger, Azure Function, and Output.](images/Whiteboarddesignsessiontrainerguide-OSSPaaSandDevOpsimages/media/image4.png "Serverless architecture diagram")
+    ![Arrows that point right connect four icons, which are labeled Change feed stream from Azure Cosmos DB, Azure Cosmos DB trigger, Azure Function, and Output.](media/image4.png "Serverless architecture diagram")
 
 2. How would you recommend Best For You Organics Company handle notifying customers that their order has been processed? Are there specific Azure services that can be used?
 
@@ -444,7 +495,7 @@ After reviewing the available options for transitioning their applications to a 
 
     A Twilio connector could act as the action to perform, which sends an SMS message when the trigger fires. The Best For You Organics Company would sign up for a Twilio account to get an API key, and would then provision a Twilio connector within the logic app, and add the credentials. Next, they would select a Send Message action using data provided in the queue message, specifically the customer's phone number and first name to include in the message, such as "Hello Steve, your Best For Your Organics weekly order has shipped!"
 
-    ![Arrows that point right connect three icons, which are labeled Trigger, Azure Function, and Output. Two arrows point to and from the Azure Function icon and the Azure Cosmos DB input binding icon below.](images/Whiteboarddesignsessiontrainerguide-OSSPaaSandDevOpsimages/media/image5.png "Logic App implementation diagram")
+    ![Arrows that point right connect three icons, which are labeled Trigger, Azure Function, and Output. Two arrows point to and from the Azure Function icon and the Azure Cosmos DB input binding icon below.](media/image5.png "Logic App implementation diagram")
 
 *Identity management*
 
@@ -474,13 +525,13 @@ After reviewing the available options for transitioning their applications to a 
 
 1. Is Azure an appropriate platform for hosting an OSS application using PaaS?
 
-    Yes. If you're an OSS developer, Azure offers more than you might expect---from virtual machines to managed services, functions, and containers. With Azure, you get full stack capabilities, including:
+    Yes. If you're an OSS developer, Azure offers more than you might expect, from virtual machines to managed services, functions, and containers. With Azure, you get full stack capabilities, including:
 
-    - Integration with popular---and free---open source tools such as Visual Studio Code
-    - Monitoring services with Application Insights to catch bugs, optimize apps, and stay on top of their status
-    - Comprehensive managed database support with Cosmos DB (compatible with MongoDB), MySQL, and PostgreSQL
-    - Support for a variety of platforms and frameworks to help with both new microservices-based apps and existing apps
-    - Global, trusted cloud infrastructure
+    - Integration with popular, and free, open source tools such as Visual Studio Code.
+    - Monitoring services with Application Insights to catch bugs, optimize apps, and stay on top of their status.
+    - Comprehensive managed database support with Cosmos DB (compatible with MongoDB), MySQL, and PostgreSQL.
+    - Support for a variety of platforms and frameworks to help with both new microservices-based apps and existing apps.
+    - Global, trusted cloud infrastructure.
 
 2. We're interested in using containers but not sure how they work in Azure. Does Azure provide reliable ways to deploy and manage containers? If so, what is the simplest way to move them to Azure based on our PaaS experience, while at the same time considering our scale and growth requirements?
 
@@ -539,10 +590,11 @@ After reviewing the available options for transitioning their applications to a 
 
     A Serverless Architecture, as the name implies, aims to provide a solution architecture where concern for individual servers is minimized. While the term "Serverless" has varying interpretations, it typically includes the following characteristics:
 
-    - The extensive use of ephemeral services, including and especially the processing capability (e.g., it can be started nearly instantaneously without pre-provisioning on your part)
+    - Extensive use of ephemeral services, including and especially the processing capability (e.g., it can be started nearly instantaneously without pre-provisioning on your part)
     
-    - A focus entirely on scaling the capabilities that support the business logic
-    - The capability is scaled transparently at a very granular level (e.g. scaling occurs on a per request or function invocation basis and not on an all up server load basis)
+    - Focus entirely on scaling the capabilities that support the business logic
+    
+    - Capability is scaled transparently at a very granular level (e.g. scaling occurs on a per request or function invocation basis and not on an all up server load basis)
     
     - Cost is typically associated with time spent supporting business logic computation, not on the time server resources are available to handle requests
 
@@ -560,6 +612,6 @@ After reviewing the available options for transitioning their applications to a 
 
 ## Customer quote (to be read back to the attendees at the end)
 
-*"The successful, and seamless, transition of our OSS application to Microsoft Azure demonstrates the flexibility and range of Azure's capabilities. Without being tied to a sunk cost in an enterprise system, this open source on Azure model provides us with the flexibility to address future business needs."*
+   "The successful, and seamless, transition of our OSS application to Microsoft Azure demonstrates the flexibility and range of Azure's capabilities. Without being tied to a sunk cost in an enterprise system, this open source on Azure model provides us with the flexibility to address future business needs."
 
 Holly Franklin, CIO of Best For You Organics Company
