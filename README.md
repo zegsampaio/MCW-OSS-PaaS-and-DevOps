@@ -18,7 +18,7 @@ The development team has also expressed that they would like to continue using G
 ### Workshop
 This workshop is designed to help you gain a better understanding of how to integrate and deploy complex open-source software (OSS) workloads into Azure Platform-as-a-Service (PaaS). You will migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure PaaS services, and fully embrace modern DevOps tools.
 
-At the end of this workshop, you will learn how to provision Web App for Containers for hosting OSS applications, migrate a MongoDB instance into Cosmos DB, implement serverless technologies, such as Logic Apps and Azure Functions, to enhance OSS app functionality, provision an Azure Container Registry, build Docker images and push them into the Azure Container Registry, and enable continuous deployment with Jenkins and Visual Studio Team Services (VSTS).
+At the end of this workshop, you will learn how to provision Web App for Containers for hosting OSS applications, migrate a MongoDB instance into Cosmos DB, implement serverless technologies, such as Logic Apps and Azure Functions, to enhance OSS app functionality, provision an Azure Container Registry, build Docker images and push them into the Azure Container Registry, and enable continuous deployment with Jenkins.
 
 ### Whiteboard design session
 In this whiteboard design session, you will work with a group to build a solution for integrating and deploying complex Open Source Software (OSS) workloads into Azure PaaS. You will design a solution to migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure PaaS services, migrate an existing MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
@@ -34,11 +34,11 @@ At the end of this hands-on lab, you will be better able to migrate and deploy O
 - Web App for Containers
 - Azure Container Registry
 - Docker
-- Cosmos DB 
+- Cosmos DB
 - Azure Functions
-- Logic App 
+- Logic App
 - Visual Studio Code
-- VSTS
+- Azure DevOps
 - Jenkins VM
 
 ## Azure solutions
