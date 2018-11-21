@@ -24,7 +24,21 @@ The names of manufacturers, products, or URLs are provided for informational pur
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
 **Contents**
-<!-- TOC -->autoauto- [OSS PaaS and DevOps before the hands-on lab setup guide](#oss-paas-and-devops-before-the-hands-on-lab-setup-guide)auto    - [Requirements](#requirements)auto    - [Before the hands-on lab](#before-the-hands-on-lab)auto        - [Task 1: Provision a resource group](#task-1-provision-a-resource-group)auto        - [Task 2: Create a development virtual machine](#task-2-create-a-development-virtual-machine)auto        - [Task 3: Provision a Jenkins server](#task-3-provision-a-jenkins-server)auto        - [Task 4: Create GitHub account](#task-4-create-github-account)auto        - [Task 5: Fork the starter app](#task-5-fork-the-starter-app)autoauto<!-- /TOC -->
+
+
+<!-- TOC -->
+
+- [OSS PaaS and DevOps before the hands-on lab setup guide](#oss-paas-and-devops-before-the-hands-on-lab-setup-guide)
+    - [Requirements](#requirements)
+    - [Before the hands-on lab](#before-the-hands-on-lab)
+        - [Task 1: Provision a resource group](#task-1-provision-a-resource-group)
+        - [Task 2: Create a development virtual machine](#task-2-create-a-development-virtual-machine)
+        - [Task 3: Provision a Jenkins server](#task-3-provision-a-jenkins-server)
+        - [Task 4: Create GitHub account](#task-4-create-github-account)
+        - [Task 5: Fork the starter app](#task-5-fork-the-starter-app)
+
+<!-- /TOC -->
+
 
 # OSS PaaS and DevOps before the hands-on lab setup guide
 
