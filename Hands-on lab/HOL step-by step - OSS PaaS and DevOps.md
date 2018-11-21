@@ -1464,14 +1464,15 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![Functions is selected and highlighted in the left-hand menu on the Function Apps blade, and + New function is highlighted on the right.](media/image188.png "Function Apps blade")
 
-3. In the trigger search box, enter "cosmos," and select the **Cosmos DB trigger**.
+3. In the trigger search box, enter "cosmos," and select the **Azure Cosmos DB trigger**.
 
-    ![In the trigger search box, cosmos is selected, and the Cosmos DB trigger is selected below it.](media/image189.png "Choose a template page")
+    ![In the trigger search box, cosmos is selected, and the Azure Cosmos DB trigger is selected below it.](media/image189.png "Choose a template page")
 
-4. In the **Cosmos DB trigger** dialog, enter the following:
+4.  Install any extensions required when prompted.
 
-    - **Language**: Select **JavaScript**.
-
+    ![A warning indicating that extensions are required is displayed.](media/install-trigger-extensions.png "Install extensions")
+5. In the **Azure Cosmos DB trigger** dialog, enter the following:
+    
     - **Name**: Enter "OrdersCosmosTrigger".
 
     - **Azure Cosmos DB account connection**: Select **new**, then select the **best-for-you-db DocumentDB** Account.
@@ -1500,7 +1501,9 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![+ New Output is highlighted under Outputs, Azure Queue Storage is selected below it, and Select is selected at the bottom.](media/image193.png "Select Azure Queue Storage")
 
-8. For the **Azure Queue Storage output**, enter the following:
+8. Install extensions if prompted to do so.
+
+9. For the **Azure Queue Storage output**, enter the following:
 
     - **Message parameter name**: outputQueue
 
@@ -1512,27 +1515,27 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![The information above is entered in the Azure Queue Storage output dialog box, and Save is selected at the bottom.](media/image194.png "Azure Queue Storage output page")
 
-9. Now, select the **OrdersCosmosTrigger** function in the left-hand menu.
+10. Now, select the **OrdersCosmosTrigger** function in the left-hand menu.
 
     ![The OrdersCosmosTrigger function is selected in the left-hand menu.](media/image195.png "Left menu")
 
-10. To get the code for the OrdersCosmosTrigger function, go into the project is VS Code, expand the AzureFunctions folder, select **OrdersCosmosTrigger.js**, and copy the code, as highlighted in the screen shot below.
+11. To get the code for the OrdersCosmosTrigger function, go into the project is VS Code, expand the AzureFunctions folder, select **OrdersCosmosTrigger.js**, and copy the code, as highlighted in the screen shot below.
 
     ![Under the AzureFunctions folder in Visual Studio Code, OrdersCosmosTrigger.js is selected and highlighted in Explorer. On the right, the code for the OrdersCosmosTrigger function is highlighted.](media/image196.png "Visual Studio Code")
 
-11. Paste the code into the **index.js** block, overwriting all the existing code, and select **Save**. Your index.js file should now look like the following:
+12. Paste the code into the **index.js** block, overwriting all the existing code, and select **Save**. Your index.js file should now look like the following:
 
     ![This is a screenshot of the index.js block.](media/image197.png "Index.js block")
 
-12. Next, select **Logs** below the code block, so you can observe the Function being called during the next steps.
+13. Next, select **Logs** below the code block, so you can observe the Function being called during the next steps.
 
     ![Logs is highlighted below the code block.](media/image198.png "Select Logs")
 
-13. To trigger the function, return to the starter application in your browser window, and select **Sign In**.
+14. To trigger the function, return to the starter application in your browser window, and select **Sign In**.
 
     ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the starter application, and Sign In is highlighted at the top.](media/image199.png "Sign in to the starter application")
 
-14. On the Login screen, enter the following credentials, and select **Login**:
+15. On the Login screen, enter the following credentials, and select **Login**:
 
     - **Email address:** <demouser@bfyo.com>
 
@@ -1540,29 +1543,29 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![The credentials above are entered in the Login page.](media/image200.png "Login page")
 
-15. After logging in, you will be returned to the home page. Select **Select this plan** for any of the plans.
+16. After logging in, you will be returned to the home page. Select **Select this plan** for any of the plans.
 
     ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the home page, and all three boxes' Select this plan buttons are highlighted.](media/image201.png "Select a plan")
 
-16. On the **Place Order** screen, select **Place Order**. This will create a new order, which will fire the Azure Cosmos DB trigger in your function, and then send the order on to the ordersqueue for processing.
+17. On the **Place Order** screen, select **Place Order**. This will create a new order, which will fire the Azure Cosmos DB trigger in your function, and then send the order on to the ordersqueue for processing.
 
     ![The Place Order button is highlighted at the bottom of the Place Order page.](media/image202.png "Place your order page")
 
-17. Next, you will update an order in the Azure portal, to set the processed value to true. This will be a change that should not be sent into the orderqueue for processing.
+18. Next, you will update an order in the Azure portal, to set the processed value to true. This will be a change that should not be sent into the orderqueue for processing.
 
-18. Navigate to your Cosmos DB account in the Azure portal, select **Data Explorer**, expand the **orders** collection, then select **Documents**.
+19. Navigate to your Cosmos DB account in the Azure portal, select **Data Explorer**, expand the **orders** collection, then select **Documents**.
 
     ![Data Explorer is selected and highlighted on the left side of the Cosmos DB account in the Azure portal, and Documents is selected and highlighted in the expanded orders collection.](media/image203.png "Azure Cosmos DB account blade")
 
-19. Select any order document, and change the processed value to "true," then select **Update**.
+20. Select any order document, and change the processed value to "true," then select **Update**.
 
     ![Update is highlighted at the top of a document, and true is highlighted next to the processed value.](media/image204.png "Change the processed value to true")
 
-20. Return to the logs pane of your function and observe that the orders have been processed though the Function, and that the new order was sent to the orderqueue, while the updated order was not.
+21. Return to the logs pane of your function and observe that the orders have been processed though the Function, and that the new order was sent to the orderqueue, while the updated order was not.
 
     ![The new order and the updated order are highlighted in the logs pane of your function.](media/image205.png "Logs pane")
 
-21. Finally, verify items are being written to the order queue, by going to the queue in the Azure Storage account, and observing that items have been added to the queue.
+22. Finally, verify items are being written to the order queue, by going to the queue in the Azure Storage account, and observing that items have been added to the queue.
 
     ![The Refresh button is highlighted in the Azure Storage account, and Message Text appears in the order queue below.](media/image206.png "Messages blade")
 
@@ -1580,13 +1583,11 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     ![The Go button is next to Create a new function triggered by this output under Actions.](media/image208.png "Actions section")
 
-3. Select **Queue trigger** from the list.
-
-    ![This is a screenshot of the Queue trigger box.](media/image209.png "Queue trigger box")
+3. Select **Azure Queue Storage trigger** from the list.
+    
+    ![This is a screenshot of the Queue trigger box.](media/azure-queue-storage-trigger.png "Queue trigger box")
 
 4. On the **Queue trigger New Function** dialog, enter the following:
-
-    - **Language:** Select **JavaScript**.
 
     - **Name:** Enter ProcessOrders.
 
@@ -1596,7 +1597,7 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     - Select **Create**.
 
-        ![The information above is entered in the Queue trigger New Function dialog box.](media/image210.png "Queue trigger New Function dialog box")
+         ![The information above is entered in the Queue trigger New Function dialog box.](media/process-orders-function.png "Queue trigger New Function dialog box")
 
 5. When the function has been created, select **Integrate** under the **ProcessOrders** function, change the Message parameter name to "orderToProcess" for the **Azure Queue storage trigger**, and select **Save**.
 
@@ -1764,11 +1765,7 @@ In this task, you will create a new Logic App, which will use the Twilio connect
 
 3. Navigate to your newly created Logic App in the Azure portal.
 
-4. Select the **Logic App Designer** under **Development Tools** on the left-hand menu.
-
-    ![Logic App Designer is selected under Development Tools in the left-hand menu of your newly created Logic App.](media/image233.png "Development Tools section")
-
-5. In the Logic App Designer, select **Blank Logic App** under **Templates**.
+4. In the Logic App Designer, select **Blank Logic App** under **Templates**.
 
     ![Blank Logic App is highlighted under Templates in Logic App Designer Templates section.](media/image234.png "Logic App Designer, Templates section")
 
@@ -1784,13 +1781,14 @@ In this task, you will create a new Logic App, which will use the Twilio connect
 
     ![In the When there are messages in a queue dialog box, Bestforyouorders is in the Connection Name box, the bestforyouorders row is highlighted at the top of the list below Storage account, and the Create button is highlighted at the bottom.](media/image237.png "When there are messages in a queue dialog box")
 
-9. In the next When there are messages in a queue dialog, select **notificationqueue** from the **Queue Name** list, and set the interval to **1** **minute**, then select **+New step**, and **Add an action**.
+9. In the next When there are messages in a queue dialog, select **notificationqueue** from the **Queue Name** list, and set the interval to **1** **minute**, then select **+New step**.
 
     ![The information above is entered in the When there are messages in a queue dialog box.](media/image238.png "When there are messages in a queue dialog box")
 
 10. In the **Choose an action box**, enter "Parse," and select **Data Operations** **-- Parse JSON** from the list.
 
-    ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box, and Data Operations -- Parse JSON is highlighted below in the list.](media/image239.png "When there are messages in a queue dialog box")
+
+    ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box, and Data Operations -- Parse JSON is highlighted below in the list.](media/data-operations-parse.png "When there are messages in a queue dialog box")
 
 11. Select the **Content** box, select **Add dynamic content +**, then select **Message Text** from the input parameters list that appears.
 
@@ -1808,9 +1806,9 @@ In this task, you will create a new Logic App, which will use the Twilio connect
 
     ![The JSON above is pasted in the sample JSON payload dialog box, and Done is selected below.](media/image242.png "Paste the JSON in the dialog box")
 
-14. You will now see the Schema for messages coming from the notification queue in the Schema box. Select **+New** **step** and select **Add an action**.
+14. You will now see the Schema for messages coming from the notification queue in the Schema box. Select **+New** **step**.
 
-    ![The Add an action button under + New step is highlighted in the Schema box.](media/image243.png "Parse JSON window")
+    ![The + New step is highlighted in the Schema box.](media/image243.png "Parse JSON window")
 
 15. In the **Choose an action box**, enter "Twilio," and select **Twilio -- Send Text Message (SMS)** under Actions.
 
@@ -1840,7 +1838,7 @@ In this task, you will create a new Logic App, which will use the Twilio connect
 
     ![The information above is entered in the next Send Text Message (SMS) dialog box.](media/image247.png "Send Text Message (SMS) dialog box")
 
-18. Select **+New step** and **Add an action**.
+18. Select **+New step**.
 
     ![The Add an action button is highlighted under + New step.](media/image248.png "Add an action button")
 
