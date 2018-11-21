@@ -444,7 +444,7 @@ In this task, you will create the collections needed for your database migration
 
         ![The information above is entered in the Add Collection dialog box.](media/add-orders-collection.png "Add Collection dialog box")
         
-3. If they do not already exist, repeat steps 1 and 2 to create collections for:
+3. If they do not already exist, use the best-for-you-organic database id to repeat steps 1 and 2 to create collections for:
 
     - users
     - plans
@@ -1015,7 +1015,7 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
         
  15.   You may be required to restart Jenkins and log in again. Otherwise, select **Start using Jenkins** on the Jenkins is ready screen.
 
-    ![Screenshot of the Jenkins is ready page, with the Start using Jenkins button highlighted.](media/image120.png "Jenkins is ready page")
+   ![Screenshot of the Jenkins is ready page, with the Start using Jenkins button highlighted.](media/image120.png "Jenkins is ready page")
 
 16. You will be redirected to the Jenkins dashboard.
 
