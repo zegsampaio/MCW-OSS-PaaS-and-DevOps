@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-August 2018
+November 2018
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -305,7 +305,7 @@ In this task, you will seed the MongoDB with sample data, then run the applicati
 3. At the bash prompt, use the `npm install` command to ensure the required components are installed on your Lab VM.
 
     ```sh
-    npm install
+    sudo npm install
     ```
 
     ![This is a screenshot of the terminal window at the bottom of the Visual Studio Code dialog box. The command above is entered at the command prompt, and the results of the command are displayed.](media/image41.png "Bash terminal window")
@@ -354,7 +354,7 @@ In this task, you will provision a new Azure Cosmos DB account using the MongoDB
 
 2. On the **Azure Cosmos** **DB** blade, enter the following:
 
-    - **ID**: Enter "best-for-you-db-SUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
+    - **Account Name**: Enter "best-for-you-db-SUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
 
     - **API:** Select **MongoDB**.
 
@@ -366,9 +366,11 @@ In this task, you will provision a new Azure Cosmos DB account using the MongoDB
 
     - **Enable geo-redundancy:** Unchecked
 
-    - Select **Create** to provision the new Azure Cosmos DB account.
+    - Select **Review + create** to move to the validation step.
 
-    ![The information above is entered in the Azure Cosmos DB blade.](media/create-cosmos-db-blade-settings.png "Azure Cosmos DB")
+    ![The information above is entered in the Azure Cosmos DB blade.](media/create-cosmos-db-settings.png "Azure Cosmos DB")
+
+    - After the Validation has succeeded, Select **Create** to provision the new Azure Cosmos DB.
     
 ### Task 2: Update database connection string
 
@@ -856,83 +858,92 @@ In this task, you will be adding a Jenkins service integration into your GitHub 
 
     ![DNS name and its value are highlighted on the Overview blade.](media/image100.png "Overview blade")
 
-3. Return to your forked `mcw-oss-paas-devops` application page in your GitHub account, select **Settings**, then select **Integrations & services** from the left-hand menu.
+3. Return to your forked `mcw-oss-paas-devops` application page in your GitHub account, select **Settings**, then select **Webhooks** from the left-hand menu.
 
-    ![Integrations & services is highlighted on the left-hand menu, and Settings is highlighted at the top.](media/image101.png "Select Settings")
-
-4. Select **Add service**, enter "Jenkins" into the search filter, and select **Jenkins (GitHub plugin)**.
-
-    ![The Add service button is highlighted under Installed GitHub Apps, Jenkins (gith is highlighted in the Available Services search box, and Jenkins (GitHub plugin) is highlighted in the search results.](media/image102.png "Add the Jenkins GitHub plugin")
+4. Select **Add Webhook**.
+  
+   ![Webhooks is highlighted on the left-hand menu, and Add webhook is highlighted at the top.](media/webhooks-selected.png "Select Webhooks")
+   
 
 5. When prompted, enter your GitHub account password to continue.
 
     ![A password is entered in the Confirm password to continue dialog box.](media/image103.png "Confirm password dialog box")
 
-6. In the Jenkins hook URL text box, enter "http://YOUR-JENKINS-URL]/github-webhook/" replacing **[YOUR-JENKINS-URL]** with the Jenkins DNS name you copied from the Azure portal, and select **Add service**.
+6.  Enter the following:
 
-    ![The value in the Jenkins hook url box is highlighted in the Services / Add Jenkins (GitHub plugin) dialog box.](media/image104.png "Select Add service")
+   - **Payload URL** Enter "http://YOUR-JENKINS-URL]/github-webhook/" replacing **[YOUR-JENKINS-URL]** with the Jenkins DNS name you copied from the Azure portal. Make sure to include the last /
 
-7. You will see the Jenkins (GitHub plugin) under the list of services.
+   - **Content type** Select **application/json**
 
-    ![Jenkins (GitHub plugin) is highlighted in the list of services.](media/image105.png "Installed GitHub Apps section")
+   -  Leave **Secret** blank.
 
-8. Next, you need to grant the Jenkins user access to your GitHub repository by adding a deploy key in the GitHub settings.
+  ![The value in the Jenkins hook url box is highlighted in the Webhooks / Add Webhook  dialog box.](media/add-webhook-settings.png "Jenkins webhook settings")
 
-9. Return to your Jenkins virtual machine page in the Azure portal, select **Connect**, and copy the SSH command.
+7. Select **Let me select individual events**, then enable **Pushes**. Select **Add webhook**
+
+  ![The Pushes checkbox is highlighted in the Let me select individual events section.](media/enable-pushes.png "Enable Pushes Events")
+
+8. A warning will be displayed. This is a permissions error that will be resolved in a later step.
+
+    ![A warning icon is displayed due to a http 403 error.](media/403-warning.png "Http Forbidden warning")
+   
+9. Next, you need to grant the Jenkins user access to your GitHub repository by adding a deploy key in the GitHub settings.
+
+10. Return to your Jenkins virtual machine page in the Azure portal, select **Connect**, and copy the SSH command.
 
     ![The Connect icon is highlighted on the Azure portal, and the SSH command is highlighted below.](media/image106.png "Jenkins virtual machine page")
 
-10. Open a new bash shell and paste the SSH command you copied above at the prompt. Enter "yes" if prompted about continuing to connect, and enter the jenkinsadmin password, "Password.1!!," when prompted.
+11. Open a new bash shell and paste the SSH command you copied above at the prompt. Enter "yes" if prompted about continuing to connect, and enter the jenkinsadmin password, "Password.1!!," when prompted.
 
     ![The information above is displayed in this screenshot of the bash terminal.](media/image107.png "bash terminal screenshot")
 
-11. At the jenkinsadmin\@Jenkins prompt, enter:
+12. At the jenkinsadmin\@Jenkins prompt, enter:
 
     ```sh
     ssh-keygen
     ```
 
-12. Press **Enter** to accept the default file in which to save the key.
+13. Press **Enter** to accept the default file in which to save the key.
 
-13. Press **Enter** to use an empty passphrase, and re-enter it to confirm. 
+14. Press **Enter** to use an empty passphrase, and re-enter it to confirm. 
 
     >**Note**: This is done only for simplicity in this hands-on lab, and is not recommend for actual environments.
 
-14. Copy the location into which your public key has been saved.
+15. Copy the location into which your public key has been saved.
 
     ![In this screenshot of the bash terminal, ssh-keygen and the location into which your public key has been saved are highlighted.](media/image108.png "bash terminal screenshot")
 
-15. Show the public key using the following command, replacing [KEY-PATH] with the location of your public key.
+16. Show the public key using the following command, replacing [KEY-PATH] with the location of your public key.
 
     ```sh
     cat [KEY-PATH]
     ```
 
-16. Copy the key displayed, so it can be added to GitHub.
+18. Copy the key displayed, so it can be added to GitHub.
 
     ![The displayed key is highlighted in this screenshot of the bash terminal.](media/image109.png "bash terminal screenshot")
 
-17. Return to you GitHub account in the browser, select the **Deploy keys** option from the left-hand menu, and select **Add deploy key**.
+19. Return to you GitHub account in the browser, select the **Deploy keys** option from the left-hand menu, and select **Add deploy key**.
 
     ![Deploy keys banner is displayed, and the Add deploy key button is highlighted.](media/image110.png "Deploy keys")
 
-18. Enter "Jenkins" for the title, paste the SSH key you copied above into the Key field, removing any trailing spaces, and select **Add key**.
+20. Enter "Jenkins" for the title, paste the SSH key you copied above into the Key field, removing any trailing spaces, and select **Add key**.
 
     ![On the GitHub account page, Deploy keys is selected in the left-hand menu, Jenkins is in the Title box, and the SSH key that you copied is in the Key field.](media/image111.png "Add the key")
 
-19. To ensure that everything is working, return to the Jenkin's bash shell, and enter the below command which will check the connection to GitHub.
+21. To ensure that everything is working, return to the Jenkin's bash shell, and enter the below command which will check the connection to GitHub.
 
     ```sh
     ssh git@github.com
     ```
 
-20. Enter "yes" when prompted about continuing.
+22. Enter "yes" when prompted about continuing.
 
-21. You should see a message like the following, indicating a successful connection.
+23. You should see a message like the following, indicating a successful connection.
 
     ![A message indicating a successful connection is highlighted in this screenshot of the Jenkins bash terminal.](media/image112.png "bash terminal")
 
-22. The GitHub side of the integration with Jenkins is complete. Next, you will configure Jenkins as part of your CI/CD pipeline.
+24. The GitHub side of the integration with Jenkins is complete. Next, you will configure Jenkins as part of your CI/CD pipeline.
 
 ### Task 2: Open connection to Jenkins
 
@@ -1002,7 +1013,7 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
         ![The Create First Admin User page, with the values specified above entered into the appropriate fields, and Save and Finish highlighted.](media/create-first-admin-user-jenkins.png "Create First Admin User page")
         
-15. Select **Start using Jenkins** on the Jenkins is ready screen.
+ 15.   You may be required to restart Jenkins and log in again. Otherwise, select **Start using Jenkins** on the Jenkins is ready screen.
 
     ![Screenshot of the Jenkins is ready page, with the Start using Jenkins button highlighted.](media/image120.png "Jenkins is ready page")
 
@@ -1014,9 +1025,10 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
     ![Manage Jenkins is highlighted in the left-hand menu of the Jenkins window, and Manage Plugins is highlighted on the right.](media/image122.png "Jenkins window")
 
-18. Install the **NodeJS** plug-in by entering **nodejs** into the Filter box, and selecting the **NodeJS** plug-in in the results, and then selecting **Install without restart**.
+18. With the **Available** tab selected, install the **NodeJS** plug-in by entering **nodejs** into the Filter box, and selecting the **NodeJS** plug-in in the results, and then selecting **Download now and install after restart**.
 
-    ![On the Manage Plugins screen, the Available tab is selected, \"nodejs\" is entered into the filter box, and NodeJS is checked in the filter results. The Install without restart button is highlighted.](media/image124.png "Manage Plugins page")
+    ![On the Manage Plugins screen, the Available tab is selected, \"nodejs\" is entered into the filter box, and NodeJS is checked in the filter results. The Download now and install after restart button is highlighted.](media/image124.png "Manage Plugins page")
+
 
 19. Scroll up to the top the screen, and select **Manage Jenkins** from the left-hand menu.
 
@@ -1257,11 +1269,11 @@ In this task, you will create an Azure Active Directory (Azure AD) application a
 11. On the Add permissions blade, do the following:
 
     - **Role**: Select Contributor.
-    - **Assign access to**: Select Azure AD user, group, or application.
+    - **Assign access to**: Select Azure AD user, group, or service principal.
     - **Select**: Enter "best" and select the best-for-you-app Registered app you created in Azure AD.
     - Select **Save**.
-
-        ![In the Add permission dialog, the Role is set to Contributor, Azure AD user, group, or application is selected in the Assign access to drop down, "best" is entered into the Select box, and best-for-you-app is listed under Selected members.](media/resource-group-access-control-add-permission.png "Add permission")
+      
+        ![In the Add permission dialog, the Role is set to Contributor, Azure AD user, group, or service principal is selected in the Assign access to drop down, "best" is entered into the Select box, and best-for-you-app is listed under Selected members.](media/add-role-assignment.png "Add role assignment")
 
 ### Task 7: Add continuous delivery to Jenkins build job
 
@@ -1406,13 +1418,15 @@ In this task, you will create a Function App in Azure, which will host your Func
 
     - **Location:** Select the location you have been using for resources in this hands-on lab.
 
+    - **Runtime Stack** Select JavaScript
+
     - **Storage:** Select **Create new** and enter "bestforyouorders" for the name.
 
     - **Application Insights** Select Off.
 
     - Select **Create** to provision the new Function App.
 
-        ![The information above is entered on the Create Function App blade.](media/create-function-app-resource.png "Create Function App Settings")
+    ![The information above is entered on the Create Function App blade.](media/create-function-app-settings.png "Create Function App Settings")
         
 ### Task 2: Configure storage queues
 
