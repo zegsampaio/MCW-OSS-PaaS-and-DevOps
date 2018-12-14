@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-August 2018
+November 2018
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -305,7 +305,7 @@ In this task, you will seed the MongoDB with sample data, then run the applicati
 3. At the bash prompt, use the `npm install` command to ensure the required components are installed on your Lab VM.
 
     ```sh
-    npm install
+    sudo npm install
     ```
 
     ![This is a screenshot of the terminal window at the bottom of the Visual Studio Code dialog box. The command above is entered at the command prompt, and the results of the command are displayed.](media/image41.png "Bash terminal window")
@@ -354,7 +354,7 @@ In this task, you will provision a new Azure Cosmos DB account using the MongoDB
 
 2. On the **Azure Cosmos** **DB** blade, enter the following:
 
-    - **ID**: Enter "best-for-you-db-SUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
+    - **Account Name**: Enter "best-for-you-db-SUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
 
     - **API:** Select **MongoDB**.
 
@@ -366,9 +366,11 @@ In this task, you will provision a new Azure Cosmos DB account using the MongoDB
 
     - **Enable geo-redundancy:** Unchecked
 
-    - Select **Create** to provision the new Azure Cosmos DB account.
+    - Select **Review + create** to move to the validation step.
 
-    ![The information above is entered in the Azure Cosmos DB blade.](media/create-cosmos-db-blade-settings.png "Azure Cosmos DB")
+    ![The information above is entered in the Azure Cosmos DB blade.](media/create-cosmos-db-settings.png "Azure Cosmos DB")
+
+    - After the Validation has succeeded, Select **Create** to provision the new Azure Cosmos DB.
     
 ### Task 2: Update database connection string
 
@@ -442,7 +444,7 @@ In this task, you will create the collections needed for your database migration
 
         ![The information above is entered in the Add Collection dialog box.](media/add-orders-collection.png "Add Collection dialog box")
         
-3. If they do not already exist, repeat steps 1 and 2 to create collections for:
+3. If they do not already exist, use the best-for-you-organic database id to repeat steps 1 and 2 to create collections for:
 
     - users
     - plans
@@ -856,83 +858,92 @@ In this task, you will be adding a Jenkins service integration into your GitHub 
 
     ![DNS name and its value are highlighted on the Overview blade.](media/image100.png "Overview blade")
 
-3. Return to your forked `mcw-oss-paas-devops` application page in your GitHub account, select **Settings**, then select **Integrations & services** from the left-hand menu.
+3. Return to your forked `mcw-oss-paas-devops` application page in your GitHub account, select **Settings**, then select **Webhooks** from the left-hand menu.
 
-    ![Integrations & services is highlighted on the left-hand menu, and Settings is highlighted at the top.](media/image101.png "Select Settings")
-
-4. Select **Add service**, enter "Jenkins" into the search filter, and select **Jenkins (GitHub plugin)**.
-
-    ![The Add service button is highlighted under Installed GitHub Apps, Jenkins (gith is highlighted in the Available Services search box, and Jenkins (GitHub plugin) is highlighted in the search results.](media/image102.png "Add the Jenkins GitHub plugin")
+4. Select **Add Webhook**.
+  
+   ![Webhooks is highlighted on the left-hand menu, and Add webhook is highlighted at the top.](media/webhooks-selected.png "Select Webhooks")
+   
 
 5. When prompted, enter your GitHub account password to continue.
 
     ![A password is entered in the Confirm password to continue dialog box.](media/image103.png "Confirm password dialog box")
 
-6. In the Jenkins hook URL text box, enter "http://YOUR-JENKINS-URL]/github-webhook/" replacing **[YOUR-JENKINS-URL]** with the Jenkins DNS name you copied from the Azure portal, and select **Add service**.
+6.  Enter the following:
 
-    ![The value in the Jenkins hook url box is highlighted in the Services / Add Jenkins (GitHub plugin) dialog box.](media/image104.png "Select Add service")
+   - **Payload URL** Enter "http://YOUR-JENKINS-URL]/github-webhook/" replacing **[YOUR-JENKINS-URL]** with the Jenkins DNS name you copied from the Azure portal. Make sure to include the last /
 
-7. You will see the Jenkins (GitHub plugin) under the list of services.
+   - **Content type** Select **application/json**
 
-    ![Jenkins (GitHub plugin) is highlighted in the list of services.](media/image105.png "Installed GitHub Apps section")
+   -  Leave **Secret** blank.
 
-8. Next, you need to grant the Jenkins user access to your GitHub repository by adding a deploy key in the GitHub settings.
+  ![The value in the Jenkins hook url box is highlighted in the Webhooks / Add Webhook  dialog box.](media/add-webhook-settings.png "Jenkins webhook settings")
 
-9. Return to your Jenkins virtual machine page in the Azure portal, select **Connect**, and copy the SSH command.
+7. Select **Let me select individual events**, then enable **Pushes**. Select **Add webhook**
+
+  ![The Pushes checkbox is highlighted in the Let me select individual events section.](media/enable-pushes.png "Enable Pushes Events")
+
+8. A warning will be displayed. This is a permissions error that will be resolved in a later step.
+
+    ![A warning icon is displayed due to a http 403 error.](media/403-warning.png "Http Forbidden warning")
+   
+9. Next, you need to grant the Jenkins user access to your GitHub repository by adding a deploy key in the GitHub settings.
+
+10. Return to your Jenkins virtual machine page in the Azure portal, select **Connect**, and copy the SSH command.
 
     ![The Connect icon is highlighted on the Azure portal, and the SSH command is highlighted below.](media/image106.png "Jenkins virtual machine page")
 
-10. Open a new bash shell and paste the SSH command you copied above at the prompt. Enter "yes" if prompted about continuing to connect, and enter the jenkinsadmin password, "Password.1!!," when prompted.
+11. Open a new bash shell and paste the SSH command you copied above at the prompt. Enter "yes" if prompted about continuing to connect, and enter the jenkinsadmin password, "Password.1!!," when prompted.
 
     ![The information above is displayed in this screenshot of the bash terminal.](media/image107.png "bash terminal screenshot")
 
-11. At the jenkinsadmin\@Jenkins prompt, enter:
+12. At the jenkinsadmin\@Jenkins prompt, enter:
 
     ```sh
     ssh-keygen
     ```
 
-12. Press **Enter** to accept the default file in which to save the key.
+13. Press **Enter** to accept the default file in which to save the key.
 
-13. Press **Enter** to use an empty passphrase, and re-enter it to confirm. 
+14. Press **Enter** to use an empty passphrase, and re-enter it to confirm. 
 
     >**Note**: This is done only for simplicity in this hands-on lab, and is not recommend for actual environments.
 
-14. Copy the location into which your public key has been saved.
+15. Copy the location into which your public key has been saved.
 
     ![In this screenshot of the bash terminal, ssh-keygen and the location into which your public key has been saved are highlighted.](media/image108.png "bash terminal screenshot")
 
-15. Show the public key using the following command, replacing [KEY-PATH] with the location of your public key.
+16. Show the public key using the following command, replacing [KEY-PATH] with the location of your public key.
 
     ```sh
     cat [KEY-PATH]
     ```
 
-16. Copy the key displayed, so it can be added to GitHub.
+18. Copy the key displayed, so it can be added to GitHub.
 
     ![The displayed key is highlighted in this screenshot of the bash terminal.](media/image109.png "bash terminal screenshot")
 
-17. Return to you GitHub account in the browser, select the **Deploy keys** option from the left-hand menu, and select **Add deploy key**.
+19. Return to you GitHub account in the browser, select the **Deploy keys** option from the left-hand menu, and select **Add deploy key**.
 
     ![Deploy keys banner is displayed, and the Add deploy key button is highlighted.](media/image110.png "Deploy keys")
 
-18. Enter "Jenkins" for the title, paste the SSH key you copied above into the Key field, removing any trailing spaces, and select **Add key**.
+20. Enter "Jenkins" for the title, paste the SSH key you copied above into the Key field, removing any trailing spaces, and select **Add key**.
 
     ![On the GitHub account page, Deploy keys is selected in the left-hand menu, Jenkins is in the Title box, and the SSH key that you copied is in the Key field.](media/image111.png "Add the key")
 
-19. To ensure that everything is working, return to the Jenkin's bash shell, and enter the below command which will check the connection to GitHub.
+21. To ensure that everything is working, return to the Jenkin's bash shell, and enter the below command which will check the connection to GitHub.
 
     ```sh
     ssh git@github.com
     ```
 
-20. Enter "yes" when prompted about continuing.
+22. Enter "yes" when prompted about continuing.
 
-21. You should see a message like the following, indicating a successful connection.
+23. You should see a message like the following, indicating a successful connection.
 
     ![A message indicating a successful connection is highlighted in this screenshot of the Jenkins bash terminal.](media/image112.png "bash terminal")
 
-22. The GitHub side of the integration with Jenkins is complete. Next, you will configure Jenkins as part of your CI/CD pipeline.
+24. The GitHub side of the integration with Jenkins is complete. Next, you will configure Jenkins as part of your CI/CD pipeline.
 
 ### Task 2: Open connection to Jenkins
 
@@ -1002,9 +1013,9 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
         ![The Create First Admin User page, with the values specified above entered into the appropriate fields, and Save and Finish highlighted.](media/create-first-admin-user-jenkins.png "Create First Admin User page")
         
-15. Select **Start using Jenkins** on the Jenkins is ready screen.
+ 15.   You may be required to restart Jenkins and log in again. Otherwise, select **Start using Jenkins** on the Jenkins is ready screen.
 
-    ![Screenshot of the Jenkins is ready page, with the Start using Jenkins button highlighted.](media/image120.png "Jenkins is ready page")
+   ![Screenshot of the Jenkins is ready page, with the Start using Jenkins button highlighted.](media/image120.png "Jenkins is ready page")
 
 16. You will be redirected to the Jenkins dashboard.
 
@@ -1014,9 +1025,10 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
     ![Manage Jenkins is highlighted in the left-hand menu of the Jenkins window, and Manage Plugins is highlighted on the right.](media/image122.png "Jenkins window")
 
-18. Install the **NodeJS** plug-in by entering **nodejs** into the Filter box, and selecting the **NodeJS** plug-in in the results, and then selecting **Install without restart**.
+18. With the **Available** tab selected, install the **NodeJS** plug-in by entering **nodejs** into the Filter box, and selecting the **NodeJS** plug-in in the results, and then selecting **Download now and install after restart**.
 
-    ![On the Manage Plugins screen, the Available tab is selected, \"nodejs\" is entered into the filter box, and NodeJS is checked in the filter results. The Install without restart button is highlighted.](media/image124.png "Manage Plugins page")
+    ![On the Manage Plugins screen, the Available tab is selected, \"nodejs\" is entered into the filter box, and NodeJS is checked in the filter results. The Download now and install after restart button is highlighted.](media/image124.png "Manage Plugins page")
+
 
 19. Scroll up to the top the screen, and select **Manage Jenkins** from the left-hand menu.
 
@@ -1257,11 +1269,11 @@ In this task, you will create an Azure Active Directory (Azure AD) application a
 11. On the Add permissions blade, do the following:
 
     - **Role**: Select Contributor.
-    - **Assign access to**: Select Azure AD user, group, or application.
+    - **Assign access to**: Select Azure AD user, group, or service principal.
     - **Select**: Enter "best" and select the best-for-you-app Registered app you created in Azure AD.
     - Select **Save**.
-
-        ![In the Add permission dialog, the Role is set to Contributor, Azure AD user, group, or application is selected in the Assign access to drop down, "best" is entered into the Select box, and best-for-you-app is listed under Selected members.](media/resource-group-access-control-add-permission.png "Add permission")
+      
+        ![In the Add permission dialog, the Role is set to Contributor, Azure AD user, group, or service principal is selected in the Assign access to drop down, "best" is entered into the Select box, and best-for-you-app is listed under Selected members.](media/add-role-assignment.png "Add role assignment")
 
 ### Task 7: Add continuous delivery to Jenkins build job
 
@@ -1406,13 +1418,15 @@ In this task, you will create a Function App in Azure, which will host your Func
 
     - **Location:** Select the location you have been using for resources in this hands-on lab.
 
+    - **Runtime Stack** Select JavaScript
+
     - **Storage:** Select **Create new** and enter "bestforyouorders" for the name.
 
     - **Application Insights** Select Off.
 
     - Select **Create** to provision the new Function App.
 
-        ![The information above is entered on the Create Function App blade.](media/create-function-app-resource.png "Create Function App Settings")
+    ![The information above is entered on the Create Function App blade.](media/create-function-app-settings.png "Create Function App Settings")
         
 ### Task 2: Configure storage queues
 
@@ -1450,14 +1464,15 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![Functions is selected and highlighted in the left-hand menu on the Function Apps blade, and + New function is highlighted on the right.](media/image188.png "Function Apps blade")
 
-3. In the trigger search box, enter "cosmos," and select the **Cosmos DB trigger**.
+3. In the trigger search box, enter "cosmos," and select the **Azure Cosmos DB trigger**.
 
-    ![In the trigger search box, cosmos is selected, and the Cosmos DB trigger is selected below it.](media/image189.png "Choose a template page")
+    ![In the trigger search box, cosmos is selected, and the Azure Cosmos DB trigger is selected below it.](media/image189.png "Choose a template page")
 
-4. In the **Cosmos DB trigger** dialog, enter the following:
+4.  Install any extensions required when prompted.
 
-    - **Language**: Select **JavaScript**.
-
+    ![A warning indicating that extensions are required is displayed.](media/install-trigger-extensions.png "Install extensions")
+5. In the **Azure Cosmos DB trigger** dialog, enter the following:
+    
     - **Name**: Enter "OrdersCosmosTrigger".
 
     - **Azure Cosmos DB account connection**: Select **new**, then select the **best-for-you-db DocumentDB** Account.
@@ -1486,7 +1501,9 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![+ New Output is highlighted under Outputs, Azure Queue Storage is selected below it, and Select is selected at the bottom.](media/image193.png "Select Azure Queue Storage")
 
-8. For the **Azure Queue Storage output**, enter the following:
+8. Install extensions if prompted to do so.
+
+9. For the **Azure Queue Storage output**, enter the following:
 
     - **Message parameter name**: outputQueue
 
@@ -1498,27 +1515,27 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![The information above is entered in the Azure Queue Storage output dialog box, and Save is selected at the bottom.](media/image194.png "Azure Queue Storage output page")
 
-9. Now, select the **OrdersCosmosTrigger** function in the left-hand menu.
+10. Now, select the **OrdersCosmosTrigger** function in the left-hand menu.
 
     ![The OrdersCosmosTrigger function is selected in the left-hand menu.](media/image195.png "Left menu")
 
-10. To get the code for the OrdersCosmosTrigger function, go into the project is VS Code, expand the AzureFunctions folder, select **OrdersCosmosTrigger.js**, and copy the code, as highlighted in the screen shot below.
+11. To get the code for the OrdersCosmosTrigger function, go into the project is VS Code, expand the AzureFunctions folder, select **OrdersCosmosTrigger.js**, and copy the code, as highlighted in the screen shot below.
 
     ![Under the AzureFunctions folder in Visual Studio Code, OrdersCosmosTrigger.js is selected and highlighted in Explorer. On the right, the code for the OrdersCosmosTrigger function is highlighted.](media/image196.png "Visual Studio Code")
 
-11. Paste the code into the **index.js** block, overwriting all the existing code, and select **Save**. Your index.js file should now look like the following:
+12. Paste the code into the **index.js** block, overwriting all the existing code, and select **Save**. Your index.js file should now look like the following:
 
     ![This is a screenshot of the index.js block.](media/image197.png "Index.js block")
 
-12. Next, select **Logs** below the code block, so you can observe the Function being called during the next steps.
+13. Next, select **Logs** below the code block, so you can observe the Function being called during the next steps.
 
     ![Logs is highlighted below the code block.](media/image198.png "Select Logs")
 
-13. To trigger the function, return to the starter application in your browser window, and select **Sign In**.
+14. To trigger the function, return to the starter application in your browser window, and select **Sign In**.
 
     ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the starter application, and Sign In is highlighted at the top.](media/image199.png "Sign in to the starter application")
 
-14. On the Login screen, enter the following credentials, and select **Login**:
+15. On the Login screen, enter the following credentials, and select **Login**:
 
     - **Email address:** <demouser@bfyo.com>
 
@@ -1526,29 +1543,29 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![The credentials above are entered in the Login page.](media/image200.png "Login page")
 
-15. After logging in, you will be returned to the home page. Select **Select this plan** for any of the plans.
+16. After logging in, you will be returned to the home page. Select **Select this plan** for any of the plans.
 
     ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the home page, and all three boxes' Select this plan buttons are highlighted.](media/image201.png "Select a plan")
 
-16. On the **Place Order** screen, select **Place Order**. This will create a new order, which will fire the Azure Cosmos DB trigger in your function, and then send the order on to the ordersqueue for processing.
+17. On the **Place Order** screen, select **Place Order**. This will create a new order, which will fire the Azure Cosmos DB trigger in your function, and then send the order on to the ordersqueue for processing.
 
     ![The Place Order button is highlighted at the bottom of the Place Order page.](media/image202.png "Place your order page")
 
-17. Next, you will update an order in the Azure portal, to set the processed value to true. This will be a change that should not be sent into the orderqueue for processing.
+18. Next, you will update an order in the Azure portal, to set the processed value to true. This will be a change that should not be sent into the orderqueue for processing.
 
-18. Navigate to your Cosmos DB account in the Azure portal, select **Data Explorer**, expand the **orders** collection, then select **Documents**.
+19. Navigate to your Cosmos DB account in the Azure portal, select **Data Explorer**, expand the **orders** collection, then select **Documents**.
 
     ![Data Explorer is selected and highlighted on the left side of the Cosmos DB account in the Azure portal, and Documents is selected and highlighted in the expanded orders collection.](media/image203.png "Azure Cosmos DB account blade")
 
-19. Select any order document, and change the processed value to "true," then select **Update**.
+20. Select any order document, and change the processed value to "true," then select **Update**.
 
     ![Update is highlighted at the top of a document, and true is highlighted next to the processed value.](media/image204.png "Change the processed value to true")
 
-20. Return to the logs pane of your function and observe that the orders have been processed though the Function, and that the new order was sent to the orderqueue, while the updated order was not.
+21. Return to the logs pane of your function and observe that the orders have been processed though the Function, and that the new order was sent to the orderqueue, while the updated order was not.
 
     ![The new order and the updated order are highlighted in the logs pane of your function.](media/image205.png "Logs pane")
 
-21. Finally, verify items are being written to the order queue, by going to the queue in the Azure Storage account, and observing that items have been added to the queue.
+22. Finally, verify items are being written to the order queue, by going to the queue in the Azure Storage account, and observing that items have been added to the queue.
 
     ![The Refresh button is highlighted in the Azure Storage account, and Message Text appears in the order queue below.](media/image206.png "Messages blade")
 
@@ -1566,13 +1583,11 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     ![The Go button is next to Create a new function triggered by this output under Actions.](media/image208.png "Actions section")
 
-3. Select **Queue trigger** from the list.
-
-    ![This is a screenshot of the Queue trigger box.](media/image209.png "Queue trigger box")
+3. Select **Azure Queue Storage trigger** from the list.
+    
+    ![This is a screenshot of the Queue trigger box.](media/azure-queue-storage-trigger.png "Queue trigger box")
 
 4. On the **Queue trigger New Function** dialog, enter the following:
-
-    - **Language:** Select **JavaScript**.
 
     - **Name:** Enter ProcessOrders.
 
@@ -1582,7 +1597,7 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     - Select **Create**.
 
-        ![The information above is entered in the Queue trigger New Function dialog box.](media/image210.png "Queue trigger New Function dialog box")
+         ![The information above is entered in the Queue trigger New Function dialog box.](media/process-orders-function.png "Queue trigger New Function dialog box")
 
 5. When the function has been created, select **Integrate** under the **ProcessOrders** function, change the Message parameter name to "orderToProcess" for the **Azure Queue storage trigger**, and select **Save**.
 
@@ -1750,11 +1765,7 @@ In this task, you will create a new Logic App, which will use the Twilio connect
 
 3. Navigate to your newly created Logic App in the Azure portal.
 
-4. Select the **Logic App Designer** under **Development Tools** on the left-hand menu.
-
-    ![Logic App Designer is selected under Development Tools in the left-hand menu of your newly created Logic App.](media/image233.png "Development Tools section")
-
-5. In the Logic App Designer, select **Blank Logic App** under **Templates**.
+4. In the Logic App Designer, select **Blank Logic App** under **Templates**.
 
     ![Blank Logic App is highlighted under Templates in Logic App Designer Templates section.](media/image234.png "Logic App Designer, Templates section")
 
@@ -1770,13 +1781,14 @@ In this task, you will create a new Logic App, which will use the Twilio connect
 
     ![In the When there are messages in a queue dialog box, Bestforyouorders is in the Connection Name box, the bestforyouorders row is highlighted at the top of the list below Storage account, and the Create button is highlighted at the bottom.](media/image237.png "When there are messages in a queue dialog box")
 
-9. In the next When there are messages in a queue dialog, select **notificationqueue** from the **Queue Name** list, and set the interval to **1** **minute**, then select **+New step**, and **Add an action**.
+9. In the next When there are messages in a queue dialog, select **notificationqueue** from the **Queue Name** list, and set the interval to **1** **minute**, then select **+New step**.
 
     ![The information above is entered in the When there are messages in a queue dialog box.](media/image238.png "When there are messages in a queue dialog box")
 
 10. In the **Choose an action box**, enter "Parse," and select **Data Operations** **-- Parse JSON** from the list.
 
-    ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box, and Data Operations -- Parse JSON is highlighted below in the list.](media/image239.png "When there are messages in a queue dialog box")
+
+    ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box, and Data Operations -- Parse JSON is highlighted below in the list.](media/data-operations-parse.png "When there are messages in a queue dialog box")
 
 11. Select the **Content** box, select **Add dynamic content +**, then select **Message Text** from the input parameters list that appears.
 
@@ -1794,9 +1806,9 @@ In this task, you will create a new Logic App, which will use the Twilio connect
 
     ![The JSON above is pasted in the sample JSON payload dialog box, and Done is selected below.](media/image242.png "Paste the JSON in the dialog box")
 
-14. You will now see the Schema for messages coming from the notification queue in the Schema box. Select **+New** **step** and select **Add an action**.
+14. You will now see the Schema for messages coming from the notification queue in the Schema box. Select **+New** **step**.
 
-    ![The Add an action button under + New step is highlighted in the Schema box.](media/image243.png "Parse JSON window")
+    ![The + New step is highlighted in the Schema box.](media/image243.png "Parse JSON window")
 
 15. In the **Choose an action box**, enter "Twilio," and select **Twilio -- Send Text Message (SMS)** under Actions.
 
@@ -1826,7 +1838,7 @@ In this task, you will create a new Logic App, which will use the Twilio connect
 
     ![The information above is entered in the next Send Text Message (SMS) dialog box.](media/image247.png "Send Text Message (SMS) dialog box")
 
-18. Select **+New step** and **Add an action**.
+18. Select **+New step**.
 
     ![The Add an action button is highlighted under + New step.](media/image248.png "Add an action button")
 

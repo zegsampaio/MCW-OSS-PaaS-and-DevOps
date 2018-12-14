@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-August 2018
+November 2018
 </div>
 
 
@@ -24,6 +24,8 @@ The names of manufacturers, products, or URLs are provided for informational pur
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
 **Contents**
+
+
 <!-- TOC -->
 
 - [OSS PaaS and DevOps before the hands-on lab setup guide](#oss-paas-and-devops-before-the-hands-on-lab-setup-guide)
@@ -36,6 +38,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Task 5: Fork the starter app](#task-5-fork-the-starter-app)
 
 <!-- /TOC -->
+
 
 # OSS PaaS and DevOps before the hands-on lab setup guide
 
@@ -96,7 +99,7 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
 
     a.  **Subscription**: Select the subscription you are using for this hands-on lab.
 
-    b.  **Resource group**: Select Use existing, and select the hands-on-lab-SUFFIX resource group.
+    b.  **Resource group**: Select the hands-on-lab-SUFFIX resource group from the dropdown list.
 
     c.  **Location**: Select the location you used for the hands-on-lab-SUFFIX resource group.
 
