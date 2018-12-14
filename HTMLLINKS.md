@@ -9,5 +9,3 @@
 
 [HOL step-by step - OSS PaaS and DevOps.html](https://cloudworkshop.blob.core.windows.net/oss-paas-devops/Hands-on%20lab/HOL%20step-by%20step%20-%20OSS%20PaaS%20and%20DevOps.html)
 
-[HOL unguided - OSS PaaS and DevOps.html](https://cloudworkshop.blob.core.windows.net/oss-paas-devops/Hands-on%20lab/HOL%20unguided%20-%20OSS%20PaaS%20and%20DevOps.html)
-
