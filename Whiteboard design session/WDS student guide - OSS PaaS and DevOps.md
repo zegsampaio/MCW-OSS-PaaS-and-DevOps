@@ -10,7 +10,7 @@ Whiteboard design session student guide
 </div>
 
 <div class="MCWHeader3">
-April 2019
+November 2018
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -19,7 +19,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2019 Microsoft Corporation. All rights reserved.
+© 2018 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -41,11 +41,11 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives
 
-In this whiteboard design session, you will work with a group to design a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. Your solution will handle the migration of an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure PaaS services, including migrating an existing MongoDB instance into Cosmos DB, enhancing application functionality using serverless technologies, and fully embracing modern DevOps tools.
+In this whiteboard design session, you will work with a group to build a solution for integrating and deploying complex Open Source Software (OSS) workloads into Azure PaaS. You will design a solution to migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure PaaS services, migrate an existing MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
 
 At the end of this whiteboard design session, you will be better able to design solutions for migrating OSS applications into Azure PaaS using modern DevOps methodologies.
 
-## Step 1: Review the customer case study
+## Step 1: Review the customer case study 
 
 **Outcome**
 
@@ -53,21 +53,21 @@ Analyze your customer's needs.
 
 Timeframe: 15 minutes
 
-Directions:  With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
+Directions: With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
 
-1. Meet your table participants and trainer.
+1.  Meet your table participants and trainer.
 
-2. Read all of the directions for steps 1-3 in the student guide.
+2.  Read all of the directions for steps 1-3 in the student guide.
 
-3. As a table team, review the following customer case study.
+3.  As a table team, review the following customer case study.
 
 ### Customer situation
 
-Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service is tailored towards working professionals, who want convenient, reliable access to healthy meal choices, and pre-packaged recipes, without having to spend too much time preparing the meals. Customers can choose from a variety of meal plan options (vegetarian, vegan, gluten-free, high-protein, etc.), along with several options for portion sizes, and the number of meals per week. Meals are delivered weekly directly to the customer's home.
+Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service is tailored towards working professionals, who want convenient, reliable access to healthy meal choices, and pre-packaged recipes, without having to speed too much time preparing the meals. Customers can choose from a variety of meal plan options (vegetarian, vegan, gluten-free, high-protein, etc.), along with several options for portion sizes, and the number of meals per week. Meals are delivered weekly directly to the customer's home.
 
-Their CIO, Holly Franklin, is a big proponent of open-source software (OSS), and development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). Their code is hosted in a private GitHub repository. A point of pride for Best For You Organics Company has been their developers' involvement in the open source community, with most members of the team frequently contributing to React.js on GitHub. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
+Their CIO, Holly Franklin, is a big proponent of Open Source Software, and development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). Their code is hosted in a private GitHub repository. A point of pride for Best For You Organics Company has been their developers' involvement in the open source community, with most members of the team frequently contributing to React.js on GitHub. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
 
-Their current meal plans include only dinner options, but Best For You Organics Company has received feedback from many customers expressing a desire that breakfast and lunch options be included as part of the service offering. They would like to expand their meal service to include offering breakfast and lunch to meet this demand, but feel they first need to address their rising infrastructure costs and management time. They have reached a point where managing their VM and server infrastructure is becoming a real challenge, and are interested in understanding more about Platform as a Service (PaaS) solutions for OSS applications that could help them focus their expenditures and efforts on their core business, rather than infrastructure. "We're finding that with every upgrade, we're spending more time and money on infrastructure, and less on delivering the functionality and features that matter most to our customers," says Holly Franklin, "and we need to rebalance those efforts." The development team at Best For You Organics has some experience with Docker, and is interested in what options might be available for using containers to deploy their application into a cloud environment.
+Their current meal plans include only dinner options, but Best For You Organics Company has received feedback from many customers expressing a desire that breakfast be included as part of the service offering. They would like to expand their meal service to include ongoing breakfast to meet this demand, but feel they first need to address their rising infrastructure costs and management time. They have reached a point where managing their VM and server infrastructure is becoming a real challenge, and are interested in understanding more about Platform as a Service (PaaS) solutions for OSS applications that could help them focus their expenditures and efforts on their core business, rather than infrastructure. "We're finding that with every upgrade, we're spending more time and money on infrastructure, and less on delivering the functionality and features that matter most to our customers," says Holly Franklin, "and we need to rebalance those efforts." The development team at Best For You Organics has some experience with Docker, and is interested in what options might be available for using containers to deploy their application into a cloud environment.
 
 Another feature she is interested in learning more about is identity management. Their existing web app requires users to register, and log in before subscribing to a meal plan. Today, this is handled via a home-grown solution that stores user names and passwords in the same database used for storing application information. They have experimented with other third-party solutions in the past, but found them difficult to integrate into their application, and are curious if moving their application into a cloud PaaS platform could help them integrate a better solution.
 
@@ -75,7 +75,7 @@ For their migration to the cloud, they have indicated that they would like to re
 
 The development team has also expressed that they would like to continue using GitHub as their code repository, but is interested in improving upon their DevOps pipeline. They currently use Jenkins for their builds and are interested in any tools available in a cloud offering that could help with release management, or other aspects of a fully-integrated, modern DevOps pipeline. Ultimately, their goal is to automate and simplify deployments through CI/CD capabilities, and deliver updates faster and more reliably.
 
-They have also expressed interest in gaining a better understanding of how serverless architecture could be leveraged to help their business grow. They have several processes that they are considering adding to their workflow, which they feel would be good candidates for a serverless approach, but are not sure which technologies and tools are right for the job. First, they would like to see if they can automate their daily order processing, queuing up the orders that need to go out each day, and updating their database when the orders have completed processing and been shipped. Next, they would like to implement functionality to send customers an email or SMS text message when their credit card has been charged and their weekly meal delivery has been shipped.
+They have also expressed interest in gaining a better understanding of how serverless architecture could be leveraged to help their business grow. They have several processes that they are considering adding to their workflow, which they feel would be good candidates for a serverless approach, but are not sure which technologies and tools are right for the job. First, they would like to see if they can automate their daily order processing, queuing up the orders that need to go out each day, and updating their database when the orders have completed processing and been shipped. Next, they would like to put functionality in place to send customers an SMS text message when their credit card has been charged, and when their weekly meal delivery has been shipped.
 
 Best For You Organics is optimistic about the benefits of moving to a PaaS solution, but very concerned about the time and potential changes which might be required to accommodate the transition for an OSS application.
 
@@ -96,11 +96,11 @@ Best For You Organics is optimistic about the benefits of moving to a PaaS solut
 
 6. Desire a replacement solution for safeguarding and managing user identities.
 
-7. Best For You Organics offers thousands of different meal options, but currently doesn't have an easy way for customers to search for specific meals or types of meals. They would like to add search capabilities to their application, providing the ability for customers to more easily find meals or options.
+7. Add search capabilities to their application, providing the ability for customers to find meals or options.
 
 ### Customer objections
 
-1. Microsoft isn't known for supporting open source. Is Azure really an appropriate platform for hosting an OSS application using PaaS?
+1. Is Azure an appropriate platform for hosting an OSS application using PaaS?
 
 2. We're interested in using containers, but we're not sure how they work in Azure. Does Azure provide reliable ways to deploy and manage containers? What is the simplest way to move containers to Azure, based on our PaaS experience, while at the same time considering our scale and growth requirements?
 
@@ -130,11 +130,11 @@ Timeframe: 60 minutes
 
 **Business needs**
 
-Directions: With all participants at your table, answer the following questions and list the answers on a flip chart:
+Directions:  With all participants at your table, answer the following questions and list the answers on a flip chart:
 
-1. Who should you present this solution to? Who is your target customer audience? Who are the decision makers?
+1.  Who should you present this solution to? Who is your target customer audience? Who are the decision makers?
 
-2. What customer business needs do you need to address with your solution?
+2.  What customer business needs do you need to address with your solution?
 
 **Design**
 
@@ -142,13 +142,13 @@ Directions: With all participants at your table, respond to the following questi
 
 *High-level architecture*
 
-1. Without getting into the details, (the following sections will address the details), diagram your initial vision for handling the top-level requirements for the OSS app and migration, serverless architecture integration, search integration, Azure AD B2C implementation, and DevOps pipeline. You will refine this diagram as you proceed.
+1. Without getting into the details, (the following sections will address the details), diagram your initial vision for handling the top-level requirements for the OSS app migration, serverless architecture integration, search integration, Azure AD B2C implementation, and DevOps pipeline. You will refine this diagram as you proceed.
 
 *PaaS solution*
 
-1. What PaaS solution would you propose to Best For You Organics Company for moving their application into Azure? Will this solution minimize the number of application code changes required to migrate the application? How will container orchestration be handled?
+1. What PaaS solution would you propose to Best For You Organics Company for moving their application into Azure? Will this solution minimize the number of application code changes required to migrate the application? How with container orchestration be handled?
 
-2. What options does the customer have for a Docker image registry? Which option you would recommend?
+2. What options does the customer have for a Docker image registry? What option you would recommend?
 
 *Database migration*
 
@@ -180,11 +180,11 @@ Directions: With all participants at your table, respond to the following questi
 
 Directions: With all participants at your table:
 
-1. Identify any customer needs that are not addressed with the proposed solution.
+1.  Identify any customer needs that are not addressed with the proposed solution.
 
-2. Identify the benefits of your solution.
+2.  Identify the benefits of your solution.
 
-3. Determine how you will respond to the customer's objections.
+3.  Determine how you will respond to the customer's objections.
 
 Prepare a 15-minute chalk-talk style presentation to the customer.
 
@@ -200,21 +200,21 @@ Timeframe: 30 minutes
 
 Directions:
 
-1. Pair with another table.
+1.  Pair with another table.
 
-2. One table is the Microsoft team and the other table is the customer.
+2.  One table is the Microsoft team and the other table is the customer.
 
-3. The Microsoft team presents their proposed solution to the customer.
+3.  The Microsoft team presents their proposed solution to the customer.
 
-4. The customer makes one of the objections from the list of objections.
+4.  The customer makes one of the objections from the list of objections.
 
-5. The Microsoft team responds to the objection.
+5.  The Microsoft team responds to the objection.
 
-6. The customer team gives feedback to the Microsoft team.
+6.  The customer team gives feedback to the Microsoft team.
 
-7. Tables switch roles and repeat Steps 2-6.
+7.  Tables switch roles and repeat Steps 2-6.
 
-## Wrap-up
+##  Wrap-up 
 
 Timeframe: 15 minutes
 
@@ -223,7 +223,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 ## Additional references
 
 |    |            |
-|----------|-------------|
+|----------|:-------------:|
 | **Description** | **Links** |
 | Azure Cosmos DB API for MongoDB | <https://docs.microsoft.com/azure/cosmos-db/mongodb-introduction/> |
 | Import MongoDB data into Cosmos DB | <https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-migrate/> |
