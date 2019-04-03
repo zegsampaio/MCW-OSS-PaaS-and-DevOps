@@ -342,7 +342,7 @@ In this task, you will seed the MongoDB with sample data, then run the applicati
 
     ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the application home page.](media/image43.png "View the three plans")
 
-9.  Return to the VS Code integrated terminal window, and press **CTRL+C** to stop the application.
+9. Return to the VS Code integrated terminal window, and press **CTRL+C** to stop the application.
 
 ## Exercise 2: Migrate the database to Cosmos DB
 

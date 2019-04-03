@@ -35,7 +35,7 @@ export default class Submit extends Component {
                         .then(result => {
                             this.setState({ user: result.data });
                             console.log(this.state.user);
-                            if (this.state.user.phone && this.state.user.phone != '') {
+                            if (this.state.user.phone && this.state.user.phone !== '') {
                                 const state = this.state;
                                 state['sendNotification'] = true;
                                 this.setState(state);
@@ -60,7 +60,7 @@ export default class Submit extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        const { orderId, userId, planId, sendNotification, creditCardNumber, cvv } = this.state;
+        const { orderId, userId, planId, sendNotification } = this.state;
 
         axios.post('/api/order', { orderId, userId, planId, sendNotification })
             .then((result) => {
@@ -71,7 +71,7 @@ export default class Submit extends Component {
     }
 
     render() {
-        const { orderId, userId, planId, sendNotification, creditCardNumber, cvv } = this.state;
+        const { creditCardNumber, cvv } = this.state;
 
         return (
             <div class="container">

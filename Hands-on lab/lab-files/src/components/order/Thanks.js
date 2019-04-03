@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Panel } from 'react-bootstrap';
 import axios from 'axios';
 
 export default class Thanks extends Component {
