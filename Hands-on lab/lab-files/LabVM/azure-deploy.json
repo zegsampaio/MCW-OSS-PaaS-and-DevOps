@@ -39,7 +39,7 @@
         "addressPrefix": "172.16.7.0/24",
         "subnetPrefix": "172.16.7.0/24",
         "customScriptFileName": "labvmconfig.sh",
-        "customScriptUri": "https://raw.githubusercontent.com/ZoinerTejada/mcw-oss-paas-devops/master/LabVM/labvmconfig.sh"
+        "customScriptUri": "https://raw.githubusercontent.com/kylebunting/MCW-OSS-PaaS-and-DevOps/master/Hands-on%20Lab/lab-files/LabVM/labvmconfig.sh"
     },
     "resources": [
         {
@@ -67,7 +67,7 @@
                         "version": "latest"
                     },
                     "osDisk": {
-                        "createOption": "fromImage",
+                        "createOption": "FromImage",
                         "diskSizeGB": "[variables('diskSizeGB')]",
                         "managedDisk": {
                             "storageAccountType": "Premium_LRS"
@@ -86,7 +86,7 @@
             "resources": [
                 {
                     "name": "CustomScriptExtension1",
-                    "apiVersion": "2016-03-30",
+                    "apiVersion": "2017-03-30",
                     "type": "extensions",
                     "location": "[variables('location')]",
                     "properties": {
@@ -163,11 +163,11 @@
         },
         {
             "name": "[variables('publicIpAddressName')]",
-            "type": "Microsoft.Network/publicIpAddresses",
+            "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2017-08-01",
             "location": "[variables('location')]",
             "properties": {
-                "publicIpAllocationMethod": "Dynamic"
+                "publicIPAllocationMethod": "Dynamic"
             },
             "sku": {
                 "name": "Basic"
@@ -184,7 +184,7 @@
                         "name": "RDP",
                         "properties": {
                             "priority": 100,
-                            "protocol": "TCP",
+                            "protocol": "Tcp",
                             "access": "Allow",
                             "direction": "Inbound",
                             "sourceAddressPrefix": "*",
@@ -197,7 +197,7 @@
                         "name": "default-allow-ssh",
                         "properties": {
                             "priority": 1000,
-                            "protocol": "TCP",
+                            "protocol": "Tcp",
                             "access": "Allow",
                             "direction": "Inbound",
                             "sourceAddressPrefix": "*",
