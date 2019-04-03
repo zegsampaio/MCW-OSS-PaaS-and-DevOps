@@ -6,84 +6,89 @@ Appendix A provides steps for manually provisioning and setting up the Lab VM us
 
 In this task, you will create a script file that will be used as a custom extension for configuring your Linux virtual machine in Azure. This script contains commands to install all the required software and configure a desktop on the Linux VM. These commands could also be run from an SSH shell manually.
 
-1. Open a web browser, and navigate to <https://raw.githubusercontent.com/ZoinerTejada/mcw-oss-paas-devops/master/LabVM/labvmconfig.sh>.
+1. Open a web browser, and navigate to <https://raw.githubusercontent.com/Microsoft/MCW-OSS-PaaS-and-DevOps/master/Hands-on%20lab/lab-files/LabVM/labvmconfig.sh>.
 
-2. Copy the contents displayed in the browser into a text editor, such as Notepad, and save the file as **labvmconfig.sh**. Note the location you saved the file, as you will be referencing it in the next task.
+2. Copy the contents displayed in the browser into a text editor, such as Visual Studio Code or Notepad, and save the file as `labvmconfig.sh`.
+
+    > Note the location where you save the file, as you will be referencing it in the next task.
 
 ## Task 2: Create a Linux virtual machine
 
 In this task, you will provision a Linux virtual machine (VM) running Ubuntu Server 16.04 LTS.
 
-1. In the [Azure Portal](https://portal.azure.com/), select **+Create a resource**, then enter "ubuntu" into the search bar, and select **Ubuntu Server 16.04 LTS** from the results.
+1. In the [Azure Portal](https://portal.azure.com/), select **+Create a resource**, then enter "ubuntu" into the search bar, expand **Ubuntu Server** and select **Ubuntu Server 16.04 LTS** from the results.
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, ubuntu is highlighted in the search box, and the Ubuntu Server 16.04 LTS row is highlighted in the search results.](media/image253.png "Azure Portal")
+    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, ubuntu is highlighted in the search box, and the Ubuntu Server 16.04 LTS row is highlighted in the search results.](media/create-resource-ubuntu-server-16.04-lts.png "Azure Portal")
 
 2. On the **Ubuntu Server 16.04 LTS** blade, select **Create**.
 
-    ![On the Windows 10 Pro, Version 1709 blade, Create is highlighted below Select a deployment model: Resource Manager.](media/image254.png "Select a deployment model field")
+    ![On the Windows 10 Pro, Version 1709 blade, Create is highlighted below Select a deployment model: Resource Manager.](media/ubuntu-server-create.png "Select a deployment model field")
 
 3. Set the following configuration on the **Basics** tab:
 
-    - **Name:** Enter LabVM
-
-    - **VM disk type:** Select **SSD**
-
-    - **User name:** Enter demouser
-
-    - **Authentication Type:** Select **Password**
-
-    - **Password:** Enter Password.1!!
+    **PROJECT DETAILS**:
 
     - **Subscription:** Select the subscription you are using for this hands-on lab.
-
     - **Resource Group:** Select **Create new**, and enter "hands-on-lab-(SUFFIX)" as the name of the new resource group.
 
-    - **Location:** Select either **East US**, **West US 2**, **West Europe**, or **Southeast Asia**, as these are currently the only regions which offer Dv3 and Ev3 VMs. Remember this location for other resources in this hands-on lab.
+    **INSTANCE DETAILS**:
 
-        ![Basics is selected on the Create virtual machine blade, and the information above is entered on the Basics blade at right.](media/image255.png "Create virtual machine and Basics blades")
+    - **Virtual machine name:** Enter **LabVM**.
+    - **Region:** Select the region you are using for this hands-on lab.
+    - **Availability options**: Select **No infrastructure redundancy required**.
+    - **Image**: Select **Ubuntu Server 16.04 LTS**.
+    - **Size**: Select **Standard D2s v3** or **Standard E2s_v3**.
 
-4. Select **OK** to move to the next step.
+    **ADMINISTRATOR ACCOUNT**:
 
-5. On the **Choose a size** blade, select **View all**. This machine will be doing nested virtualization, so it needs to be in either the Dv3 or Ev3 series, so selecting **D2S_V3 Standard** is a good baseline option. If that size is not available in the region you selected, go back to the **Basics** blade, and try one of the other regions listed above.
+    - **Authentication type:** Select **Password**.
+    - **Username:** Enter **demouser**
+    - **Password:** Enter **Password.1!!**
+    - **Login with Azure Active Directory**: Select **Off**.
 
-    ![Size is selected on the Create virtual machine blade, the information above is entered on the Choose a size blade at right, and View all, and D2S\_V3 Standard are highlighted.](media/image256.png "Create virtual machine and Choose a size blades")
+    **INBOUND PORT RULES**:
 
-6. Click **Select** to move on to the **Settings** blade.
+     - **Public inbound ports**: Select **Allow selected ports**.
+     - **Select inbound ports**: Check the box for **RDP (3389)**.
 
-7. On the **Settings** blade, select **Network security group (firewall)**, then select **+Add an inbound rule** in the Create network security group blade.
+    ![Basics is selected on the Create virtual machine blade, and the information above is entered on the Basics blade at right.](media/create-ubuntu-server-basics.png "Create a virtual machine")
 
-    ![Settings is selected on the Create virtual machine blade, the Network security group (firewall) option is selected on the Settings blade, and + Add an inbound rule is highlighted on the Create network security group blade.](media/image257.png "Multiple blades")
+4. Select **Next : Disks** to move to the Disks tab.
 
-8. On the **Add inbound security rule** blade, select **RDP** from the **Service** drop down, then select **OK**.
+5. On the **Disks** tab, ensure **Premium SSD** is selected for the **OS disk type**.
 
-    ![RDP is selected in the Service drop down on the Add inbound security rule blade.](media/image258.png "Add inbound security rule blade")
+    ![Premium SSD is selected for the OS disk type on the Disks tab.](media/create-ubuntu-server-disks.png "Create a virtual machine")
 
-9. Select **OK** on the Create network security group blade.
+6. Select **Next : Networking**.
 
-10. Next, select **Extensions** on the **Settings** blade, and select **Add extension**.
+7. On the **Networking** tab, accept all the defaults and select **Next : Management**.
 
-    ![Settings is selected on the Create virtual machine blade, the Extensions option is selected on the Settings blade, and Add extension is highlighted on the Extensions blade.](media/image259.png "Multiple blades")
+8. On the **Management** tab, accept all the defaults and select **Next : Advanced**.
 
-11. On the **New resource** blade, select **Custom Script for Linux**, then select **Create** on the **Custom Script for Linux** blade. By using a custom script, you can install software and configure the VM as part of the provisioning process.
+9. On the **Advanced** tab, click on the **Select an extension to install** link.
 
-    ![Custom Script for Linux is selected on the New resource blade, and the Custom Script for Linux blade is displayed on the right.](media/image260.png "New resource and Custom Script for Linux blades")
+    ![Select an extension to install is highlighted on the Advanced tab.](media/create-ubuntu-server-advanced.png "Create a virtual machine")
 
-12. On the **Install extension** blade:
+10. On the **New resource** blade that appears, select **Custom Script for Linux**, and then select **Create** on the Custom Script for Linux blade.
 
-    - **Script files**: Select the **labvmconfig.sh** file you saved in the previous task.
+    ![On the New resource blade, Custom Script for Linux is highlighted and selected. The Create button is highlighted on the Custom Script for Linux blade.](media/create-ubuntu-server-new-resource-extension.png "Create a virtual machine")
 
-    - **Command**: Enter "bash labvmconfig.sh"
+11. On the **Install extension** blade:
+
+    - **Script files**: Select the `labvmconfig.sh` file you saved in the previous task.
+
+    - **Command**: Enter `bash labvmconfig.sh`
 
     - Select **OK**.
 
-    ![The Install extension blade is displayed and the information above are entered into the fields.](media/image261.png "Install extension blade")
+    ![The Install extension blade is displayed and the information above are entered into the fields.](media/create-ubuntu-server-install-extension.png "Install extension blade")
 
-13. Select **OK** on the Extension blade.
+12. Select **OK** on the Install extension blade.
 
-14. Select **OK** on the Settings blade.
+13. Select **Review + create** on the Advanced tab.
 
-15. Select **Create** on the **Create** blade to provision the virtual machine.
+14. Select **Create** on the **Review + create** tab to provision the virtual machine.
 
-    ![Summary is selected on the Create virtual machine blade, and Create is selected on the Create blade at right.](media/image262.png "Create virtual machine and Create blades")
+    ![Summary is selected on the Create virtual machine blade, and Create is selected on the Create blade at right.](media/create-ubuntu-server-review-create.png "Create a virtual machine")
 
-16. It may take 10+ minutes for the virtual machine to complete provisioning. You can move on to the next task while you wait for this to complete.
+15. It may take 10+ minutes for the virtual machine to finish provisioning.

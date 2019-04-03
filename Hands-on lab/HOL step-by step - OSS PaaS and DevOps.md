@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-November 2018
+April 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -37,8 +37,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 5: Launch the starter application](#task-5-launch-the-starter-application)
   - [Exercise 2: Migrate the database to Cosmos DB](#exercise-2-migrate-the-database-to-cosmos-db)
     - [Task 1: Provision Cosmos DB using the MongoDB API](#task-1-provision-cosmos-db-using-the-mongodb-api)
-    - [Task 2: Update database connection string](#task-2-update-database-connection-string)
-    - [Task 3: Pre-create and scale collections](#task-3-pre-create-and-scale-collections)
+    - [Task 2: Create and scale collections](#task-2-create-and-scale-collections)
+    - [Task 3: Update database connection string](#task-3-update-database-connection-string)
     - [Task 4: Import data to the API for MongoDB using mongoimport](#task-4-import-data-to-the-api-for-mongodb-using-mongoimport)
     - [Task 5: Install Azure Cosmos DB extension for VS Code](#task-5-install-azure-cosmos-db-extension-for-vs-code)
     - [Task 6: Decrease collection throughput](#task-6-decrease-collection-throughput)
@@ -76,7 +76,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives
 
-In this hands-on lab, you will implement a solution for integrating and deploying complex Open Source Software (OSS) workloads into Azure PaaS. You will migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers, migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
+In this hands-on lab, you will implement a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. You will migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers, migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
 
 At the end of this hands-on lab, you will be better able to migrate and deploy OSS applications into Azure PaaS using modern DevOps methodologies and Docker containers.
 
@@ -119,7 +119,7 @@ In this exercise, you will create a local copy of the starter application on you
 
 In this task, you will create an RDP connection to your Lab VM. If you are already connected, skip to [Task 2](#task-2-grant-permissions-to-docker).
 
-1. Navigate to the Azure portal and select **Resource groups** from the left-hand menu, then select the **hands-on-lab-SUFFIX resource group** from the list. If there are too many, enter "hands-on-lab" into the filter box to reduce the resource groups displayed the list.
+1. Navigate to the Azure portal and select **Resource groups** from the left-hand menu, then select the **hands-on-lab-SUFFIX** resource group from the list. If there are too many, enter "hands-on-lab" into the filter box to reduce the resource groups displayed the list.
 
     ![Resource groups is highlighted in the navigation pane of the Azure portal. On the Resource groups blade, hands-on-lab is highlighted in the filter box, and hands-on-lab is highlighted in the search results.](media/image17.png "Azure Portal")
 
@@ -186,7 +186,7 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
 4. Close VS Code.
 
-    >**Note**: VS Code must be restarted to enable the extension.
+    > **Note**: VS Code must be restarted to enable the extension.
 
 5. To connect VS Code with your GitHub account, you need to generate a Personal access token.
 
@@ -246,9 +246,9 @@ In this task, you will clone the starter application, creating a local copy on y
 
 1. On your Lab VM, open a browser, and navigate to your GitHub account (<https://github.com>).
 
-2. Within your GitHub account, navigate to the forked copy of the `mcw-oss-paas-devops` application page, select **Clone or download**, then select the **copy** link next to the web URL.
+2. Within your GitHub account, navigate to the forked copy of the `MCW-OSS-PaaS-and-Devops` application page, select **Clone or download**, then select the **copy** link next to the web URL.
 
-    ![The Clone or download button is selected on the forked copy of the mcw-oss-paas-devops application page, and the web URL is displayed below it.](media/image35.png "Select Clone or download")
+    ![The Clone or download button is selected on the forked copy of the MCW-OSS-PaaS-and-Devops application page, and the web URL is displayed below it.](media/image35.png "Select Clone or download")
 
 3. Open a new bash shell, and enter the following command:
 
@@ -275,7 +275,7 @@ In this task, you will clone the starter application, creating a local copy on y
 6. Now, change the directory to the cloned project by entering the following at the prompt:
 
     ```sh
-    cd mcw-oss-paas-devops
+    cd MCW-OSS-PaaS-and-DevOps
     ```
 
     ![The command to change the directory is displayed in the bash terminal window.](media/image38.png "bash terminal window")
@@ -288,7 +288,7 @@ In this task, you will clone the starter application, creating a local copy on y
 
 8. A new VS Code window will open, with the `mcw-oss-paas-devops` folder opened.
 
-    ![The MCW-OSS-PAAS-DEVOPS folder is open in the Explorer pane in the Visual Studio Code window, and the Welcome pane is open on the right.](media/image39.png "Visual Studio Code window")
+    ![The MCW-OSS-PaaS-and-Devops folder is open in the Explorer pane in the Visual Studio Code window, and the Welcome pane is open on the right.](media/image39.png "Visual Studio Code window")
 
 9. You are now ready to begin working with the project in VS Code.
 
@@ -302,7 +302,13 @@ In this task, you will seed the MongoDB with sample data, then run the applicati
 
 2. This will open a new bash terminal window at the bottom of the VS Code dialog.
 
-3. At the bash prompt, use the `npm install` command to ensure the required components are installed on your Lab VM.
+3. Change directories to the `lab-files` folder by running the following command:
+
+    ```sh
+    cd "Hands-on lab/lab-files"
+    ```
+
+4. At the bash prompt, use the `npm install` command to ensure the required components are installed on your Lab VM.
 
     ```sh
     sudo npm install
@@ -310,7 +316,7 @@ In this task, you will seed the MongoDB with sample data, then run the applicati
 
     ![This is a screenshot of the terminal window at the bottom of the Visual Studio Code dialog box. The command above is entered at the command prompt, and the results of the command are displayed.](media/image41.png "Bash terminal window")
 
-4. Next, enter the following to seed the local MongoDB database with plans, user accounts, and orders.
+5. Next, enter the following to seed the local MongoDB database with plans, user accounts, and orders.
 
     ```sh
     node data/Seed.js
@@ -320,23 +326,23 @@ In this task, you will seed the MongoDB with sample data, then run the applicati
 
     >**Note**: If you receive an error that the service is not running, start the MongoDB service by executing the `sudo service mongod start` command at the shell prompt.
 
-5. Next, build the application using the following:
+6. Next, build the application using the following:
 
     ```sh
     npm run build
     ```
 
-6. Finally, enter the following to start the web server for the application:
+7. Finally, enter the following to start the web server for the application:
 
     ```sh
     npm start
     ```
 
-7. Open a browser and navigate to <http://localhost:3000> to view the landing page of the starter application. You will see three plans listed on the application home page, which are pulled from the local MongoDB database.
+8. Open a browser and navigate to <http://localhost:3000> to view the landing page of the starter application. You will see three plans listed on the application home page, which are pulled from the local MongoDB database.
 
     ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the application home page.](media/image43.png "View the three plans")
 
-8. Return to the VS Code integrated terminal window, and press **CTRL+C** to stop the application.
+9.  Return to the VS Code integrated terminal window, and press **CTRL+C** to stop the application.
 
 ## Exercise 2: Migrate the database to Cosmos DB
 
@@ -371,62 +377,12 @@ In this task, you will provision a new Azure Cosmos DB account using the MongoDB
     ![The information above is entered in the Azure Cosmos DB blade.](media/create-cosmos-db-settings.png "Azure Cosmos DB")
 
     - After the Validation has succeeded, Select **Create** to provision the new Azure Cosmos DB.
-    
-### Task 2: Update database connection string
 
-In this task, you will retrieve the connection string for your Azure Cosmos DB database and update the starter application's database connection string.
-
-1. When your Cosmos DB account is provisioned, navigate to it in the Azure portal.
-
-2. On the **Azure Cosmos DB account** blade, select **Connection String** under **SETTINGS** in the left-hand menu, and copy the **PRIMARY connection string**.
-
-    ![Connection String is selected under Settings on the Azure Cosmos DB account blade, and the Primary Connection String value is highlighted on the Read-write Keys tab on the right.](media/image46.png "Azure cosmos DB account blade")
-
-3. Return to VS Code.
-
-4. Open `app.js` from the root directory of the application and locate the line that starts with var **databaseUrl**.
-
-    ![App.js is selected and highlighted in the Explorer pane in the Visual Studio Code window, and the line starting with var databaseUrl is highlighted on the right.](media/image47.png "Visual Studio Code window")
-
-5. Replace the value of the **databaseUrl** variable with the Cosmos DB connection string you copied from the Azure portal.
-
-    ![The value of the databaseUrl variable is displayed in the Visual Studio Code window.](media/image48.png "Visual Studio Code window")
-
-6. Scroll to the end of the value you just pasted in and locate **10255/?ssl=** in the string.
-
-    ![10255/?ssl= is highlighted in the string in the Visual Studio Code window.](media/image49.png "Visual Studio Code window")
-
-7. Between the "/" and the "?" insert **best-for-you-organics** to specify the database name.
-
-    ![best-for-you-organics is selected in the string in the Visual Studio Code window.](media/image50.png "Visual Studio Code window")
-
-8. Save `app.js`.
-
-9. In the VS Code integrated terminal, enter the following command to rebuild the application:
-
-    ```sh
-    npm run build
-    ```
-
-10. When the build completes, start the application by typing the following:
-
-    ```sh
-    npm start
-    ```
-
-11. Return to your browser and refresh the application page. Note: You may need to press **CTRL+F5** in your browser window to clear the browser cache while refreshing the page.
-
-    ![This is a screenshot of the refreshed application page.](media/image51.png "Refreshed application screenshot")
-
-12. Notice the three plans that were displayed on the page previously are no longer there. This is because the application is now pointed to your Azure Cosmos DB, and there is no plan data in that database yet.
-
-13. Let's move on to copying the data from the local MongoDB instance into Cosmos DB.
-
-### Task 3: Pre-create and scale collections
+### Task 2: Create and scale collections
 
 In this task, you will create the collections needed for your database migration and increase each collection's throughput from the default 1,000 RUs to 2,500 RUs. This is done to avoid throttling during the migration, and reduce the time required to import data.
 
-1. In the Azure portal, navigate to your Azure Cosmos DB account, select **Browse** from the left-hand menu, under **COLLECTIONS**, and select **+Add Collection**.
+1. When your Cosmos DB account is provisioned, navigate to it in the Azure portal, select **Browse** from the left-hand menu, under **COLLECTIONS**, and select **+Add Collection**.
 
     ![Browse is selected and highlighted in the left-hand menu of your Azure Cosmos DB account, and + Add Collection is highlighted on the right.](media/image52.png "Azure Cosmos DB account blade")
 
@@ -442,9 +398,9 @@ In this task, you will create the collections needed for your database migration
 
     - Select **OK** to create the collection.
 
-        ![The information above is entered in the Add Collection dialog box.](media/add-orders-collection.png "Add Collection dialog box")
-        
-3. If they do not already exist, use the best-for-you-organic database id to repeat steps 1 and 2 to create collections for:
+    ![The information above is entered in the Add Collection dialog box.](media/add-orders-collection.png "Add Collection dialog box")
+
+3. Repeat steps 1 and 2 to create collections for:
 
     - users
     - plans
@@ -458,7 +414,55 @@ In this task, you will create the collections needed for your database migration
     - Enter "2500" into the **Throughput** box and select **Save**.
 
     ![Scale is highlighted under Collections. The turned delta next to users is highlighted under Collections, Scale & Settings is selected and highlighted below it, and Save is highlighted on the Scale & Settings tab on the right. 2500 is entered in the Throughput box on the Scale & Settings tab.](media/db-collections-adjust-scale.png "Collections section")
-    
+
+### Task 3: Update database connection string
+
+In this task, you will retrieve the connection string for your Azure Cosmos DB database and update the starter application's database connection string.
+
+1. On the **Azure Cosmos DB account** blade, select **Connection String** under **SETTINGS** in the left-hand menu, and copy the **PRIMARY connection string**.
+
+    ![Connection String is selected under Settings on the Azure Cosmos DB account blade, and the Primary Connection String value is highlighted on the Read-write Keys tab on the right.](media/image46.png "Azure cosmos DB account blade")
+
+2. Return to VS Code.
+
+3. Open `app.js` from the root directory of the application and locate the line that starts with var **databaseUrl**.
+
+    ![App.js is selected and highlighted in the Explorer pane in the Visual Studio Code window, and the line starting with var databaseUrl is highlighted on the right.](media/image47.png "Visual Studio Code window")
+
+4. Replace the value of the **databaseUrl** variable with the Cosmos DB connection string you copied from the Azure portal.
+
+    ![The value of the databaseUrl variable is displayed in the Visual Studio Code window.](media/image48.png "Visual Studio Code window")
+
+5. Scroll to the end of the value you just pasted in and locate **10255/?ssl=** in the string.
+
+    ![10255/?ssl= is highlighted in the string in the Visual Studio Code window.](media/image49.png "Visual Studio Code window")
+
+6. Between the "/" and the "?" insert **best-for-you-organics** to specify the database name.
+
+    ![best-for-you-organics is selected in the string in the Visual Studio Code window.](media/image50.png "Visual Studio Code window")
+
+7. Save `app.js`.
+
+8. In the VS Code integrated terminal, enter the following command to rebuild the application:
+
+    ```sh
+    npm run build
+    ```
+
+9. When the build completes, start the application by typing the following:
+
+    ```sh
+    npm start
+    ```
+
+10. Return to your browser and refresh the application page. Note: You may need to press **CTRL+F5** in your browser window to clear the browser cache while refreshing the page.
+
+    ![This is a screenshot of the refreshed application page.](media/image51.png "Refreshed application screenshot")
+
+11. Notice the three plans that were displayed on the page previously are no longer there. This is because the application is now pointed to your Azure Cosmos DB, and there is no plan data in that database yet.
+
+12. Let's move on to copying the data from the local MongoDB instance into Cosmos DB.
+
 ### Task 4: Import data to the API for MongoDB using mongoimport
 
 In this task, you will use `mongoimport.exe` to import data to your Cosmos DB account. There is a shell script located in the `mcw-oss-paas-devops` solution which handles exporting each collection to a JSON file.
@@ -1293,7 +1297,7 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
 
 4. In the Publish an Azure Web App section that appears, select **Add** next to **Azure Credentials**.
 
-    ![In the Publish an Azure Web App post-build action, Add Azure credentials is highlighted.](media/jenkins-post-build-action-publis-azure-web-app-credentials-add.png "Add Azure Credentials")
+    ![In the Publish an Azure Web App post-build action, Add Azure credentials is highlighted.](media/jenkins-post-build-action-publish-azure-web-app-credentials-add.png "Add Azure Credentials")
 
 5. On the Jenkins Credentials Provider screen, enter the following:
 
