@@ -27,7 +27,7 @@ async.series([
     },
     function (callback) {
         mongoose.Promise = require('bluebird');
-        mongoose.connect(databaseUrl, { useMongoClient: true, promiseLibrary: require('bluebird') })
+        mongoose.connect(databaseUrl, { promiseLibrary: require('bluebird'), useNewUrlParser: true })
             .then(() => {
                 console.log('Connected to MongoDB database: ' + mongoose.connection.name);
                 callback(null, 'SUCCESS - Connected to MongoDB');
@@ -90,7 +90,7 @@ async.series([
                 firstName: 'Demo',
                 lastName: 'User',
                 address1: '123 Main St',
-                city: 'Carmel',
+                city: 'Westfield',
                 state: 'IN',
                 postalCode: '46033'
             }),
