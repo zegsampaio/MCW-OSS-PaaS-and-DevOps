@@ -83,7 +83,7 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
 
 1. To open a custom deployment screen in the Azure portal select the Deploy to Azure button below:
 
-    <a href ="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fkylebunting%2FMCW-OSS-PaaS-and-DevOps%2Fmaster%2FHands-on%20lab%2Flab-files%2FLabVM%2Fazure-deploy.json" target="_blank" title="Deploy to Azure">
+    <a href ="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FMCW-OSS-PaaS-and-DevOps%2Fmaster%2FHands-on%20lab%2Flab-files%2FLabVM%2Fazure-deploy.json" target="_blank" title="Deploy to Azure">
     <img src="http://azuredeploy.net/deploybutton.png"/>
     </a>
 
@@ -117,7 +117,7 @@ In this task, you will provision an Azure Linux VM, which will serve as your Jen
     - **Authentication type:** Select **Password**
     - **Password:** Enter **Password.1!!**
     - **Subscription:** Select the subscription you are using for this hands-on lab.
-    - **Resource group:** Select the **hands-on-lab-SUFFIX** resource group from the list.
+    - **Resource group:** Select Create new, and enter "jenkins-SUFFIX" (Note: Jenkins will use a different resource group than the other resources in this lab).
     - **Location:** Select the location you are using for resources in this hands-on lab.
     - Select **OK** to proceed to the **Settings** blade.
 
@@ -125,25 +125,26 @@ In this task, you will provision an Azure Linux VM, which will serve as your Jen
 
 3. On the **Additional Settings** blade:
 
-    - Select **Configure subnets**, and then select **OK** on the **Subnets** blade to accept the defaults.
-    - Enter a unique **Domain name label,** such as "Jenkins-SUFFIX".
-    - Ensure the **Jenkins release type** is set to LTS.
+    - **Subnets**: Select **Configure subnets**, and then select **OK** on the **Subnets** blade to accept the defaults.
+    - **Domain name label**: Enter a unique value, such as **jenkins-SUFFIX**.
+    - **Jenkins release type**: Select **LTS**.
+    - **JDK Type**: Select **Zulu**.
 
 4. Select **OK** to proceed to the Integration Settings screen.
 
-    ![Additional Settings is selected on the Create Jenkins blade, SSD and Subnets are selected on the Additional Settings blade in the middle, and OK is selected on the Subnets blade at right.](media/b4-image8.png "Proceed to the summary screen")
+    ![Additional Settings is selected on the Create Jenkins blade, SSD and Subnets are selected on the Additional Settings blade in the middle, and OK is selected on the Subnets blade at right.](media/create-jenkins-additional-settings.png "Proceed to the summary screen")
 
 5. On the **Integration Settings** blade, select **OK**.
 
-    ![Integration Settings is selected on the Create Jenkins blade. On the Jenkins Integration Settings blade to the right, VM is selected, and OK is selected at the bottom.](media/b4-image9.png "Select OK on the Jenkins Integration Settings blade")
+    ![Integration Settings is selected on the Create Jenkins blade. On the Jenkins Integration Settings blade to the right, VM is selected, and OK is selected at the bottom.](media/create-jenkins-integration-settings.png "Select OK on the Jenkins Integration Settings blade")
 
-6. On the **Summary** blade, ensure validation passed, and select **OK**.
+6. On the **Summary** blade, ensure the `Validation passed` message is displayed, and then select **OK**.
 
-    ![Summary is selected on the Create Jenkins blade. Validation information is displayed on the Summary blade to the right, and OK is selected at the bottom.](media/b4-image10.png "Ensure that validation passed")
+    ![Summary is selected on the Create Jenkins blade. Validation information is displayed on the Summary blade to the right, and OK is selected at the bottom.](media/create-jenkins-summary.png "Ensure that validation passed")
 
 7. Select **Create** on the **Buy** screen to provision the Jenkins server.
 
-    ![Buy is selected on the Create Jenkins blade. Provisioning information is displayed on the Create blade to the right, and Create is selected at the bottom.](media/b4-image11.png "Provision the Jenkins server")
+    ![Buy is selected on the Create Jenkins blade. Provisioning information is displayed on the Create blade to the right, and Create is selected at the bottom.](media/create-jenkins-buy.png "Provision the Jenkins server")
 
 8. It can take 10+ minutes for the VM to provision. You can move on to the next task while you wait.
 
@@ -153,19 +154,19 @@ In this task, you will sign up for a free GitHub account, which will be used for
 
 > **NOTE**: If you already have a GitHub account, and wish to use that account, you can skip to the [next task](#task-5-fork-the-starter-app).
 
-1. Open a browser and navigate to <https://github.com>.
+1. Navigate to <https://github.com> in a web browser.
 
 2. In the form on the page, enter a **username**, your **email** address, and a **password**, then select **Sign up for GitHub**.
 
-    ![This is a screenshot of the sign-up form on github.com.](media/b4-image12.png "Sign up for GitHub")
+    ![This is a screenshot of the sign-up form on github.com.](media/github-signup.png "Sign up for GitHub")
 
 3. On the Welcome to GitHub screen, select **Unlimited public repositories free** under **Choose your personal plan**, and select **Continue**.
 
-    ![Unlimited public repositories free is selected under Choose your personal plan on the Welcome to GitHub screen.](media/b4-image13.png "Select Unlimited public repositories free")
+    ![Unlimited public repositories free is selected under Choose your personal plan on the Welcome to GitHub screen.](media/github-welcome.png "Select Unlimited public repositories free")
 
 4. On the next screen, you can select options to tailor your experience and select **Submit**, or select **skip this step**, next to **Submit,** to complete your registration.
 
-    ![Very experienced, Development, and I'm a professional are selected in Step 2 on the Welcome to GitHub screen.](media/b4-image14.png "Select options in Step 2")
+    ![Very experienced, Development, and I'm a professional are selected in Step 2 on the Welcome to GitHub screen.](media/github-experience.png "Select options in Step 2")
 
 ### Task 5: Fork the starter app
 
@@ -177,7 +178,7 @@ In this task, you will fork the [OSS PaaS and DevOps MCW GitHub repository](http
 
 2. At the top right of the projects GitHub page, select **Fork**.
 
-    ![Fork is highlighted at the top right of the projects GitHub page.](media/b4-image15.png "Select Fork")
+    ![Fork is highlighted at the top right of the projects GitHub page.](media/github-fork.png "Select Fork")
 
 3. If you have more than one GitHub account, select the account you are using for this hands-on lab.
 
@@ -185,6 +186,6 @@ In this task, you will fork the [OSS PaaS and DevOps MCW GitHub repository](http
 
 5. Once completed the project page will open.
 
-    ![The Code tab is highlighted on this screenshot of the project page. At this time, we are unable to capture all of the information in the window. Future versions of this course should address this.](media/b4-image16.png "Screenshot of the project page")
+    ![The Code tab is highlighted on this screenshot of the project page. At this time, we are unable to capture all of the information in the window. Future versions of this course should address this.](media/github-repo.png "Screenshot of the project page")
 
 You should follow all steps provided *before* attending the Hands-on lab.

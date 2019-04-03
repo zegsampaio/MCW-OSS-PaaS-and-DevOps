@@ -49,7 +49,7 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
     **INBOUND PORT RULES**:
 
      - **Public inbound ports**: Select **Allow selected ports**.
-     - **Select inbound ports**: Check the box for **RDP (3389)**.
+     - **Select inbound ports**: Expand the list and check the box for **RDP (3389)**.
 
     ![Basics is selected on the Create virtual machine blade, and the information above is entered on the Basics blade at right.](media/create-ubuntu-server-basics.png "Create a virtual machine")
 
