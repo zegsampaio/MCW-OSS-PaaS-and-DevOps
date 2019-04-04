@@ -121,15 +121,15 @@ In this task, you will create an RDP connection to your Lab VM. If you are alrea
 
 1. Navigate to the Azure portal and select **Resource groups** from the left-hand menu, then select the **hands-on-lab-SUFFIX** resource group from the list. If there are too many, enter "hands-on-lab" into the filter box to reduce the resource groups displayed the list.
 
-    ![Resource groups is highlighted in the navigation pane of the Azure portal. On the Resource groups blade, hands-on-lab is highlighted in the filter box, and hands-on-lab is highlighted in the search results.](media/image17.png "Azure Portal")
+    ![Resource groups is highlighted in the navigation pane of the Azure portal. On the Resource groups blade, hands-on-lab is highlighted in the filter box, and hands-on-lab is highlighted in the search results.](media/azure-resource-groups.png "Azure Portal")
 
 2. Next, select **LabVM** from the list of available resources.
 
-    ![LabVM is highlighted in the list of available resources.](media/image18.png "Select LabVM")
+    ![LabVM is highlighted in the list of available resources.](media/rg-labvm.png "Select LabVM")
 
 3. On the **LabVM** blade, copy the Public IP address from the Essentials area on the Overview screen.
 
-    ![Public IP address is highlighted in the top menu on the LabVM blade.](media/image19.png "LabVM blade")
+    ![Public IP address is highlighted in the top menu on the LabVM blade.](media/labvm-public-ip-address.png "LabVM blade")
 
 4. Open a Remote Desktop Client (RDP) application and enter or paste the Public IP address of your Lab VM into the computer name field.
 
@@ -137,14 +137,14 @@ In this task, you will create an RDP connection to your Lab VM. If you are alrea
 
 6. Select **Yes** to connect, if prompted that the identity of the remote computer cannot be verified.
 
-    ![This is a screenshot of the Remote Desktop Connection prompt about connecting to the remote despite the identity of the remote computer being unverified. Yes is selected.](media/image20.png "Remote Desktop Connection dialog box")
+    ![This is a screenshot of the Remote Desktop Connection prompt about connecting to the remote despite the identity of the remote computer being unverified. Yes is selected.](media/remote-desktop-connection.png "Remote Desktop Connection dialog box")
 
 7. Enter the following credentials (or the non-default credentials if you changed them):
 
     - **User name:** demouser
     - **Password:** Password.1!!
 
-        ![The credentials above are entered in the Login to xrdp dialog box.](media/image21.png "Login to xrdp dialog box")
+    ![The credentials above are entered in the Login to xrdp dialog box.](media/login-to-xrdp.png "Login to xrdp dialog box")
 
 8. Select **OK** to log into the Lab VM.
 
@@ -152,11 +152,13 @@ In this task, you will create an RDP connection to your Lab VM. If you are alrea
 
 In this task, you will grant permissions to the demouser account to access the Unix socket needed to communicate with the Docker engine.
 
-1. On your Lab VM, open a bash shell.
+1. On your Lab VM, open a **Bash** shell by selecting the Start menu, and then expanding Debian, Applications, and Shells.
+
+    ![In the Lab VM start menu, Debian -> Applications -> Shells is expanded, and Bash is highlighted in the Shells menu.](media/labvm-menu-bash-shell.png "Start menu")
 
 2. At the command prompt, enter the following command:
 
-    ```sh
+    ```bash
     sudo usermod -a -G docker $USER
     ```
 
@@ -164,25 +166,27 @@ In this task, you will grant permissions to the demouser account to access the U
 
 4. After logging back in, run the following command to test that the demouser account has proper permissions:
 
-    ```sh
+    ```bash
     docker run hello-world
     ```
 
-    ![Screenshot of the bash shell command sudo usermod -a pG docker \$USER output. Includes output from running the test command, docker run hello-world.](media/image22.png "Bash Shell")
+    ![Screenshot of the bash shell command sudo usermod -a pG docker \$USER output. Includes output from running the test command, docker run hello-world.](media/bash-docker-hello-world.png "Bash Shell")
 
 ### Task 3: Integrate GitHub into VS Code
 
 In this task, you will install the GitHub extension in VS Code, and configure a service integration with your GitHub account. This integration will allow you to push your code changes to GitHub directly from VS Code.
 
-1. On your Lab VM, open **VS Code**.
+1. On your Lab VM, open **VS Code** under Programming on the Start menu.
+
+    ![Visual Studio Code is highlighted under Programming on the start menu.](media/labvm-menu-programming-vscode.png "Visual Studio Code")
 
 2. In VS Code, select the **Extensions** icon from the left-hand menu, enter "github" into the **Extensions** search box, and select the **GitHub** extension.
 
-    ![Extensions is highlighted in the Visual Studio Code navigation pane, github is entered in the Extensions search box, and GitHub is highlighted below.](media/image23.png "Visual Studio Code navigation pane")
+    ![Extensions is highlighted in the Visual Studio Code navigation pane, github is entered in the Extensions search box, and GitHub is highlighted below.](media/vscode-extensions-github.png "Visual Studio Code navigation pane")
 
 3. Select **Install** in the Extension: GitHub window.
 
-    ![Install is highlighted in the Extension: GitHub window.](media/image24.png "Install the GitHub extension")
+    ![Install is highlighted in the Extension: GitHub window.](media/vscode-extensions-github-install.png "Install the GitHub extension")
 
 4. Close VS Code.
 
@@ -194,31 +198,31 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
 7. Within your GitHub account, select **your user profile icon** in the top right, then select **Settings** from the menu.
 
-    ![The user profile icon is highlighted at the top left of the GitHub account page, and Settings is highlighted in the submenu.](media/image25.png "Select your account settings")
+    ![The user profile icon is highlighted at the top left of the GitHub account page, and Settings is highlighted in the submenu.](media/github-profile-settings.png "Select your account settings")
 
 8. On the Settings screen, select **Developer settings** at the bottom of the Personal settings menu on the left-hand side of the screen.
 
-    ![Developer settings is highlighted at the bottom of the Personal settings menu on the Settings screen.](media/image26.png "Select Developer settings")
+    ![Developer settings is highlighted at the bottom of the Personal settings menu on the Settings screen.](media/github-developer-settings.png "Select Developer settings")
 
 9. On the Developer settings page, select **Personal access tokens** from the left-hand menu.
 
-    ![Personal access tokens is highlighted on the Developer settings page.](media/image27.png "Select Personal access tokens")
+    ![Personal access tokens is highlighted on the Developer settings page.](media/github-personal-access-tokens.png "Select Personal access tokens")
 
 10. Select **Generate new token**.
 
-    ![The Generate new token button is highlighted on the Personal access tokens page.](media/image28.png "Select Generate new token")
+    ![The Generate new token button is highlighted on the Personal access tokens page.](media/github-generate-new-token.png "Select Generate new token")
 
 11. Enter a token description, such as "VS Code Integration", and then check the box next to **repo** under **Select scopes**, which will select all the boxes under it.
 
-    ![On the New personal access token page, VS Code Integration is entered under Token description, and the check boxes next to and under repo are selected under Select scopes.](media/image29.png "Select the scopes")
+    ![On the New personal access token page, VS Code Integration is entered under Token description, and the check boxes next to and under repo are selected under Select scopes.](media/github-new-personal-access-token.png "Select the scopes")
 
 12. Select **Generate token** near the bottom of the screen.
 
-    ![Generate token button](media/image30.png "Generate token button")
+    ![Generate token button](media/github-generate-token.png "Generate token button")
 
 13. Select the **copy** button next to the token that is generated.
 
-    ![The copy button that is next to the new personal access button is highlighted.](media/image31.png "Copy the new personal access button")
+    ![The copy button that is next to the new personal access button is highlighted.](media/github-copy-personal-access-token.png "Copy the new personal access button")
 
     >**Important**: Make sure you copy the new personal access token before you navigate away from the screen, or you will need to regenerate the token. Save the copied token by pasting it into a text editor for future reference. This will also be used as your password when pushing changes to GitHub.
 
@@ -226,15 +230,15 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
 15. Select the **View** menu, then select **Command Palette** from the menu.
 
-    ![View is highlighted in the menu, and Command Palette is highlighted below.](media/image32.png "Visual Studio Code window, View menu")
+    ![View is highlighted in the menu, and Command Palette is highlighted below.](media/vscode-view-menu-command-palette.png "Visual Studio Code window, View menu")
 
 16. In the box that appears at the top center of the VS Code window, enter "Set Personal Access Token," then select **GitHub: Set Personal Access Token**, when it appears.
 
-    ![GitHub: Set Personal Access Token is highlighted below Set Personal.](media/image33.png "Select GitHub: Set Personal Access Token")
+    ![GitHub: Set Personal Access Token is highlighted below Set Personal.](media/vscode-command-palette-set-personal-access-token.png "Select GitHub: Set Personal Access Token")
 
 17. Paste the Personal access token you copied from GitHub into the box, and press **Enter**.
 
-    ![The Personal access token is pasted in the box.](media/image34.png "Paste the Personal access token")
+    ![The Personal access token is pasted in the box.](media/github-paste-personal-access-token.png "Paste the Personal access token")
 
 18. VS Code is now connected to your GitHub account.
 
@@ -248,47 +252,47 @@ In this task, you will clone the starter application, creating a local copy on y
 
 2. Within your GitHub account, navigate to the forked copy of the `MCW-OSS-PaaS-and-Devops` application page, select **Clone or download**, then select the **copy** link next to the web URL.
 
-    ![The Clone or download button is selected on the forked copy of the MCW-OSS-PaaS-and-Devops application page, and the web URL is displayed below it.](media/image35.png "Select Clone or download")
+    ![The Clone or download button is selected on the forked copy of the MCW-OSS-PaaS-and-Devops application page, and the web URL is displayed below it.](media/github-clone.png "Select Clone or download")
 
 3. Open a new bash shell, and enter the following command:
 
-    ```sh
+    ```bash
     cd ~
     ```
 
-4. Next, enter the following command, replacing [EMAIL] with the email address you used when creating your GitHub account. This will associate your git email address with the commits made from the Lab VM.
+4. Next, enter the following command, replacing `[EMAIL]` with the email address you used when creating your GitHub account. This will associate your git email address with the commits made from the Lab VM.
 
-    ```sh
+    ```bash
     git config --global user.email "[EMAIL]"
     ```
 
-    ![The above command to associate your git email address with the commits made from the Lab VM is displayed in the bash terminal window.](media/image36.png "bash terminal window")
+    ![The above command to associate your git email address with the commits made from the Lab VM is displayed in the bash terminal window.](media/bash-git-config.png "bash terminal window")
 
-5. At the prompt, enter the following command, replacing [CLONE-URL] with URL you copied from GitHub in step 2 above:
+5. At the prompt, enter the following command, replacing `[CLONE-URL]` with URL you copied from GitHub in step 2 above:
 
-    ```sh
+    ```bash
     git clone [CLONE-URL]
     ```
 
-    ![The git clone command is displayed in the bash terminal window.](media/image37.png "bash terminal window")
+    ![The git clone command is displayed in the bash terminal window.](media/bash-git-clone.png "bash terminal window")
 
 6. Now, change the directory to the cloned project by entering the following at the prompt:
 
-    ```sh
+    ```bash
     cd MCW-OSS-PaaS-and-DevOps
     ```
 
-    ![The command to change the directory is displayed in the bash terminal window.](media/image38.png "bash terminal window")
+    ![The command to change the directory is displayed in the bash terminal window.](media/bash-cd-mcw-oss-paas-and-devops.png "bash terminal window")
 
 7. Finally, issue a command to open the starter project in VS Code by typing:
 
-    ```sh
+    ```bash
     code .
     ```
 
 8. A new VS Code window will open, with the `mcw-oss-paas-devops` folder opened.
 
-    ![The MCW-OSS-PaaS-and-Devops folder is open in the Explorer pane in the Visual Studio Code window, and the Welcome pane is open on the right.](media/image39.png "Visual Studio Code window")
+    ![The MCW-OSS-PaaS-and-Devops folder is open in the Explorer pane in the Visual Studio Code window, and the Welcome pane is open on the right.](media/vscode-mcw-oss-paas-and-devops.png "Visual Studio Code window")
 
 9. You are now ready to begin working with the project in VS Code.
 
@@ -296,45 +300,45 @@ In this task, you will clone the starter application, creating a local copy on y
 
 In this task, you will seed the MongoDB with sample data, then run the application locally, connected to your MongoDB instance. This task is to verify the connection to MongoDB and that it contains the seeded plan data, before we migrate the application and data to Azure Cosmos DB.
 
-1. Return to VS Code, select **View** from the menu, and select **Terminal**.
+1. Return to VS Code, select **Terminal** from the menu, and select **New Terminal**.
 
-    ![Terminal is highlighted in the View (also highlighted) menu in Visual Studio Code.](media/visual-studio-code-view-terminal.png "Visual Studio Code View window")
+    ![New Terminal is highlighted in the Terminal menu in Visual Studio Code.](media/visual-studio-code-view-terminal.png "Visual Studio Code Terminal menu")
 
 2. This will open a new bash terminal window at the bottom of the VS Code dialog.
 
-3. Change directories to the `lab-files` folder by running the following command:
+3. Change directories to the `Hands-on lab/lab-files` folder by running the following command. **Important**: Be sure to include the quotes around the path, since it contains a space.
 
-    ```sh
+    ```bash
     cd "Hands-on lab/lab-files"
     ```
 
 4. At the bash prompt, use the `npm install` command to ensure the required components are installed on your Lab VM.
 
-    ```sh
+    ```bash
     sudo npm install
     ```
 
-    ![This is a screenshot of the terminal window at the bottom of the Visual Studio Code dialog box. The command above is entered at the command prompt, and the results of the command are displayed.](media/image41.png "Bash terminal window")
+    ![This is a screenshot of the terminal window at the bottom of the Visual Studio Code dialog box. The command above is entered at the command prompt, and the results of the command are displayed.](media/vscode-terminal-npm-install.png "Bash terminal window")
 
 5. Next, enter the following to seed the local MongoDB database with plans, user accounts, and orders.
 
-    ```sh
+    ```bash
     node data/Seed.js
     ```
 
-    ![The above command to seed the local MongoDB database is displayed in the bash terminal window.](media/image42.png "Bash terminal window")
+    ![The above command to seed the local MongoDB database is displayed in the bash terminal window.](media/vscode-terminal-seedjs.png "Bash terminal window")
 
     >**Note**: If you receive an error that the service is not running, start the MongoDB service by executing the `sudo service mongod start` command at the shell prompt.
 
 6. Next, build the application using the following:
 
-    ```sh
+    ```bash
     npm run build
     ```
 
-7. Finally, enter the following to start the web server for the application:
+7. Finally, enter the following to start the web server for the application. You will see a `connection successful` message in the terminal window.
 
-    ```sh
+    ```bash
     npm start
     ```
 
@@ -445,13 +449,13 @@ In this task, you will retrieve the connection string for your Azure Cosmos DB d
 
 8. In the VS Code integrated terminal, enter the following command to rebuild the application:
 
-    ```sh
+    ```bash
     npm run build
     ```
 
 9. When the build completes, start the application by typing the following:
 
-    ```sh
+    ```bash
     npm start
     ```
 
@@ -475,13 +479,13 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 3. At the prompt, enter the following command to grant execute permissions on the export script:
 
-    ```sh
+    ```bash
     chmod +x ~/mcw-oss-paas-devops/data/mongo-export.sh
     ```
 
 4. Next, run the script by entering the following command:
 
-    ```sh
+    ```bash
     ~/mcw-oss-paas-devops/data/mongo-export.sh
     ```
 
@@ -493,7 +497,7 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 7. Use the following command template for executing the data import:
 
-    ```sh
+    ```bash
     mongoimport --host <your_hostname>:10255 -u <your_username> -p <your_password> --db <your_database> --collection <your_collection> --ssl --sslAllowInvalidCertificates --type json --file ~/MongoExport/<your_collection>.json
     ```
 
@@ -511,7 +515,7 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 10. Your final command should look something like:
 
-    ```sh
+    ```bash
     mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection plans --ssl --sslAllowInvalidCertificates --type json --file ~/MongoExport/plans.json
     ```
 
@@ -529,13 +533,13 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
     - users
 
-        ```sh
+        ```bash
         mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection users --ssl --sslAllowInvalidCertificates --type json --file ~/MongoExport/users.json
         ```
 
     - orders
 
-        ```sh
+        ```bash
         mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection orders --ssl --sslAllowInvalidCertificates --type json --file ~/MongoExport/orders.json
         ```
 
@@ -693,13 +697,13 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
 
 12. Entry the following into the **Tag image as...** box, where [Login server] is the Login server value from Azure:
 
-    ```sh
+    ```bash
     [Login server]/best-for-you-organics:latest
     ```
 
 13. For example:
 
-    ```sh
+    ```bash
     bestforyouregistry.azurecr.io/best-for-you-organics:latest
     ```
 
@@ -749,13 +753,13 @@ In this task, you are going to push the image to your Azure Container Registry.
 
 3. Return to the Integrated terminal window in VS Code and enter the following command to log in to your Azure Container registry, replacing the bracketed values with those from the container registry access keys page.
 
-    ```sh
+    ```bash
     docker login [Login Server] -u [Username]
     ```
 
 4. For example:
 
-    ```sh
+    ```bash
     docker login bestforyouregistry.azurecr.io -u bestforyouregistry
     ```
 
@@ -903,7 +907,7 @@ In this task, you will be adding a Jenkins service integration into your GitHub 
 
 12. At the jenkinsadmin\@Jenkins prompt, enter:
 
-    ```sh
+    ```bash
     ssh-keygen
     ```
 
@@ -919,7 +923,7 @@ In this task, you will be adding a Jenkins service integration into your GitHub 
 
 16. Show the public key using the following command, replacing [KEY-PATH] with the location of your public key.
 
-    ```sh
+    ```bash
     cat [KEY-PATH]
     ```
 
@@ -937,7 +941,7 @@ In this task, you will be adding a Jenkins service integration into your GitHub 
 
 21. To ensure that everything is working, return to the Jenkin's bash shell, and enter the below command which will check the connection to GitHub.
 
-    ```sh
+    ```bash
     ssh git@github.com
     ```
 
@@ -969,7 +973,7 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
 6. Open a new bash shell, and at the command prompt paste the copied ssh command, replacing "username" with **jenkinsadmin**. The command will resemble the following:
 
-    ```sh
+    ```bash
     ssh -L 127.0.0.1:8080:localhost:8080 jenkinsadmin@jenkins-kb.westus.cloudapp.azure.com
     ```
 
@@ -985,7 +989,7 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
 10. To get the initial password, copy the path provided, return to the SSH tunnel bash window, and run the following command:
 
-    ```sh
+    ```bash
     sudo cat /var/lib/jenkins/secrets/initialAdminPassword
     ```
 
@@ -1086,7 +1090,7 @@ In this task, you will set up a simple Jenkins continuous integration (CI) pipel
 
 9. In the **Execute shell** Command block, enter:
 
-    ```sh
+    ```bash
     npm install
     npm run build
     ```
@@ -1141,19 +1145,19 @@ In this task, you will install Docker CE on your Jenkins VM, so it can be used t
 
 1. The first step is to ensure no older versions of Docker are installed on your Jenkins VM. Using the SSH tunnel bash terminal you opened previously, navigate to the command prompt, and enter:
 
-    ```sh
+    ```bash
     sudo apt-get remove docker docker-engine docker.io
     ```
 
 2. Next, you need to set up a Docker repository on the host machine. The begin, update the `apt` package index:
 
-    ```sh
+    ```bash
     sudo apt-get update
     ```
 
 3. Install the necessary packages to allow `apt` to use a repository over HTTPS, entering `y` when prompted to continue.
 
-    ```sh
+    ```bash
     sudo apt-get install \
     apt-transport-https \
     ca-certificates \
@@ -1163,19 +1167,19 @@ In this task, you will install Docker CE on your Jenkins VM, so it can be used t
 
 4. Add Docker's official GPG key.
 
-    ```sh
+    ```bash
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     ```
 
 5. Verify that you now have the key with fingerprint `9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88`, by searching for the last 8 characters of the fingerprint:
 
-    ```sh
+    ```bash
     sudo apt-key fingerprint 0EBFCD88
     ```
 
 6. You should see output similar to:
 
-    ```sh
+    ```bash
     pub   4096R/0EBFCD88 2017-02-22
         Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
     uid                  Docker Release (CE deb) <docker@docker.com>
@@ -1184,7 +1188,7 @@ In this task, you will install Docker CE on your Jenkins VM, so it can be used t
 
 7. Next, enter the following commands to set up the **stable** repository.
 
-    ```sh
+    ```bash
     sudo add-apt-repository \
     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) \
@@ -1193,32 +1197,32 @@ In this task, you will install Docker CE on your Jenkins VM, so it can be used t
 
 8. You are now ready to install Docker CE. Start by updating the `apt` package index.
 
-    ```sh
+    ```bash
     sudo apt-get update
     ```
 
 9. Install the latest version of Docker CE, entering `y` when prompted to continue.
 
-    ```sh
+    ```bash
     sudo apt-get install docker-ce
     ```
 
 10. Verify that Docker CE is installed correctly by running the `hello-world` image.
 
-    ```sh
+    ```bash
     sudo docker run hello-world
     ```
 
 11. The final step is to add permission to the `jenkins` user to Docker.
 
-    ```sh
+    ```bash
     sudo usermod -a -G docker jenkins
     sudo chmod 664 /run/docker.sock
     ```
 
 12. Now, restart the Jenkins service, entering the jenkinsadmin password, Password.1!!, when prompted.
 
-    ```sh
+    ```bash
     service jenkins restart
     ```
 
@@ -1378,7 +1382,7 @@ In this task, you will commit changes to the `mcw-oss-paas-devops` starter appli
 
 6. On the Build page, select **Console Output** from the left-hand menu.
 
-    ![Console Output is highlighted in the left-hand menu on the Jenkins project build page](media/jenkins-build-console-ouptput.png "Build console output")
+    ![Console Output is highlighted in the left-hand menu on the Jenkins project build page](media/jenkins-build-console-output.png "Build console output")
 
 7. On the Console Output page, you can monitor the build progress. When it completes after a few minutes, you will see a SUCCESS message similar to the following:
 
