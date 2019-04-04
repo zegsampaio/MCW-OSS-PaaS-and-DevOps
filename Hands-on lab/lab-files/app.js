@@ -17,8 +17,8 @@ var databaseUrl = 'mongodb://localhost:27017/best-for-you-organics';
 
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-mongoose.connect(databaseUrl, { useMongoClient: true, promiseLibrary: require('bluebird') })
-  .then(() => console.log('connection succesful'))
+mongoose.connect(databaseUrl, { useNewUrlParser: true, promiseLibrary: require('bluebird') })
+  .then(() => console.log('connection successful'))
   .catch((err) => console.error(err));
 var db = mongoose.connection;
 

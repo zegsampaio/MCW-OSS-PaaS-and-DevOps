@@ -333,7 +333,7 @@ In this task, you will seed the MongoDB with sample data, then run the applicati
 6. Next, build the application using the following:
 
     ```bash
-    npm run build
+    sudo npm run build
     ```
 
 7. Finally, enter the following to start the web server for the application. You will see a `connection successful` message in the terminal window.
@@ -344,7 +344,7 @@ In this task, you will seed the MongoDB with sample data, then run the applicati
 
 8. Open a browser and navigate to <http://localhost:3000> to view the landing page of the starter application. You will see three plans listed on the application home page, which are pulled from the local MongoDB database.
 
-    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the application home page.](media/image43.png "View the three plans")
+    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the application home page.](media/bfyo-web-home.png "View the three plans")
 
 9. Return to the VS Code integrated terminal window, and press **CTRL+C** to stop the application.
 
@@ -360,97 +360,101 @@ In this task, you will provision a new Azure Cosmos DB account using the MongoDB
 
 1. In the Azure portal, select **+Create a resource**, **Databases**, the select **Azure Cosmos DB**.
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, and Databases and Azure Cosmos DB are highlighted on the New blade.](media/image44.png "Azure Portal")
+    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, and Databases and Azure Cosmos DB are highlighted on the New blade.](media/create-resource-cosmos-db.png "Azure Portal")
 
 2. On the **Azure Cosmos** **DB** blade, enter the following:
 
-    - **Account Name**: Enter "best-for-you-db-SUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
-
-    - **API:** Select **MongoDB**.
+    **PROJECT DETAILS**:
 
     - **Subscription:** Select the subscription you are using for this hands-on lab.
+    - **Resource Group:** Select the **hands-on-lab-SUFFIX** resource group you created previously.
 
-    - **Resource Group:** Select **Use existing** and choose the **hands-on-lab-SUFFIX resource group** you created previously.
+    **INSTANCE DETAILS**:
 
+    - **Account Name**: Enter `best-for-you-db-SUFFIX`, where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
+    - **API:** Select **Azure Cosmos DB for MongoDB API**.
     - **Location:** Select a location near you from the list (Note: not all locations are available for Cosmos DB).
+    - **Enable geo-redundancy:** Select Disable.
+    - **Multi-region Writes**: Select Disable.
 
-    - **Enable geo-redundancy:** Unchecked
+    ![The information above is entered in the Azure Cosmos DB blade.](media/cosmos-db-create-basics.png "Azure Cosmos DB")
 
-    - Select **Review + create** to move to the validation step.
+3. Select **Review + create** to move to the validation step.
 
-    ![The information above is entered in the Azure Cosmos DB blade.](media/create-cosmos-db-settings.png "Azure Cosmos DB")
-
-    - After the Validation has succeeded, Select **Create** to provision the new Azure Cosmos DB.
+4. Ensure the **Validation Success** message is displayed, and then select **Create** to provision the new Azure Cosmos DB.
 
 ### Task 2: Create and scale collections
 
 In this task, you will create the collections needed for your database migration and increase each collection's throughput from the default 1,000 RUs to 2,500 RUs. This is done to avoid throttling during the migration, and reduce the time required to import data.
 
-1. When your Cosmos DB account is provisioned, navigate to it in the Azure portal, select **Browse** from the left-hand menu, under **COLLECTIONS**, and select **+Add Collection**.
+> To learn more about RUs and throughput provisioning in Cosmos DB, read [Request Units in Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/request-units).
 
-    ![Browse is selected and highlighted in the left-hand menu of your Azure Cosmos DB account, and + Add Collection is highlighted on the right.](media/image52.png "Azure Cosmos DB account blade")
+1. When your Cosmos DB account is provisioned, navigate to it in the Azure portal, select **Browse** from the left-hand menu, under **Collections**, and then select **+Add Collection**.
+
+    ![Browse is selected and highlighted in the left-hand menu of your Azure Cosmos DB account, and + Add Collection is highlighted on the right.](media/cosmos-db-add-collection.png "Azure Cosmos DB account blade")
 
 2. In the **Add Collection** dialog, enter the following:
 
-    - **Database id:** Select **Create new**, and enter "best-for-you-organics".
-
-    - **Collection Id:** Enter "orders".
-
+    - **Database id:** Select **Create new**, and enter **best-for-you-organics**.
+    - **Collection Id:** Enter **orders**.
     - **Storage capacity:** Select **Fixed (10 GB)**.
-
-    - **Throughput:** Enter "2500".
-
+    - **Throughput:** Enter **2500**.
     - Select **OK** to create the collection.
 
-    ![The information above is entered in the Add Collection dialog box.](media/add-orders-collection.png "Add Collection dialog box")
+    ![The information above is entered in the Add Collection dialog box.](media/cosmos-db-new-collection-orders.png "Add Collection dialog box")
 
-3. Repeat steps 1 and 2 to create collections for:
+3. On the Collections blade, select **New Collection** to create another collection.
 
-    - users
-    - plans
+    ![The New Collection button is highlighted on the Cosmos DB Collections blade.](media/cosmos-db-new-collection.png "New Collection")
 
-4. If the users and plans collections already exist from your application connecting, edit each collection to increase their throughput using the following steps:
+4. On the Add Collection dialog, enter the following:
 
-    - Select **Scale** from the left-hand menu, under **COLLECTIONS**.
+    - **Database id**: Select **Use existing** and select the **best-for-you-organics** database from the list.
+    - **Collection id**: Enter **users**.
+    - **Storage capacity**: Select **Fixed (10 GB)**.
+    - **Throughput**: Enter **2500**.
+    - Select **OK** to create the collection.
 
-    - Expand the existing collection and select **Scale & Settings**.
+    ![The information for the users collections above is entered into the Add Collection dialog.](media/cosmos-db-new-collection-users.png "Add Collection")
 
-    - Enter "2500" into the **Throughput** box and select **Save**.
+5. Repeat steps 3 and 4, this time entering **plans** as the collection name.
 
-    ![Scale is highlighted under Collections. The turned delta next to users is highlighted under Collections, Scale & Settings is selected and highlighted below it, and Save is highlighted on the Scale & Settings tab on the right. 2500 is entered in the Throughput box on the Scale & Settings tab.](media/db-collections-adjust-scale.png "Collections section")
+6. The best-for-you-organics database will have three collections listed under it when you are complete.
+
+    ![The best-for-you-organics database is displayed, with orders, plans, and users collections under it.](media/cosmos-db-database-and-collections.png "Cosmos DB Collections")
 
 ### Task 3: Update database connection string
 
 In this task, you will retrieve the connection string for your Azure Cosmos DB database and update the starter application's database connection string.
 
-1. On the **Azure Cosmos DB account** blade, select **Connection String** under **SETTINGS** in the left-hand menu, and copy the **PRIMARY connection string**.
+1. On the **Azure Cosmos DB account** blade, select **Connection String** under **Settings** in the left-hand menu, and copy the **PRIMARY connection string**.
 
-    ![Connection String is selected under Settings on the Azure Cosmos DB account blade, and the Primary Connection String value is highlighted on the Read-write Keys tab on the right.](media/image46.png "Azure cosmos DB account blade")
+    ![Connection String is selected under Settings on the Azure Cosmos DB account blade, and the Primary Connection String value is highlighted on the Read-write Keys tab on the right.](media/cosmos-db-connection-strings.png "Azure cosmos DB account blade")
 
 2. Return to VS Code.
 
-3. Open `app.js` from the root directory of the application and locate the line that starts with var **databaseUrl**.
+3. Open `app.js` from the `Hands-on lab/lab-files` directory of the application and locate the line that starts with **var databaseUrl** (line 16).
 
-    ![App.js is selected and highlighted in the Explorer pane in the Visual Studio Code window, and the line starting with var databaseUrl is highlighted on the right.](media/image47.png "Visual Studio Code window")
+    ![App.js is selected and highlighted in the Explorer pane in the Visual Studio Code window, and the line starting with var databaseUrl is highlighted on the right.](media/vscode-app-js-database-url.png "Visual Studio Code window")
 
 4. Replace the value of the **databaseUrl** variable with the Cosmos DB connection string you copied from the Azure portal.
 
-    ![The value of the databaseUrl variable is displayed in the Visual Studio Code window.](media/image48.png "Visual Studio Code window")
+    ![The value of the databaseUrl variable is displayed in the Visual Studio Code window.](media/vscode-app-js-connection-string.png "Visual Studio Code window")
 
-5. Scroll to the end of the value you just pasted in and locate **10255/?ssl=** in the string.
+5. The connection string copied from the portal does not specify the name of the database, so you now need to add that to the connection string. Scroll to the end of the value you just pasted in and locate **10255/?ssl=** in the string.
 
-    ![10255/?ssl= is highlighted in the string in the Visual Studio Code window.](media/image49.png "Visual Studio Code window")
+    ![10255/?ssl= is highlighted in the string in the Visual Studio Code window.](media/vscode-app-js-connection-string-database-name-position.png "Visual Studio Code window")
 
 6. Between the "/" and the "?" insert **best-for-you-organics** to specify the database name.
 
-    ![best-for-you-organics is selected in the string in the Visual Studio Code window.](media/image50.png "Visual Studio Code window")
+    ![best-for-you-organics is selected in the string in the Visual Studio Code window.](media/vscode-app-js-connection-string-database-name.png "Visual Studio Code window")
 
 7. Save `app.js`.
 
 8. In the VS Code integrated terminal, enter the following command to rebuild the application:
 
     ```bash
-    npm run build
+    sudo npm run build
     ```
 
 9. When the build completes, start the application by typing the following:
@@ -461,147 +465,143 @@ In this task, you will retrieve the connection string for your Azure Cosmos DB d
 
 10. Return to your browser and refresh the application page. Note: You may need to press **CTRL+F5** in your browser window to clear the browser cache while refreshing the page.
 
-    ![This is a screenshot of the refreshed application page.](media/image51.png "Refreshed application screenshot")
+    ![This is a screenshot of the refreshed application page.](media/bfyo-web-home-empty.png "Refreshed application screenshot")
 
-11. Notice the three plans that were displayed on the page previously are no longer there. This is because the application is now pointed to your Azure Cosmos DB, and there is no plan data in that database yet.
+    > Notice the three plans that were displayed on the page previously are no longer there. This is because the application is now pointed to your Azure Cosmos DB, and the plans collection does not contain any data yet.
 
-12. Let's move on to copying the data from the local MongoDB instance into Cosmos DB.
+11. Let's move on to copying the data from the local MongoDB instance into Cosmos DB.
 
 ### Task 4: Import data to the API for MongoDB using mongoimport
 
-In this task, you will use `mongoimport.exe` to import data to your Cosmos DB account. There is a shell script located in the `mcw-oss-paas-devops` solution which handles exporting each collection to a JSON file.
+In this task, you will use `mongoimport.exe` to import data to your Cosmos DB account. There is a shell script located in the `MCW-OSS-PaaS-and-DevOps` project which handles exporting the data out of your MongoDB into JSON files on the local file system. These files will be used for the import into Cosmos DB.
 
-1. Next, you will execute a script file, included in the project files you downloaded, to handle exporting the data out of your MongoDB into JSON files on the local file system. These files will be used for the import into Cosmos DB.
+1. On your Lab VM, open a new integrated bash prompt in VS Code by selecting the **+** next to the shell dropdown in the integrated terminal pane.
 
-2. On your Lab VM, open a new integrated bash prompt in VS Code by selecting the **+** next to the shell dropdown in the integrated terminal pane.
+    ![This is a screenshot of the terminal window at the bottom of the Visual Studio Code dialog box. The + button is highlighted.](media/vscode-terminal-new.png "Bash terminal window")
 
-    ![This is a screenshot of the terminal window at the bottom of the Visual Studio Code dialog box. The + button is highlighted.](media/image55.png "Bash terminal window")
-
-3. At the prompt, enter the following command to grant execute permissions on the export script:
+2. At the prompt, enter the following command to grant execute permissions on the export script:
 
     ```bash
-    chmod +x ~/mcw-oss-paas-devops/data/mongo-export.sh
+    chmod +x "Hands-on lab/lab-files/data/mongo-export.sh"
     ```
 
-4. Next, run the script by entering the following command:
+3. Next, run the script by entering the following command:
 
     ```bash
-    ~/mcw-oss-paas-devops/data/mongo-export.sh
+    "Hands-on lab/lab-files/data/mongo-export.sh"
     ```
 
-    ![The above command to export data from the local MongoDB database is displayed in the bash terminal window.](media/image56.png "Bash terminal window")
+    ![The above command to export data from the local MongoDB database is displayed in the bash terminal window.](media/vscode-terminal-mongo-export.png "Bash terminal window")
 
-5. The script creates the folder ~/MongoExport, and exports each of the collections in your MongoDB to JSON files.
-
-6. You are now ready to import the data into Azure Cosmos DB using `mongoimport.exe`.
-
-7. Use the following command template for executing the data import:
+4. The script creates the folder ~/MongoExport, and exports each of the collections in your MongoDB to JSON files. Navigate to the MongoExport directory for your user account by running the following command:
 
     ```bash
-    mongoimport --host <your_hostname>:10255 -u <your_username> -p <your_password> --db <your_database> --collection <your_collection> --ssl --sslAllowInvalidCertificates --type json --file ~/MongoExport/<your_collection>.json
+    cd ~/MongoExport
     ```
 
-8. To get the values needed for the template command above, return to the **Connection string** blade for your Azure Cosmos DB account in the Azure portal. Leave this window up, as will need the **HOST, USERNAME**, and **PRIMARY PASSWORD** values from this page to import data to your Cosmos DB account.
+5. You are now ready to import the data into Azure Cosmos DB using `mongoimport.exe`.
 
-    ![Connection String is selected under Settings on the Azure Cosmos DB account blade. On the Read-write Keys tab on the right, the values under Host, Username, and Primary Password are highlighted.](media/image57.png "Azure Cosmos DB account blade")
-
-9. Replace the values as follows in the template command above:
-
-    - <your_hostname>: Copy and paste the **Host** value from your **Cosmos DB Connection String** blade.
-    - <your_username>: Copy and paste the **Username** value from your **Cosmos DB Connection String** blade.
-    - <your_password>: Copy and paste the **Primary Password** value from your **Cosmos DB Connection** **String** blade.
-    - <your_database>: Enter "best-for-you-organics".
-    - <your_collection>: Enter "plans" (Note there are two instances of <your-collection> in the template command).
-
-10. Your final command should look something like:
+6. You will use the following command template for executing the data import:
 
     ```bash
-    mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection plans --ssl --sslAllowInvalidCertificates --type json --file ~/MongoExport/plans.json
+    mongoimport --host <your_hostname>:10255 -u <your_username> -p <your_password> --db <your_database> --collection <your_collection> --ssl --sslAllowInvalidCertificates --type json --file <your_collection>.json
     ```
 
-11. Copy and paste the final command at the command prompt to import the plans collection into Azure Cosmos DB.
+7. To get the values needed for the template command above, return to the **Connection string** blade for your Azure Cosmos DB account in the Azure portal. Leave this window up, as you will need the **HOST**, **USERNAME**, and **PRIMARY PASSWORD** values from this page to import data to your Cosmos DB account.
 
-    ![The final command to import the plans collection into Azure Cosmos DB is displayed in the Command Prompt window.](media/image58.png "Bash terminal window")
+    ![Connection String is selected under Settings on the Azure Cosmos DB account blade. On the Read-write Keys tab on the right, the values under Host, Username, and Primary Password are highlighted.](media/cosmos-db-connection-strings-values.png "Azure Cosmos DB account blade")
 
-12. You will see a message indicating the number of documents imported, which should be 3 for plans.
+8. Replace the values as follows in the template command above:
 
-13. Verify the import by selecting **Data Explorer** in your Cosmos DB account in the Azure portal, expanding plans, and selecting **Documents**. You will see the three documents imported listed.
+    - `<your_hostname>`: Copy and paste the **Host** value from your **Cosmos DB Connection String** blade.
+    - `<your_username>`: Copy and paste the **Username** value from your **Cosmos DB Connection String** blade.
+    - `<your_password>`: Copy and paste the **Primary Password** value from your **Cosmos DB Connection** **String** blade.
+    - `<your_database>`: Enter "best-for-you-organics".
+    - `<your_collection>`: Enter "plans" (Note there are two instances of `<your-collection>` in the template command).
 
-    ![Data Explorer is selected and highlighted on the Azure Cosmos DB account blade. On the Collections blade, the turned delta next to plans is highlighted, and Documents is selected and highlighted below it. On the Mongo Documents tab to the right, the first of three imported documents is selected and highlighted.](media/image59.png "Azure Cosmos DB account blade")
+9. Your final command should look something like:
 
-14. Repeat step 8 for the users and orders collections, replacing the **\<your\_collection\>** values with:
+    ```bash
+    mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection plans --ssl --sslAllowInvalidCertificates --type json --file plans.json
+    ```
+
+10. Copy and paste the final command at the command prompt to import the plans collection into Azure Cosmos DB.
+
+    ![The final command to import the plans collection into Azure Cosmos DB is displayed in the Command Prompt window.](media/vscode-terminal-mongoimport.png "Bash terminal window")
+
+    > You will see a message indicating the number of documents imported, which should be 3 for plans.
+
+11. Verify the import by selecting **Data Explorer** in your Cosmos DB account in the Azure portal, expanding plans, and selecting **Documents**. You will see the three documents imported listed.
+
+    ![Data Explorer is selected and highlighted on the Azure Cosmos DB account blade. On the Collections blade, the turned delta next to plans is highlighted, and Documents is selected and highlighted below it. On the Mongo Documents tab to the right, the first of three imported documents is selected and highlighted.](media/cosmos-db-plans-documents.png "Azure Cosmos DB account blade")
+
+12. Repeat step 8 for the users and orders collections, replacing the `<your_collection>` values with:
 
     - users
 
         ```bash
-        mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection users --ssl --sslAllowInvalidCertificates --type json --file ~/MongoExport/users.json
+        mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection users --ssl --sslAllowInvalidCertificates --type json --file users.json
         ```
 
     - orders
 
         ```bash
-        mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection orders --ssl --sslAllowInvalidCertificates --type json --file ~/MongoExport/orders.json
+        mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection orders --ssl --sslAllowInvalidCertificates --type json --file orders.json
         ```
 
-15. To verify the starter application is now pulling properly from Azure Cosmos DB, return to your browser running the starter application (<http://localhost:3000>), and refresh the page. You should now see the three plans appear again on the home page. These were pulled from your Azure Cosmos DB database.
+13. To verify the starter application is now pulling properly from Azure Cosmos DB, return to your browser running the starter application (<http://localhost:3000>), and refresh the page. You should now see the three plans appear again on the home page. These were pulled from your Azure Cosmos DB database.
 
-    ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the starter application.](media/image60.png "View the starter application")
+    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the application home page.](media/bfyo-web-home.png "View the three plans")
 
-16. You have successfully migrated the application and data to use Azure Cosmos DB with MongoDB APIs.
+14. You have successfully migrated the application and data to use Azure Cosmos DB with MongoDB APIs.
 
-17. Return to the Integrated terminal window of VS Code which is running the application, and press **CTRL+C** to stop the application.
+15. Return to the Integrated terminal window of VS Code which is running the application, and press **CTRL+C** to stop the application.
 
 ### Task 5: Install Azure Cosmos DB extension for VS Code
 
-In this task, you will install the Azure Cosmos DB extension for VS Code, to take advantage of the integration with Azure Cosmos DB. This extension allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
+In this task, you will install the Azure Cosmos DB extension for VS Code to take advantage of the integration with Azure Cosmos DB. This extension allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
 
-1. Select the **Extensions** icon, enter "cosmos" into the search box, select the **Azure Cosmos DB** extension, and then select **Install** in the Extension: Azure Cosmos DB window.
+1. Select the **Extensions** icon, enter "azure cosmos db" into the search box, select the **Azure Cosmos DB** extension, and then select **Install** in the Extension: Azure Cosmos DB window.
 
-    ![The Extensions icon is highlighted on the left side of the Extension: Azure Cosmos DB window. On the right, azure cosmos db is in the search box, Azure Cosmos DB is highlighted below it, and Install is highlighted on the right side.](media/image61.png "Install the Azure Cosmos DB extension")
+    ![The Extensions icon is highlighted on the left side of the Extension: Azure Cosmos DB window. On the right, azure cosmos db is in the search box, Azure Cosmos DB is highlighted below it, and Install is highlighted on the right side.](media/vscode-extensions-cosmosdb.png "Install the Azure Cosmos DB extension")
 
-2. Once the extension installation completes, restart VS Code, and reopen the `mcw-oss-paas-devops` project folder.
+2. Once the extension installation completes, restart VS Code, and reopen the `MCW-OSS-PaaS-and-DevOps` project folder.
 
-3. At the bottom left-hand corner of VS Code, you will now see **AZURE COSMOS DB**. Expand that, and select **Sign in to Azure**.
+3. In the left-hand menu of VS Code you should now see an Azure icon. Select that, and then select **Sign in to Azure**.
 
-    ![Sign in to Azure is highlighted below AZURE COSMOS DB in the bottom left-hand corner of Visual Studio Code window.](media/image62.png "Sign in to Azure")
+    ![Sign in to Azure is highlighted below AZURE COSMOS DB in the bottom left-hand corner of Visual Studio Code window.](media/vscode-azure-sign-in.png "Sign in to Azure")
 
-4. An info banner will pop up at the top of your VS Code window. Copy the code provided and select **Open**.
+4. Enter your Azure account credentials in the browser window that appears.
 
-    ![The authentication code is highlighted and Open is selected on the right side of the pop-up info banner in the Visual Studio Code window.](media/image63.png "Info banner")
+5. If presented with a prompt to enter a password for a new keyring, enter "**Password.1!!**" as the password, and select **Continue**.
 
-5. In the browser window that opens, paste the copied code into the **Code** box, and select **Continue**.
+    ![Choose password for new keyring dialog, with Password.1!! entered in the password and confirm boxes.](media/ubuntu-new-keyring.png "Choose password window")
 
-    ![Code is entered in the Code box in the Device Login window, and Continue is selected at the bottom.](media/image64.png "Device Login window")
+6. Once you have signed in, you will receive a message that you can close the browser window.
 
-6. On the following screens, log in with your Azure account credentials.
+7. Back in VS Code, you should now see your Azure account listed under Azure Cosmos DB, along with your Azure account email listed in the status bar of VS Code.
 
-7. Once you have signed in, you will be taken to a new page in the browser. You can close the browser window.
+    ![Your Azure account is listed under Azure Cosmos DB, and your Azure email is listed in the status bar of the Visual Studio Code window.](media/vscode-azure-cosmosdb.png "Azure Cosmos DB window")
 
-    ![This is a screenshot of a window indicating that you have signed in, which you can close.](media/image65.png "Signed iin successfully window")
-
-8. If presented with a prompt to enter a password for a new keyring, enter "**Password.1!!**" as the password, and select **Continue**.
-
-    ![Choose password for new keyring dialog, with Password.1!! entered in the password and confirm boxes.](media/image66.png "Choose password window")
-
-9. Back in VS Code, you should now see your Azure account listed under Azure Cosmos DB, along with your Azure account email listed in the status bar of VS Code.
-
-    ![Your Azure account is listed under Azure Cosmos DB, and your Azure email is listed in the status bar of the Visual Studio Code window.](media/image67.png "Azure Cosmos DB window")
-
-10. From here, you can view your databases, collections, and documents, as well as edit documents directly in VS Code, and push the updated documents back into your database.
+8. From here, you can view your databases, collections, and documents, as well as edit documents directly in VS Code, and push the updated documents back into your database.
 
 ### Task 6: Decrease collection throughput
 
 In this task, you will decrease the throughput on your collections. Azure Cosmos DB uses an hourly billing rate, so reducing the throughput after the data migration will help save costs.
 
-1. In the Azure portal, navigate to your Azure Cosmos DB account, select **Scale** from the left-hand menu, under **COLLECTIONS**.
+1. From the Azure Cosmos DB menu pane in Visual Studio Code, right-click on the **best-for-you-db** database and then select **Open in Portal**.
 
-2. Expand the **users** collection and select **Scale & Settings**.
+    ![Open in Portal is highlighted in the best-for-you-db content menu.](media/vscode-azure-cosmosdb-open-in-portal.png "Cosmos DB")
 
-3. Change the **Throughput** value to "500," and select **Save**.
+2. In the Azure portal, select **Scale** from the left-hand menu, under **Collections** on the Azure Cosmos DB account blade.
 
-    ![Scale is selected and highlighted on the left side of your Azure Cosmos DB account. On the Collections blade, the turned delta next to users is highlighted, and Scale & Settings is selected and highlighted below it. On the Scale & Settings tab to the right, 500 is entered and highlighted in the Throughput box, and the Save icon is highlighted above it.](media/image68.png "Azure Cosmos DB account blade")
+3. Expand the **orders** collection and select **Scale & Settings**.
 
-4. Repeat steps 2 & 3 for the **plans** and **orders** collections.
+4. Change the **Throughput** value to **400** and select **Save**.
+
+    ![Scale is selected and highlighted on the left side of the Azure Cosmos DB account blade. On the Collections blade, Scale & Settings is selected and highlighted below orders. On the Scale & Settings tab to the right, 400 is entered and highlighted in the Throughput box, and the Save icon is highlighted above it.](media/cosmos-db-scale.png "Azure Cosmos DB account blade")
+
+5. Repeat steps 3 & 4 for the **plans** and **users** collections.
 
 ## Exercise 3: Containerize the app
 
