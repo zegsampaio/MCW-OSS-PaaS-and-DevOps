@@ -795,57 +795,46 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
 1. In the Azure portal, select **+Create a resource**, **Web**, and select **Web App for Containers**.
 
     ![+ Create a resource is highlighted in the navigation pane of the Azure portal, Web + Mobile is highlighted in the middle, and Web App for Containers is highlighted on the right.](media/create-web-app-for-containers-resource.png "Provision Web App for Containers")
-    
+
 2. On the **Create** blade, enter the following:
 
-    - **App name**: Enter "best-for-you-app-SUFFIX" (the name must be unique).
-
+    - **App name**: Enter **best-for-you-app-SUFFIX** (the name must be unique).
     - **Subscription**: Select the subscription you are using for this lab.
-
     - **Resource group**: Select **Use existing** and choose the hands-on-lab-SUFFIX resource group.
-
+    - **OS**: Select **Linux**.
     - **App Service plan/Location**: Accept the default assigned value, which will create a new App Service plan.
-
     - Select **Configure container**, and enter the following:
-
         - **Image source:** Select **Azure Container Registry**.
-
         - **Registry**: Select **bestforyouregistrySUFFIX**.
-
-        - **OS**: Select **Linux**.
-
         - **Image**: Select **best-for-you-organics**.
-
         - **Tag**: Select **latest**.
-
         - **Startup File**: Leave blank.
+        - Select **Apply**.
 
-        - Select **OK**.
+3. Select **Create**.
 
-    - Select **Create**.
+    ![The information above is entered on the Create container registry blade, and Configure container is highlighted on the left side. On the right, Azure Container Registry is highlighted under Image source, and more information from above is entered.](media/web-app-for-containers-create-settings.png "Web App for Containers and Docker Container blades")
 
-        ![The information above is entered on the Create container registry blade, and Configure container is highlighted on the left side. On the right, Azure Container Registry is highlighted under Image source, and more information from above is entered.](media/web-app-for-containers-create-settings.png "Web App for Containers and Docker Container blades")
-        
 ### Task 2: Navigate to the deployed app
 
 In this task, you will navigate to the deployed app, and log in to verify it is functioning correctly.
 
 1. When you receive the notification that the Web App for Containers deployment has completed, navigate to the Web App by selecting the **notifications icon**, and selecting **Go to resource**.
 
-    ![The Go to resource button is highlighted at the bottom of the successful deployment notification window.](media/image95.png "Notifications window")
+    ![The Go to resource button is highlighted at the bottom of the successful deployment notification window.](media/azure-go-to-resource.png "Notifications window")
 
-2. On the **Overview** blade of **App Service**, select the URL for the App Service.
+2. On the **Overview** blade of **App Service**, select the **URL** for the App Service.
 
-    ![The URL for the App Service is highlighted on the Overview blade of App Service.](media/image96.png "App Service blade")
+    ![The URL for the App Service is highlighted on the Overview blade of App Service.](media/app-service-url.png "App Service blade")
 
 3. A new browser window or tab will open, and you should see the `MCW-OSS-PaaS-and-DevOps` application's home page displayed.
 
-4. Sign in to the site with the following credentials to verify everything is working as expected:
+4. Select **Sign In** on the top right of the page and login with the following credentials to verify everything is working as expected:
 
-    - <demouser@bfyo.com>
-    - Password.1!!
+    - **Email address**: <demouser@bfyo.com>
+    - **Password**: Password.1!!
 
-        ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the MCW-OSS-PaaS-and-DevOps home page.](media/image97.png "Sign in to the MCW-OSS-PaaS-and-DevOps home page")
+    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the MCW-OSS-PaaS-and-DevOps home page.](media/bfyo-web-login.png "Sign in to the MCW-OSS-PaaS-and-DevOps home page")
 
 ## Exercise 5: Configure CI/CD pipeline
 
