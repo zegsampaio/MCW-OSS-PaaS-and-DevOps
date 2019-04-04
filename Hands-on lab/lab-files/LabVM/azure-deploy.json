@@ -39,7 +39,7 @@
         "addressPrefix": "172.16.7.0/24",
         "subnetPrefix": "172.16.7.0/24",
         "customScriptFileName": "labvmconfig.sh",
-        "customScriptUri": "https://raw.githubusercontent.com/Microsoft/MCW-OSS-PaaS-and-DevOps/master/Hands-on%20Lab/lab-files/LabVM/labvmconfig.sh"
+        "customScriptUri": "https://raw.githubusercontent.com/kylebunting/MCW-OSS-PaaS-and-DevOps/master/Hands-on%20lab/lab-files/LabVM/labvmconfig.sh"
     },
     "resources": [
         {
