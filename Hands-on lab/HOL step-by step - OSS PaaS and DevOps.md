@@ -840,66 +840,61 @@ In this task, you will navigate to the deployed app, and log in to verify it is 
 
 Duration: 60 minutes
 
-In this exercise, you are going to use Jenkins to implement a continuous integration (CI) and continuous delivery (CD) pipeline to deploy the containerized MERN app to Web App for Containers.
+In this exercise, you are going to use Jenkins to implement a continuous integration (CI) and continuous delivery (CD) pipeline to deploy the containerized MERN app to Web App for Containers in Azure.
 
 ### Task 1: Prepare GitHub account for service integrations
 
 In this task, you will be adding a Jenkins service integration into your GitHub account. This integration will enable a Jenkins CI build job to be triggered when code is checked in to your GitHub repository.
 
-1. On your Lab VM, navigate to your Jenkins VM in the [Azure portal](https://portal.azure.com/).
+1. On your Lab VM, navigate to your Jenkins VM in the [Azure portal](https://portal.azure.com/) by selecting **Resource groups** from the left-hand menu, entering "jenkins" into the search box, and selecting your **jenkins-SUFFIX** resource group from the list.
 
-    - Select **Resource groups** from the left-hand menu, then enter "Jenkins" into the search box, and select your **Jenkins-SUFFIX** resource group from the list.
+    ![Resource groups is highlighted in the navigation pane of the Azure portal, Jenkins is highlighted in the search box, and jenkins is highlighted in the search results.](media/azure-rg-jenkins.png "Azure Portal")
 
-    ![Resource groups is highlighted in the navigation pane of the Azure portal, Jenkins is highlighted in the search box, and jenkins is highlighted in the search results.](media/image98.png "Azure Portal")
+2. On the Jenkins-SUFFIX Resource group blade, select your **Jenkins** virtual machine.
 
-    - On the Jenkins-SUFFIX Resource group blade, select your **Jenkins** virtual machine.
+    ![Overview is highlighted in the jenkins resource group blade, and Jenkins is highlighted in the Filter by name results.](media/rg-jenkins-vm.png "Resource group blade")
 
-    ![Overview is highlighted in the jenkins resource group blade, and Jenkins is highlighted in the Filter by name results.](media/image99.png "Resource group blade")
+3. On the **Overview** blade of your Jenkins virtual machine, locate the **DNS name**, and copy the value.
 
-2. On the **Overview** blade of your Jenkins virtual machine, locate the **DNS name**, and copy the value.
+    ![DNS name and its value are highlighted on the Overview blade.](media/jenkins-vm-dns-name.png "Overview blade")
 
-    ![DNS name and its value are highlighted on the Overview blade.](media/image100.png "Overview blade")
-
-3. Return to your forked `MCW-OSS-PaaS-and-DevOps` application page in your GitHub account, select **Settings**, then select **Webhooks** from the left-hand menu.
-
-4. Select **Add Webhook**.
+4. Return to your forked `MCW-OSS-PaaS-and-DevOps` application page in GitHub, select **Settings**, then select **Webhooks** from the left-hand menu, and then select **Add Webhook**.
   
-   ![Webhooks is highlighted on the left-hand menu, and Add webhook is highlighted at the top.](media/webhooks-selected.png "Select Webhooks")
-   
+   ![Webhooks is highlighted on the left-hand menu, and Add webhook is highlighted at the top.](media/github-settings-webhooks.png "Select Webhooks")
 
 5. When prompted, enter your GitHub account password to continue.
 
-    ![A password is entered in the Confirm password to continue dialog box.](media/image103.png "Confirm password dialog box")
+    ![A password is entered in the Confirm password to continue dialog box.](media/github-password.png "Confirm password dialog box")
 
-6.  Enter the following:
+6. On the Add webhook page, enter the following:
 
-   - **Payload URL** Enter "http://YOUR-JENKINS-URL]/github-webhook/" replacing **[YOUR-JENKINS-URL]** with the Jenkins DNS name you copied from the Azure portal. Make sure to include the last /
+    - **Payload URL**: Enter <http://YOUR-JENKINS-URL/github-webhook/>, replacing `YOUR-JENKINS-URL` with the Jenkins DNS name you copied from the Azure portal. **Important**: Make sure to include the trailing backslash ("/").
+    - **Content type**: Select **application/json**.
+    - **Secret**: Leave blank.
+    - Under **Which events would you like to trigger this webhook?**, select **Just the _push_ event.**
+    - **Active**: Check this box.
 
-   - **Content type** Select **application/json**
+    ![The value in the Jenkins hook url box is highlighted in the Webhooks / Add Webhook  dialog box.](media/github-add-webhook-settings.png "Jenkins webhook settings")
 
-   -  Leave **Secret** blank.
-
-  ![The value in the Jenkins hook url box is highlighted in the Webhooks / Add Webhook  dialog box.](media/add-webhook-settings.png "Jenkins webhook settings")
-
-7. Select **Let me select individual events**, then enable **Pushes**. Select **Add webhook**
-
-  ![The Pushes checkbox is highlighted in the Let me select individual events section.](media/enable-pushes.png "Enable Pushes Events")
+7. Select **Add webhook**
 
 8. A warning will be displayed. This is a permissions error that will be resolved in a later step.
 
-    ![A warning icon is displayed due to a http 403 error.](media/403-warning.png "Http Forbidden warning")
-   
-9. Next, you need to grant the Jenkins user access to your GitHub repository by adding a deploy key in the GitHub settings.
+    ![A warning icon is displayed due to a http 403 error.](media/github-webhook-403-warning.png "Http Forbidden warning")
 
-10. Return to your Jenkins virtual machine page in the Azure portal, select **Connect**, and copy the SSH command.
+9. Next, you need to grant the Jenkins user access to your GitHub repository by adding a deploy key in the GitHub settings. Return to your Jenkins virtual machine page in the Azure portal, select **Connect**.
 
-    ![The Connect icon is highlighted on the Azure portal, and the SSH command is highlighted below.](media/image106.png "Jenkins virtual machine page")
+    ![The Connect button on the Jenkins VM overview blade is highlighted.](media/jenkins-connect.png "Connect")
 
-11. Open a new bash shell and paste the SSH command you copied above at the prompt. Enter "yes" if prompted about continuing to connect, and enter the jenkinsadmin password, "Password.1!!," when prompted.
+10. On the Connect to virtual machine dialog, select the **SSH** tab and copy the **Login using VM local account** value.
 
-    ![The information above is displayed in this screenshot of the bash terminal.](media/image107.png "bash terminal screenshot")
+    ![The Connect icon is highlighted on the Azure portal, and the SSH command is highlighted below.](media/jenkins-connect-ssh.png "Jenkins virtual machine page")
 
-12. At the jenkinsadmin\@Jenkins prompt, enter:
+11. Open a new bash shell and paste the SSH command you copied above at the prompt. Enter "yes" if prompted about continuing to connect, and enter the jenkinsadmin password, `Password.1!!`, when prompted.
+
+    ![The information above is displayed in this screenshot of the bash terminal.](media/bash-jenkins-ssh.png "bash terminal screenshot")
+
+12. At the `jenkinsadmin@Jenkins` prompt, enter:
 
     ```bash
     ssh-keygen
@@ -907,45 +902,45 @@ In this task, you will be adding a Jenkins service integration into your GitHub 
 
 13. Press **Enter** to accept the default file in which to save the key.
 
-14. Press **Enter** to use an empty passphrase, and re-enter it to confirm. 
+14. Press **Enter** to use an empty passphrase, and re-enter it to confirm.
 
-    >**Note**: This is done only for simplicity in this hands-on lab, and is not recommend for actual environments.
+    > **Note**: The use of an empty password is done only for simplicity in this hands-on lab. This not recommend for actual environments.
 
 15. Copy the location into which your public key has been saved.
 
-    ![In this screenshot of the bash terminal, ssh-keygen and the location into which your public key has been saved are highlighted.](media/image108.png "bash terminal screenshot")
+    ![In this screenshot of the bash terminal, ssh-keygen and the location into which your public key has been saved are highlighted.](media/bash-jenkins-ssh-keygen.png "bash terminal screenshot")
 
-16. Show the public key using the following command, replacing [KEY-PATH] with the location of your public key.
+16. Show the public key using the following command, replacing `[KEY-PATH]` with the location of your public key.
 
     ```bash
     cat [KEY-PATH]
     ```
 
-18. Copy the key displayed, so it can be added to GitHub.
+17. Copy the key displayed, so it can be added to GitHub.
 
-    ![The displayed key is highlighted in this screenshot of the bash terminal.](media/image109.png "bash terminal screenshot")
+    ![The displayed key is highlighted in this screenshot of the bash terminal.](media/bash-jenkins-rsa-key.png "bash terminal screenshot")
 
-19. Return to you GitHub account in the browser, select the **Deploy keys** option from the left-hand menu, and select **Add deploy key**.
+18. Return to the Settings page of your GitHub account in the browser, select the **Deploy keys** option from the left-hand menu, and then select **Add deploy key**.
 
-    ![Deploy keys banner is displayed, and the Add deploy key button is highlighted.](media/image110.png "Deploy keys")
+    ![Deploy keys banner is displayed, and the Add deploy key button is highlighted.](media/github-deploy-keys.png "Deploy keys")
 
-20. Enter "Jenkins" for the title, paste the SSH key you copied above into the Key field, removing any trailing spaces, and select **Add key**.
+19. Enter "Jenkins" for the title, paste the SSH key you copied above into the Key field, removing any trailing spaces, and select **Add key**.
 
-    ![On the GitHub account page, Deploy keys is selected in the left-hand menu, Jenkins is in the Title box, and the SSH key that you copied is in the Key field.](media/image111.png "Add the key")
+    ![On the GitHub account page, Deploy keys is selected in the left-hand menu, Jenkins is in the Title box, and the SSH key that you copied is in the Key field.](media/github-deploy-keys-add.png "Add key")
 
-21. To ensure that everything is working, return to the Jenkin's bash shell, and enter the below command which will check the connection to GitHub.
+20. To ensure that everything is working, return to the Jenkin's bash shell, and enter the below command which will check the connection to GitHub.
 
     ```bash
     ssh git@github.com
     ```
 
-22. Enter "yes" when prompted about continuing.
+21. Enter "yes" when prompted about continuing.
 
-23. You should see a message like the following, indicating a successful connection.
+22. You should see a message like the following, indicating a successful authentication and closed connection.
 
-    ![A message indicating a successful connection is highlighted in this screenshot of the Jenkins bash terminal.](media/image112.png "bash terminal")
+    ![A message indicating a successful connection is highlighted in this screenshot of the Jenkins bash terminal.](media/bash-jenkins-ssh-git.png "bash terminal")
 
-24. The GitHub side of the integration with Jenkins is complete. Next, you will configure Jenkins as part of your CI/CD pipeline.
+23. The GitHub side of the integration with Jenkins is complete. Next, you will configure Jenkins as part of your CI/CD pipeline.
 
 ### Task 2: Open connection to Jenkins
 
@@ -955,7 +950,7 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
 2. On the **Overview** blade of your Jenkins VM, locate the **DNS name**, and copy the value.
 
-    ![DNS name and its value are highlighted on the Overview blade.](media/image100.png "Overview blade")
+    ![DNS name and its value are highlighted on the Overview blade.](media/jenkins-vm-dns-name.png "Overview blade")
 
 3. Open a new browser window or tab and paste the copied DNS name into the browser's address bar to navigate to your Jenkins server.
 
@@ -963,7 +958,7 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
 5. To set up an SSH tunnel to Jenkins, copy the ssh command provided in the Jenkins on Azure window, as highlighted in the screen shot below.
 
-    ![The ssh command that Jenkins provides is highlighted in the Jenkins on Azure window.](media/image113.png "Jenkins On Azure window")
+    ![The ssh command that Jenkins provides is highlighted in the Jenkins on Azure window.](media/jenkins-on-azure.png "Jenkins On Azure window")
 
 6. Open a new bash shell, and at the command prompt paste the copied ssh command, replacing "username" with **jenkinsadmin**. The command will resemble the following:
 
@@ -975,13 +970,13 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
 8. Enter the **jenkinsadmin** password, "Password.1!!"
 
-    ![The ssh command above is highlighted in the bash window, and yes is highlighted next to Are you sure you want to continue connecting (yes/no)?](media/image114.png "bash window")
+    ![The ssh command above is highlighted in the bash window, and yes is highlighted next to Are you sure you want to continue connecting (yes/no)?](media/bash-jenkins-ssh-tunnel.png "bash window")
 
 9. After you have started the SSH tunnel, open a new browser tab or window, and navigate to <http://localhost:8080/>.
 
-    ![After navigating to http://localhost:8080, the Getting Started page is displayed, providing the path to the initial administrator password, /var/lib/jenkins/secrets/initialAdminPassword.](media/image115.png "Unlock Jenkins window")
+    ![After navigating to http://localhost:8080, the Getting Started page is displayed, providing the path to the initial administrator password, /var/lib/jenkins/secrets/initialAdminPassword.](media/jenkins-unlock.png "Unlock Jenkins window")
 
-10. To get the initial password, copy the path provided, return to the SSH tunnel bash window, and run the following command:
+10. To get the initial password, return to the SSH tunnel bash window, and run the following command:
 
     ```bash
     sudo cat /var/lib/jenkins/secrets/initialAdminPassword
@@ -989,66 +984,60 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
 11. Copy the password returned.
 
-    ![The returned password is highlighted in the bash window.](media/image116.png "bash window")
+    ![The returned password is highlighted in the bash window.](media/bash-jenkins-initial-password.png "bash window")
 
 12. Return to the Getting Started screen in your browser, paste the password into the **Administrator password** box, and select **Continue**.
 
-    ![Screenshot of the Administrator password pasted into the box on the Getting Started screen, and Continue selected.](media/image117.png "Administrator password field")
+    ![Screenshot of the Administrator password pasted into the box on the Getting Started screen, and Continue selected.](media/jenkins-admin-password.png "Administrator password field")
 
 13. On the Customize Jenkins screen, select **Install suggested plugins**.
 
-    ![Screenshot of the Customize Jenkins page, with Install suggested plugins highlighted and selected.](media/image118.png "Customize Jenkins page")
+    ![Screenshot of the Customize Jenkins page, with Install suggested plugins highlighted and selected.](media/jenkins-customize.png "Customize Jenkins page")
 
 14. On the Create First Admin User screen, enter the following:
 
-    - **Username**: Enter a username, such as your first name.
-
+    - **Username**: Enter **jenkins**.
     - **Password**: Password.1!!
-
     - **Confirm Password**: Password.1!!
-
-    - **Full name**: Enter your first name.
-
+    - **Full name**: Enter **jenkins**.
     - **E-mail address**: Enter your email address.
-
     - Select **Save and Continue**.
 
-        ![The Create First Admin User page, with the values specified above entered into the appropriate fields, and Save and Finish highlighted.](media/create-first-admin-user-jenkins.png "Create First Admin User page")
-        
- 15.   You may be required to restart Jenkins and log in again. Otherwise, select **Start using Jenkins** on the Jenkins is ready screen.
+    ![The Create First Admin User page, with the values specified above entered into the appropriate fields, and Save and Finish highlighted.](media/create-first-admin-user-jenkins.png "Create First Admin User page")
 
-   ![Screenshot of the Jenkins is ready page, with the Start using Jenkins button highlighted.](media/image120.png "Jenkins is ready page")
+15. You may be required to restart Jenkins and log in again. Otherwise, select **Start using Jenkins** on the Jenkins is ready screen.
+
+    ![Screenshot of the Jenkins is ready page, with the Start using Jenkins button highlighted.](media/jenkins-is-ready.png "Jenkins is ready page")
 
 16. You will be redirected to the Jenkins dashboard.
 
-    ![Screenshot of the Jenkins dashboard.](media/image121.png "Jenkins dashboard")
+    ![Screenshot of the Jenkins dashboard.](media/jenkins-dashboard.png "Jenkins dashboard")
 
 17. From the Jenkins dashboard, select **Manage Jenkins** from the left-hand menu and then select **Manage Plugins**.
 
-    ![Manage Jenkins is highlighted in the left-hand menu of the Jenkins window, and Manage Plugins is highlighted on the right.](media/image122.png "Jenkins window")
+    ![Manage Jenkins is highlighted in the left-hand menu of the Jenkins window, and Manage Plugins is highlighted on the right.](media/jenkins-dashboard-manage.png "Jenkins window")
 
-18. With the **Available** tab selected, install the **NodeJS** plug-in by entering **nodejs** into the Filter box, and selecting the **NodeJS** plug-in in the results, and then selecting **Download now and install after restart**.
+18. With the **Available** tab selected, install the **NodeJS** plug-in by entering **nodejs** into the Filter box, and selecting the **NodeJS** plug-in in the results, and then selecting **Install without restart**.
 
-    ![On the Manage Plugins screen, the Available tab is selected, \"nodejs\" is entered into the filter box, and NodeJS is checked in the filter results. The Download now and install after restart button is highlighted.](media/image124.png "Manage Plugins page")
-
+    ![On the Manage Plugins screen, the Available tab is selected, \"nodejs\" is entered into the filter box, and NodeJS is checked in the filter results. The Install without restart button is highlighted.](media/jenkins-plugins-nodejs.png "Manage Plugins page")
 
 19. Scroll up to the top the screen, and select **Manage Jenkins** from the left-hand menu.
 
-    ![Screenshot of the Jenkins left-hand menu with Manage Jenkins link highlighted.](media/image125.png "Jenkins menu")
+    ![Screenshot of the Jenkins left-hand menu with Manage Jenkins link highlighted.](media/jenkins-manage.png "Jenkins menu")
 
 20. Select **Global Tool Configuration**.
 
-    ![Screenshot of Manage Jenkins page, with Global Tool Configuration option highlighted.](media/image126.png "Manage Jenkins page")
+    ![Screenshot of Manage Jenkins page, with Global Tool Configuration option highlighted.](media/jenkins-global-tool-configuration.png "Manage Jenkins page")
 
 21. Find **NodeJS** and select **Add NodeJS** next to NodeJS installations.
 
-22. Enter a name, ensure **Install automatically** is checked, and accept the default (latest) version of nodejs.
+22. Enter **bestforyounode** as the Name, ensure **Install automatically** is checked, and accept the default (latest) version of nodejs.
 
-    ![In the NodeJS dialog box, bestforyounode is in the Name box, and Install automatically is selected below it.](media/image127.png "NodeJS dialog box")
+    ![In the NodeJS dialog box, bestforyounode is in the Name box, and Install automatically is selected below it.](media/jenkins-nodejs-install.png "NodeJS dialog box")
 
 23. Select **Save**.
 
-    ![This is a screenshot of the Save (selected) and Apply buttons.](media/image128.png "Select Save")
+    ![This is a screenshot of the Save (selected) and Apply buttons.](media/jenkins-global-tool-configuration-save.png "Select Save")
 
 ### Task 3: Configure Continuous Integration with Jenkins
 
@@ -1058,44 +1047,46 @@ In this task, you will set up a simple Jenkins continuous integration (CI) pipel
 
 2. Enter "best-for-you-build" as the name, select **Freestyle project**, and select **OK**.
 
-    ![Best-for-you-build is entered in the Enter an item name box, and Freestyle project and OK are selected below it.](media/image129.png "Enter an item name section")
+    ![Best-for-you-build is entered in the Enter an item name box, and Freestyle project and OK are selected below it.](media/jenkins-best-for-you-build.png "Enter an item name section")
 
-3. On the **General** tab of the project page, select **GitHub project**, and enter the URL for your forked copy of the best-for-you-organics project page in your GitHub account.
+3. On the **General** tab of the project page:
 
-    ![On the General tab of the project page, GitHub project is selected and the URL for your forked copy of the best-for-you-organics project page in your GitHub account is entered.](media/image130.png "Project page General tab")
+    - Select **GitHub project**, and enter the URL for your forked copy of the `MCW-OSS-PaaS-and-DevOps` project page in your GitHub account.
+    - Uncheck **Restrict where this project can be run**, if it is checked.
 
-4. Also under the **General** tab, uncheck **Restrict where this project can be run** if it is checked.
+    ![On the General tab of the project page, GitHub project is selected and the URL for your forked copy of the best-for-you-organics project page in your GitHub account is entered.](media/jenkins-project-general.png "Project page General tab")
 
-5. Next, scroll down to the **Source Code Management** section, select **Git**, and enter the URL to your project, including the ".git" extension.
+4. Next, scroll down to the **Source Code Management** section, select **Git**, and enter the URL to your project, including the ".git" extension.
 
-    ![Git is selected on the Source Code Management tab of the project page, and the URL to your project, including the .git extension, is entered in the Repository URL box.](media/image131.png "Source Code Management section")
+    ![Git is selected on the Source Code Management tab of the project page, and the URL to your project, including the .git extension, is entered in the Repository URL box.](media/jenkins-project-source-code.png "Source Code Management section")
 
-6. Scroll down to the **Build Triggers** section and select **GitHub hook trigger for GITScm polling**.
+5. Scroll down to the **Build Triggers** section and select **GitHub hook trigger for GITScm polling**.
 
-    ![The GitHub hook trigger for GITScm polling is selected and highlighted in the Build Triggers section.](media/image132.png "Build Triggers section")
+    ![The GitHub hook trigger for GITScm polling is selected and highlighted in the Build Triggers section.](media/jenkins-project-build-triggers.png "Build Triggers section")
 
-7. Scroll down to the **Build Environment** section and select **Provide Node & npm bin/ folder to PATH**, select your NodeJS Installation from the list, and leave the default value for npmrc file.
+6. Scroll down to the **Build Environment** section and select **Provide Node & npm bin/ folder to PATH**, select your NodeJS Installation from the list, and leave the default value for npmrc file.
 
-    ![In the Jenkins Build Environment section, Provide Node & npm /bin folder to PATH is checked, the NodeJS Installation is specified, and the default value is set for npmrc](media/jenkins-build-environment.png "Jenkins Build Environment")
+    ![In the Jenkins Build Environment section, Provide Node & npm /bin folder to PATH is checked, the NodeJS Installation is specified, and the default value is set for npmrc](media/jenkins-project-build-environment.png "Jenkins Build Environment")
 
-8. In the **Build** section, select **Add build step**, and select **Execute shell** from the options.
+7. In the **Build** section, select **Add build step**, and select **Execute shell** from the options.
 
-    ![In the Jenkins Add build step menu, Execute shell is highlighted.](media/jenkins-add-build-step-execute-shell.png "Add Execute Shell Build step")
+    ![In the Jenkins Add build step menu, Execute shell is highlighted.](media/jenkins-project-add-build-step.png "Add Execute Shell Build step")
 
-9. In the **Execute shell** Command block, enter:
+8. In the **Execute shell** Command block, enter:
 
     ```bash
+    cd "Hands-on lab/lab-files"
     npm install
     npm run build
     ```
 
-    ![In the Execute build section, npm install and npm run build are entered on separate lines in the command block.](media/jenkins-build-execute-shell-command.png "Jenkins Execute Build shell")
+    ![In the Execute build section, npm install and npm run build are entered on separate lines in the command block.](media/jenkins-project-execute-shell-command.png "Jenkins Execute Build shell")
 
-10. Finally, select **Save**.
+9. Finally, select **Save**.
 
-    ![This is a screenshot of the Save (selected) and Apply buttons.](media/image133.png "Select Save")
+    ![This is a screenshot of the Save (selected) and Apply buttons.](media/jenkins-save.png "Select Save")
 
-11. Your Jenkins CI build job should now be triggered whenever a push is made to your repository.
+10. Your Jenkins CI build job should now be triggered whenever a push is made to your repository.
 
 ### Task 4: Trigger CI build
 
@@ -1105,23 +1096,23 @@ In this task you will commit your pending changes in VS Code to you GitHub repo,
 
 2. Observe that the **source control icon** on the left-hand navigation bar has a badge indicating you have uncommitted changes. Select the **icon**.
 
-    ![The Source Control icon is highlighted on the Visual Studio Code Activity Bar.](media/image134.png "Visual Studio Code Activity Bar")
+    ![The Source Control icon is highlighted on the Visual Studio Code Activity Bar.](media/vscode-source-control.png "Visual Studio Code Activity Bar")
 
 3. In the **SOURCE CONTROL: GIT** pane, enter a commit message, such as "Added Docker configuration," and select **+** next to **CHANGES** to stage all the pending changes.
 
-    ![Added Docker configuration is highlighted in the SOURCE CONTROL: GIT pane, and the plus sign (+) next to CHANGES is highlighted on the right.](media/image135.png "Visual Studio Code Activity Bar")
+    ![Added Docker configuration is highlighted in the SOURCE CONTROL: GIT pane, and the plus sign (+) next to CHANGES is highlighted on the right.](media/vscode-source-control-stage-changes.png "Visual Studio Code Activity Bar")
 
 4. Select the **checkmark** to commit the changes.
 
-    ![The check mark next to commit the changes is highlighted in the SOURCE CONTROL: GIT pane.](media/image136.png "Visual Studio Code Activity Bar")
+    ![The check mark next to commit the changes is highlighted in the SOURCE CONTROL: GIT pane.](media/vscode-source-control-commit.png "Visual Studio Code Activity Bar")
 
 5. Next, select the **ellipsis** to the right of the check mark, and select **Push** from the dropdown.
 
-    ![The ellipsis (...) to the right of the check mark is highlighted in the SOURCE CONTROL: GIT pane, and Push is highlighted in the submenu.](media/image137.png "Visual Studio Code Activity Bar")
+    ![The ellipsis (...) to the right of the check mark is highlighted in the SOURCE CONTROL: GIT pane, and Push is highlighted in the submenu.](media/vscode-source-control-push.png "Visual Studio Code Activity Bar")
 
 6. If prompted, enter your GitHub account credentials to log into your GitHub account.
 
-    >**Note**: You will need to user your GitHub username (not your email address) here, and the password will be the Personal Access Token you created and saved previously.
+    > **Note**: You will need to user your GitHub username (not your email address) here, and the password will be the Personal Access Token you created and saved previously.
 
 7. Return to your best-for-you-build job in Jenkins, and locate the **Build History** block on the left-hand side. Select **#1** to view the details of the build job, caused by your GitHub commit.
 
@@ -1207,6 +1198,8 @@ In this task, you will install Docker CE on your Jenkins VM, so it can be used t
     sudo docker run hello-world
     ```
 
+    ![Hello world message from Docker on the Jenkins server.](media/bash-jenkins-docker-hello-world.png "Jenkins Docker install")
+
 11. The final step is to add permission to the `jenkins` user to Docker.
 
     ```bash
@@ -1214,7 +1207,7 @@ In this task, you will install Docker CE on your Jenkins VM, so it can be used t
     sudo chmod 664 /run/docker.sock
     ```
 
-12. Now, restart the Jenkins service, entering the jenkinsadmin password, Password.1!!, when prompted.
+12. Now, restart the Jenkins service, entering the jenkinsadmin password, `Password.1!!`, when prompted.
 
     ```bash
     service jenkins restart
@@ -1222,125 +1215,122 @@ In this task, you will install Docker CE on your Jenkins VM, so it can be used t
 
 ### Task 6: Add an Azure service principal for Jenkins
 
-In this task, you will create an Azure Active Directory (Azure AD) application and service principal (SP) that will provide the Jenkins CD pipeline access to Azure resources. You will grant the SP permissions to the hands-on-lab-SUFFIX resource group.
+In this task, you will use the Azure CLI to create an Azure Active Directory (Azure AD) application and service principal (SP) that will provide the Jenkins CD pipeline access to Azure resources. You will grant the SP permissions to the hands-on-lab-SUFFIX resource group.
 
-1. In the [Azure portal](https://portal.azure.com), select **Azure Active Directory** from the navigation menu, and then select **App registrations** and **+New application registration**.
+1. In the [Azure portal](https://portal.azure.com), select the **Cloud Shell** icon in the top toolbar.
 
-    ![Azure Active Directory (Azure AD) is highlighted in the Azure navigation menu, and App registrations is selected and highlighted in the left-hand menu of the Azure AD blade. New application registration is highlighted.](media/azure-active-directory-app-registrations-new.png "New Azure AD application registration")
+    ![The Cloud Shell icon is highlighted on the Azure toolbar.](media/azure-toolbar-cloud-shell.png "Azure Toolbar")
 
-2. On the Create blade, enter the following:
+2. Select **PowerShell** in the Cloud Shell pane.
 
-    - **Name**: Enter best-for-you-app, or something similar.
+    ![PowerShell is highlighted in the Cloud Shell pane.](media/cloud-shell-powershell.png "Cloud Shell")
 
-    - **Application type**: Select Web app / API.
+3. Next, you will issue a command to create a service principal named **best-for-you-app** and assign it contributor permissions to your **hands-on-lab-SUFFIX** resource group. The command will be in the following format:
 
-    - **Sign-on URL**: Enter https://bestforyou.com.
+    ```bash
+    az ad sp create-for-rbac -n "best-for-you-app" --role contributor --scopes subscriptions/{SubID}/resourceGroups/{ResourceGroupName}
+    ```
 
-        ![In the Create Azure AD App registration blade, the values specified above are entered into the appropriate fields.](media/azure-active-directory-app-registrations-create.png "Create Azure AD App registration")
+    > You will need to replace the `{SubID}` and `{ResourceGroupName}` values.
 
-3. When the app finishes creating, you will be taken to the blade for the app. On the Registered app blade, copy the **Application ID**, and save the value in a text editor for later user. You will need this value in Jenkins to specify the credentials for connecting to Azure.
+4. To retrieve the values you need to replace above, navigate to **Resource groups** in the Azure navigation menu, enter "hands-on-lab-SUFFIX" into the filter box, and select the hands-on-lab-SUFFIX resource group from the list.
 
-    ![On the Registered app blade, Application ID is highlighted.](media/registered-app-application-id.png "Registered app")
+5. On your hands-on-lab-SUFFIX blade, you will copy two values to paste into the command above:
 
-4. Now, select **Settings** on the Registered app blade, and then select **Keys**.
-
-    ![On the Registered app blade, Settings is highlighted.](media/registered-app-blade-settings.png "Registered app")
-
-5. On the Keys blade, create a new Password by entering a **Key description**, selecting a **Duration**, and selecting **Save**.
-
-    ![On the Keys blade, a new password description and expiration are entered.](media/registered-app-keys-new-password.png "Registered app Keys")
-
-6. Copy the generated value and save it into a text editor for future reference.
-
-    ![On the Keys blade, the generated password value is selected and highlighted.](media/registered-app-keys-generated-password.png "Registered app Keys")
-
-7. Return to the Azure AD blade in the portal and select **Properties** from the left-hand menu, then copy the **Directory ID** value from the Properties blade. Paste this value in a text editor for later reference, as the Tenant ID of your subscription.
-
-    ![On the Azure AD properties blade, Directory ID is highlighted.](media/azure-active-directory-properties.png "Azure AD properties")
-
-8. Next, select **Resource groups** from the Azure navigation menu, enter "hands-on-lab-SUFFIX" into the filter box, and select the hands-on-lab-SUFFIX resource group from the list.
-
-9. On your hands-on-lab-SUFFIX blade, copy the **Subscription ID** in the Essentials area of the Overview blade, and paste the value into a text editor for later reference.
+    - **Resource group name**: Copy the resource group name (hands-on-lab-SUFFIX) and paste it into the command in place of `{ResourceGroupName}`.
+    - **Subscription ID**: In the Essentials area of the Overview blade, locate the Subscription ID, then copy and paste the value into the command in place of the `{SubID}` value.
 
     ![On the Overview blade of the resource group, Subscription ID is highlighted.](media/resource-group-overview-subscription-id.png "Resource group overview blade")
 
-10. Select **Access control (IAM)** from the left-hand menu of the Resource group blade, and then select **+ Add**.
+6. Copy and paste the updated `az ad sp create-for-rbac` command at the Cloud Shell prompt and press `Enter`. The command should be similar to the following, with your subscription ID and resource group name:
 
-    ![On the Resource group blade, Access control (IAM) is selected, and +Add is highlighted.](media/resource-group-access-control-add.png "Resource group Access control (IAM)")
+    ```bash
+    az ad sp create-for-rbac -n "best-for-you-app" --role contributor --scopes /subscriptions/30fc406c-c745-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/hands-on-lab
+    ```
 
-11. On the Add permissions blade, do the following:
+    ![The az ad sp create-for-rbac command is entered into the Cloud Shell, and the output of the command is displayed.](media/azure-cli-create-sp.png "Azure CLI")
 
-    - **Role**: Select Contributor.
-    - **Assign access to**: Select Azure AD user, group, or service principal.
-    - **Select**: Enter "best" and select the best-for-you-app Registered app you created in Azure AD.
-    - Select **Save**.
-      
-        ![In the Add permission dialog, the Role is set to Contributor, Azure AD user, group, or service principal is selected in the Assign access to drop down, "best" is entered into the Select box, and best-for-you-app is listed under Selected members.](media/add-role-assignment.png "Add role assignment")
+7. Copy the output from the command into a text editor, as you will need it in the next task. The output should be similar to:
+
+    ```json
+    {
+        "appId": "24c91e7d-4568-4f48-bca5-af3fc75e5481",
+        "displayName": "best-for-you-app",
+        "name": "http://best-for-you-app",
+        "password": "389bbb6f-731a-449a-a438-65a0f485ec8b",
+        "tenant": "9c37bff0-cd20-XXXX-XXXX-XXXXXXXXXXXX"
+    }
+    ```
+
+8. To verify the role assignment, select **Access control (IAM)** from the left-hand menu of the **hands-on-lab-SUFFIX** resource group blade, and then select the **Role assignments** tab and locate **best-for-you-app** under the CONTRIBUTOR role.
+
+    ![The Role assignments tab is displayed, with best-for-you-app highlighted under CONTRIBUTOR in the list.](media/rg-hands-on-lab-role-assignments.png "Role assignments")
 
 ### Task 7: Add continuous delivery to Jenkins build job
 
-In this task, you will use the [Azure App Service Jenkins plugin](https://plugins.jenkins.io/azure-app-service) to add continuous deployment (CD) to the Jenkins build pipeline. This will use a post-build action to create a Docker new image from the build, push that image to your Azure Container Registry, and deploy the image to your Web App for Containers instance. This post-build action will run under the credentials of the SP you created in the previous task.
+In this task, you will use the [Azure App Service Jenkins plugin](https://plugins.jenkins.io/azure-app-service) to add continuous deployment (CD) to the Jenkins build pipeline. This will use a post-build action to create a new Docker image from the build, push that image to your Azure Container Registry, and deploy the image to your Web App for Containers instance. This post-build action will run under the credentials of the SP you created in the previous task.
 
 1. Return to your **Jenkins** dashboard, and select the **best-for-you-build** project.
 
-    ![The best-for-you-build project is highlighted on the Jenkins dashboard.](media/image149.png "Jenkins dashboard")
+    ![The best-for-you-build project is highlighted on the Jenkins dashboard.](media/jenkins-dashboard-best-for-you-build.png "Jenkins dashboard")
 
 2. Select **Configure** from the left-hand menu.
 
-    ![Configure is highlighted in the left-hand menu.](media/image150.png "Jenkins left-hand menu")
+    ![Configure is highlighted in the left-hand menu.](media/jenkins-project-configure.png "Jenkins left-hand menu")
 
 3. On the configure screen, scroll down to Post-build Actions, select **Add post-build action** and then select **Publish an Azure Web App**.
 
     ![In the Jenkins post-build action menu, Publish an Azure Web App is highlighted.](media/jenkins-post-build-action-publish-azure-web-app.png "Jenkins post-build action menu")
 
-4. In the Publish an Azure Web App section that appears, select **Add** next to **Azure Credentials**.
+4. In the Publish an Azure Web App section that appears, select **Add** and then **Jenkins** next to **Azure Credentials**.
 
     ![In the Publish an Azure Web App post-build action, Add Azure credentials is highlighted.](media/jenkins-post-build-action-publish-azure-web-app-credentials-add.png "Add Azure Credentials")
 
 5. On the Jenkins Credentials Provider screen, enter the following:
 
     - **Domain**: Leave set to Global credentials (unrestricted).
-    - **Kind**: Select Microsoft Azure Service Principal.
+    - **Kind**: Select **Microsoft Azure Service Principal**.
     - **Scope**: Leave set to Global (Jenkins, nodes, items, all child items, etc).
-    - **Subscription ID**: Enter your Azure subscription ID which you copied into a text editor from the Resource group blade.
-    - **Client ID**: Enter the best-for-you-app Application ID you copied into the text editor.
-    - **Client Secret**: Enter the password you created on the Keys blade for the best-for-you-app registered app in Azure AD.
-    - **Tenant ID**: Enter the Directory ID you copied into the text editor from the properties blade of your Azure AD account.
+    - **Subscription ID**: Enter your Azure subscription ID which you copied above from the hands-on-lab-SUFFIX Resource group blade.
+    - **Client ID**: Enter the **appId** value from the Cloud shell output you copied into the text editor.
+    - **Client Secret**: Enter the **password** value from the Cloud shell output you copied into the text editor.
+    - **Tenant ID**: Enter the **tenant** value from the Cloud shell output you copied into the text editor.
     - **Azure Environment**: Leave set to Azure.
     - **ID**: Enter jenkinsSp.
     - **Description** Leave blank, or enter a description if you like.
     - Select **Verify Service Principal** and ensure you see the _Successfully verified the Microsoft Azure Service Principal_ message.
-    - Select **Add**.
 
-        ![On the Jenkins Credentials Provider screen, the values specified above are entered into the appropriate fields.](media/jenkins-credential-provider.png "Jenkins Credentials Provider")
+    ![On the Jenkins Credentials Provider screen, the values specified above are entered into the appropriate fields.](media/jenkins-project-credentials.png "Jenkins Credentials Provider")
 
-6. Back in the Publish an Azure Web App of the post-build actions tab, select the newly created jenkinsSp credentials in the Azure Credentials list.
+6. Select **Add**.
+
+7. Back in the Publish an Azure Web App of the post-build actions tab, select the newly created jenkinsSp credentials in the Azure Credentials list.
 
     ![The newly created jenkinsSp credentials are selected in the Azure Credentials box of the Azure Profile Configuration section.](media/jenkins-azure-profile-configuration.png "Azure Profile Configuration")
 
-7. In the App configuration section:
+8. In the App configuration section:
 
     - **Resource Group Name**: Select the hands-on-lab-SUFFIX resource group.
     - **App Name**: Select best-for-you-app.
     - Select **Publish via Docker**.
     - **Dockerfile path**: Leave set to **/Dockerfile.
     - **Docker registry URL**: Enter your Azure Container Registry's Login server value, which you can retrieve from the Access keys blade in the Azure portal.
-    - **Registry credentials**: Select **Add**, and in the add dialog enter the following:
+    - **Registry credentials**: Select **Add** and then **Jenkins**, and in the Add Credentials dialog enter the following:
         - **Domain**: Leave set to Global credentials (unrestricted).
         - **Kind**: Set to Username with password.
         - **Scope**: Leave set to Global (Jenkins, nodes, items, all child items, etc).
         - **Username**: Enter the Username value for your Azure Container Registry, which you can retrieve from the Access keys blade of your ACR in the Azure portal.
         - **Password**: Enter the password value for your Azure Container Registry, which you can retrieve from the Access keys blade of your ACR in the Azure portal.
 
-            ![In the Container Registry Access keys blade, ](media/azure-container-registry-access-keys.png "Container Registry Access keys")
+        ![In the Container Registry Access keys blade, ](media/azure-container-registry-access-keys.png "Container Registry Access keys")
 
         - **ID**: Enter acrCreds.
         - **Description**: Leave blank, or enter a description if you like.
         - Select **Add**.
 
-            ![In the Jenkins Credential Provider dialog, the values specified above are entered into the appropriate fields.](media/jenkins-credentials-provider-username-with-password.png "Add credentials")
+        ![In the Jenkins Credential Provider dialog, the values specified above are entered into the appropriate fields.](media/jenkins-credentials-provider-username-with-password.png "Add credentials")
 
-    - Select the newly added acrCreds credentials from the Registry credentials list (will be listed as [the name of your registry]/******).
+    - Select the newly added acrCreds credentials from the Registry credentials list (will be listed as `[the name of your registry]/******`).
     - Select the **Advanced** button.
     - **Docker Image**: Leave blank.
     - **Docker Image Tag**: Leave blank.
@@ -1348,7 +1338,7 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
 
         ![In the Publish an Azure Web App post-build action section, the values specified above are entered into the appropriate fields.](media/jenkins-publish-an-azure-web-app.png "Publish an Azure Web App post-build action")
 
-8. Select **Save**.
+9. Select **Save**.
 
 ### Task 8: Trigger CI-CD pipeline
 
@@ -1382,13 +1372,13 @@ In this task, you will commit changes to the `MCW-OSS-PaaS-and-DevOps` starter a
 
     ![A build and Docker deployment success message is displayed in the console output in Jenkins](media/jenkins-build-console-output-success.png "Build and Docker deployment success")
 
-8. Once the deployment is complete, you can verify the changes deployed successfully by going to Azure and reloading the web page for your App Service in the browser. The deployment of the container can take several minutes to complete so refreshes may take a few minutes to show the new header.
+8. When the deployment is complete, you can verify the changes deployed successfully by navigating to your App Service instance in the Azure portal, and selecting the URL on the overview blade. The deployment of the container can take several minutes to complete so refreshes may take a few minutes to show the new header.
 
     >**Tip**: It may help to open the app in an Incognito or InPrivate browser window, so you don't have the old page cached.
 
-9. When the deployment is complete you should see the home page, with a new header above the three plans on the page.
+9. You should see the home page, with a new header above the three plans on the page.
 
-    ![Welcome to Best for You Organics Company! is highlighted above the Two Person Plan, Four Person Plan, and High-Pro Plan boxes in this screenshot of the home page.](media/image179.png "Home page")
+    ![Welcome to Best for You Organics Company! is highlighted above the Two Person Plan, Four Person Plan, and High-Pro Plan boxes in this screenshot of the home page.](media/bfyo-web-welcome.png "Home page")
 
 ## Exercise 6: Create Azure Function for order processing
 
