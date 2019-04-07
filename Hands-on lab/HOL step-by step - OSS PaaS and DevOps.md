@@ -65,8 +65,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 2: Configure storage queues](#task-2-configure-storage-queues)
     - [Task 3: Create Cosmos DB trigger function](#task-3-create-cosmos-db-trigger-function)
     - [Task 4: Create Queue function](#task-4-create-queue-function)
-  - [Exercise 7: Create Logic App for sending SMS notifications](#exercise-7-create-logic-app-for-sending-sms-notifications)
-    - [Task 1: Create Free Twilio account](#task-1-create-free-twilio-account)
+  - [Exercise 7: Create Logic App for sending email notifications](#exercise-7-create-logic-app-for-sending-email-notifications)
+    - [Task 1: Create SendGrid account](#task-1-create-sendgrid-account)
     - [Task 2: Create Logic App](#task-2-create-logic-app)
   - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Delete Azure resource groups](#task-1-delete-azure-resource-groups)
@@ -1642,75 +1642,65 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
 19. The order you placed has been sent to the notificationqueue and is pending the notification being sent to your email address.
 
-## Exercise 7: Create Logic App for sending SMS notifications
+## Exercise 7: Create Logic App for sending email notifications
 
 Duration: 30 minutes
 
-In this exercise, you will create Logic App which will trigger when an item is added to the notificationqueue Azure Storage Queue. The Logic App will use a Twilio connection to send an SMS message to the phone number included in the notificationqueue message.
+In this exercise, you will create Logic App which will trigger when an item is added to the `notificationqueue` Azure Storage Queue. The Logic App will send an email message to the email address included in the `notificationqueue` message.
 
-### Task 1: Create Free Twilio account
+### Task 1: Create SendGrid account
 
-In this task, you will use a free Twilio account to send SMS notifications to customers, informing them that their order has been processed, and is on its way.
+In this task, you will create a SendGrid account through the Azure portal to send email notifications to customers, informing them that their order has been processed, and is on its way.
 
-1. If you do not have a Twilio account, sign up for one for free at by going to <https://www.twilio.com/try-twilio>.
+1. In the [Azure portal](https://portal.azure.com), select **+ Create a resource** and enter "SendGrid" into the Search the Marketplace box.
 
-2. On the **Sign up for free** page:
+    ![Create a resource is highlighted on the left-hand navigation menu of the Azure portal, and SendGrid is entered into the Search the Marketplace box.](media/azure-create-resource-send-grid.png "Create SendGrid Resource")
 
-    - Enter your personal info, email address, and a 14+ character password.
-   
-    - Select **JavaScript** under **Choose your language**.
-    
-    - Check the box next to **I'm not a robot**.
+2. On the SendGrid blade, select **Create**.
 
-    - Select **Get Started**.
+    ![The Create button is highlighted on the SendGrid blade.](media/sendgrid-create.png "Create SendGrid")
 
-    ![The information above is entered on the Sign up for free page.](media/twilio-signup.png "Sign up for free page")
-    
-3. Enter your **cell phone number** on the We need to verify you're a human screen, check the box if you do not wish to be contacted at the number you enter, and select **Verify** via SMS.
+3. On the Create a new SendGrid Account blade, enter the following:
 
-    ![An obscured cell phone number is entered next to the Verify via SMS button on the We need to verify you're a human screen.](media/image222.png "Verify your human screen")
+    - **Name**: Enter **bfyoemail**.
+    - **Password**: Enter **Password.1!!**
+    - **Subscription** Select the subscription you are using for this hands-on lab.
+    - **Resource group**: Choose **Use existing** and select the **hands-on-lab-SUFFIX** resource group.
+    - **Pricing tier**: Select **F1 Free** and select **Select**.
+    - **Contact information**: Enter your name, company, and email address and select **OK**.
+    - **Legal terms**: Review the legal terms and enter a phone number and then select **OK**.
 
-4. Enter the verification code received via text into the box and select **Submit**.
+    ![The values specified above are entered into the create a new SendGrid account blade.](media/sendgrid-create-settings.png "Create SendGrid account")
 
-    ![A verification code is entered on the We need to verify you're a human screen.](media/image223.png "We need to verify you???re a human screen")
+4. Select **Create** to provision the SendGrid account.
 
-5. From the Templates and Products page, select **Products**.
+5. When the SendGrid account finishes provisioning, select **Go to resource** from the notifications pane in the Azure portal.
 
-6. Select **\#Phone Numbers** under **Super Network**.
+    ![The Go to resource button in highlighted in the SendGrid deployment notification.](media/go-to-resource-sendgrid.png "Go to resource")
 
-    ![\#Phone Numbers is highlighted under Super Network.](media/phone-numbers-selected.png "Super Network section")
-    
-7. Select **Continue**.
+6. On the SendGrid account blade, select **Manage** from the toolbar.
 
-8. Give your project a name. Enter Order Notification.
+    ![The Manage button is highlighted on the SendGrid account toolbar.](media/sendgrid-manage.png "SendGrid account Manage")
 
-    ![Order Notification is entered as the project name](media/twilio-project-name.png "Twilio Project Name")
+7. On the SendGrid page that opens, select **API Keys** under Settings in the left-hand menu, and then select **Create API Key**.
 
-9.  Select the **\# (Phone Numbers) Icon** from the left-hand menu.
+    ![The Create API Key button is highlighted on the API Keys page.](media/sendgrid-create-api-key.png "SendGrid API Keys")
 
-    ![The number symbol icon is selected and the Phone Number menu item is highlighted](media/twilio-phone-number-menu-icon.png "Twilio Phone Number Icon")
+8. On the Create API Key page, enter the following:
 
-10. Select **Get your first Twilio phone number**.
+    - **API Key Name**: Enter **bfyo-api-key**.
+    - **API Key Permissions**: Select **Full Access**.
+    - Select **Create & View**.
 
-    ![Get your first Twilio phone number is highlighted on the Get Started with Phone Numbers screen.](media/twilio-get-phone-number.png "Get Started with Phone Numbers screen")
-    
-10. Select **Choose this Number** (or search for a different number if you want something different).
+    ![The values specified above are entered into the Create API Key page.](media/sendgrid-create-api-key-page.png "Create API Key")
 
-    ![Choose this Number is highlighted on the Your first Twilio Phone Number screen.](media/image228.png "Your first Twilio Phone Number screen")
+9. Leave the API Key Created screen that appears open. You will be copying the key and pasting it into your Logic App in the next task.
 
-11. Select **Done** on the Congratulations dialog.
-
-12. Select **Home**.
-
-    ![Done is highlighted on the Congratulations! screen.](media/image229.png "Congratulations screen")
-    
-13. On your **Account Dashboard**, and leave this page up, as you will be referencing the **Account SID** and **Auth Token** in the next task to configure the Twilio Connector.
-
-    ![The Home icon is highlighted on your Account Dashboard.](media/image230.png "Account dashboard")
+    ![The API Key Created screen is displayed.](media/sendgrid-api-key-created.png "API Key Created")
 
 ### Task 2: Create Logic App
 
-In this task, you will create a new Logic App, which will use the Twilio connector to send SMS notifications to users, informing them that their weekly order has processed and shipped.
+In this task, you will create a new Logic App, which will use the SendGrid connector to send email notifications to users, informing them that their order has processed and shipped.
 
 1. In the Azure portal, select **+Create a resource**, select **Web**, and select **Logic App**.
 
@@ -1719,115 +1709,122 @@ In this task, you will create a new Logic App, which will use the Twilio connect
 2. In the **Create logic app** blade, enter the following:
 
     - **Name:** Enter "OrderNotifications".
-
     - **Subscription:** Select the subscription you are using for this hands-on lab.
-
     - **Resource group:** Select **Use existing** and choose the **hands-on-lab-SUFFIX** resource group.
-
     - **Location:** Select the location you have been using for resources in this hands-on lab.
-
     - Select **Create** to provision the new Logic App.
 
-        ![The information above is entered on the Create logic app blade.](media/image232.png "Logic App blade")
+    ![The information above is entered on the Create logic app blade.](media/logic-app-create.png "Logic App blade")
 
 3. Navigate to your newly created Logic App in the Azure portal.
 
 4. In the Logic App Designer, select **Blank Logic App** under **Templates**.
 
-    ![Blank Logic App is highlighted under Templates in Logic App Designer Templates section.](media/image234.png "Logic App Designer, Templates section")
+    ![Blank Logic App is highlighted under Templates in Logic App Designer Templates section.](media/logic-app-templates-blank.png "Logic App Designer, Templates section")
 
-6. Select **Azure Queues** under **Connectors**.
+5. In the blank logic app template, select **All** and then select **Azure Queues** under **Connectors**.
 
-    ![Azure Queues is highlighted under Connectors.](media/image235.png "Connectors section")
+    ![Azure Queues is highlighted under Connectors.](media/logic-app-connectors-azure-queues.png "Connectors section")
 
-7. Select **Azure Queues** -- When there are messages in a queue.
+6. Select **When there are messages in a queue** under Triggers.
 
-    ![Azure Queues -- When there are messages in a queue is highlighted under Triggers (2).](media/image236.png "Triggers section")
+    ![When there are messages in a queue is highlighted under Triggers.](media/logic-app-triggers-when-there-are-messages-in-a-queue.png "Triggers section")
 
-8. On the When there are messages in a queue dialog, enter **bestforyouorders** for the, **Connection Name** select the bestforyouorders **Storage account** from the list and select **Create**.
+7. On the When there are messages in a queue dialog, enter **bestforyouorders** for the, **Connection Name** select the bestforyouorders **Storage account** from the list and select **Create**.
 
-    ![In the When there are messages in a queue dialog box, Bestforyouorders is in the Connection Name box, the bestforyouorders row is highlighted at the top of the list below Storage account, and the Create button is highlighted at the bottom.](media/image237.png "When there are messages in a queue dialog box")
+    ![In the When there are messages in a queue dialog box, Bestforyouorders is in the Connection Name box, the bestforyouorders row is highlighted at the top of the list below Storage account, and the Create button is highlighted at the bottom.](media/logic-app-trigger-queues-configure.png "When there are messages in a queue dialog box")
 
-9. In the next When there are messages in a queue dialog, select **notificationqueue** from the **Queue Name** list, and set the interval to **1** **minute**, then select **+New step**.
+8. In the next **When there are messages in a queue** dialog, select **notificationqueue** from the **Queue Name** list, and set the interval to **1 minute**.
 
-    ![The information above is entered in the When there are messages in a queue dialog box.](media/image238.png "When there are messages in a queue dialog box")
+    ![The information above is entered in the When there are messages in a queue dialog box.](media/logic-app-trigger-message-in-queue-configure.png "When there are messages in a queue dialog box")
 
-10. In the **Choose an action box**, enter "Parse," and select **Data Operations** **-- Parse JSON** from the list.
+9. Select **+ New step**.
 
+    ![The New step button is displayed.](media/logic-app-new-step.png "Logic App new step")
 
-    ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box, and Data Operations -- Parse JSON is highlighted below in the list.](media/data-operations-parse.png "When there are messages in a queue dialog box")
+10. In the **Choose an action box**, enter "parse," and select **Data Operations**.
 
-11. Select the **Content** box, select **Add dynamic content +**, then select **Message Text** from the input parameters list that appears.
+    ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box, and Data Operations below in the list.](media/data-operations-parse.png "When there are messages in a queue dialog box")
 
-    ![In the Parse JSON window, Message Text is in the Content box, Add dynamic content is highlighted, and Message Text is highlighted below in the input parameters list.](media/image240.png "Parse JSON window")
+11. Under Data Operations, select **Parse JSON**.
 
-12. Next, select **Use sample payload to generate schema** below the **Schema** box.
+    ![Parse JSON is highlighted under Data Operations.](media/logic-app-data-operations-parse-json.png "Data Operations")
 
-    ![In the Parse JSON window, Use sample payload to generate schema is highlighted below the Schema box.](media/image241.png "Parse JSON window")
+12. In the Parse JSON box, select the **Content** box, select **Add dynamic content +**, then select **Message Text** from the input parameters list that appears.
 
-13. In the dialog that appears, paste the following JSON into the sample JSON payload dialog that appears, then select **Done**.
+    ![In the Parse JSON window, Message Text is in the Content box, Add dynamic content is highlighted, and Message Text is highlighted below in the input parameters list.](media/logic-app-parse-json-content.png "Parse JSON window")
+
+13. Next, select **Use sample payload to generate schema** below the **Schema** box.
+
+    ![In the Parse JSON window, Use sample payload to generate schema is highlighted below the Schema box.](media/logic-app-parse-json-schema.png "Parse JSON window")
+
+14. In the dialog that appears, paste the following JSON into the sample JSON payload box, then select **Done**.
 
     ```json
-    {"orderId":"5a6748c5d0d3199cfa076ed3","userId":"demouser@bfyo.com","notificationPhone":"3175551212","firstName":"Demo"}
+    {"orderId":"5a6748c5d0d3199cfa076ed3","userId":"demouser@bfyo.com","notificationEmail":"demouser@bfyo.com","firstName":"Demo"}
     ```
 
-    ![The JSON above is pasted in the sample JSON payload dialog box, and Done is selected below.](media/image242.png "Paste the JSON in the dialog box")
+    ![The JSON above is pasted in the sample JSON payload dialog box, and Done is selected below.](media/logic-app-parse-json-sample-payload.png "Paste the JSON in the dialog box")
 
-14. You will now see the Schema for messages coming from the notification queue in the Schema box. Select **+New** **step**.
+15. You will now see the Schema for messages coming from the notification queue in the Schema box.
 
-    ![The + New step is highlighted in the Schema box.](media/image243.png "Parse JSON window")
+    ![The completed Parse JSON box is displayed.](media/logic-app-parse-json-complete.png "Parse JSON")
 
-15. In the **Choose an action box**, enter "Twilio," and select **Twilio -- Send Text Message (SMS)** under Actions.
+16. Select **+ New** **step**.
 
-    ![Twilio is highlighted in the Choose an action box, and Twilio -- Send Text Message (SMS) is highlighted under Actions.](media/image244.png "Choose an action box")
+    ![The + New step button is displayed](media/logic-app-new-step.png "Logic App new step")
 
-16. In the **Twilio -- Send Text Message (SMS)** dialog, enter the following (You will need the details from Project Info block on the dashboard of your Twilio account for this step):
+17. In the **Choose an action box**, enter "sendgrid," and select **SendGrid** under Connectors.
 
-    - **Connection Name:** Twilio
+    ![SendGrid is entered into the search box, and the SendGrid connection is highlighted under connectors.](media/logic-app-connectors-sendgrid.png "Choose a connector")
 
-    - **Twilio Account Id:** Enter your Twilio account SID.
+18. In the **SendGrid** connector dialog, select **Send email (V2)**.
 
-    - **Twilio Access Token:** Enter your Twilio auth token.
+    ![Send email (v2) is highlighted in the list of SendGrid actions.](media/logic-app-sendgrid-send-email.png "SendGrid")
 
+19. In the **SendGrid** box, enter the following:
+
+    - **Connection Name**: Enter **bfyo-sendgrid**.
+    - **SendGrid Api Key**: Return to the **API Key Created** screen in your SendGrid account, and then copy and paste the API key you generated.
     - Select **Create**.
 
-        ![The information above is entered in the Twilio -- Send Text Message (SMS) dialog box.](media/image245.png "Twilio ??? Send Text Message (SMS) dialog box")
+    ![The SendGrid connection configuration information above is entered into the SendGrid box.](media/logic-app-sendgrid-create.png "SendGrid")
 
-17. On the next **Send Text Message (SMS)** dialog, enter the following:
+20. In the **Send email (V2)** box, enter the following:
 
-    - **From Phone Number:** Select your Twilio phone number from the drop down.
+    - **From**: Enter your email address.
+    - **To**: Click in the box, select **Add dynamic content**, and then select the **notificationEmail** property. **NOTE**: If under the Parse JSON Dynamic Content section, you see a message that there were not any outputs to match the input format, select **See more** in the message.
 
-    - **To Phone Number:** Select **notificationPhone** from the **Parse JSON** parameters.
+    ![See more is highlighted under Parse JSON in the dynamic content dialog.](media/logic-app-dynamic-content-see-more.png "Dynamic content")
 
-    ![The information above is entered in the next Send Text Message (SMS) dialog box.](media/image246.png "Send Text Message (SMS) dialog box")
+    - **Subject**: Enter "Order #: " and then select **orderId** from the dynamic content dialog.
+    - **Email body**: Select **firstName** from the dynamic content dialog, and then enter ", Your Best For You Organics Company order has shipped."
 
-    - **Text:** Enter a message, such as "Hello \[firstName\], your Best for You Organics weekly order has shipped!" For \[firstName\], select the **firstName** parameter from the **Parse JSON** items.
+    ![The Send Email (V2) dialog is completed with the values specified above.](media/logic-app-send-email-v2-complete.png "Send Email (v2"))
 
-    ![The information above is entered in the next Send Text Message (SMS) dialog box.](media/image247.png "Send Text Message (SMS) dialog box")
+21. Select **+ New step**.
 
-18. Select **+New step**.
+    ![The Add an action button is highlighted under + New step.](media/logic-app-new-step.png "Add an action button")
 
-    ![The Add an action button is highlighted under + New step.](media/image248.png "Add an action button")
+22. In the **Choose an action** dialog, enter "queues" in to the search box, and select **Delete message** under Actions.
 
-19. In the **Choose an action** dialog, enter "queue" in to the search box, and select **Azure Queues -- Delete** **message**.
+    ![Queue is highlighted in the Choose an action search box, and Azure Queues -- Delete message is highlighted below.](media/logic-app-azure-queues-delete-message.png "Choose an action dialog box")
 
-    ![Queue is highlighted in the Choose an action search box, and Azure Queues -- Delete message is highlighted below.](media/image249.png "Choose an action dialog box")
+23. Select **notificationqueue** for the Queue Name.
 
-20. Select **notificationqueue** for the Queue Name.
+24. For Message ID, select the **Message ID** parameter from the dynamic content parameter list.
 
-21. For Message ID, select the **Message ID** parameter from the **When there are messages in the queue** parameter list.
+25. For Pop Receipt, select the **Pop Receipt** parameter from the dynamic content parameter list.
 
-    ![The information above is entered in the Delete message dialog box.](media/image250.png "Delete message dialog box")
+    ![The settings above are entered into the Delete Message box.](media/logic-app-azure-queue-delete-message-settings.png "Delete message")
 
-22. For Pop Receipt, select the **Pop Receipt** parameter from the **When there are messages in a queue** parameter list.
+26. Select **Save** on the **Logic Apps Designer** toolbar.
 
-    ![The information above is entered in the next Delete message dialog box.](media/image251.png "Delete message dialog box")
+    ![Save is highlighted on the Logic Apps Designer blade toolbar.](media/logic-app-save.png "Logic Apps Designer blade")
 
-23. Select **Save** on the **Logic Apps Designer** toolbar.
+27. The Logic App will begin running immediately, so if you entered your valid email address when you registered your account in the Best for You Organics starter app, and placed an order, you should receive an email message within a minute or two of selecting Save.
 
-    ![Save is highlighted on the Logic Apps Designer blade toolbar.](media/image252.png "Logic Apps Designer blade")
-
-24. The Logic App will begin running immediately, so if you entered your cell phone number when you registered your account in the Best for You Organics starter app, and placed an order, you should receive a text message on your phone within a minute or two of selecting Save
+    ![The email message from the LogicApp is displayed.](media/order-email-message.png "Email message")
 
 ## After the hands-on lab
 
