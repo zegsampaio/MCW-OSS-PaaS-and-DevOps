@@ -35,7 +35,7 @@ export default class Submit extends Component {
                         .then(result => {
                             this.setState({ user: result.data });
                             console.log(this.state.user);
-                            if (this.state.user.phone && this.state.user.phone !== '') {
+                            if (this.state.user.email && this.state.user.email !== '') {
                                 const state = this.state;
                                 state['sendNotification'] = true;
                                 this.setState(state);

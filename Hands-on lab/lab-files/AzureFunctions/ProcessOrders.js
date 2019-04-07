@@ -16,13 +16,13 @@ module.exports = function (context, orderToProcess) {
 	if (orderToProcess.sendNotification)  {
 		var users = context.bindings.users;
 		
-        var notificationPhone = '';
+        var notificationEmail = '';
         var firstName = '';
 		for(var i=0; i < users.length; i++) {
 			var user = users[i];
 			if (user['$v']['email']['$v'] === orderToProcess.userId) {
-				if (user['$v']['phone']) {
-                    notificationPhone =  user['$v']['phone']['$v'];
+				if (user['$v']['email']) {
+                    notificationEmail =  user['$v']['email']['$v'];
                     firstName =  user['$v']['firstName']['$v'];
 				}
 			}
@@ -31,7 +31,7 @@ module.exports = function (context, orderToProcess) {
 		context.bindings.outputQueue = {
 			orderId: orderToProcess.orderId,
 			userId: orderToProcess.userId,
-            notificationPhone: notificationPhone,
+            notificationEmail: notificationEmail,
             firstName: firstName
 		};
 		context.log('Sent to notificationqueue for order id ', orderToProcess.orderId);
