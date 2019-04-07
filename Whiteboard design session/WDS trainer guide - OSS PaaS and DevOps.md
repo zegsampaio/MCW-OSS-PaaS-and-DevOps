@@ -190,9 +190,9 @@ Directions:  With all participants in the session, the facilitator/SME presents 
 
 Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service is tailored towards working professionals, who want convenient, reliable access to healthy meal choices, and pre-packaged recipes, without having to spend too much time preparing the meals. Customers can choose from a variety of meal plan options (vegetarian, vegan, gluten-free, high-protein, etc.), along with several options for portion sizes, and the number of meals per week. Meals are delivered weekly directly to the customer's home.
 
-Their CIO, Holly Franklin, is a big proponent of open-source software (OSS), and development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). Their code is hosted in a private GitHub repository. A point of pride for Best For You Organics Company has been their developers' involvement in the open source community, with most members of the team frequently contributing to React.js on GitHub. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
+Their current meal plans include only dinner options, but Best For You Organics Company has received feedback from many customers expressing a desire that breakfast and lunch options be included as part of the service offering. They would like to expand their meal services to meet this demand, but feel they first need to address their rising infrastructure costs and management time. They have reached a point where managing their VM and server infrastructure is becoming a real challenge, and are interested in understanding more about Platform as a Service (PaaS) solutions for OSS applications that could help them focus their expenditures and efforts on their core business, rather than infrastructure. "We're finding that with every upgrade, we're spending more time and money on infrastructure, and less on delivering the functionality and features that matter most to our customers," says Holly Franklin, "and we need to rebalance those efforts." The development team at Best For You Organics has some experience with Docker, and is interested in what options might be available for using containers to deploy their application into a cloud environment.
 
-Their current meal plans include only dinner options, but Best For You Organics Company has received feedback from many customers expressing a desire that breakfast and lunch options be included as part of the service offering. They would like to expand their meal service to include offering breakfast and lunch to meet this demand, but feel they first need to address their rising infrastructure costs and management time. They have reached a point where managing their VM and server infrastructure is becoming a real challenge, and are interested in understanding more about Platform as a Service (PaaS) solutions for OSS applications that could help them focus their expenditures and efforts on their core business, rather than infrastructure. "We're finding that with every upgrade, we're spending more time and money on infrastructure, and less on delivering the functionality and features that matter most to our customers," says Holly Franklin, "and we need to rebalance those efforts." The development team at Best For You Organics has some experience with Docker, and is interested in what options might be available for using containers to deploy their application into a cloud environment.
+Their CIO, Holly Franklin, has voiced several concerns about a cloud migration. First, all of their business comes through their website, so high availability and performance are critically important to them, and she would like to see an improvement in this area as the migrate to the cloud. Second, she is a big proponent of open-source software (OSS) and would like to continue to use their open source tools. Development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). Their code is hosted in a private GitHub repository. A point of pride for Best For You Organics Company has been their developers' involvement in the open source community, with most members of the team frequently contributing to React.js on GitHub. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
 
 Another feature she is interested in learning more about is identity management. Their existing web app requires users to register, and log in before subscribing to a meal plan. Today, this is handled via a home-grown solution that stores user names and passwords in the same database used for storing application information. They have experimented with other third-party solutions in the past, but found them difficult to integrate into their application, and are curious if moving their application into a cloud PaaS platform could help them integrate a better solution.
 
@@ -235,7 +235,7 @@ Best For You Organics is optimistic about the benefits of moving to a PaaS solut
 
 5. Is Azure Search an appropriate solution for improving the search capabilities of our OSS app?
 
-6. Will we be able to continue using the MongoDB API, while benefiting from the scalability and reliability of a PaaS database platform?
+6. We no longer want to maintain VMs for running our MongoDB database. Does Azure offer a solution that will allow us to continue using the MongoDB APIs, while benefiting from the scalability and reliability of a PaaS database platform?
 
 7. We would like to understand more about the benefits of a serverless architecture. In Azure does it mean only using Azure Functions or is there more to it?
 
@@ -273,7 +273,9 @@ Directions: With all participants at your table, respond to the following questi
 
 1. What PaaS solution would you propose to Best For You Organics Company for moving their application into Azure? Will this solution minimize the number of application code changes required to migrate the application? How will container orchestration be handled?
 
-2. What options does the customer have for a Docker image registry? Which option you would recommend?
+2. Describe the scalability, high-availability and performance options that are open to Best For Your Organics Company with the PaaS solution you proposed above.
+
+3. What options does the customer have for a Docker image registry? Which option you would recommend?
 
 *Database migration*
 
@@ -439,7 +441,15 @@ After reviewing the available options for transitioning their applications to a 
 
     Web App for Containers was designing leveraging years of Microsoft's Azure App Service PaaS innovations, and allows developers to just focus on composing their containers without worrying about managing and maintaining an underlying container orchestrator. Container orchestration is obfuscated away from developers, and handled as part of the managed services.
 
-2. What options does the customer have for a Docker image registry? What option you would recommend?
+2. Describe the scalability, high-availability and performance options that are open to Best For Your Organics Company with the PaaS solution you proposed above.
+
+    By using Azure Web Apps in multiple North American regions, we can meet the high-availability needs of Best For You Organics Company. They could deploy Web Apps into several paired regions to ensure failover capabilities. In addition, this approach provides web front-ends close to current and future customers.
+
+    Configuring web apps to scale is simple using Azure App Services. A set of criteria is easy to define and then Azure will take care of the hard work to ensure that the web app is always responsive. This set of steps is easily completed by administrators based on a few different metrics, such as CPU, memory, etc.
+
+    Using an Azure CDN Standard or Premium from Verizon, we can pre-load files into nodes that are located closer to customers. This ensures that the load times for static content will be less than if they were served directly by the web application. All static content will be preloaded, including images and PDFs among other items on the site.
+
+3. What options does the customer have for a Docker image registry? What option you would recommend?
 
     The image registry is core to the CI/CD workflow, and must be a production worthy implementation, as it is the source of container images, versioning, deployment, upgrade, and rollback strategies. Registry images can also be used for cross-environment promotion (between development, test, staging, and production, for example).
 
@@ -573,7 +583,7 @@ After reviewing the available options for transitioning their applications to a 
     - Fast time to market
     - Simplify search index management
 
-6. Will we be able to continue using the MongoDB API, while benefiting from the scalability and reliability of a PaaS database platform?
+6. We no longer want to maintain VMs for running our MongoDB database. Does Azure offer a solution that will allow us to continue using the MongoDB APIs, while benefiting from the scalability and reliability of a PaaS database platform?
 
     You can use your existing MongoDB expertise, application code, and tooling as Azure Cosmos DB implements the MongoDB 3.4 (version 5) wire protocol and supports the MongoDB aggregation pipeline. You can develop applications using MongoDB, and deploy them to production using the fully managed, and globally distributed Azure Cosmos DB service. In other words, your application only knows that it's connecting to a database using MongoDB APIs. It is transparent to the application that the data is stored in Azure Cosmos DB.
 
