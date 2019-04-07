@@ -1116,11 +1116,11 @@ In this task you will commit your pending changes in VS Code to you GitHub repo,
 
 7. Return to your best-for-you-build job in Jenkins, and locate the **Build History** block on the left-hand side. Select **#1** to view the details of the build job, caused by your GitHub commit.
 
-    ![Screenshot of Build History on the best-for-you-organics project page, with build job \#1 highlighted.](media/image138.png "Build History section")
+    ![Screenshot of Build History on the best-for-you-organics project page, with build job \#1 highlighted.](media/jenkins-build-history-list.png "Build History section")
 
 8. On the build page, you can see the changes you committed.
 
-    ![The committed changes are displayed on the build page.](media/image139.png "Build page")
+    ![The committed changes are displayed on the build page.](media/jenkins-build-history-details.png "Build page")
 
 9. You have successfully set up your CI pipeline.
 
@@ -1352,7 +1352,7 @@ In this task, you will commit changes to the `MCW-OSS-PaaS-and-DevOps` starter a
     <h3>Welcome to Best For You Organics Company</h3>
     ```
 
-    ![The src/components/plan/Plans.js file is highlighted on the left side of Visual Studio Code, and the markup above is highlighted on the right.](media/image174.png "VS Code")
+    ![The src/components/plan/Plans.js file is highlighted on the left side of Visual Studio Code, and the markup above is highlighted on the right.](media/vscode-plans-js.png "VS Code")
 
 3. Save the updated files.
 
