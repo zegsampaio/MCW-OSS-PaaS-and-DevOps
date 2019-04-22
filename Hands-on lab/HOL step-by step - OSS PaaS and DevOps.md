@@ -1479,7 +1479,7 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![+ New Output is highlighted under Outputs, Azure Queue Storage is selected below it, and Select is selected at the bottom.](media/function-app-new-output.png "Select Azure Queue Storage")
 
-9.  Install extensions if prompted to do so.
+9. Install extensions if prompted to do so.
 
     ![Extensions not installed warning.](media/function-app-install-extensions.png "Install")
 
@@ -1496,7 +1496,7 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![The OrdersCosmosTrigger function is selected in the left-hand menu.](media/function-app-orderscosmostrigger.png "Left menu")
 
-    > If you receive the error "Failed to start language worker process for: node," you will need to select the **bestforyourorders** function app on the left, and then select **Application settings** under Configured features. On the Application Settings page, edit the **WEBSITE_NODE_DEFAULT_VERSION** by selecting the pencil icon to the right of the value. Enter **8.11.1** as the new value, and then select **Save** at the top of the page. You can then select the **OrdersCosmosTrigger** again, as explained above.
+    > **NOTE**: There appears to be a bug associated with Functions and the node language worker process, so if you receive the error "Failed to start language worker process for: node," you will need to select the **bestforyourorders** function app on the left, and then select **Application settings** under Configured features. On the Application Settings page, edit the **WEBSITE_NODE_DEFAULT_VERSION** by selecting the pencil icon to the right of the value. Enter **8.11.1** as the new value, and then select **Save** at the top of the page. You may also need to restart the Function App. You can then select the **OrdersCosmosTrigger** again, as explained above.
 
 12. To get the code for the OrdersCosmosTrigger function, go into the project is VS Code, expand the AzureFunctions folder, select `OrdersCosmosTrigger.js`, and copy the code, as highlighted in the screen shot below.
 
