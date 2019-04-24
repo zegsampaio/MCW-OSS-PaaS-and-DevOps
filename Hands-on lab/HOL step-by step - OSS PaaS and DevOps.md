@@ -141,7 +141,7 @@ In this task, you will create an RDP connection to your Lab VM. If you are alrea
 
 7. Enter the following credentials (or the non-default credentials if you changed them):
 
-    - **User name:** demouser
+    - **Username:** demouser
     - **Password:** Password.1!!
 
     ![The credentials above are entered in the Login to xrdp dialog box.](media/login-to-xrdp.png "Login to xrdp dialog box")
@@ -467,7 +467,7 @@ In this task, you will retrieve the connection string for your Azure Cosmos DB d
 
     ![This is a screenshot of the refreshed application page.](media/bfyo-web-home-empty.png "Refreshed application screenshot")
 
-    > Notice the three plans that were displayed on the page previously are no longer there. This is because the application is now pointed to your Azure Cosmos DB, and the plans collection does not contain any data yet.
+    > **Note**: Notice the three plans that were displayed on the page previously are no longer there. This is because the application is now pointed to your Azure Cosmos DB, and the plans collection does not contain any data yet.
 
 11. Let's move on to copying the data from the local MongoDB instance into Cosmos DB.
 
@@ -529,7 +529,7 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
     ![The final command to import the plans collection into Azure Cosmos DB is displayed in the Command Prompt window.](media/vscode-terminal-mongoimport.png "Bash terminal window")
 
-    > You will see a message indicating the number of documents imported, which should be 3 for plans.
+    > **Note**: You will see a message indicating the number of documents imported, which should be 3 for plans.
 
 11. Verify the import by selecting **Data Explorer** in your Cosmos DB account in the Azure portal, expanding plans, and selecting **Documents**. You will see the three documents imported listed.
 
@@ -569,7 +569,7 @@ In this task, you will install the Azure Cosmos DB extension for VS Code to take
 
     ![Sign in to Azure is highlighted below AZURE COSMOS DB in the bottom left-hand corner of Visual Studio Code window.](media/vscode-azure-sign-in.png "Sign in to Azure")
 
-    > If you don't see the Azure icon, restart VS Code, and reopen the `MCW-OSS-PaaS-and-DevOps` project folder.
+    > **Note**: If you don't see the Azure icon, restart VS Code, and reopen the `MCW-OSS-PaaS-and-DevOps` project folder.
 
 3. Enter your Azure account credentials in the browser window that appears.
 
@@ -644,7 +644,7 @@ The Docker extension for VS Code is used to simplify the management of local Doc
 
     ![In the Docker VS Code extension, Registries and Azure are expanded, and the bestforyouregistry is highlighted.](media/vscode-extension-docker-registries.png "Docker extension")
 
-    > If you don't see the Docker icon in the left-hand menu, close and reopen VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
+    > **Note**: If you don't see the Docker icon in the left-hand menu, close and reopen VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
 
 ### Task 3: Create Docker image and run the app
 
@@ -702,7 +702,7 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
     docker build --rm -f "Dockerfile" -t [Login server]/best-for-you-organics:latest .
     ```
 
-    > Be sure to include the "." at the end of the line.
+    > **Note**: Be sure to include the "." at the end of the line.
 
 14. For example:
 
@@ -876,7 +876,7 @@ In this task, you will be adding a Jenkins service integration into your GitHub 
 
     ![The value in the Jenkins hook url box is highlighted in the Webhooks / Add Webhook  dialog box.](media/github-add-webhook-settings.png "Jenkins webhook settings")
 
-7. Select **Add webhook**
+7. Select **Add webhook**.
 
 8. A warning will be displayed. This is a permissions error that will be resolved in a later step.
 
@@ -1231,7 +1231,7 @@ In this task, you will use the Azure CLI to create an Azure Active Directory (Az
     az ad sp create-for-rbac -n "best-for-you-app" --role contributor --scopes subscriptions/{SubID}/resourceGroups/{ResourceGroupName}
     ```
 
-    > You will need to replace the `{SubID}` and `{ResourceGroupName}` values.
+    > **Note**: You will need to replace the `{SubID}` and `{ResourceGroupName}` values.
 
 4. To retrieve the values you need to replace above, navigate to **Resource groups** in the Azure navigation menu, enter "hands-on-lab-SUFFIX" into the filter box, and select the hands-on-lab-SUFFIX resource group from the list.
 
@@ -1496,7 +1496,7 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![The OrdersCosmosTrigger function is selected in the left-hand menu.](media/function-app-orderscosmostrigger.png "Left menu")
 
-    > **NOTE**: There appears to be a bug associated with Functions and the node language worker process, so if you receive the error "Failed to start language worker process for: node," you will need to select the **bestforyourorders** function app on the left, and then select **Application settings** under Configured features. On the Application Settings page, edit the **WEBSITE_NODE_DEFAULT_VERSION** by selecting the pencil icon to the right of the value. Enter **8.11.1** as the new value, and then select **Save** at the top of the page. You may also need to restart the Function App. You can then select the **OrdersCosmosTrigger** again, as explained above.
+    > **Note**: There appears to be a bug associated with Functions and the node language worker process, so if you receive the error "Failed to start language worker process for: node," you will need to select the **bestforyourorders** function app on the left, and then select **Application settings** under Configured features. On the Application Settings page, edit the **WEBSITE_NODE_DEFAULT_VERSION** by selecting the pencil icon to the right of the value. Enter **8.11.1** as the new value, and then select **Save** at the top of the page. You may also need to restart the Function App. You can then select the **OrdersCosmosTrigger** again, as explained above.
 
 12. To get the code for the OrdersCosmosTrigger function, go into the project is VS Code, expand the AzureFunctions folder, select `OrdersCosmosTrigger.js`, and copy the code, as highlighted in the screen shot below.
 
@@ -1625,7 +1625,7 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     ![In this screenshot of the starter application, Sign In is highlighted at the top, and the Register button is highlighted below.](media/bfyo-web-register.png "Sign in to the starter application")
 
-    > **NOTE**: You may need to select **Logout** if you are still logged in with the demouser account.
+    > **Note**: You may need to select **Logout** if you are still logged in with the demouser account.
 
 15. Complete the registration form. Be sure to include a valid email address so you can receive notifications of order processing in the next exercise. (If you opt not to enter a valid email address, you can still complete the next Exercise, but will not receive the email notifications that your order has been processed.)
 
