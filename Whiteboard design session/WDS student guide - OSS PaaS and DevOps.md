@@ -150,7 +150,7 @@ Directions: With all participants at your table, respond to the following questi
 
 2. Describe the scalability, high-availability and performance options that are open to Best For Your Organics Company with the PaaS solution you proposed above.
 
-3. What options does the customer have for a Docker image registry? Which option you would recommend?
+3. What options does the customer have for a Docker image registry? Which options would you recommend?
 
 *Database migration*
 
