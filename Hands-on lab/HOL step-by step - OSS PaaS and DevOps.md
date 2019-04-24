@@ -904,7 +904,7 @@ In this task, you will be adding a Jenkins service integration into your GitHub 
 
 14. Press **Enter** to use an empty passphrase, and re-enter it to confirm.
 
-    > **Note**: The use of an empty password is done only for simplicity in this hands-on lab. This not recommend for actual environments.
+    > **Note**: The use of an empty password is done only for simplicity in this hands-on lab. This is not recommended for actual environments.
 
 15. Copy the location into which your public key has been saved.
 
@@ -1290,7 +1290,7 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
 
     - **Domain**: Leave set to Global credentials (unrestricted).
     - **Kind**: Select **Microsoft Azure Service Principal**.
-    - **Scope**: Leave set to Global (Jenkins, nodes, items, all child items, etc).
+    - **Scope**: Leave set to Global (Jenkins, nodes, items, all child items, etc.).
     - **Subscription ID**: Enter your Azure subscription ID which you copied above from the hands-on-lab-SUFFIX Resource group blade.
     - **Client ID**: Enter the **appId** value from the Cloud shell output you copied into the text editor.
     - **Client Secret**: Enter the **password** value from the Cloud shell output you copied into the text editor.
@@ -1318,7 +1318,7 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
     - **Registry credentials**: Select **Add** and then **Jenkins**, and in the Add Credentials dialog enter the following:
         - **Domain**: Leave set to Global credentials (unrestricted).
         - **Kind**: Set to Username with password.
-        - **Scope**: Leave set to Global (Jenkins, nodes, items, all child items, etc).
+        - **Scope**: Leave set to Global (Jenkins, nodes, items, all child items, etc.).
         - **Username**: Enter the Username value for your Azure Container Registry, which you can retrieve from the Access keys blade of your ACR in the Azure portal.
         - **Password**: Enter the password value for your Azure Container Registry, which you can retrieve from the Access keys blade of your ACR in the Azure portal.
 
