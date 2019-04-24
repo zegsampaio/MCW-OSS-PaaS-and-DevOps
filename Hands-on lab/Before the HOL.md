@@ -81,7 +81,7 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
 
 > If you would like to review the steps to manually provision the VM and installed software, see [Appendix A](./Appendix-A).
 
-1. To open a custom deployment screen in the Azure portal select the Deploy to Azure button below:
+1. To open a custom deployment screen in the Azure portal, select the Deploy to Azure button below:
 
     <a href ="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FMCW-OSS-PaaS-and-DevOps%2Fmaster%2FHands-on%20lab%2Flab-files%2FLabVM%2Fazure-deploy.json" target="_blank" title="Deploy to Azure">
     <img src="http://azuredeploy.net/deploybutton.png"/>
@@ -113,7 +113,7 @@ In this task, you will provision an Azure Linux VM, which will serve as your Jen
 2. On the **Create Jenkins Basics** blade, enter the following:
 
     - **Name:** Enter **Jenkins**
-    - **User name:** Enter **jenkinsadmin**
+    - **Username:** Enter **jenkinsadmin**
     - **Authentication type:** Select **Password**
     - **Password:** Enter **Password.1!!**
     - **Subscription:** Select the subscription you are using for this hands-on lab.
@@ -152,7 +152,7 @@ In this task, you will provision an Azure Linux VM, which will serve as your Jen
 
 In this task, you will sign up for a free GitHub account, which will be used for hosting a copy of the sample application used throughout this lab. This account will be integrated into the CI/CD workflow for pushing updates to the application into Azure.
 
-> **NOTE**: If you already have a GitHub account, and wish to use that account, you can skip to the [next task](#task-5-fork-the-starter-app).
+> **Note**: If you already have a GitHub account, and wish to use that account, you can skip to the [next task](#task-5-fork-the-starter-app).
 
 1. Navigate to <https://github.com> in a web browser.
 
