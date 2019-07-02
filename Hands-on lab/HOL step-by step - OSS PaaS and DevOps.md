@@ -24,53 +24,53 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 **Contents**
 
-- [OSS PaaS and DevOps hands-on lab step-by-step](#oss-paas-and-devops-hands-on-lab-step-by-step)
-  - [Abstract and learning objectives](#abstract-and-learning-objectives)
-  - [Overview](#overview)
-  - [Solution architecture](#solution-architecture)
-  - [Requirements](#requirements)
-  - [Exercise 1: Run starter application](#exercise-1-run-starter-application)
-    - [Task 1: Connect to your Lab VM](#task-1-connect-to-your-lab-vm)
-    - [Task 2: Grant permissions to Docker](#task-2-grant-permissions-to-docker)
-    - [Task 3: Integrate GitHub into VS Code](#task-3-integrate-github-into-vs-code)
-    - [Task 4: Clone the starter application](#task-4-clone-the-starter-application)
-    - [Task 5: Launch the starter application](#task-5-launch-the-starter-application)
-  - [Exercise 2: Migrate the database to Cosmos DB](#exercise-2-migrate-the-database-to-cosmos-db)
-    - [Task 1: Provision Cosmos DB using the MongoDB API](#task-1-provision-cosmos-db-using-the-mongodb-api)
-    - [Task 2: Create and scale collections](#task-2-create-and-scale-collections)
-    - [Task 3: Update database connection string](#task-3-update-database-connection-string)
-    - [Task 4: Import data to the API for MongoDB using mongoimport](#task-4-import-data-to-the-api-for-mongodb-using-mongoimport)
-    - [Task 5: Install Azure Cosmos DB extension for VS Code](#task-5-install-azure-cosmos-db-extension-for-vs-code)
-    - [Task 6: Decrease collection throughput](#task-6-decrease-collection-throughput)
-  - [Exercise 3: Containerize the app](#exercise-3-containerize-the-app)
-    - [Task 1: Create an Azure Container Registry](#task-1-create-an-azure-container-registry)
-    - [Task 2: Install Docker extension in VS Code](#task-2-install-docker-extension-in-vs-code)
-    - [Task 3: Create Docker image and run the app](#task-3-create-docker-image-and-run-the-app)
-    - [Task 4: Run the containerized app](#task-4-run-the-containerized-app)
-    - [Task 5: Push image to Azure Container Registry](#task-5-push-image-to-azure-container-registry)
-  - [Exercise 4: Set up Web App for Containers](#exercise-4-set-up-web-app-for-containers)
-    - [Task 1: Provision Web App for Containers](#task-1-provision-web-app-for-containers)
-    - [Task 2: Navigate to the deployed app](#task-2-navigate-to-the-deployed-app)
-  - [Exercise 5: Configure CI/CD pipeline](#exercise-5-configure-cicd-pipeline)
-    - [Task 1: Prepare GitHub account for service integrations](#task-1-prepare-github-account-for-service-integrations)
-    - [Task 2: Open connection to Jenkins](#task-2-open-connection-to-jenkins)
-    - [Task 3: Configure Continuous Integration with Jenkins](#task-3-configure-continuous-integration-with-jenkins)
-    - [Task 4: Trigger CI build](#task-4-trigger-ci-build)
-    - [Task 5: Install Docker on the Jenkins VM](#task-5-install-docker-on-the-jenkins-vm)
-    - [Task 6: Add an Azure service principal for Jenkins](#task-6-add-an-azure-service-principal-for-jenkins)
-    - [Task 7: Add continuous delivery to Jenkins build job](#task-7-add-continuous-delivery-to-jenkins-build-job)
-    - [Task 8: Trigger CI-CD pipeline](#task-8-trigger-ci-cd-pipeline)
-  - [Exercise 6: Create Azure Function for order processing](#exercise-6-create-azure-function-for-order-processing)
-    - [Task 1: Provision a Function App](#task-1-provision-a-function-app)
-    - [Task 2: Configure storage queues](#task-2-configure-storage-queues)
-    - [Task 3: Create Cosmos DB trigger function](#task-3-create-cosmos-db-trigger-function)
-    - [Task 4: Create Queue function](#task-4-create-queue-function)
-  - [Exercise 7: Create Logic App for sending email notifications](#exercise-7-create-logic-app-for-sending-email-notifications)
-    - [Task 1: Create SendGrid account](#task-1-create-sendgrid-account)
-    - [Task 2: Create Logic App](#task-2-create-logic-app)
-  - [After the hands-on lab](#after-the-hands-on-lab)
-    - [Task 1: Delete Azure resource groups](#task-1-delete-azure-resource-groups)
-    - [Task 2: Delete WebHooks and Service Integrations](#task-2-delete-webhooks-and-service-integrations)
+- [OSS PaaS and DevOps hands-on lab step-by-step](#OSS-PaaS-and-DevOps-hands-on-lab-step-by-step)
+  - [Abstract and learning objectives](#Abstract-and-learning-objectives)
+  - [Overview](#Overview)
+  - [Solution architecture](#Solution-architecture)
+  - [Requirements](#Requirements)
+  - [Exercise 1: Run starter application](#Exercise-1-Run-starter-application)
+    - [Task 1: Connect to your Lab VM](#Task-1-Connect-to-your-Lab-VM)
+    - [Task 2: Grant permissions to Docker](#Task-2-Grant-permissions-to-Docker)
+    - [Task 3: Integrate GitHub into VS Code](#Task-3-Integrate-GitHub-into-VS-Code)
+    - [Task 4: Clone the starter application](#Task-4-Clone-the-starter-application)
+    - [Task 5: Launch the starter application](#Task-5-Launch-the-starter-application)
+  - [Exercise 2: Migrate the database to Cosmos DB](#Exercise-2-Migrate-the-database-to-Cosmos-DB)
+    - [Task 1: Provision Cosmos DB using the MongoDB API](#Task-1-Provision-Cosmos-DB-using-the-MongoDB-API)
+    - [Task 2: Create and scale collections](#Task-2-Create-and-scale-collections)
+    - [Task 3: Update database connection string](#Task-3-Update-database-connection-string)
+    - [Task 4: Import data to the API for MongoDB using mongoimport](#Task-4-Import-data-to-the-API-for-MongoDB-using-mongoimport)
+    - [Task 5: Install Azure Cosmos DB extension for VS Code](#Task-5-Install-Azure-Cosmos-DB-extension-for-VS-Code)
+    - [Task 6: Decrease collection throughput](#Task-6-Decrease-collection-throughput)
+  - [Exercise 3: Containerize the app](#Exercise-3-Containerize-the-app)
+    - [Task 1: Create an Azure Container Registry](#Task-1-Create-an-Azure-Container-Registry)
+    - [Task 2: Install Docker extension in VS Code](#Task-2-Install-Docker-extension-in-VS-Code)
+    - [Task 3: Create Docker image and run the app](#Task-3-Create-Docker-image-and-run-the-app)
+    - [Task 4: Run the containerized app](#Task-4-Run-the-containerized-app)
+    - [Task 5: Push image to Azure Container Registry](#Task-5-Push-image-to-Azure-Container-Registry)
+  - [Exercise 4: Set up Web App for Containers](#Exercise-4-Set-up-Web-App-for-Containers)
+    - [Task 1: Provision Web App for Containers](#Task-1-Provision-Web-App-for-Containers)
+    - [Task 2: Navigate to the deployed app](#Task-2-Navigate-to-the-deployed-app)
+  - [Exercise 5: Configure CI/CD pipeline](#Exercise-5-Configure-CICD-pipeline)
+    - [Task 1: Prepare GitHub account for service integrations](#Task-1-Prepare-GitHub-account-for-service-integrations)
+    - [Task 2: Open connection to Jenkins](#Task-2-Open-connection-to-Jenkins)
+    - [Task 3: Configure Continuous Integration with Jenkins](#Task-3-Configure-Continuous-Integration-with-Jenkins)
+    - [Task 4: Trigger CI build](#Task-4-Trigger-CI-build)
+    - [Task 5: Install Docker on the Jenkins VM](#Task-5-Install-Docker-on-the-Jenkins-VM)
+    - [Task 6: Add an Azure service principal for Jenkins](#Task-6-Add-an-Azure-service-principal-for-Jenkins)
+    - [Task 7: Add continuous delivery to Jenkins build job](#Task-7-Add-continuous-delivery-to-Jenkins-build-job)
+    - [Task 8: Trigger CI-CD pipeline](#Task-8-Trigger-CI-CD-pipeline)
+  - [Exercise 6: Create Azure Function for order processing](#Exercise-6-Create-Azure-Function-for-order-processing)
+    - [Task 1: Provision a Function App](#Task-1-Provision-a-Function-App)
+    - [Task 2: Configure storage queues](#Task-2-Configure-storage-queues)
+    - [Task 3: Create Cosmos DB trigger function](#Task-3-Create-Cosmos-DB-trigger-function)
+    - [Task 4: Create Queue function](#Task-4-Create-Queue-function)
+  - [Exercise 7: Create Logic App for sending email notifications](#Exercise-7-Create-Logic-App-for-sending-email-notifications)
+    - [Task 1: Create SendGrid account](#Task-1-Create-SendGrid-account)
+    - [Task 2: Create Logic App](#Task-2-Create-Logic-App)
+  - [After the hands-on lab](#After-the-hands-on-lab)
+    - [Task 1: Delete Azure resource groups](#Task-1-Delete-Azure-resource-groups)
+    - [Task 2: Delete WebHooks and Service Integrations](#Task-2-Delete-WebHooks-and-Service-Integrations)
 
 # OSS PaaS and DevOps hands-on lab step-by-step
 
@@ -1400,11 +1400,11 @@ In this task, you will create a Function App in Azure, which will host your Func
 
     - **App name:** Enter a unique name, such as "bestforyouordersSUFFIX".
     - **Subscription:** Select the subscription you are using for this hands-on lab.
-    - **Resource group:** Select **Use existing** and choose the **hands-on-lab-SUFFIX** resource group.
+    - **Resource group:** Choose **Create new** and enter **hands-on-lab-func-SUFFIX** as resource group name.
     - **OS:** Select Windows.
     - **Hosting Plan:** Choose Consumption Plan.
     - **Location:** Select the location you have been using for resources in this hands-on lab.
-    - **Runtime Stack** Select JavaScript.
+    - **Runtime Stack** Select Node.js.
     - **Storage:** Select **Create new** and enter "bestforyouordersSUFFIX" for the name.
     - **Application Insights** Select Disabled.
     - Select **Create** to provision the new Function App.
@@ -1415,7 +1415,7 @@ In this task, you will create a Function App in Azure, which will host your Func
 
 In this task, you will add two storage queues to the storage account provisioned when you created your Function App. These queues will be used to store orders and notifications needing to be processed.
 
-1. In the Azure portal, navigate to the new **bestforyouordersSUFFIX** storage account that was created when you provisioned your Function App, by selecting **Resource groups** from the left-hand menu, selecting your **hands-on-lab-SUFFIX** resource group from the list, and then selecting the **bestforyouordersSUFFIX** storage account.
+1. In the Azure portal, navigate to the new **bestforyouordersSUFFIX** storage account that was created when you provisioned your Function App, by selecting **Resource groups** from the left-hand menu, selecting your **hands-on-lab-func-SUFFIX** resource group from the list, and then selecting the **bestforyouordersSUFFIX** storage account.
 
     ![Resource groups is highlighted in the navigation pane of the Azure portal, and hands-on-labs is selected and highlighted to the right under Resource groups. Overview is selected to the right, and the bestforyouorders storage account row is highlighted on the far right.](media/rg-storage-account.png "Azure Portal")
 
