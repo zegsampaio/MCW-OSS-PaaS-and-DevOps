@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-April 2019
+August 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -24,75 +24,75 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 **Contents**
 
-- [OSS PaaS and DevOps hands-on lab step-by-step](#OSS-PaaS-and-DevOps-hands-on-lab-step-by-step)
-  - [Abstract and learning objectives](#Abstract-and-learning-objectives)
-  - [Overview](#Overview)
-  - [Solution architecture](#Solution-architecture)
-  - [Requirements](#Requirements)
-  - [Exercise 1: Run starter application](#Exercise-1-Run-starter-application)
-    - [Task 1: Connect to your Lab VM](#Task-1-Connect-to-your-Lab-VM)
-    - [Task 2: Grant permissions to Docker](#Task-2-Grant-permissions-to-Docker)
-    - [Task 3: Integrate GitHub into VS Code](#Task-3-Integrate-GitHub-into-VS-Code)
-    - [Task 4: Clone the starter application](#Task-4-Clone-the-starter-application)
-    - [Task 5: Launch the starter application](#Task-5-Launch-the-starter-application)
-  - [Exercise 2: Migrate the database to Cosmos DB](#Exercise-2-Migrate-the-database-to-Cosmos-DB)
-    - [Task 1: Provision Cosmos DB using the MongoDB API](#Task-1-Provision-Cosmos-DB-using-the-MongoDB-API)
-    - [Task 2: Create and scale collections](#Task-2-Create-and-scale-collections)
-    - [Task 3: Update database connection string](#Task-3-Update-database-connection-string)
-    - [Task 4: Import data to the API for MongoDB using mongoimport](#Task-4-Import-data-to-the-API-for-MongoDB-using-mongoimport)
-    - [Task 5: Install Azure Cosmos DB extension for VS Code](#Task-5-Install-Azure-Cosmos-DB-extension-for-VS-Code)
-    - [Task 6: Decrease collection throughput](#Task-6-Decrease-collection-throughput)
-  - [Exercise 3: Containerize the app](#Exercise-3-Containerize-the-app)
-    - [Task 1: Create an Azure Container Registry](#Task-1-Create-an-Azure-Container-Registry)
-    - [Task 2: Install Docker extension in VS Code](#Task-2-Install-Docker-extension-in-VS-Code)
-    - [Task 3: Create Docker image and run the app](#Task-3-Create-Docker-image-and-run-the-app)
-    - [Task 4: Run the containerized app](#Task-4-Run-the-containerized-app)
-    - [Task 5: Push image to Azure Container Registry](#Task-5-Push-image-to-Azure-Container-Registry)
-  - [Exercise 4: Set up Web App for Containers](#Exercise-4-Set-up-Web-App-for-Containers)
-    - [Task 1: Provision Web App for Containers](#Task-1-Provision-Web-App-for-Containers)
-    - [Task 2: Navigate to the deployed app](#Task-2-Navigate-to-the-deployed-app)
-  - [Exercise 5: Configure CI/CD pipeline](#Exercise-5-Configure-CICD-pipeline)
-    - [Task 1: Prepare GitHub account for service integrations](#Task-1-Prepare-GitHub-account-for-service-integrations)
-    - [Task 2: Open connection to Jenkins](#Task-2-Open-connection-to-Jenkins)
-    - [Task 3: Configure Continuous Integration with Jenkins](#Task-3-Configure-Continuous-Integration-with-Jenkins)
-    - [Task 4: Trigger CI build](#Task-4-Trigger-CI-build)
-    - [Task 5: Install Docker on the Jenkins VM](#Task-5-Install-Docker-on-the-Jenkins-VM)
-    - [Task 6: Add an Azure service principal for Jenkins](#Task-6-Add-an-Azure-service-principal-for-Jenkins)
-    - [Task 7: Add continuous delivery to Jenkins build job](#Task-7-Add-continuous-delivery-to-Jenkins-build-job)
-    - [Task 8: Trigger CI-CD pipeline](#Task-8-Trigger-CI-CD-pipeline)
-  - [Exercise 6: Create Azure Function for order processing](#Exercise-6-Create-Azure-Function-for-order-processing)
-    - [Task 1: Provision a Function App](#Task-1-Provision-a-Function-App)
-    - [Task 2: Configure storage queues](#Task-2-Configure-storage-queues)
-    - [Task 3: Create Cosmos DB trigger function](#Task-3-Create-Cosmos-DB-trigger-function)
-    - [Task 4: Create Queue function](#Task-4-Create-Queue-function)
-  - [Exercise 7: Create Logic App for sending email notifications](#Exercise-7-Create-Logic-App-for-sending-email-notifications)
-    - [Task 1: Create SendGrid account](#Task-1-Create-SendGrid-account)
-    - [Task 2: Create Logic App](#Task-2-Create-Logic-App)
-  - [After the hands-on lab](#After-the-hands-on-lab)
-    - [Task 1: Delete Azure resource groups](#Task-1-Delete-Azure-resource-groups)
-    - [Task 2: Delete WebHooks and Service Integrations](#Task-2-Delete-WebHooks-and-Service-Integrations)
+- [OSS PaaS and DevOps hands-on lab step-by-step](#oss-paas-and-devops-hands-on-lab-step-by-step)
+  - [Abstract and learning objectives](#abstract-and-learning-objectives)
+  - [Overview](#overview)
+  - [Solution architecture](#solution-architecture)
+  - [Requirements](#requirements)
+  - [Exercise 1: Run starter application](#exercise-1-run-starter-application)
+    - [Task 1: Connect to your Lab VM](#task-1-connect-to-your-lab-vm)
+    - [Task 2: Grant permissions to Docker](#task-2-grant-permissions-to-docker)
+    - [Task 3: Integrate GitHub into VS Code](#task-3-integrate-github-into-vs-code)
+    - [Task 4: Clone the starter application](#task-4-clone-the-starter-application)
+    - [Task 5: Launch the starter application](#task-5-launch-the-starter-application)
+  - [Exercise 2: Migrate the database to Cosmos DB](#exercise-2-migrate-the-database-to-cosmos-db)
+    - [Task 1: Provision Cosmos DB using the MongoDB API](#task-1-provision-cosmos-db-using-the-mongodb-api)
+    - [Task 2: Create and scale collections](#task-2-create-and-scale-collections)
+    - [Task 3: Update database connection string](#task-3-update-database-connection-string)
+    - [Task 4: Import data to the API for MongoDB using mongoimport](#task-4-import-data-to-the-api-for-mongodb-using-mongoimport)
+    - [Task 5: Install Azure Cosmos DB extension for VS Code](#task-5-install-azure-cosmos-db-extension-for-vs-code)
+    - [Task 6: Decrease collection throughput](#task-6-decrease-collection-throughput)
+  - [Exercise 3: Containerize the app](#exercise-3-containerize-the-app)
+    - [Task 1: Create an Azure Container Registry](#task-1-create-an-azure-container-registry)
+    - [Task 2: Install Docker extension in VS Code](#task-2-install-docker-extension-in-vs-code)
+    - [Task 3: Create Docker image and run the app](#task-3-create-docker-image-and-run-the-app)
+    - [Task 4: Run the containerized app](#task-4-run-the-containerized-app)
+    - [Task 5: Push image to Azure Container Registry](#task-5-push-image-to-azure-container-registry)
+  - [Exercise 4: Set up Web App for Containers](#exercise-4-set-up-web-app-for-containers)
+    - [Task 1: Provision Web App for Containers](#task-1-provision-web-app-for-containers)
+    - [Task 2: Navigate to the deployed app](#task-2-navigate-to-the-deployed-app)
+  - [Exercise 5: Configure CI/CD pipeline](#exercise-5-configure-cicd-pipeline)
+    - [Task 1: Prepare GitHub account for service integrations](#task-1-prepare-github-account-for-service-integrations)
+    - [Task 2: Open connection to Jenkins](#task-2-open-connection-to-jenkins)
+    - [Task 3: Configure Continuous Integration with Jenkins](#task-3-configure-continuous-integration-with-jenkins)
+    - [Task 4: Trigger CI build](#task-4-trigger-ci-build)
+    - [Task 5: Install Docker on the Jenkins VM](#task-5-install-docker-on-the-jenkins-vm)
+    - [Task 6: Add an Azure service principal for Jenkins](#task-6-add-an-azure-service-principal-for-jenkins)
+    - [Task 7: Add continuous delivery to Jenkins build job](#task-7-add-continuous-delivery-to-jenkins-build-job)
+    - [Task 8: Trigger CI-CD pipeline](#task-8-trigger-ci-cd-pipeline)
+  - [Exercise 6: Create Azure Function for order processing](#exercise-6-create-azure-function-for-order-processing)
+    - [Task 1: Provision a Function App](#task-1-provision-a-function-app)
+    - [Task 2: Configure storage queues](#task-2-configure-storage-queues)
+    - [Task 3: Create Cosmos DB trigger function](#task-3-create-cosmos-db-trigger-function)
+    - [Task 4: Create Queue function](#task-4-create-queue-function)
+  - [Exercise 7: Create Logic App for sending email notifications](#exercise-7-create-logic-app-for-sending-email-notifications)
+    - [Task 1: Create SendGrid account](#task-1-create-sendgrid-account)
+    - [Task 2: Create Logic App](#task-2-create-logic-app)
+  - [After the hands-on lab](#after-the-hands-on-lab)
+    - [Task 1: Delete Azure resource groups](#task-1-delete-azure-resource-groups)
+    - [Task 2: Delete WebHooks and Service Integrations](#task-2-delete-webhooks-and-service-integrations)
 
 # OSS PaaS and DevOps hands-on lab step-by-step
 
 ## Abstract and learning objectives
 
-In this hands-on lab, you will implement a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. You will migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers, migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
+In this hands-on lab, you will implement a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. You will migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers. You will also migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
 
 At the end of this hands-on lab, you will be better able to migrate and deploy OSS applications into Azure PaaS using modern DevOps methodologies and Docker containers.
 
 ## Overview
 
-Best For You Organics Company is one of the leading health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They have a MERN stack web application which they host on-premises and are looking to migrate their OSS application into Azure. They will be creating a custom Docker image for their application and using a Jenkins continuous integration/continuous delivery (CI/CD) pipeline to deploy the application into a Web App for Containers instance. In addition, they will be swapping out the use of MongoDB with Azure Cosmos DB, using the MongoDB APIs.
+Best For You Organics Company is one of the leading health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They have a MERN stack web application that they host on-premises and are looking to migrate their OSS application into Azure. They will be creating a custom Docker image for their application and using a Jenkins continuous integration/continuous delivery (CI/CD) pipeline to deploy the application into a Web App for Containers instance. Also, they will be swapping out the use of MongoDB with Azure Cosmos DB, using the MongoDB APIs.
 
-In this hands-on lab, you will assist them with completing the OSS application and database migrations into Azure. You will create a custom Docker image, provision an Azure Container Registry, push the image to the registry, and configure the CI/CD pipeline to deploy the application to a Web App for Containers instance. You will also help them implement functionality enhancements using serverless architecture services in Azure.
+In this hands-on lab, you will assist them with completing the OSS application and database migrations into Azure. You will implement a containerized solution. For this, you will create a custom Docker image and push it to an Azure Container Registry. You will then configure a CI/CD pipeline to deploy the application to a Web App for Containers instance. You will also help them implement functionality enhancements using serverless architecture services in Azure.
 
 ## Solution architecture
 
 Below is a diagram of the solution architecture you will build in this lab. Please study this carefully, so you understand the whole of the solution as you are working on the various components.
 
-![This diagram consists of icons that are connected by arrows. On the left, the Developer icon (VS Code) points in a linear fashion to the GitHub Repo and Jenkins icons. The previous two icons are enclosed in a box labeled CI/CD Pipeline. Jenkins points to Web App for Containers on the right. Various arrows point from Web App for Container to: Azure Container Registry (a double-sided arrow); Logic Apps (a linear arrow that also points from Logic Apps to Customers); Customers (a linear arrow); and Azure Cosmos DB (a double-sided arrow that also points from Azure Cosmos DB to Azure Functions with another double-sided arrow).](media/solution-architecture-diagram.png "Solution architecture diagram")
+![This diagram consists of icons that are connected by arrows. On the left, the Developer icon (VS Code) points linearly to the GitHub Repo and Jenkins icons. The previous two icons are enclosed in a box labeled CI/CD Pipeline. Jenkins points to Web App for Containers on the right. Various arrows point from Web App for Container to: Azure Container Registry (a double-sided arrow); Logic Apps (a linear arrow that also points from Logic Apps to Customers); Customers (a linear arrow); and Azure Cosmos DB (a double-sided arrow that also points from Azure Cosmos DB to Azure Functions with another double-sided arrow).](media/solution-architecture-diagram.png "Solution architecture diagram")
 
-The solution begins with developers using Visual Studio Code (VS Code) as their code editor, so they can leverage its rich integration with GitHub, Docker, and Azure. From a high level, developers will package the entire OSS application inside a custom Docker container using the Docker extension in VS Code. The image will be pushed to an Azure Container Registry as part of a continuous integration/continuous delivery (CI/CD) pipeline using GitHub and Jenkins. This Docker image will then be deployed to a Web App for Containers instance, as part of their continuous delivery process using The Azure App Service Jenkins plugin.
+The solution begins with developers using Visual Studio Code (VS Code) as their code editor. In VS Code, they can leverage rich integrations with GitHub, Docker, and Azure. From a high level, developers will package the entire OSS application inside a custom Docker container using the Docker extension in VS Code. The image will be pushed to an Azure Container Registry as part of a continuous integration/continuous delivery (CI/CD) pipeline using GitHub and Jenkins. This Docker image will then be deployed to a Web App for Containers instance, as part of their continuous delivery process using The Azure App Service Jenkins plugin.
 
 The MongoDB database will be imported into Azure Cosmos DB, using mongoimport.exe, and access the database from the application will continue to use the MongoDB APIs. The database connection string in the application will be updated to point to the new Cosmos DB.
 
@@ -188,61 +188,57 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
     ![Install is highlighted in the Extension: GitHub window.](media/vscode-extensions-github-install.png "Install the GitHub extension")
 
-4. Close VS Code.
+4. To connect VS Code with your GitHub account, you need to generate a Personal access token.
 
-    > **Note**: VS Code must be restarted to enable the extension.
+5. Open a browser window and navigate to your GitHub account (<https://github.com>).
 
-5. To connect VS Code with your GitHub account, you need to generate a Personal access token.
-
-6. Open a browser window and navigate to your GitHub account (<https://github.com>).
-
-7. Within your GitHub account, select **your user profile icon** in the top right, then select **Settings** from the menu.
+6. Within your GitHub account, select **your user profile icon** in the top right, then select **Settings** from the menu.
 
     ![The user profile icon is highlighted at the top left of the GitHub account page, and Settings is highlighted in the submenu.](media/github-profile-settings.png "Select your account settings")
 
-8. On the Settings screen, select **Developer settings** at the bottom of the Personal settings menu on the left-hand side of the screen.
+7. On the Settings screen, select **Developer settings** at the bottom of the Personal settings menu on the left-hand side of the screen.
 
     ![Developer settings is highlighted at the bottom of the Personal settings menu on the Settings screen.](media/github-developer-settings.png "Select Developer settings")
 
-9. On the Developer settings page, select **Personal access tokens** from the left-hand menu.
+8. On the Developer settings page, select **Personal access tokens** from the left-hand menu.
 
     ![Personal access tokens is highlighted on the Developer settings page.](media/github-personal-access-tokens.png "Select Personal access tokens")
 
-10. Select **Generate new token**.
+9.  Select **Generate new token**.
 
     ![The Generate new token button is highlighted on the Personal access tokens page.](media/github-generate-new-token.png "Select Generate new token")
 
-11. Enter a token description, such as "VS Code Integration", and then check the box next to **repo** under **Select scopes**, which will select all the boxes under it.
+10. Enter a token description, such as "VS Code Integration", and then check the box next to **repo** under **Select scopes**, which will select all the boxes under it.
 
     ![On the New personal access token page, VS Code Integration is entered under Token description, and the check boxes next to and under repo are selected under Select scopes.](media/github-new-personal-access-token.png "Select the scopes")
 
-12. Select **Generate token** near the bottom of the screen.
+11. Select **Generate token** near the bottom of the screen.
 
     ![Generate token button](media/github-generate-token.png "Generate token button")
 
-13. Select the **copy** button next to the token that is generated.
+12. Select the **copy** button next to the token that is generated.
 
     ![The copy button that is next to the new personal access button is highlighted.](media/github-copy-personal-access-token.png "Copy the new personal access button")
 
     >**Important**: Make sure you copy the new personal access token before you navigate away from the screen, or you will need to regenerate the token. Save the copied token by pasting it into a text editor for future reference. This will also be used as your password when pushing changes to GitHub.
 
-14. Open **VS Code** on your Lab VM.
+13. Open **VS Code** on your Lab VM.
 
-15. Select the **View** menu, then select **Command Palette** from the menu.
+14. Select the **View** menu, then select **Command Palette** from the menu.
 
     ![View is highlighted in the menu, and Command Palette is highlighted below.](media/vscode-view-menu-command-palette.png "Visual Studio Code window, View menu")
 
-16. In the box that appears at the top center of the VS Code window, enter "Set Personal Access Token," then select **GitHub: Set Personal Access Token**, when it appears.
+15. In the box that appears at the top center of the VS Code window, enter "Set Personal Access Token," then select **GitHub: Set Personal Access Token**, when it appears.
 
     ![GitHub: Set Personal Access Token is highlighted below Set Personal.](media/vscode-command-palette-set-personal-access-token.png "Select GitHub: Set Personal Access Token")
 
-17. Paste the Personal access token you copied from GitHub into the box, and press **Enter**.
+16. Paste the Personal access token you copied from GitHub into the box, and press **Enter**.
 
     ![The Personal access token is pasted in the box.](media/github-paste-personal-access-token.png "Paste the Personal access token")
 
-18. VS Code is now connected to your GitHub account.
+17. VS Code is now connected to your GitHub account.
 
-19. Close VS Code.
+18. Close VS Code.
 
 ### Task 4: Clone the starter application
 
@@ -358,9 +354,9 @@ In this exercise, you will provision an Azure Cosmos DB account, and then update
 
 In this task, you will provision a new Azure Cosmos DB account using the MongoDB API.
 
-1. In the Azure portal, select **+Create a resource**, **Databases**, the select **Azure Cosmos DB**.
+1. In the Azure portal, select **+Create a resource**, **Databases**, enter "cosmos" into the Search the Marketplace box, select **Azure Cosmos DB** in the search results, and then select **Create**.
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, and Databases and Azure Cosmos DB are highlighted on the New blade.](media/create-resource-cosmos-db.png "Azure Portal")
+    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, "cosmos" is entered into the Search the Marketplace box, and Azure Cosmos DB is highlighted in the search results.](media/create-resource-cosmos-db.png "Azure Portal")
 
 2. On the **Azure Cosmos** **DB** blade, enter the following:
 
