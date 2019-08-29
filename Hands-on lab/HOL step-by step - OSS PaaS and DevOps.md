@@ -381,23 +381,24 @@ In this task, you will provision a new Azure Cosmos DB account using the MongoDB
 
 ### Task 2: Create and scale collections
 
-In this task, you will create the collections needed for your database migration and increase each collection's throughput from the default 1,000 RUs to 2,500 RUs. This is done to avoid throttling during the migration, and reduce the time required to import data.
+In this task, you will create the collections needed for your database migration and increase each collection's throughput from the default 400 RUs to 2,500 RUs. This is done to avoid throttling during the migration, and reduce the time required to import data.
 
 > To learn more about RUs and throughput provisioning in Cosmos DB, read [Request Units in Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/request-units).
 
-1. When your Cosmos DB account is provisioned, navigate to it in the Azure portal, select **Browse** from the left-hand menu, under **Collections**, and then select **+Add Collection**.
+1. When your Cosmos DB account is provisioned, navigate to it in the Azure portal, select **Data Explorer** from the left-hand menu and then select **New Collection**.
 
-    ![Browse is selected and highlighted in the left-hand menu of your Azure Cosmos DB account, and + Add Collection is highlighted on the right.](media/cosmos-db-add-collection.png "Azure Cosmos DB account blade")
+    ![Data Explorer is selected and highlighted in the left-hand menu of the Azure portal, and New Collection is highlighted on the right.](media/cosmos-db-add-collection.png "Azure Cosmos DB")
 
 2. In the **Add Collection** dialog, enter the following:
 
-    - **Database id:** Select **Create new**, and enter **best-for-you-organics**.
-    - **Collection Id:** Enter **orders**.
-    - **Storage capacity:** Select **Fixed (10 GB)**.
-    - **Throughput:** Enter **2500**.
+    - **Database id**: Select **Create new**, and enter **best-for-you-organics**.
+    - **Provision database throughput**: Uncheck this box.
+    - **Collection Id**: Enter **orders**.
+    - **Storage capacity**: Select **Fixed (10 GB)**.
+    - **Throughput**: Enter **2500**.
     - Select **OK** to create the collection.
 
-    ![The information above is entered in the Add Collection dialog box.](media/cosmos-db-new-collection-orders.png "Add Collection dialog box")
+    ![The information above is entered in the Add Collection dialog box.](media/cosmos-db-new-collection-orders.png "Add Collection")
 
 3. On the Collections blade, select **New Collection** to create another collection.
 
