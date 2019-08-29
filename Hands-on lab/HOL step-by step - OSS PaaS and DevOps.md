@@ -637,7 +637,7 @@ The Docker extension for VS Code is used to simplify the management of local Doc
 
     ![Extensions is highlighted in the Visual Studio Code navigation pane, docker is entered in the Extensions search box, Docker is highlighted below, and Install is highlighted on the right.](media/vscode-extensions-docker.png "Visual Studio Code window")
 
-3. You should now see a Docker icon appear in the left-hand menu of Visual Studio Code. Select the **Docker** icon. Expand **Registries** and then expand **Azure**. You should see the **bestforyouregistry** you created above listed.
+3. You should now see a Docker icon appear in the left-hand menu of Visual Studio Code. Select the **Docker** icon. Expand **Registries** and then expand **Azure**. If you do not see Azure listed, select **Connect registry** and select **Azure** from the list of registries. You should see the **bestforyouregistry** you created above listed.
 
     ![In the Docker VS Code extension, Registries and Azure are expanded, and the bestforyouregistry is highlighted.](media/vscode-extension-docker-registries.png "Docker extension")
 
@@ -765,7 +765,7 @@ In this task, you are going to push the image to your Azure Container Registry.
 
     ![This is a screenshot of the password prompt in the Visual Studio Code Integrated terminal window.](media/vscode-terminal-docker-login.png "Integrated terminal window")
 
-6. Once you are successfully logged in, find your image in the Docker extension section of the VS Code, right-click your image, and select **Push**.
+6. Once you are successfully logged in, expand the bestforyouregistry image in the Docker extension section of the VS Code, right-click on the latest image, and select **Push**.
 
     ![The image is selected in the Images area of the Docker extension explorer, and Push is highlighted in the shortcut menu.](media/vscode-docker-push.png "Docker extension explorer")
 
