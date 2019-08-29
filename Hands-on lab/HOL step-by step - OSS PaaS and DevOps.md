@@ -793,24 +793,41 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
 
     ![+ Create a resource is highlighted in the navigation pane of the Azure portal, Web + Mobile is highlighted in the middle, and Web App for Containers is highlighted on the right.](media/create-web-app-for-containers-resource.png "Provision Web App for Containers")
 
-2. On the **Create** blade, enter the following:
+2. On the **Web App Create** Basics Tab, enter the following:
 
-    - **App name**: Enter **best-for-you-app-SUFFIX** (the name must be unique).
+    **Project Details**:
+
     - **Subscription**: Select the subscription you are using for this lab.
     - **Resource group**: Select **Use existing** and choose the hands-on-lab-SUFFIX resource group.
-    - **OS**: Select **Linux**.
-    - **App Service plan/Location**: Accept the default assigned value, which will create a new App Service plan.
-    - Select **Configure container**, and enter the following:
-        - **Image source:** Select **Azure Container Registry**.
-        - **Registry**: Select **bestforyouregistrySUFFIX**.
-        - **Image**: Select **best-for-you-organics**.
-        - **Tag**: Select **latest**.
-        - **Startup File**: Leave blank.
-        - Select **Apply**.
 
-3. Select **Create**.
+    **Instance Details**:
 
-    ![The information above is entered on the Create container registry blade, and Configure container is highlighted on the left side. On the right, Azure Container Registry is highlighted under Image source, and more information from above is entered.](media/web-app-for-containers-create-settings.png "Web App for Containers and Docker Container blades")
+    - **Name**: Enter **best-for-you-app-SUFFIX** (the name must be globally unique).
+    - **Publish**: Select **Docker Image**.
+    - **Operating System**: Select **Linux**.
+    - **Region**: Select the region you are using for resources in this hands-on lab.
+
+    **App Service Plan**:
+
+    - **Linux Plan**: Accept the default assigned value, which will create a new App Service plan.
+    - **Sku and size**: Select **Change size**, choose **Dev/Test**, select the **B1** pricing tier, and select **Apply**.
+
+    ![The values specified above are entered into the Create Web App Basics tab.](media/web-app-for-containers-basics-tab.png "Create Web App")
+
+3. Select **Next: Docker**.
+
+4. On the **Docker** tab, enter the following:
+
+     - **Options**: Select **Single Container**.
+     - **Image source:** Select **Azure Container Registry**.
+     - **Registry**: Select **bestforyouregistrySUFFIX**.
+     - **Image**: Select **best-for-you-organics**.
+     - **Tag**: Select **latest**.
+     - **Startup File**: Leave blank.
+
+    ![The values specified above are set in the Docker tab.](media/web-app-for-containers-docker-tab.png "Create Web App")
+
+5. Select **Review + create**, and then select **Create**.
 
 ### Task 2: Navigate to the deployed app
 
