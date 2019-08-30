@@ -860,13 +860,13 @@ In this exercise, you are going to use Jenkins to implement a continuous integra
 
 In this task, you will be adding a Jenkins service integration into your GitHub account. This integration will enable a Jenkins CI build job to be triggered when code is checked in to your GitHub repository.
 
-1. On your Lab VM, navigate to your Jenkins VM in the [Azure portal](https://portal.azure.com/) by selecting **Resource groups** from the left-hand menu, entering "jenkins" into the search box, and selecting your **jenkins-SUFFIX** resource group from the list.
+1. On your Lab VM, navigate to your Jenkins VM in the [Azure portal](https://portal.azure.com/) by selecting **Resource groups** from the left-hand menu, entering "hands-on-lab" into the search box, and selecting your **hands-on-lab-SUFFIX** resource group from the list.
 
-    ![Resource groups is highlighted in the navigation pane of the Azure portal, Jenkins is highlighted in the search box, and jenkins is highlighted in the search results.](media/azure-rg-jenkins.png "Azure Portal")
+    ![Resource groups is highlighted in the navigation pane of the Azure portal, hands-on-lab is highlighted in the search box, and the hands-on-lab resource group is highlighted in the search results.](media/azure-rg.png "Azure Portal")
 
-2. On the Jenkins-SUFFIX Resource group blade, select your **Jenkins** virtual machine.
+2. On the hands-on-lab-SUFFIX Resource group blade, select your **Jenkins** virtual machine.
 
-    ![Overview is highlighted in the jenkins resource group blade, and Jenkins is highlighted in the Filter by name results.](media/rg-jenkins-vm.png "Resource group blade")
+    ![The Jenkins VM is highlighted in this of resources in the hand-on-lab resource group.](media/rg-jenkins-vm.png "Resource group blade")
 
 3. On the **Overview** blade of your Jenkins virtual machine, locate the **DNS name**, and copy the value.
 
