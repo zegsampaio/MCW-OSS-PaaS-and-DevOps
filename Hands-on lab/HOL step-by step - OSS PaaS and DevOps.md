@@ -1242,7 +1242,7 @@ In this task, you will use the Azure CLI to create an Azure Active Directory (Az
 3. Next, you will issue a command to create a service principal named **best-for-you-app** and assign it contributor permissions to your **hands-on-lab-SUFFIX** resource group. The command will be in the following format:
 
     ```bash
-    az ad sp create-for-rbac -n "best-for-you-app" --role contributor --scopes subscriptions/{SubID}/resourceGroups/{ResourceGroupName}
+    az ad sp create-for-rbac -n "best-for-you-app" --role contributor --scopes /subscriptions/{SubID}/resourceGroups/{ResourceGroupName}
     ```
 
     > **Note**: You will need to replace the `{SubID}` and `{ResourceGroupName}` values.
