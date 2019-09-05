@@ -60,10 +60,10 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 6: Add an Azure service principal for Jenkins](#task-6-add-an-azure-service-principal-for-jenkins)
     - [Task 7: Add continuous delivery to Jenkins build job](#task-7-add-continuous-delivery-to-jenkins-build-job)
     - [Task 8: Trigger CI-CD pipeline](#task-8-trigger-ci-cd-pipeline)
-  - [Exercise 6: Create Azure Function for order processing](#exercise-6-create-azure-function-for-order-processing)
+  - [Exercise 6: Create Azure Functions for order processing](#exercise-6-create-azure-functions-for-order-processing)
     - [Task 1: Provision a Function App](#task-1-provision-a-function-app)
     - [Task 2: Configure storage queues](#task-2-configure-storage-queues)
-    - [Task 3: Create Cosmos DB trigger function](#task-3-create-cosmos-db-trigger-function)
+    - [Task 3: Create timer triggered function](#task-3-create-timer-triggered-function)
     - [Task 4: Create Queue function](#task-4-create-queue-function)
   - [Exercise 7: Create Logic App for sending email notifications](#exercise-7-create-logic-app-for-sending-email-notifications)
     - [Task 1: Create SendGrid account](#task-1-create-sendgrid-account)
@@ -1259,7 +1259,7 @@ In this task, you will use the Azure CLI to create an Azure Active Directory (Az
 6. Copy and paste the updated `az ad sp create-for-rbac` command at the Cloud Shell prompt and press `Enter`. The command should be similar to the following, with your subscription ID and resource group name:
 
     ```bash
-    az ad sp create-for-rbac -n "best-for-you-app" --role contributor --scopes /subscriptions/30fc406c-c745-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/hands-on-lab
+    az ad sp create-for-rbac -n "best-for-you-app" --role contributor --scopes /subscriptions/30fc406c-c745-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/hands-on-lab-SUFFIX
     ```
 
     ![The az ad sp create-for-rbac command is entered into the Cloud Shell, and the output of the command is displayed.](media/azure-cli-create-sp.png "Azure CLI")
@@ -1394,11 +1394,11 @@ In this task, you will commit changes to the `MCW-OSS-PaaS-and-DevOps` starter a
 
     ![Welcome to Best for You Organics Company! is highlighted above the Two Person Plan, Four Person Plan, and High-Pro Plan boxes in this screenshot of the home page.](media/bfyo-web-welcome.png "Home page")
 
-## Exercise 6: Create Azure Function for order processing
+## Exercise 6: Create Azure Functions for order processing
 
 Duration: 45 minutes
 
-In this task, you will create an Azure Function that will be triggered by orders being added to the Orders collection in Azure Cosmos DB. This Function will trigger whenever a document in the orders collection is inserted or updated. The function checks the processed field on the order document, ensuring only unprocessed orders are sent to the processing queue.
+In this task, you will create Azure Functions that will handle order processing. The first function will send unprocessed order details into a storage queue. This Function uses a timer trigger and checks the processed field on order documents, ensuring only unprocessed orders are sent to the processing queue. A second function is used to simulate order processing and send notifications to the user who placed the order.
 
 ### Task 1: Provision a Function App
 
@@ -1419,7 +1419,7 @@ In this task, you will create a Function App in Azure, which will host your Func
     - **Hosting Plan:** Choose Consumption Plan.
     - **Location:** Select the location you have been using for resources in this hands-on lab.
     - **Runtime Stack** Select Node.js.
-    - **Storage:** Select **Create new** and enter "bestforyouordersSUFFIX" for the name.
+    - **Storage:** Select **Create new** and enter a globally unique name, such as "bestforyouordersSUFFIX."
     - **Application Insights** Select Disabled.
     - Select **Create** to provision the new Function App.
 
@@ -1429,7 +1429,7 @@ In this task, you will create a Function App in Azure, which will host your Func
 
 In this task, you will add two storage queues to the storage account provisioned when you created your Function App. These queues will be used to store orders and notifications needing to be processed.
 
-1. In the Azure portal, navigate to the new **bestforyouordersSUFFIX** storage account that was created when you provisioned your Function App, by selecting **Resource groups** from the left-hand menu, selecting your **hands-on-lab-func-SUFFIX** resource group from the list, and then selecting the **bestforyouordersSUFFIX** storage account.
+1. In the [Azure portal](https://portal.azure.com), navigate to the new **bestforyouordersSUFFIX** storage account that was created when you provisioned your Function App, by selecting **Resource groups** from the left-hand menu, selecting your **hands-on-lab-func-SUFFIX** resource group from the list, and then selecting the **bestforyouordersSUFFIX** storage account.
 
     ![Resource groups is highlighted in the navigation pane of the Azure portal, and hands-on-labs is selected and highlighted to the right under Resource groups. Overview is selected to the right, and the bestforyouorders storage account row is highlighted on the far right.](media/rg-storage-account.png "Azure Portal")
 
@@ -1443,17 +1443,17 @@ In this task, you will add two storage queues to the storage account provisioned
 
 4. In the **Add** queue dialog, enter **orderqueue** for the **Queue name**, and select **OK**.
 
-    ![Orderqueue is entered in the Queue name box in the Add queue dialog box.](media/storage-order-queue.png "Add queue dialog box")
+    ![The name "orderqueue" is entered in the Queue name box in the Add queue dialog box.](media/storage-order-queue.png "Add queue dialog box")
 
 5. Select **+Queue** again, and this time enter "notificationqueue" for the **Queue name**.
 
-    ![Notificationqueue is entered in the Queue name box in the Add queue dialog box.](media/storage-notification-queue.png "Add queue dialog box")
+    ![The name "notificationqueue" is entered in the Queue name box in the Add queue dialog box.](media/storage-notification-queue.png "Add queue dialog box")
 
-### Task 3: Create Cosmos DB trigger function
+### Task 3: Create timer triggered function
 
-In this task, you will create a function that will be triggered whenever a document is inserted into the orders collection in your Azure Cosmos DB. This function sends all new orders to a queue for processing and shipping. This function will use a Cosmos DB trigger and an output binding to an Azure Storage Queue.
+In this task, you will create a function that function sends all new orders to a queue for processing and shipping. The function uses a Timer trigger and an output binding to an Azure Storage Queue.
 
-1. When the Function App has deployed, navigate to the new Function App in the Azure portal, by selecting the **notifications icon**, then select **Go to resource** for the Function App notification.
+1. In the [Azure portal](https://portal.azure.com), navigate to your new Function App by selecting the **notifications icon**, then selecting **Go to resource** for the Function App notification.
 
     ![The Go to resource button is highlighted under a Deployment succeeded message in a Notifications window.](media/go-to-resource-function.png "Notifications window")
 
@@ -1461,103 +1461,126 @@ In this task, you will create a function that will be triggered whenever a docum
 
     ![Functions is selected and highlighted in the left-hand menu on the Function Apps blade, and + New function is highlighted on the right.](media/function-app-new.png "Function Apps blade")
 
-3. In the trigger search box, enter "cosmos," and select the **Azure Cosmos DB trigger**.
+3. In the trigger search box, select the **Timer trigger**.
 
-    ![In the trigger search box, cosmos is selected, and the Azure Cosmos DB trigger is selected below it.](media/function-cosmos-db-trigger.png "Choose a template page")
+    ![The Timer trigger box is displayed.](media/function-timer-trigger.png "Timer trigger")
 
-4. Install any extensions required when prompted, and select Continue when the install completes.
+4. In the **Timer trigger** dialog, enter the following:
 
-    ![A warning indicating that extensions are required is displayed.](media/install-trigger-extensions.png "Install extensions")
-
-5. In the **Azure Cosmos DB trigger** dialog, enter the following:
-
-    - **Name**: Enter "OrdersCosmosTrigger".
-    - **Azure Cosmos DB account connection**: Select **new**, then select the **best-for-you-db** Cosmos DB Account.
-    - **Collection name:** Enter orders (use all lowercase, as case matters).
-    - **Create lease collection if it does not exist:** Leave this checked.
-    - **Database name:** Enter "best-for-you-organics".
-    - **Collection name for leases:** Leave set to leases.
+    - **Name**: Enter "OrdersTimerTrigger".
+    - **Schedule**: Leave the default value, `0 */5 * * * *`. This will execute the trigger every 5 minutes.
     - Select **Create**.
 
-    ![The information above is entered in the Cosmos DB blade.](media/function-app-new-function.png "Cosmos DB blade")
+    ![The information above is entered in the Timer trigger blade.](media/function-app-new-function.png "Timer trigger blade")
 
-6. After the function is created, select **Integrate** under the new function.
+5. After the function is created, select **Integrate** under the new function.
 
     ![Integrate is selected and highlighted under the new function.](media/function-app-integrate.png "New function menu")
 
-7. Change the Document collection parameter name to "newOrders" for the **Azure Cosmos DB trigger** and select **Save**.
-
-    ![The newOrders value is entered in the Document collection parameter name box for the Azure Cosmos DB trigger, and Save is selected at the bottom.](media/function-app-integrate-neworders.png "Azure Cosmos DB trigger section")
-
-8. Next, select **+New Output**, select **Azure Queue Storage**, and select **Select**.
+6. Next, select **+New Output**, select **Azure Queue Storage**, and select **Select**.
 
     ![+ New Output is highlighted under Outputs, Azure Queue Storage is selected below it, and Select is selected at the bottom.](media/function-app-new-output.png "Select Azure Queue Storage")
 
-9. Install extensions if prompted to do so.
+7. Install extensions, if prompted to do so.
 
     ![Extensions not installed warning.](media/function-app-install-extensions.png "Install")
 
-10. For the **Azure Queue Storage output**, enter the following:
+8. For the **Azure Queue Storage output**, enter the following:
 
     - **Message parameter name**: outputQueue
     - **Queue name:** orderqueue (all lowercase, as casing matters)
-    - **Storage account collection:** Select **AzureWebJobsStorage** from the list (this is the bestforyouorders storage account you created when you provisioned your Function App).
+    - **Storage account collection:** Select **AzureWebJobsStorage** from the list (this is the bestforyouordersSUFFIX storage account you created when you provisioned your Function App).
     - Select **Save**.
 
     ![The information above is entered in the Azure Queue Storage output dialog box, and Save is selected at the bottom.](media/function-app-storage-queue-output.png "Azure Queue Storage output page")
 
-11. Now, select the **OrdersCosmosTrigger** function in the left-hand menu.
+9. Now, select the **bestforyouorders** Function App in the left-hand menu, and then select the **Platform features** tab. On the Platform features tab, select **Advanced tools (Kudu)** under Development tools.
 
-    ![The OrdersCosmosTrigger function is selected in the left-hand menu.](media/function-app-orderscosmostrigger.png "Left menu")
+    ![The bestforyouorders Function App is selected and highlighted in the left-hand menu, the Platform features tab is selected, and the Advanced tools (Kudu) link is highlighted under Development tools.](media/function-app-platform-features-kudu.png "Platform features tab")
 
-    > **Note**: There appears to be a bug associated with Functions and the node language worker process, so if you receive the error "Failed to start language worker process for: node," you will need to select the **bestforyourorders** function app on the left, and then select **Application settings** under Configured features. On the Application Settings page, edit the **WEBSITE_NODE_DEFAULT_VERSION** by selecting the pencil icon to the right of the value. Enter **8.11.1** as the new value, and then select **Save** at the top of the page. You may also need to restart the Function App. You can then select the **OrdersCosmosTrigger** again, as explained above.
+10. In the new browser window that opens, select **Debug console -> PowerShell** from the top menu.
 
-12. To get the code for the OrdersCosmosTrigger function, go into the project is VS Code, expand the AzureFunctions folder, select `OrdersCosmosTrigger.js`, and copy the code, as highlighted in the screen shot below.
+    ![The Kudu window is displayed with Debug console, PowerShell highlighted in the menu.](media/kudu-debug-console.png "Kudu")
 
-    ![Under the AzureFunctions folder in Visual Studio Code, OrdersCosmosTrigger.js is selected and highlighted in Explorer. On the right, the code for the OrdersCosmosTrigger function is highlighted.](media/vscode-orders-cosmos-trigger-js.png "Visual Studio Code")
+11. In the Kudu file browser, navigate to `home\site\wwwroot`.
 
-13. Paste the code into the `index.js` block, overwriting all the existing code, and select **Save**. Your `index.js` file should now look like the following:
+    ![The site folder is highlighted in the Kudu file browser.](media/kudu-file-browser-site.png "Site")
+
+    ![The wwwroot folder is highlighted in the Kudu file browser.](media/kudu-file-browser-wwwroot.png "wwwroot")
+
+12. In the `wwwroot` folder, select **+** and then select **New file** to add a new file.
+
+    ![The new file (+) icon is highlighted and New file is highlighted in the context menu.](media/kudu-file-browser-new-file.png "New file")
+
+13. Enter `package.json` as the name of the file and press Enter.
+
+    ![The name of the new file is entered as package.json.](media/kudu-file-browser-package-json.png "package.json")
+
+14. After creating the new file, select the pencil (Edit) icon next to it.
+
+    ![The pencil icon is highlighted next to package.json.](media/kudu-file-browser-edit-package-json.png "package.json")
+
+15. Copy and paste the following JSON into the file editor and then select **Save**.
+
+    ```json
+    {
+        "name": "best-for-you-organics",
+        "dependencies": {
+            "mongodb": "3.x"
+        }
+    }
+    ```
+
+    ![The JSON above is entered into the file editor screen, and the Save button is highlighted.](media/kudu-file-editor.png "File editor")
+
+16. In the Kudu Remote Execution Console, run the following at the command prompt:
+
+    ```powershell
+    npm install
+    ```
+
+    ![At the Kudu PowerShell prompt, the command above is entered, and the output of the command is displayed.](media/kudu-powershell.png "PowerShell")
+
+17. Return to your Function App blade in the Azure portal and select the **OrdersTimerTrigger** function in the left-hand menu.
+
+    ![The OrdersCosmosTrigger function is selected in the left-hand menu.](media/function-app-orders-timer-trigger.png "Left menu")
+
+18. To get the code for the `OrdersTimerTrigger` function, go into the project is VS Code, expand the `Hands-on lab/lab-files/AzureFunctions` folder, and open the `OrdersTimerTrigger.js` file.
+
+19. Replace the `uri` variable value on line 4 of the `OrdersTriggerTimer.js` file with the primary connection string for your Cosmos DB, which you can retrieve from the Connection String blade of your Azure Cosmos DB account.
+
+    ![The Azure Cosmos DB account connection string blade is displayed, and the primary connection string is highlighted.](media/cosmos-db-connection-string.png "Connection string")
+
+20. Copy all of the code within the file.
+
+21. Return to your `OrdersTimerTrigger` function in the Azure portal and paste the code into the `index.js` block, overwriting all the existing code. Your `index.js` file should now look like the following:
 
     ![This is a screenshot of the index.js block.](media/function-app-index-js.png "Index.js block")
 
-14. Next, select **Logs** below the code block, so you can observe the Function being called during the next steps.
+22. Next, select **Save and run** above the code block to trigger the function and observe it running in the Logs block.
 
     ![Logs is highlighted below the code block.](media/function-app-logs.png "Select Logs")
 
-15. To trigger the function, return to the starter application in your browser window, and select **Sign In**.
+23. Return to the starter application in your browser window, and select **Sign In**.
 
     ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the starter application, and Sign In is highlighted at the top.](media/bfyo-web-sign-in.png "Sign in to the starter application")
 
-16. On the Login screen, enter the following credentials, and select **Login**:
+24. On the Login screen, enter the following credentials, and select **Login**:
 
     - **Email address:** <demouser@bfyo.com>
     - **Password:** Password.1!!
 
     ![The credentials above are entered in the Login page.](media/bfyo-web-login-page.png "Login page")
 
-17. After logging in, you will be returned to the home page. Select **Select this plan** for any of the plans.
+25. After logging in, you will be returned to the home page. Select **Select this plan** for any of the plans.
 
     ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the home page, and all three boxes' Select this plan buttons are highlighted.](media/bfyo-web-plans.png "Select a plan")
 
-18. On the **Place Order** screen, select **Place Order**. This will create a new order, which will fire the Azure Cosmos DB trigger in your function, and then send the order on to the ordersqueue for processing.
+26. On the **Place Order** screen, select **Place Order**. This will create a new order in the Cosmos DB `orders` collection. Within 5 minutes the Timer trigger of your function will fire, and then send the order on to the `orderqueue` for processing.
 
     ![The Place Order button is highlighted at the bottom of the Place Order page.](media/bfyo-place-order.png "Place your order page")
 
-19. Next, you will update an order in the Azure portal, to set the processed value to true. This will be a change that should not be sent into the orderqueue for processing.
-
-20. Navigate to your Cosmos DB account in the Azure portal, select **Data Explorer**, expand the **orders** collection, then select **Documents**.
-
-    ![Data Explorer is selected and highlighted on the left side of the Cosmos DB account in the Azure portal, and Documents is selected and highlighted in the expanded orders collection.](media/cosmos-db-data-explorer.png "Azure Cosmos DB account blade")
-
-21. Select any order document, and change the processed value to "true," then select **Update**.
-
-    ![Update is highlighted at the top of a document, and true is highlighted next to the processed value.](media/cosmos-db-document-update.png "Change the processed value to true")
-
-22. Return to the logs pane of your function and observe that the orders have been processed though the Function, and that the new order was sent to the orderqueue, while the updated order was not.
-
-    ![The new order and the updated order are highlighted in the logs pane of your function.](media/function-app-logs-processed.png "Logs pane")
-
-23. Finally, verify items are being written to the order queue, by going to the queue in the Azure Storage account, and observing that items have been added to the queue.
+27. Finally, verify items are being written to the order queue, by going to the queue in the Azure Storage account, and observing that items have been added to the `orderqueue`.
 
     ![The Refresh button is highlighted in the Azure Storage account, and Message Text appears in the order queue below.](media/storage-queue-items.png "Messages blade")
 
@@ -1592,25 +1615,11 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     ![Integrate is selected and highlighted under the ProcessOrders function on the left, and orderToProcess is highlighted in the Message parameter name box on the right.](media/function-app-integrate-process-orders.png "Azure Queue Storage trigger section")
 
-6. Now, select **+New Input**, select **Azure Cosmos DB**, and select **Select**.
-
-    ![+ New Input is highlighted under Inputs, Azure Cosmos DB is selected below it, and Select is selected at the bottom.](media/function-app-new-input.png "Inputs section")
-
-7. On the **Azure Cosmos DB** input screen, enter the following:
-
-    - **Document parameter name:** Enter "users".
-    - **Database name:** Enter "best-for-you-organics".
-    - **Collection name:** Enter "users" (all lowercase, as case matters).
-    - **Azure Cosmos DB account connection:** Select **best-for-you_DOCUMENTDB**.
-    - Select **Save**.
-
-    ![The information above is entered in the Azure Cosmos DB input page.](media/function-app-input-cosmos-db.png "Azure Cosmos DB input page")
-
-8. Next, select **+New Output**, select **Azure Queue Storage**, and select **Select**.
+6. Now, select **+New Output**, select **Azure Queue Storage**, and select **Select**.
 
     ![+ New Output is highlighted under Outputs, Azure Queue Storage is selected below it, and Select is selected at the bottom.](media/function-app-new-output-storage-queue.png "Outputs section")
 
-9. For the **Azure Queue Storage output**, enter the following:
+7. For the **Azure Queue Storage output**, enter the following:
 
     - **Message parameter name**: "outputQueue"
     - **Queue name:** "notificationqueue" (all lowercase, as casing matters)
@@ -1619,44 +1628,44 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     ![The information above is entered in the Azure Queue Storage output dialog box.](media/function-app-azure-queue-storage-output.png "Azure Queue Storage output dialog box")
 
-10. Now, select the **ProcessOrders** function in the left-hand menu.
+8. Now, select the **ProcessOrders** function in the left-hand menu.
 
     ![The ProcessOrders function is selected and highlighted in the left-hand menu.](media/function-app-process-orders.png "Left menu")
 
-11. To get the code for the **ProcessOrders** function, go into the project is VS Code, expand the **AzureFunctions** folder, select **ProcessOrders.js**, and copy the code, as highlighted in the screen shot below.
+9. To get the code for the **ProcessOrders** function, go into the project in VS Code, expand the `Hands-on lab/lab-files/AzureFunctions` folder, select `ProcessOrders.js`, and copy all the code in the file.
 
-    ![ProcessOrders.js is highlighted on the left side of Visual Studio Code, and the code for the ProcessOrders function is highlighted on the right.](media/vscode-function-code-process-orders.png "Visual Studio Code")
-
-12. Paste the code into the **index.js** block, overwriting all the existing code, and select **Save**. Your index.js file should now look like the following:
+10. Return to the **ProcessOrders** Function in the Azure portal and paste the code into the `index.js` block, overwriting all the existing code, and select **Save**. Your `index.js` file should now look like the following:
 
     ![The code for the ProcessOrders function is pasted in the index.js block.](media/function-app-code-process-orders.png "Index.js block")
 
-13. Next, select **Logs** below the code block, so you can observe the Function being called during the next steps.
+11. Next, select **Logs** below the code block, so you can observe the Function being called during the next steps.
 
-    ![Logs is highlighted below the code block.](media/function-app-logs.png "Select Logs")
+    ![Logs is highlighted below the code block.](media/function-app-logs-bar.png "Select Logs")
 
-14. To trigger the function, return to the starter application in your browser window, select **Sign In**, and on the **Sign In** screen, select **Register**.
+12. To trigger the function, return to the starter application in your browser window, select **Sign In**, and on the **Sign In** screen, select **Register**.
 
     ![In this screenshot of the starter application, Sign In is highlighted at the top, and the Register button is highlighted below.](media/bfyo-web-register.png "Sign in to the starter application")
 
     > **Note**: You may need to select **Logout** if you are still logged in with the demouser account.
 
-15. Complete the registration form. Be sure to include a valid email address so you can receive notifications of order processing in the next exercise. (If you opt not to enter a valid email address, you can still complete the next Exercise, but will not receive the email notifications that your order has been processed.)
+13. Complete the registration form. Be sure to include a valid email address so you can receive notifications of order processing in the next exercise. (If you opt not to enter a valid email address, you can still complete the next Exercise, but will not receive the email notifications that your order has been processed.)
 
     - You only need to enter data into the **First name**, **Last name**, and **email address** fields. All other fields have been pre-populated to save time.
     - The password has been set to `Password.1!!`. If you choose to enter a different password, note that when you log into the account.
 
-16. After registering, you should be automatically logged into the site. If not, select **Sign In** from the Home page, enter the email address you provided during registration and the password (`Password.1!!`) on the login screen, and then select **Login**.
+14. After registering, you should be automatically logged into the site. If not, select **Sign In** from the Home page, enter the email address you provided during registration and the password (`Password.1!!`) on the login screen, and then select **Login**.
 
-17. Select the **Select this plan** button for any plan on the home page, and on the Order screen, select **Place Order**.
+15. Select the **Select this plan** button for any plan on the home page, and on the Order screen, select **Place Order**.
 
     ![The Place Order button is highlighted on the Order page.](media/bfyo-place-order.png "Order page")
 
-18. Return to your **ProcessOrders** function page in the Azure portal and observe the logs.
+16. Return to your **ProcessOrders** function page in the Azure portal and observe the logs.
 
     ![A notification is highlighted in the logs on the ProcessOrders Function page in the Azure portal.](media/function-app-logs-notification-sent.png "ProcessOrders Function page")
 
-19. The order you placed has been sent to the notificationqueue and is pending the notification being sent to your email address.
+    > **NOTE**: It can take up to five minutes for the OrdersTimerTrigger to fire. The ProcessOrders function will fire immediately after the OrderTimerTrigger function.
+
+17. The order you placed has been sent to the notificationqueue and is pending the notification being sent to your email address.
 
 ## Exercise 7: Create Logic App for sending email notifications
 
@@ -1698,7 +1707,7 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
     ![The Manage button is highlighted on the SendGrid account toolbar.](media/sendgrid-manage.png "SendGrid account Manage")
 
-7. On the SendGrid page that opens, select **API Keys** under Settings in the left-hand menu, and then select **Create API Key**.
+7. On the SendGrid page that opens, expand **Settings** in the left-hand menu, select **API Keys**, and then select **Create API Key**.
 
     ![The Create API Key button is highlighted on the API Keys page.](media/sendgrid-create-api-key.png "SendGrid API Keys")
 
@@ -1718,9 +1727,9 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
 In this task, you will create a new Logic App, which will use the SendGrid connector to send email notifications to users, informing them that their order has processed and shipped.
 
-1. In the Azure portal, select **+Create a resource**, select **Web**, and select **Logic App**.
+1. In the Azure portal, select **+Create a resource**, enter "logic app" into the Search the Marketplace box, select **Logic App** from the results, and then select **Create**.
 
-    ![+ Create a resource is highlighted on the left side of the Azure portal, Web + Mobile is selected in the middle, and Logic App is selected on the right.](media/create-logic-app-resource.png "Azure Marketplace Logic App")
+    ![+ Create a resource is highlighted on the left side of the Azure portal, "logic app" is highlighted in the Search the Marketplace box, and Logic App is selected in the results.](media/create-logic-app-resource.png "Azure Marketplace Logic App")
 
 2. In the **Create logic app** blade, enter the following:
 
@@ -1794,7 +1803,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![SendGrid is entered into the search box, and the SendGrid connection is highlighted under connectors.](media/logic-app-connectors-sendgrid.png "Choose a connector")
 
-18. In the **SendGrid** connector dialog, select **Send email (V2)**.
+18. In the **SendGrid** connector dialog, select **Send email (V3)**.
 
     ![Send email (v2) is highlighted in the list of SendGrid actions.](media/logic-app-sendgrid-send-email.png "SendGrid")
 
@@ -1806,7 +1815,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The SendGrid connection configuration information above is entered into the SendGrid box.](media/logic-app-sendgrid-create.png "SendGrid")
 
-20. In the **Send email (V2)** box, enter the following:
+20. In the **Send email (V3)** box, enter the following:
 
     - **From**: Enter your email address.
     - **To**: Click in the box, select **Add dynamic content**, and then select the **notificationEmail** property. **NOTE**: If under the Parse JSON Dynamic Content section, you see a message that there were not any outputs to match the input format, select **See more** in the message.
@@ -1816,7 +1825,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
     - **Subject**: Enter "Order #: " and then select **orderId** from the dynamic content dialog.
     - **Email body**: Select **firstName** from the dynamic content dialog, and then enter ", Your Best For You Organics Company order has shipped."
 
-    ![The Send Email (V2) dialog is completed with the values specified above.](media/logic-app-send-email-v2-complete.png "Send Email (v2"))
+    ![The Send email (V3) dialog is completed with the values specified above.](media/logic-app-send-email-v2-complete.png "Send email (V3)"))
 
 21. Select **+ New step**.
 
