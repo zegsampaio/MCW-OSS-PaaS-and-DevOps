@@ -1804,7 +1804,7 @@ In this exercise, you will de-provision all Azure resources that were created in
 1. In the Azure portal, select **Resource groups** from the left-hand menu, and locate and delete the following resource groups.
 
     - hands-on-lab-SUFFIX
-    - jenkins-SUFFIX
+    - hands-on-lab-func-SUFFIX
 
 ### Task 2: Delete WebHooks and Service Integrations
 
