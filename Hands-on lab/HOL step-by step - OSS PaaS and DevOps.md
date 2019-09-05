@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-August 2019
+September 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -52,12 +52,12 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Provision Web App for Containers](#task-1-provision-web-app-for-containers)
     - [Task 2: Navigate to the deployed app](#task-2-navigate-to-the-deployed-app)
   - [Exercise 5: Configure CI/CD pipeline](#exercise-5-configure-cicd-pipeline)
-    - [Task 1: Prepare GitHub account for service integrations](#task-1-prepare-github-account-for-service-integrations)
-    - [Task 2: Open connection to Jenkins](#task-2-open-connection-to-jenkins)
-    - [Task 3: Configure Continuous Integration with Jenkins](#task-3-configure-continuous-integration-with-jenkins)
-    - [Task 4: Trigger CI build](#task-4-trigger-ci-build)
-    - [Task 5: Install Docker on the Jenkins VM](#task-5-install-docker-on-the-jenkins-vm)
-    - [Task 6: Add an Azure service principal for Jenkins](#task-6-add-an-azure-service-principal-for-jenkins)
+    - [Task 1: Enable Continuous Deployment on Web App](#task-1-enable-continuous-deployment-on-web-app)
+    - [Task 2: Prepare GitHub account for service integrations](#task-2-prepare-github-account-for-service-integrations)
+    - [Task 3: Open connection to Jenkins](#task-3-open-connection-to-jenkins)
+    - [Task 4: Configure Continuous Integration with Jenkins](#task-4-configure-continuous-integration-with-jenkins)
+    - [Task 5: Trigger CI build](#task-5-trigger-ci-build)
+    - [Task 6: Install Docker on the Jenkins VM](#task-6-install-docker-on-the-jenkins-vm)
     - [Task 7: Add continuous delivery to Jenkins build job](#task-7-add-continuous-delivery-to-jenkins-build-job)
     - [Task 8: Trigger CI-CD pipeline](#task-8-trigger-ci-cd-pipeline)
   - [Exercise 6: Create Azure Functions for order processing](#exercise-6-create-azure-functions-for-order-processing)
@@ -856,7 +856,17 @@ Duration: 60 minutes
 
 In this exercise, you are going to use Jenkins to implement a continuous integration (CI) and continuous delivery (CD) pipeline to deploy the containerized MERN app to Web App for Containers in Azure.
 
-### Task 1: Prepare GitHub account for service integrations
+### Task 1: Enable Continuous Deployment on Web App
+
+In this task, you will turn Continuous Deployment on for your Web App.
+
+1. Return to your Web App blade in the Azure portal, select **Container settnigs** from the left-hand menu, and then select **On** under Continuous Deployment.
+
+    ![The Web App blade is displayed, with Container settings selected and highlighted on the left, the On button for Continuous Deployment selected and highlighted, and the Save button highlighted.](media/web-app-continuous-deployment.png "Continuous Deployment")
+
+2. Select **Save**.
+
+### Task 2: Prepare GitHub account for service integrations
 
 In this task, you will be adding a Jenkins service integration into your GitHub account. This integration will enable a Jenkins CI build job to be triggered when code is checked in to your GitHub repository.
 
@@ -956,7 +966,7 @@ In this task, you will be adding a Jenkins service integration into your GitHub 
 
 23. The GitHub side of the integration with Jenkins is complete. Next, you will configure Jenkins as part of your CI/CD pipeline.
 
-### Task 2: Open connection to Jenkins
+### Task 3: Open connection to Jenkins
 
 In this task, you will create an SSH tunnel to the Jenkins server, and configure the Jenkins server for use with the MERN application.
 
@@ -1053,7 +1063,7 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
     ![This is a screenshot of the Save (selected) and Apply buttons.](media/jenkins-global-tool-configuration-save.png "Select Save")
 
-### Task 3: Configure Continuous Integration with Jenkins
+### Task 4: Configure Continuous Integration with Jenkins
 
 In this task, you will set up a simple Jenkins continuous integration (CI) pipeline, which will build the `MCW-OSS-PaaS-and-DevOps` application with every code commit into GitHub.
 
@@ -1102,7 +1112,7 @@ In this task, you will set up a simple Jenkins continuous integration (CI) pipel
 
 10. Your Jenkins CI build job should now be triggered whenever a push is made to your repository.
 
-### Task 4: Trigger CI build
+### Task 5: Trigger CI build
 
 In this task you will commit your pending changes in VS Code to you GitHub repo, and trigger the Jenkins CI build job.
 
@@ -1138,7 +1148,7 @@ In this task you will commit your pending changes in VS Code to you GitHub repo,
 
 9. You have successfully set up your CI pipeline.
 
-### Task 5: Install Docker on the Jenkins VM
+### Task 6: Install Docker on the Jenkins VM
 
 In this task, you will install Docker CE on your Jenkins VM, so it can be used to build images from the build artifacts produced by your CI build.
 
@@ -1227,132 +1237,64 @@ In this task, you will install Docker CE on your Jenkins VM, so it can be used t
     service jenkins restart
     ```
 
-### Task 6: Add an Azure service principal for Jenkins
-
-In this task, you will use the Azure CLI to create an Azure Active Directory (Azure AD) application and service principal (SP) that will provide the Jenkins CD pipeline access to Azure resources. You will grant the SP permissions to the hands-on-lab-SUFFIX resource group.
-
-1. In the [Azure portal](https://portal.azure.com), select the **Cloud Shell** icon in the top toolbar.
-
-    ![The Cloud Shell icon is highlighted on the Azure toolbar.](media/azure-toolbar-cloud-shell.png "Azure Toolbar")
-
-2. Select **PowerShell** in the Cloud Shell pane.
-
-    ![PowerShell is highlighted in the Cloud Shell pane.](media/cloud-shell-powershell.png "Cloud Shell")
-
-3. Next, you will issue a command to create a service principal named **best-for-you-app** and assign it contributor permissions to your **hands-on-lab-SUFFIX** resource group. The command will be in the following format:
-
-    ```bash
-    az ad sp create-for-rbac -n "best-for-you-app" --role contributor --scopes /subscriptions/{SubID}/resourceGroups/{ResourceGroupName}
-    ```
-
-    > **Note**: You will need to replace the `{SubID}` and `{ResourceGroupName}` values.
-
-4. To retrieve the values you need to replace above, navigate to **Resource groups** in the Azure navigation menu, enter "hands-on-lab-SUFFIX" into the filter box, and select the hands-on-lab-SUFFIX resource group from the list.
-
-5. On your hands-on-lab-SUFFIX blade, you will copy two values to paste into the command above:
-
-    - **Resource group name**: Copy the resource group name (hands-on-lab-SUFFIX) and paste it into the command in place of `{ResourceGroupName}`.
-    - **Subscription ID**: In the Essentials area of the Overview blade, locate the Subscription ID, then copy and paste the value into the command in place of the `{SubID}` value.
-
-    ![On the Overview blade of the resource group, Subscription ID is highlighted.](media/resource-group-overview-subscription-id.png "Resource group overview blade")
-
-6. Copy and paste the updated `az ad sp create-for-rbac` command at the Cloud Shell prompt and press `Enter`. The command should be similar to the following, with your subscription ID and resource group name:
-
-    ```bash
-    az ad sp create-for-rbac -n "best-for-you-app" --role contributor --scopes /subscriptions/30fc406c-c745-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/hands-on-lab-SUFFIX
-    ```
-
-    ![The az ad sp create-for-rbac command is entered into the Cloud Shell, and the output of the command is displayed.](media/azure-cli-create-sp.png "Azure CLI")
-
-7. Copy the output from the command into a text editor, as you will need it in the next task. The output should be similar to:
-
-    ```json
-    {
-        "appId": "24c91e7d-4568-4f48-bca5-af3fc75e5481",
-        "displayName": "best-for-you-app",
-        "name": "http://best-for-you-app",
-        "password": "389bbb6f-731a-449a-a438-65a0f485ec8b",
-        "tenant": "9c37bff0-cd20-XXXX-XXXX-XXXXXXXXXXXX"
-    }
-    ```
-
-8. To verify the role assignment, select **Access control (IAM)** from the left-hand menu of the **hands-on-lab-SUFFIX** resource group blade, and then select the **Role assignments** tab and locate **best-for-you-app** under the CONTRIBUTOR role.
-
-    ![The Role assignments tab is displayed, with best-for-you-app highlighted under CONTRIBUTOR in the list.](media/rg-hands-on-lab-role-assignments.png "Role assignments")
-
 ### Task 7: Add continuous delivery to Jenkins build job
 
 In this task, you will use the [Azure App Service Jenkins plugin](https://plugins.jenkins.io/azure-app-service) to add continuous deployment (CD) to the Jenkins build pipeline. This will use a post-build action to create a new Docker image from the build, push that image to your Azure Container Registry, and deploy the image to your Web App for Containers instance. This post-build action will run under the credentials of the SP you created in the previous task.
 
-1. Return to your **Jenkins** dashboard, and select the **best-for-you-build** project.
+1. In a new browser window, navigate to your Container registry in the [Azure portal](https://portal.azure.com) by selecting **Resource groups** from the Azure navigation menu, selecting the **hands-on-lab-SUFFIX** resource group from the list, and then selecting the **Container registry** resource.
+
+2. On the Container registry blade, select **Access keys** from the left-hand menu and leave this page open for the following steps.
+
+3. Return to your **Jenkins** dashboard, and select the **best-for-you-build** project.
 
     ![The best-for-you-build project is highlighted on the Jenkins dashboard.](media/jenkins-dashboard-best-for-you-build.png "Jenkins dashboard")
 
-2. Select **Configure** from the left-hand menu.
+4. Select **Configure** from the left-hand menu.
 
     ![Configure is highlighted in the left-hand menu.](media/jenkins-project-configure.png "Jenkins left-hand menu")
 
-3. On the configure screen, scroll down to Post-build Actions, select **Add post-build action** and then select **Publish an Azure Web App**.
+5. On the configure screen, scroll down to the Build section and select the Execute shell block you created previously.
 
-    ![In the Jenkins post-build action menu, Publish an Azure Web App is highlighted.](media/jenkins-post-build-action-publish-azure-web-app.png "Jenkins post-build action menu")
+6. Return to the Container registry Access keys blade in the Azure portal, copy the values specified below and paste them into the appropriate values in the `docker build` command below.
 
-4. In the Publish an Azure Web App section that appears, select **Add** and then **Jenkins** next to **Azure Credentials**.
-
-    ![In the Publish an Azure Web App post-build action, Add Azure credentials is highlighted.](media/jenkins-post-build-action-publish-azure-web-app-credentials-add.png "Add Azure Credentials")
-
-5. On the Jenkins Credentials Provider screen, enter the following:
-
-    - **Domain**: Leave set to Global credentials (unrestricted).
-    - **Kind**: Select **Microsoft Azure Service Principal**.
-    - **Scope**: Leave set to Global (Jenkins, nodes, items, all child items, etc.).
-    - **Subscription ID**: Enter your Azure subscription ID which you copied above from the hands-on-lab-SUFFIX Resource group blade.
-    - **Client ID**: Enter the **appId** value from the Cloud shell output you copied into the text editor.
-    - **Client Secret**: Enter the **password** value from the Cloud shell output you copied into the text editor.
-    - **Tenant ID**: Enter the **tenant** value from the Cloud shell output you copied into the text editor.
-    - **Azure Environment**: Leave set to Azure.
-    - **ID**: Enter jenkinsSp.
-    - **Description** Leave blank, or enter a description if you like.
-    - Select **Verify Service Principal** and ensure you see the _Successfully verified the Microsoft Azure Service Principal_ message.
-
-    ![On the Jenkins Credentials Provider screen, the values specified above are entered into the appropriate fields.](media/jenkins-project-credentials.png "Jenkins Credentials Provider")
-
-6. Select **Add**.
-
-7. Back in the Publish an Azure Web App of the post-build actions tab, select the newly created jenkinsSp credentials in the Azure Credentials list.
-
-    ![The newly created jenkinsSp credentials are selected in the Azure Credentials box of the Azure Profile Configuration section.](media/jenkins-azure-profile-configuration.png "Azure Profile Configuration")
-
-8. In the App configuration section:
-
-    - **Resource Group Name**: Select the hands-on-lab-SUFFIX resource group.
-    - **App Name**: Select best-for-you-app.
-    - Select **Publish via Docker**.
-    - **Dockerfile path**: Leave set to **/Dockerfile.
-    - **Docker registry URL**: Enter your Azure Container Registry's Login server value, which you can retrieve from the Access keys blade in the Azure portal.
-    - **Registry credentials**: Select **Add** and then **Jenkins**, and in the Add Credentials dialog enter the following:
-        - **Domain**: Leave set to Global credentials (unrestricted).
-        - **Kind**: Set to Username with password.
-        - **Scope**: Leave set to Global (Jenkins, nodes, items, all child items, etc.).
-        - **Username**: Enter the Username value for your Azure Container Registry, which you can retrieve from the Access keys blade of your ACR in the Azure portal.
-        - **Password**: Enter the password value for your Azure Container Registry, which you can retrieve from the Access keys blade of your ACR in the Azure portal.
+    - **Login server**: Copy the Azure Container Registry's Login server value, and paste into the command below as the `ACR_URL` value.
+    - **Username**: Copy the Username value for your Azure Container Registry, and paste into the command below as the `ACR_USERNAME` value.
+    - **Password**: Enter the password value for your Azure Container Registry, and paste into the command below as the `ACR_PASSWORD` value.
 
         ![In the Container Registry Access keys blade, ](media/azure-container-registry-access-keys.png "Container Registry Access keys")
 
-        - **ID**: Enter acrCreds.
-        - **Description**: Leave blank, or enter a description if you like.
-        - Select **Add**.
+    ```bash
+    ACR_URL="<your-container-registry-login-server>"
+    ACR_USERNAME="<your-container-registry-username>"
+    ACR_PASSWORD="<your-container-registry-password>"
 
-        ![In the Jenkins Credential Provider dialog, the values specified above are entered into the appropriate fields.](media/jenkins-credentials-provider-username-with-password.png "Add credentials")
+    docker build --tag "${ACR_URL}/best-for-you-organics:latest" .
+    docker login $ACR_URL --username $ACR_USERNAME --password $ACR_PASSWORD
+    docker push "${ACR_URL}/best-for-you-organics:latest"
+    ```
 
-    - Select the newly added acrCreds credentials from the Registry credentials list (will be listed as `[the name of your registry]/******`).
-    - Select the **Advanced** button.
-    - **Docker Image**: Leave blank.
-    - **Docker Image Tag**: Leave blank.
-    - Select **Verify Docker Configuration** and ensure the _Docker registry configuration verified_ message is displayed.
+7. You final command should look similar to the following:
 
-        ![In the Publish an Azure Web App post-build action section, the values specified above are entered into the appropriate fields.](media/jenkins-publish-an-azure-web-app.png "Publish an Azure Web App post-build action")
+    ```bash
+    ACR_URL="bestforyouregistrykb.azurecr.io"
+    ACR_USERNAME="bestforyouregistrykb"
+    ACR_PASSWORD="uddDqqTdBdxaI=QMmTqTfAg75cJHnfcj"
+
+    docker build --tag "${ACR_URL}/best-for-you-organics:latest" .
+    docker login $ACR_URL --username $ACR_USERNAME --password $ACR_PASSWORD
+    docker push "${ACR_URL}/best-for-you-organics:latest"
+    ```
+
+8. Copy the completed command text and paste it below the `npm run build` line within the Execute shell Command box. The Execute shell command should now look similar to the following:
+
+    ![The command above is appended to the execute shell command.](media/jenkins-execute-shell-command-cd.png "Execute shell")
+
+
+    ![In the Jenkins post-build action menu, Publish an Azure Web App is highlighted.](media/jenkins-post-build-action-publish-azure-web-app.png "Jenkins post-build action menu")
 
 9. Select **Save**.
+
+    ![This is a screenshot of the Save (selected) and Apply buttons.](media/jenkins-save.png "Select Save")
 
 ### Task 8: Trigger CI-CD pipeline
 
@@ -1388,7 +1330,7 @@ In this task, you will commit changes to the `MCW-OSS-PaaS-and-DevOps` starter a
 
 8. When the deployment is complete, you can verify the changes deployed successfully by navigating to your App Service instance in the Azure portal, and selecting the URL on the overview blade. The deployment of the container can take several minutes to complete so refreshes may take a few minutes to show the new header.
 
-    >**Tip**: It may help to open the app in an Incognito or InPrivate browser window, so you don't have the old page cached.
+    >**Tip**: It may help to open the app in an Incognito or InPrivate browser window, as the old page may be cached.
 
 9. You should see the home page, with a new header above the three plans on the page.
 
