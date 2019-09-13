@@ -562,7 +562,7 @@ In this task, you will install the Azure Cosmos DB extension for VS Code to take
 
     ![The Extensions icon is highlighted on the left side of the Extension: Azure Cosmos DB window. On the right, azure cosmos db is in the search box, Azure Cosmos DB is highlighted below it, and Install is highlighted on the right side.](media/vscode-extensions-cosmosdb.png "Install the Azure Cosmos DB extension")
 
-2. In the left-hand menu of VS Code you should now see an Azure icon. Select that, and then select **Sign in to Azure**.
+2. In the left-hand menu of VS Code, you should now see an Azure icon. Select that, and then select **Sign in to Azure**.
 
     ![Sign in to Azure is highlighted below AZURE COSMOS DB in the bottom left-hand corner of Visual Studio Code window.](media/vscode-azure-sign-in.png "Sign in to Azure")
 
@@ -860,7 +860,7 @@ In this exercise, you are going to use Jenkins to implement a continuous integra
 
 In this task, you will turn Continuous Deployment on for your Web App.
 
-1. Return to your Web App blade in the Azure portal, select **Container settnigs** from the left-hand menu, and then select **On** under Continuous Deployment.
+1. Return to your Web App blade in the Azure portal, select **Container settings** from the left-hand menu, and then select **On** under Continuous Deployment.
 
     ![The Web App blade is displayed, with Container settings selected and highlighted on the left, the On button for Continuous Deployment selected and highlighted, and the Save button highlighted.](media/web-app-continuous-deployment.png "Continuous Deployment")
 
@@ -1419,7 +1419,7 @@ In this task, you will create a function that function sends all new orders to a
 
     ![Integrate is selected and highlighted under the new function.](media/function-app-integrate.png "New function menu")
 
-6. Next, select **+New Output**, select **Azure Queue Storage**, and select **Select**.
+6. Next, select **+New Output**, select **Azure Queue Storage**, and choose **Select**.
 
     ![+ New Output is highlighted under Outputs, Azure Queue Storage is selected below it, and Select is selected at the bottom.](media/function-app-new-output.png "Select Azure Queue Storage")
 
@@ -1557,7 +1557,7 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     ![Integrate is selected and highlighted under the ProcessOrders function on the left, and orderToProcess is highlighted in the Message parameter name box on the right.](media/function-app-integrate-process-orders.png "Azure Queue Storage trigger section")
 
-6. Now, select **+New Output**, select **Azure Queue Storage**, and select **Select**.
+6. Now, select **+New Output**, select **Azure Queue Storage**, and choose **Select**.
 
     ![+ New Output is highlighted under Outputs, Azure Queue Storage is selected below it, and Select is selected at the bottom.](media/function-app-new-output-storage-queue.png "Outputs section")
 
