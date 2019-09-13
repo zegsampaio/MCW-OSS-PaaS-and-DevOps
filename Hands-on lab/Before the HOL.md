@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-April 2019
+September 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -41,12 +41,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Requirements
 
-1. Microsoft Azure subscription must be pay-as-you-go or MSDN
-
+1. Microsoft Azure subscription must be pay-as-you-go or MSDN.
    - Trial subscriptions will *not* work.
-
 2. Linux virtual machine configured with:
-
    - Visual Studio Code
    - Azure CLI
    - Docker
@@ -65,15 +62,23 @@ In this exercise, you will set up your environment for use in the rest of the ha
 
 In this task, you will create an Azure resource group for the resources used throughout this lab.
 
-1. In the [Azure Portal](https://portal.azure.com/), select **Resource groups**, select **+Add**, and then enter the following in the Create an empty resource group blade:
+1. In the [Azure Portal](https://portal.azure.com/), select **Resource groups** from the left-hand menu and then select **+Add**
 
-    - **Name**: Enter hands-on-lab-SUFFIX.
+    ![Resource groups is highlighted in the navigation pane of the Azure portal and + Add is highlighted on the Resource groups blade.](media/resource-groups-add.png "Add Resource Group")
+
+2. On the Create a resource group **Basics** tab, enter the following:
+
     - **Subscription**: Select the subscription you are using for this hands-on lab.
-    - **Resource group location**: Select the region you are using for this hands-on lab.
+    - **Resource group**: Enter **hands-on-lab-SUFFIX** as the name of the new resource group.
+    - **Region**: Select the region you are using for this hands-on lab.
 
-    ![Resource groups is highlighted in the navigation pane of the Azure portal, + Add is highlighted in the Resource groups blade, and \"hands-on-labs\" is entered into the Resource group name textbox on the Resource Group, Create an empty resource group blade.](media/create-resource-group.png "Azure Portal")
+    ![The values specified above are entered into the Create a resource group Basics tab.](media/create-resource-group.png "Create resource group")
 
-2. Select **Create**.
+3. Select **Review + Create**.
+
+4. On the **Review + create** tab, ensure the Validation passed message is displayed and then select **Create**.
+
+    ![The Create a resource group Review + create tab is displayed with the Validation passed message.](media/create-resource-group-review-create.png "Create resource group")
 
 ### Task 2: Create a development virtual machine
 
@@ -96,57 +101,57 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
     - **Admin Username**: Accept the default value, demouser.
     - **Admin Password**: Accept the default value, Password.1!!
     - Check the box to agree to the Azure Marketplace terms and conditions.
-    - Select **Purchase**.
 
     ![The Custom deployment blade displays, and the information above is entered on the Custom deployment blade.](media/azure-custom-deployment.png "Custom deployment blade")
 
-3. It can take about 20 minutes to deploy the Lab VM. You can move on to the next task while the VM is deploying.
+3. Select **Purchase**.
+
+> It can take about 20 minutes to deploy the Lab VM. You can move on to the next task while the VM is deploying.
 
 ### Task 3: Provision a Jenkins server
 
 In this task, you will provision an Azure Linux VM, which will serve as your Jenkins server for this hands-on lab.
 
-1. In the Azure portal, select **+ Create a resource**, enter "Jenkins" into the **Search the Marketplace** box, select the **Jenkins** compute item from the results, and then select **Create**.
+1. In the Azure portal, select **+ Create a resource**, enter "jenkins" into the **Search the Marketplace** box, select the **Jenkins** compute item from the results, and then select **Create**.
 
     ![+ Create a resource is highlighted in the navigation pane of the Azure portal, and Everything is highlighted to the right. On the Everything blade to the right, jenkins is highlighted in the search box, and the Jenkins row is highlighted in the search results.](media/create-resource-jenkins.png "Azure Portal")
 
-2. On the **Create Jenkins Basics** blade, enter the following:
+2. On the **Create Jenkins Basics** tab, enter the following:
 
-    - **Name:** Enter **Jenkins**
-    - **Username:** Enter **jenkinsadmin**
+    - **Subscription:** Select the subscription you are using for this hands-on lab.
+    - **Resource group:** Select the hands-on-lab-SUFFIX resource group from the list.
+    - **Region:** Select the region you are using for resources in this hands-on lab.
+    - **Name:** Enter **Jenkins**.
+    - **User name:** Enter **jenkinsadmin**.
     - **Authentication type:** Select **Password**
     - **Password:** Enter **Password.1!!**
-    - **Subscription:** Select the subscription you are using for this hands-on lab.
-    - **Resource group:** Select Create new, and enter "jenkins-SUFFIX" (Note: Jenkins will use a different resource group than the other resources in this lab).
-    - **Location:** Select the location you are using for resources in this hands-on lab.
-    - Select **OK** to proceed to the **Settings** blade.
 
-    ![Basics is selected on the Create Jenkins blade, and the information above is entered on the Basics blade at right.](media/create-jenkins-basics.png "Configure settings on the Create Jenkins Basics blade")
+    ![The Create Jenkins Basic tab is displayed and the information above is entered into the form.](media/create-jenkins-basics.png "Configure settings on the Create Jenkins Basics blade")
 
-3. On the **Additional Settings** blade:
+3. Select **Next: Additional settings**, and on the **Additional Settings** tab set the following configuration:
 
-    - **Subnets**: Select **Configure subnets**, and then select **OK** on the **Subnets** blade to accept the defaults.
-    - **Domain name label**: Enter a unique value, such as **jenkins-SUFFIX**.
+    - **Size**: Accept the default VM size of **Standard DS2 v2**.
+    - **VM disk type**: Select **SSD**.
+    - **Virtual network**: Accept the default value of **(new) jenkins-vnet**.
+    - **Subnet**: Accept the default value of **(new) jenkins (10.x.0.0/24)**.
+    - **Public IP address**: Accept the default value of **(new) jenkins-pip**.
+    - **Domain name label**: Enter a globally unique value, such as **jenkins-SUFFIX**.
     - **Jenkins release type**: Select **LTS**.
     - **JDK Type**: Select **Zulu**.
 
-4. Select **OK** to proceed to the Integration Settings screen.
+    ![The Additional Settings tab is displayed and the values specified above are entered into the appropriate fields in the form.](media/create-jenkins-additional-settings.png "Jenkins VM Additional settings")
 
-    ![Additional Settings is selected on the Create Jenkins blade, SSD and Subnets are selected on the Additional Settings blade in the middle, and OK is selected on the Subnets blade at right.](media/create-jenkins-additional-settings.png "Proceed to the summary screen")
+4. Select **Next: Integration settings**.
 
-5. On the **Integration Settings** blade, select **OK**.
+5. On the **Integration Settings** blade accept the default settings and select **Review + create**.
 
-    ![Integration Settings is selected on the Create Jenkins blade. On the Jenkins Integration Settings blade to the right, VM is selected, and OK is selected at the bottom.](media/create-jenkins-integration-settings.png "Select OK on the Jenkins Integration Settings blade")
+    ![The Integration Settings tab is selected on the Create Jenkins blade, showing the default settings.](media/create-jenkins-integration-settings.png "Jenkins VM Integration settings")
 
-6. On the **Summary** blade, ensure the `Validation passed` message is displayed, and then select **OK**.
+6. On the **Review + create** blade, ensure the `Validation passed` message is displayed, and then select **Create**.
 
-    ![Summary is selected on the Create Jenkins blade. Validation information is displayed on the Summary blade to the right, and OK is selected at the bottom.](media/create-jenkins-summary.png "Ensure that validation passed")
+    ![Validation information is displayed on the Review + create tab, with the Validation passed message displayed.](media/create-jenkins-summary.png "Validation passed")
 
-7. Select **Create** on the **Buy** screen to provision the Jenkins server.
-
-    ![Buy is selected on the Create Jenkins blade. Provisioning information is displayed on the Create blade to the right, and Create is selected at the bottom.](media/create-jenkins-buy.png "Provision the Jenkins server")
-
-8. It can take 10+ minutes for the VM to provision. You can move on to the next task while you wait.
+7. It can take 10+ minutes for the VM to provision. You can move on to the next task while you wait.
 
 ### Task 4: Create GitHub account
 
@@ -176,7 +181,7 @@ In this task, you will fork the [OSS PaaS and DevOps MCW GitHub repository](http
 
 1. Log into your GitHub account, and then navigate to the [OSS PaaS and DevOps MCW GitHub repository](https://github.com/Microsoft/MCW-OSS-PaaS-and-DevOps).
 
-2. At the top right of the projects GitHub page, select **Fork**.
+2. At the top right of the project's GitHub page, select **Fork**.
 
     ![Fork is highlighted at the top right of the projects GitHub page.](media/github-fork.png "Select Fork")
 
