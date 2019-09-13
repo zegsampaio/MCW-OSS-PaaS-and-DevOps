@@ -38,10 +38,12 @@ At the end of this hands-on lab, you will be better able to migrate and deploy O
 - Azure Container Registry
 - Azure DevOps
 - Azure Functions
+- Azure CLI
 - Cosmos DB
 - Docker
 - GitHub
 - Jenkins VM
+- MongoDB
 - Logic App
 - Visual Studio Code
 - Web App for Containers
