@@ -9,7 +9,7 @@ Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-September 2019
+November 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -166,7 +166,7 @@ When participants are doing activities, you can **look ahead to refresh your mem
 
 ## Abstract and learning objectives
 
-In this whiteboard design session, you will work with a group to design a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. Your solution will handle the migration of an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure PaaS services, including migrating an existing MongoDB instance into Cosmos DB, enhancing application functionality using serverless technologies, and fully embracing modern DevOps tools.
+In this whiteboard design session, you work with a group to design a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. Your solution should handle the migration of an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application. The application will be migrated from a hosted environment into Azure PaaS services, including migrating an existing MongoDB instance into Cosmos DB, enhancing application functionality using serverless technologies, and fully embracing modern DevOps tools.
 
 At the end of this whiteboard design session, you will be better able to design solutions for migrating OSS applications into Azure PaaS using modern DevOps methodologies.
 
@@ -188,32 +188,32 @@ Directions:  With all participants in the session, the facilitator/SME presents 
 
 ### Customer situation
 
-Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service is tailored towards working professionals, who want convenient, reliable access to healthy meal choices, and pre-packaged recipes, without having to spend too much time preparing the meals. Customers can choose from a variety of meal plan options (vegetarian, vegan, gluten-free, high-protein, etc.), along with several options for portion sizes, and the number of meals per week. Meals are delivered weekly directly to the customer's home.
+Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service caters to working professionals, who want convenient, reliable access to healthy meal choices, and pre-packaged recipes, without having to spend too much time preparing the meals. Customers can choose from a variety of meal plan options (e.g., vegetarian, vegan, gluten-free, high-protein), along with several options for portion sizes and the number of meals per week. Meals are delivered weekly directly to the customer's home.
 
-Their current meal plans include only dinner options, but Best For You Organics Company has received feedback from many customers expressing a desire that breakfast and lunch options be included as part of the service offering. They would like to expand their meal services to meet this demand, but feel they first need to address their rising infrastructure costs and management time. They have reached a point where managing their VM and server infrastructure is becoming a real challenge, and are interested in understanding more about Platform as a Service (PaaS) solutions for OSS applications that could help them focus their expenditures and efforts on their core business, rather than infrastructure. "We're finding that with every upgrade, we're spending more time and money on infrastructure, and less on delivering the functionality and features that matter most to our customers," says Holly Franklin, "and we need to rebalance those efforts." The development team at Best For You Organics has some experience with Docker, and is interested in what options might be available for using containers to deploy their application into a cloud environment.
+Their current meal plans include only dinner options. However, Best For You Organics Company has received feedback from many customers expressing a desire for breakfast and lunch options to be included as part of the service offering. They would like to expand their meal services to meet this demand but feel they first need to address their rising infrastructure costs and management time. They have reached a point where managing their VM and server infrastructure is becoming a real challenge. They are interested in learning more about Platform as a Service (PaaS) solutions for OSS applications that could help them focus their expenditures and efforts on their core business rather than infrastructure. "We're finding that with every upgrade, we're spending more time and money on infrastructure and less on delivering the functionality and features that matter most to our customers," says Holly Franklin, "and we need to rebalance those efforts." The development team at Best For You Organics has some experience with Docker and is interested in what options might be available for using containers to deploy their application into a cloud environment.
 
-Their CIO, Holly Franklin, has voiced several concerns about a cloud migration. First, all of their business comes through their website, so high availability and performance are critically important to them, and she would like to see an improvement in this area as the migrate to the cloud. Second, she is a big proponent of open-source software (OSS) and would like to continue to use their open source tools. Development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). Their code is hosted in a private GitHub repository. A point of pride for Best For You Organics Company has been their developers' involvement in the open source community, with most members of the team frequently contributing to React.js on GitHub. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
+Their CIO, Holly Franklin, has voiced several concerns about a cloud migration. First, all of their business comes through their website, so high availability and performance are critically important to them, and she would like to see an improvement in this area as they migrate to the cloud. Second, she is a big proponent of open-source software (OSS) and would like to continue to use their open-source tools. The development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). They host their code in a private GitHub repository. A point of pride for Best For You Organics Company has been their developers' involvement in the open-source community, with most members of the team frequently contributing to React.js on GitHub. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
 
-Another feature she is interested in learning more about is identity management. Their existing web app requires users to register, and log in before subscribing to a meal plan. Today, this is handled via a home-grown solution that stores usernames and passwords in the same database used for storing application information. They have experimented with other third-party solutions in the past, but found them difficult to integrate into their application, and are curious if moving their application into a cloud PaaS platform could help them integrate a better solution.
+Another feature she is interested in learning more about is identity management. Their existing web app requires users to register and log in before subscribing to a meal plan. Today, they handle this via a home-grown solution that stores usernames and passwords in the same database used for storing application information. They have experimented with other third-party solutions in the past, but found them difficult to integrate into their application, and are curious if moving their application into a cloud PaaS platform could help them integrate a better solution.
 
-For their migration to the cloud, they have indicated that they would like to reuse as much code and architecture as possible. "We want the migration to be non-invasive. Although the existing code has its nuances and issues, we do not want to redesign the entire solution to migrate to the cloud. We want to be as efficient as possible with time and cost." Additionally, they want to continue using MongoDB APIs for data storage, to avoid having to rewrite application data access code, but don't want to worry about managing infrastructure, consistency, replication, etc.
+For their migration to the cloud, they have indicated that they would like to reuse as much code and architecture as possible. "We want the migration to be non-invasive. Although the existing code has its nuances and issues, we do not want to redesign the entire solution to migrate to the cloud. We want to be as efficient as possible with time and cost." Additionally, they want to continue using MongoDB APIs for data storage, to avoid having to rewrite application data access code, but don't want to worry about managing infrastructure, consistency, and replication.
 
-The development team has also expressed that they would like to continue using GitHub as their code repository, but is interested in improving upon their DevOps pipeline. They currently use Jenkins for their builds and are interested in any tools available in a cloud offering that could help with release management, or other aspects of a fully-integrated, modern DevOps pipeline. Ultimately, their goal is to automate and simplify deployments through CI/CD capabilities, and deliver updates faster and more reliably.
+The development team has also expressed that they would like to continue using GitHub as their code repository but is interested in improving upon their DevOps pipeline. They currently use Jenkins for their builds and are interested in any tools available in a cloud offering that could help with release management, or other aspects of a fully-integrated, modern DevOps pipeline. Ultimately, their goal is to automate and simplify deployments through CI/CD capabilities and deliver updates faster and more reliably.
 
-They have also expressed interest in gaining a better understanding of how serverless architecture could be leveraged to help their business grow. They have several processes that they are considering adding to their workflow, which they feel would be good candidates for a serverless approach, but are not sure which technologies and tools are right for the job. First, they would like to see if they can automate their daily order processing, queuing up the orders that need to go out each day, and updating their database when the orders have completed processing and been shipped. Next, they would like to implement functionality to send customers an email or SMS text message when their credit card has been charged and their weekly meal delivery has been shipped.
+They have also expressed interest in gaining a better understanding of how serverless architecture could be leveraged to help their business grow. They have several processes that they are considering adding to their workflow, which they feel would be good candidates for a serverless approach, but are not sure which technologies and tools are right for the job. First, they would like to see if they can automate their daily order processing, queuing up the orders that need to go out each day, and updating their database when the orders have completed processing and shipped. Next, they would like to implement functionality to send customers an email or SMS text message when their credit card has been charged, and their weekly meal delivery has shipped.
 
-Best For You Organics is optimistic about the benefits of moving to a PaaS solution, but very concerned about the time and potential changes which might be required to accommodate the transition for an OSS application.
+Best For You Organics is optimistic about the benefits of moving to a PaaS solution but very concerned about the time and potential changes that might be required to accommodate the transition for an OSS application.
 
 ### Customer needs
 
-1. Wants to migrate as much of their infrastructure as possible to the cloud to make it easier to take advantage of the scalability, reliability, and performance of a PaaS solution, and reduce the burden of building out and managing hardware and software.
+1. Best For You Organics wants to migrate as much of their infrastructure as possible to the cloud to make it easier to take advantage of the scalability, reliability, and performance of a PaaS solution, and reduce the burden of building out and managing hardware and software.
 
-2. Would like to reuse as much of their existing code and architecture as possible.
+2. They would like to reuse as much of their existing code and architecture as possible.
 
-    - They want the migration to be non-invasive. Although the existing code has its nuances and issues, we do not want to redesign the entire solution to migrate to the cloud.
-    - Would like to continue using MongoDB APIs for data storage, to avoid having to rewrite application data access code, but don't want to worry about managing infrastructure, consistency, replication, etc.
+   - They want the migration to be non-invasive. Although the existing code has its nuances and issues, we do not want to redesign the entire solution to migrate to the cloud.
+   - The would like to continue using MongoDB APIs for data storage, to avoid having to rewrite application data access code, but don't want to worry about managing infrastructure, consistency, replication, etc.
 
-3. Want to continue to use their GitHub repository for source control, and Jenkins for their builds, but are interested in any value-added functionality available in Azure which improve their ability to rapidly build, test, and deploy application updates, through automated and simplified deployments using continuous Integration/continuous delivery (CI/CD) capabilities.
+3. They want to continue to use their GitHub repository for source control, and Jenkins for their builds. However, they are interested in any value-added functionality available in Azure that might improve their ability to rapidly build, test, and deploy application updates through automated and simplified deployments using continuous integration/continuous delivery (CI/CD) capabilities.
 
 4. Want to maintain a dedication to open source technologies, and maintain those same technologies within the cloud solution, while taking advantage of integrations with the cloud environment, where possible.
 
@@ -229,21 +229,21 @@ Best For You Organics is optimistic about the benefits of moving to a PaaS solut
 
 2. We're interested in using containers, but we're not sure how they work in Azure. Does Azure provide reliable ways to deploy and manage containers? What is the simplest way to move containers to Azure, based on our PaaS experience, while at the same time considering our scale and growth requirements?
 
-3. We would like to improve our current DevOps workflow. What options are available in Azure? Can we implement a CI/CD pipeline? Can we continue to use Jenkins? Does Azure offer any value-added services which we can leverage in our existing Jenkins CI pipeline?
+3. We want to improve our current DevOps workflow. What options are available in Azure? Can we implement a CI/CD pipeline? Can we continue to use Jenkins? Does Azure offer any value-added services which we can leverage in our existing Jenkins CI pipeline?
 
-4. We've heard about Azure Active Directory B2C (Azure AD B2C) to manage application users, but we are not sure how that would work with our open source application.
+4. We've heard about Azure Active Directory B2C (Azure AD B2C) to manage application users, but we are not sure how that would work with our open-source application.
 
-5. Is Azure Search an appropriate solution for improving the search capabilities of our OSS app?
+5. Is Azure Cognitive Search an appropriate solution for improving the search capabilities of our OSS app?
 
-6. We no longer want to maintain VMs for running our MongoDB database. Does Azure offer a solution that will allow us to continue using the MongoDB APIs, while benefiting from the scalability and reliability of a PaaS database platform?
+6. We no longer want to maintain VMs for running our MongoDB database. Does Azure offer a solution that will allow us to continue using the MongoDB APIs while benefiting from the scalability and reliability of a PaaS database platform?
 
-7. We would like to understand more about the benefits of a serverless architecture. In Azure does it mean only using Azure Functions or is there more to it?
+7. We would like to understand more about the benefits of a serverless architecture. In Azure, does it mean only using Azure Functions, or is there more to it?
 
-8. We've read that Visual Studio Code is a free, open source code editor that can be used for OSS development. Can our developers continue to use their IDE, or do they need to switch over to using Visual Studio Code to write code destined for the Azure platform? Does Visual Studio Code offer any features or integration capabilities that would make it advantageous over a non-Microsoft code editor?
+8. We've read that Visual Studio Code is a free, open-source code editor that can be used for OSS development. Can our developers continue to use their IDE, or do they need to switch over to using Visual Studio Code to write code destined for the Azure platform? Does Visual Studio Code offer any features or integration capabilities that would make it advantageous over a non-Microsoft code editor?
 
 ### Infographic for common scenarios
 
-![This data flow diagram illustrates how to build highly scalable e-commerce websites with catalog, checkout, analysis, and forecasting. Fifteen components in this diagram interact with each other between end users and the enterprise, and the components are organized in three tiers: the internet tier, the services tier, and the data tier.](media/image2.png "Common E-Commerce Website scenarios infographic")
+![This data flow diagram illustrates how to build highly scalable e-commerce websites with catalog, checkout, analysis, and forecasting. Fifteen components in this diagram interact with each other between end-users and the enterprise, and the components are organized in three tiers: the internet tier, the services tier, and the data tier.](media/image2.png "Common E-Commerce Website scenarios infographic")
 
 ## Step 2: Design a proof of concept solution
 
@@ -267,13 +267,13 @@ Directions: With all participants at your table, respond to the following questi
 
 *High-level architecture*
 
-1. Without getting into the details, (the following sections will address the details), diagram your initial vision for handling the top-level requirements for the OSS app and migration, serverless architecture integration, search integration, Azure AD B2C implementation, and DevOps pipeline. You will refine this diagram as you proceed.
+1. Without getting into the details (they are addressed in the following sections), diagram your initial vision for handling the top-level requirements for the OSS app and migration, serverless architecture integration, search integration, Azure AD B2C implementation, and DevOps pipeline. You will refine this diagram as you proceed.
 
 *PaaS solution*
 
 1. What PaaS solution would you propose to Best For You Organics Company for moving their application into Azure? Will this solution minimize the number of application code changes required to migrate the application? How will container orchestration be handled?
 
-2. Describe the scalability, high-availability and performance options that are open to Best For Your Organics Company with the PaaS solution you proposed above.
+2. Describe the scalability, high-availability, and performance options that are open to Best For Your Organics Company with the PaaS solution you proposed above.
 
 3. What options does the customer have for a Docker image registry? Which options would you recommend?
 
@@ -297,7 +297,7 @@ Directions: With all participants at your table, respond to the following questi
 
 *Search integration*
 
-1. How could Azure Search be integrated into the OSS application?
+1. How could Azure Cognitive Search be integrated into the OSS application?
 
 *DevOps workflows*
 
@@ -361,7 +361,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | Cosmos DB | <https://docs.microsoft.com/azure/cosmos-db> |
 | Deploy to Azure App Service using Jenkins plugin | <https://docs.microsoft.com/azure/jenkins/deploy-jenkins-app-service-plugin> |
 | Create Jenkins server in Azure | <https://docs.microsoft.com/en-us/azure/jenkins/install-jenkins-solution-template> |
-| Azure Search in Node.js | <https://docs.microsoft.com/azure/search/search-get-started-nodejs> |
+| Azure Cognitive Search in Node.js | <https://docs.microsoft.com/azure/search/search-get-started-nodejs> |
 | Visual Studio (VS) cCode for OSS | <https://code.visualstudio.com/docs/nodejs/reactjs-tutorial> |
 | Web App for containers | <https://azure.microsoft.com/blog/webapp-for-containers-overview/> |
 
@@ -411,7 +411,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 Holly Franklin, CIO of Best For You Organics Company
 
-The primary audience is the business decision makers and technology decision makers. Usually we talk to the infrastructure managers who report to the chief information officer (CIO), or to application sponsors (i.e. VP-line of business \[LOB\], chief marketing officer \[CMO\]), business unit IT personnel, or developers that report to application sponsors.
+The primary audience is business and technology decision-makers. Usually we talk to the infrastructure managers who report to the chief information officer (CIO), or to application sponsors (i.e., VP-line of business \[LOB\], chief marketing officer \[CMO\]), business unit IT personnel, or developers that report to application sponsors.
 
 ## Preferred solution
 
@@ -421,47 +421,47 @@ After reviewing the available options for transitioning their applications to a 
 
 1. Without getting into the details, (the following sections will address them), diagram your initial vision for handling the top-level requirements for the OSS app migration, serverless architecture integration, search integration, Azure AD B2C implementation, and DevOps pipeline. You will refine this diagram as you proceed.
 
-    ![This diagram consists of icons that are connected by arrows. On the left, the Developer icon (VS Code) points in a linear fashion to GitHub Repo and Jenkins icons. The previous two icons are enclosed in a box labeled CI/CD Pipeline. Jenkins points to Web App for Containers on the right. Various arrows point from Web App for Container to: Azure Container Registry (a linear arrow points from Azure Container Registry to Web App for Container); Logic Apps (a linear arrow that points from Logic Apps to a mobile device/computer, which points to Azure AD B2C (a double-sided arrow), which points back to Web App for Container (a double-sided arrow); Azure Search (a linear arrow); and Azure Cosmos DB (a double-sided arrow). Azure Cosmos DB points at Azure Functions (a double-sided arrow), which points at 3rd Party Gateway (a linear arrow).](media/preferred-solution.png "Solution architecture diagram")
+    ![This diagram consists of icons that are connected by arrows. On the left, the Developer icon (VS Code) points in a linear fashion to GitHub Repo and Jenkins icons. The previous two icons are enclosed in a box labeled CI/CD Pipeline. Jenkins points to Web App for Containers on the right. Various arrows point from Web App for Container to: Azure Container Registry (a linear arrow points from Azure Container Registry to Web App for Container); Logic Apps (a linear arrow that points from Logic Apps to a mobile device/computer, which points to Azure AD B2C (a double-sided arrow), which points back to Web App for Container (a double-sided arrow); Azure Cognitive Search (a linear arrow); and Azure Cosmos DB (a double-sided arrow). Azure Cosmos DB points at Azure Functions (a double-sided arrow), which points at 3rd Party Gateway (a linear arrow).](media/preferred-solution.png "Solution architecture diagram")
 
-    From a high level, developers will package the entire OSS application inside a custom Docker container using VS Code or another editor. The image will be pushed to an Azure Container Registry as part of a continuous integration process using GitHub and Jenkins. This Docker image will then be deployed to a Web App for Containers instance, as part of their continuous delivery process using Jenkins with the Azure App Service Jenkins plugin.
+    From a high level, developers package the entire OSS application inside a custom Docker container using VS Code or another editor. The container image is pushed to an Azure Container Registry as part of a continuous integration process using GitHub and Jenkins. This Docker image is then be deployed to a Web App for Containers instance, as part of their continuous delivery process using Jenkins with the Azure App Service Jenkins plugin.
 
-    The MongoDB database will be imported into Azure Cosmos DB, using *mongoimport* or *mongorestore*, and access to the database from the application will continue to use the MongoDB APIs. Database connection strings in the application will be updated to point to the new Cosmos DB.
+    The MongoDB database is imported into Azure Cosmos DB, using *mongoimport* or *mongorestore*, and access to the database from the application continues to use the MongoDB APIs. Database connection strings in the application are updated to point to the new Cosmos DB.
 
-    Serverless architecture will be applied to order processing and customer notifications. Azure Functions will be used to automate the processing of orders, billing credit cards, and updating the database as order processing is complete. Logic Apps will be applied to send SMS notifications, via a Twilio connector, to customers informing them that their order has been processed and shipped. Azure Search will be integrated into the application to provide enhanced search functionality.
+    A serverless architecture is applied to order processing and customer notifications. Azure Functions are used to automate the processing of orders, billing credit cards, and updating the database as order processing is complete. Logic Apps are applied to send SMS notifications via a Twilio connector to customers, informing them that their order has been processed and shipped. Azure Search is integrated into the application to provide enhanced search functionality.
 
-    Identity management for the application will be handled via Active Directory B2C. This will be used for both sign up and sign in actions, and to secure access to the containerized web app.
+    Identity management for the application is handled via Azure Active Directory B2C. AAD B2C is used for both sign-up and sign in actions, and to secure access to the containerized web app.
 
 *PaaS solution*
 
 1. What PaaS solution would you propose to Best For You Organics Company for moving their application into Azure? Will this solution minimize the number of application code changes required to migrate the application? How with container orchestration be handled?
 
-    Azure App Service on Linux and Web App for Containers would be possible options for Best For You Organics Company. Both were design with the intention of supporting OSS workloads inside Azure App Service. Azure App Service on Linux provides multiple built-in images, catering to developers who want to use FTP or GIT, deploy .NET Core, Node, PHP or Ruby applications to Azure App Service running on Linux. Web App for Containers provides developers more control over the packages, runtime frameworks, and tooling using custom Docker images.
+    Azure App Service on Linux and Web App for Containers would be possible options for Best For You Organics Company. Both were designed with to support OSS workloads inside Azure App Service. Azure App Service on Linux provides multiple built-in images, catering to developers who want to use FTP or GIT, deploy .NET Core, Node, PHP, or Ruby applications to Azure App Service running on Linux. Web App for Containers provides developers more control over the packages, runtime frameworks, and tooling using custom Docker images.
 
-    Considering Best For You Organics' desire to reuse as much code and architecture as possible, along with their previous experience with Docker, Web App for Containers would provide the best approach to quickly and easily migrating their application to Azure. Using Web App for Containers would enable Best For You Organics' to reuse most, if not all, of their existing code and architecture. The development team would just need to create a custom Docker image for their application, and upload that to their registry.
+    Considering Best For You Organics' desire to reuse as much code and architecture as possible, along with their previous experience with Docker, Web App for Containers would provide the best approach to quickly and easily migrating their application to Azure. Using Web App for Containers would enable Best For You Organics' to reuse most, if not all, of their existing code and architecture. The development team only needs to create a custom Docker image for their application and upload that to their registry.
 
-    Web App for Containers was designing leveraging years of Microsoft's Azure App Service PaaS innovations, and allows developers to just focus on composing their containers without worrying about managing and maintaining an underlying container orchestrator. Container orchestration is obfuscated away from developers, and handled as part of the managed services.
+    Web App for Containers was designed leveraging years of Microsoft's Azure App Service PaaS innovations, and it allows developers to focus on composing their containers without worrying about managing and maintaining an underlying container orchestrator. Container orchestration is obfuscated away from developers and handled as part of the managed services.
 
-2. Describe the scalability, high-availability and performance options that are open to Best For Your Organics Company with the PaaS solution you proposed above.
+2. Describe the scalability, high-availability, and performance options that are open to Best For Your Organics Company with the PaaS solution you proposed above.
 
-    By using Azure Web Apps in multiple North American regions, we can meet the high-availability needs of Best For You Organics Company. They could deploy Web Apps into several paired regions to ensure failover capabilities. In addition, this approach provides web front-ends close to current and future customers.
+    By using Azure Web Apps in multiple North American regions, we can meet the high-availability needs of Best For You Organics Company. They could deploy Web Apps into several paired regions to ensure failover capabilities. Also, this approach provides web front-ends close to current and future customers.
 
-    Configuring web apps to scale is simple using Azure App Services. A set of criteria is easy to define and then Azure will take care of the hard work to ensure that the web app is always responsive. This set of steps is easily completed by administrators based on a few different metrics, such as CPU, memory, etc.
+    Configuring web apps to scale is simple using Azure App Services. A set of criteria is easy to define, and then Azure handles the hard work of ensuring that the web app is always responsive. Administrators can easily complete this set of steps based on a few different metrics, such as CPU or memory.
 
-    Using an Azure CDN Standard or Premium from Verizon, we can pre-load files into nodes that are located closer to customers. This ensures that the load times for static content will be less than if they were served directly by the web application. All static content will be preloaded, including images and PDFs among other items on the site.
+    Using an Azure CDN Standard or Premium from Verizon, we can preload files into nodes that are located closer to customers. This ensures that the load times for static content will be less than if they were served directly by the web application. All static content will be preloaded, including images and PDFs, among other items on the site.
 
-3. What options does the customer have for a Docker image registry? What option you would recommend?
+3. What options does the customer have for a Docker image registry? Which option would you recommend?
 
-    The image registry is core to the CI/CD workflow, and must be a production worthy implementation, as it is the source of container images, versioning, deployment, upgrade, and rollback strategies. Registry images can also be used for cross-environment promotion (between development, test, staging, and production, for example).
+    The image registry is core to the CI/CD workflow. It must be a production worthy implementation, as it is the source of container images, versioning, deployment, upgrade, and rollback strategies. Registry images can also be used for cross-environment promotion (between development, test, staging, and production, for example).
 
     The two most feasible options for the customer's container registry are Azure Container Registry (ACR) or a private Docker Hub. You could also deploy and manage your own Docker Registry in an Azure VM, but given customer's desire to move away from managing infrastructure, this would not be recommended.
 
-    We recommend the use of Azure Container Registry where possible for Azure solutions.
+    We recommend the use of Azure Container Registry, where possible, for Azure solutions.
 
     Using Azure container registry provides the following advantages over DockerHub:
 
     - **Network-close deployment**: Network-close deployment is one of the primary reasons for using a private container registry. By creating your container registry in the same Azure region in which you deploy containers, you can help lower both network latency and egress fees.
 
-    - **Geo-replication**: Azure Container Registry's geo-replication feature can be used if deploying containers to multiple regions. Using this feature, you can simplify registry management, and minimize latency.
+    - **Geo-replication**: Azure Container Registry's geo-replication feature can be used if deploying containers to multiple regions. Using this feature, you can simplify registry management and minimize latency.
 
     - **Repository namespaces**: By leveraging repository namespaces, you can allow sharing a single registry across multiple groups within your organization.
 
@@ -491,9 +491,9 @@ After reviewing the available options for transitioning their applications to a 
 
     They should use Azure Functions for automating their order processing.
 
-    A Function with an Azure Cosmos DB trigger could be used to queue up new orders for processing as they are received. A second Function could handle processing the items in the queue and ensuring the order are updated when processing is completed.
+    A Function with an Azure Cosmos DB trigger could be used to queue up new orders for processing as they are received. A second Function could handle processing the items in the queue and ensuring the orders are updated when processing is completed.
 
-    Azure Storage Queues should be for the queueing technology. Given the customers need to process orders daily, the lifetime of the messages in the queue will be less than a day; should the queue fail, a subsequent worker can continue from where the prior worker left off. They do not require some of the more advanced queueing features offered by Service Bus.
+    Azure Storage Queues should be used as the queueing technology. Given the customers need to process orders daily, the lifetime of the messages in the queue will be less than a day; should the queue fail, a subsequent worker can continue from where the prior worker left off. They do not require some of the more advanced queueing features offered by Service Bus.
 
     ![Arrows that point right connect four icons, which are labeled Change feed stream from Azure Cosmos DB, Azure Cosmos DB trigger, Azure Function, and Output.](media/image4.png "Serverless architecture diagram")
 
@@ -501,7 +501,7 @@ After reviewing the available options for transitioning their applications to a 
 
     Logic Apps can be used to send SMS messages via Twilio to customers.
 
-    Best For You Organics Company can implement a Logic App to notify customers of their order status. The logic app would include an Azure Queue trigger, linked to the notification queue populated by one of their Azure Functions, which would trigger whenever an order is finished processing, and a notification queue item is added.
+    Best For You Organics Company can implement a Logic App to notify customers of their order status. The logic app would include an Azure Queue trigger linked to the notification queue populated by one of their Azure Functions, which would trigger whenever an order is finished processing, and a notification queue item is added.
 
     A Twilio connector could act as the action to perform, which sends an SMS message when the trigger fires. The Best For You Organics Company would sign up for a Twilio account to get an API key, and would then provision a Twilio connector within the logic app, and add the credentials. Next, they would select a Send Message action using data provided in the queue message, specifically the customer's phone number and first name to include in the message, such as "Hello Steve, your Best For Your Organics weekly order has shipped!"
 
@@ -511,15 +511,15 @@ After reviewing the available options for transitioning their applications to a 
 
 1. How would you recommend Best For You Organics Company implement identity management in their customer-facing application?
 
-    Best For You Organics Company could leverage Azure Active Directory Business to Consumer (B2C) to manage their customer's usernames and passwords. They would need to provision an Azure Active Directory B2C instance within their Azure subscription. AAD B2C provides a highly available, global, identity management service for customer-facing applications, which can be easily integrated into mobile and web platforms.
+    Best For You Organics Company could leverage Azure Active Directory Business to Consumer (B2C) to manage their customer's usernames and passwords. They would need to provision an Azure Active Directory B2C instance within their Azure subscription. AAD B2C provides a highly available, global identity management service for customer-facing applications, which can be easily integrated into mobile and web platforms.
 
     For web apps (including .NET, PHP, Java, Ruby, Python, and Node.js) that are hosted on a server or in a container, and accessed through a browser, Azure AD B2C supports OpenID Connect for all user experiences. This includes sign-in, sign-up, and profile management. In the Azure AD B2C implementation of OpenID Connect, your web app initiates these user experiences by issuing authentication requests to Azure AD.
 
 *Search integration*
 
-1. How could Azure Search be integrated into the OSS application?
+1. How could Azure Cognitive Search be integrated into the OSS application?
 
-    The search index would be built on the meal option data stored in Cosmos DB. The Best For You Organics team could then create a Node.js API App, secured by Azure AD B2C, which wraps the Azure Search API. To perform a search, a browser loads the web page on a device and makes a cross-origin, XmlHttpRequest to the API app. Meals and plan options matching the search terms are returned, with HTML and CSS formatting embedded, so the text that matches the search query is highlighted in the displayed results.
+    The search index would be built on the meal option data stored in Cosmos DB. The Best For You Organics team could then create a Node.js API App, secured by Azure AD B2C, which wraps the Azure Cognitive Search API. To perform a search, a browser loads the web page on a device and makes a cross-origin XmlHttpRequest to the API app. Meals and plan options matching the search terms are returned, with HTML and CSS formatting embedded, so the text that matches the search query is highlighted in the displayed results.
 
 *DevOps workflows*
 
@@ -529,15 +529,15 @@ After reviewing the available options for transitioning their applications to a 
 
     Using the Azure App Service Jenkins plugin, you can automate your deployments so that you can deliver your apps/services easily and often. You can set up a CI/CD process all in Azure DevOps. However, if you already have a CI pipeline with a third-party tool, such as Jenkins, you can continue to use those tools to implement your CI/CD pipeline.
 
-    Using the customer's existing Jenkins server and build pipeline, they could add a post-build action to publish an Azure Web App. Using the Azure App Service plug-in for Jenkins, you can build and deploy a docker container to the App Service underlying the Web App for Containers in Azure.
+    Using the customer's existing Jenkins server and build pipeline, they could add a post-build action to publish an Azure Web App. Using the Azure App Service plugin for Jenkins, you can build and deploy a docker container to the App Service underlying the Web App for Containers in Azure.
 
 ## Checklist of preferred objection handling
 
 1. Is Azure an appropriate platform for hosting an OSS application using PaaS?
 
-    Yes. If you're an OSS developer, Azure offers more than you might expect, from virtual machines to managed services, functions, and containers. With Azure, you get full stack capabilities, including:
+    Yes. If you're an OSS developer, Azure offers more than you might expect, from virtual machines to managed services, functions, and containers. With Azure, you get full-stack capabilities, including:
 
-    - Integration with popular, and free, open source tools such as Visual Studio Code.
+    - Integration with popular, and free, open-source tools such as Visual Studio Code.
     - Monitoring services with Application Insights to catch bugs, optimize apps, and stay on top of their status.
     - Comprehensive managed database support with Cosmos DB (compatible with MongoDB), MySQL, and PostgreSQL.
     - Support for a variety of platforms and frameworks to help with both new microservices-based apps and existing apps.
@@ -547,9 +547,9 @@ After reviewing the available options for transitioning their applications to a 
 
     Microsoft Azure provides integrated tools for developing and managing containerized applications faster. Deploy containers using widely adopted orchestrators or choose a fully-managed container platform. Take advantage of Visual Studio Tools for Docker to easily develop, run, and debug multi-container applications, and store images in Docker Hub or Azure Container Registry and deploy to your preferred targets.
 
-    Azure Container Registry (ACR) is a private registry for hosting container images. Using the Azure Container Registry, you can store Docker-formatted images for all types of container deployments. Azure Container Registry integrates well with orchestrators hosted in Azure Container Service, including Docker Swarm, DC/OS, and Kubernetes. You don't have to learn new APIs or commands. Because Azure Container Registry is compatible with the open-source Docker Registry v2, you can use the same open-source Docker CLI tools you already know and the skills you have to efficiently interact with the registry.
+    Azure Container Registry (ACR) is a private registry for hosting container images. Using the Azure Container Registry, you can store Docker-formatted images for all types of container deployments. Azure Container Registry integrates well with orchestrators hosted in Azure Container Service, including Docker Swarm, DC/OS, and Kubernetes. You don't have to learn new APIs or commands. Because Azure Container Registry is compatible with the open-source Docker Registry v2, you can use the same open-source Docker CLI tools you already know and the skills you have to interact with the registry efficiently.
 
-    Microsoft designed Web App for Containers specifically for customers interested in bringing their Docker formatted containers to the Azure App Service platform. Web App for Containers provides an ideal environment for running OSS web apps that do not require extensive infrastructure control, allowing customers to use their own containers, and deploy them to App Service as a web app running on Linux. Like the Web App solution, this eliminates time-consuming infrastructure management tasks during container deployment, updating, and scaling to help developers focus on coding and getting their apps in front of more end users faster. This also provides integrated CI/CD capabilities with DockerHub, Azure Container Registry, and Azure DevOps, as well as built-in staging, rollback, testing-in-production, monitoring, and performance testing capabilities to boost developer productivity.
+    Microsoft designed Web App for Containers specifically for customers interested in bringing their Docker formatted containers to the Azure App Service platform. Web App for Containers provides an ideal environment for running OSS web apps that do not require extensive infrastructure control, allowing customers to use their containers, and deploy them to App Service as a web app running on Linux. Like the Web App solution, this eliminates time-consuming infrastructure management tasks during container deployment, updating, and scaling to help developers focus on coding and getting their apps in front of more end-users faster. This also provides integrated CI/CD capabilities with DockerHub, Azure Container Registry, and Azure DevOps, as well as built-in staging, rollback, testing-in-production, monitoring, and performance testing capabilities to boost developer productivity.
 
     This solution also allows organizations to take advantage of built-in auto-scaling and load balancing. Automatically scale vertically and horizontally based on application needs. Granular scaling rules are available to handle peaks in workload automatically while minimizing costs during off-peak times. Deploy data and host services across multiple locations with just a few mouse clicks.
 
@@ -559,9 +559,9 @@ After reviewing the available options for transitioning their applications to a 
 
     Using Web App for Containers, you can streamline CI/CD with Docker Hub, Azure Container Registry, and GitHub. Automate and simplify your container image deployments through continuous integration/continuous deployment (CI/CD) capabilities with Docker Hub, Azure Container Registry, and Azure DevOps. App Service creates an association with the selected repository, so your apps are updated each time your source code changes. Schedule performance and quality tests in staging environment, and use deployment slots to swap staging to production in seconds, or roll back to previous versions without downtime.
 
-4. We've heard about Azure Active Directory B2C to manage application users, but we are not sure how that would work with our open source application.
+4. We've heard about Azure Active Directory B2C to manage application users, but we are not sure how that would work with our open-source application.
 
-    Azure AD B2C is a highly available, global, identity management service for customer-facing applications that scales to hundreds of millions of identities. It can be easily integrated across mobile and web platforms. Your customers can log on to all your applications through fully customizable experiences by using their existing social accounts or by creating new credentials.
+    Azure AD B2C is a highly available, global identity management service for customer-facing applications that scales to hundreds of millions of identities. It can be easily integrated across mobile and web platforms. Your customers can log on to all your applications through fully customizable experiences by using their existing social accounts or by creating new credentials.
 
     - Protect your consumer's identities
     - Login with social media accounts
@@ -570,33 +570,34 @@ After reviewing the available options for transitioning their applications to a 
 
     For web apps (including .NET, PHP, Java, Ruby, Python, and Node.js) that are hosted on a server or in a container, and accessed through a browser, Azure AD B2C supports OpenID Connect for all user experiences. This includes sign-in, sign-up, and profile management. In the Azure AD B2C implementation of OpenID Connect, your web app initiates these user experiences by issuing authentication requests to Azure AD.
 
-5. Is Azure Search an appropriate solution for improving the search capabilities of our OSS app?
+5. Is Azure Cognitive Search an appropriate solution for improving the search capabilities of our OSS app?
 
-    Yes. Microsoft Azure Search is capable of integration into OSS applications. Azure Search is a search-as-a-service solution that allows developers to embed a sophisticated search experience into web and mobile applications without having to worry about the complexities of full-text search and without having to deploy, maintain or manage any infrastructure. With Azure Search you can surface the power of searching data in your application, reduce the complexity around managing and tuning a search index, and boost development speed using familiar tools and a consistent platform.
+    Yes. Microsoft Azure Cognitive Search is capable of integration into OSS applications. Azure Cognitive Search is a search-as-a-service solution that allows developers to embed a sophisticated search experience into web and mobile applications without having to worry about the complexities of full-text search and without having to deploy, maintain or manage any infrastructure. With Azure Cognitive Search, you can surface the power of searching data in your application, reduce the complexity around managing and tuning a search index, and boost development speed using familiar tools and a consistent platform.
 
     Azure Search Features:
 
     - Powerful, reliable performance
     - Connect business goals to the application
-    - Scale out easily
+    - Scale-out easily
     - Sophisticated search functionality
     - Fast time to market
     - Simplify search index management
+    - AI-enabled enrichments
 
-6. We no longer want to maintain VMs for running our MongoDB database. Does Azure offer a solution that will allow us to continue using the MongoDB APIs, while benefiting from the scalability and reliability of a PaaS database platform?
+6. We no longer want to maintain VMs for running our MongoDB database. Does Azure offer a solution that will allow us to continue using the MongoDB APIs while benefiting from the scalability and reliability of a PaaS database platform?
 
     You can use your existing MongoDB expertise, application code, and tooling as Azure Cosmos DB implements the MongoDB 3.4 (version 5) wire protocol and supports the MongoDB aggregation pipeline. You can develop applications using MongoDB, and deploy them to production using the fully managed, and globally distributed Azure Cosmos DB service. In other words, your application only knows that it's connecting to a database using MongoDB APIs. It is transparent to the application that the data is stored in Azure Cosmos DB.
 
     By using Azure Cosmos DB for MongoDB applications, you get the following benefits:
 
     - **Elastically scalable throughput and storage**: Azure Cosmos DB supports MongoDB collections that can scale to virtually unlimited storage sizes and provisioned throughput. You can elastically scale Azure Cosmos DB with predictable performance seamlessly as your application grows.
-    - **Multi-region replication**: Azure Cosmos DB transparently replicates your data to all regions you've associated with your MongoDB account, enabling you to develop applications that require global access to data while providing tradeoffs between consistency, availability, and performance, all with corresponding guarantees. Azure Cosmos DB provides transparent regional failover with multi-homing APIs, and the ability to elastically scale throughput and storage across the globe.
+    - **Multi-region replication**: Azure Cosmos DB transparently replicates your data to all regions you've associated with your MongoDB account. This enables you to develop applications that require global access to data while providing trade-offs between consistency, availability, and performance, all with corresponding guarantees. Azure Cosmos DB provides transparent regional failover with multi-homing APIs, and the ability to elastically scale throughput and storage across the globe.
     - **No server management**: You don't have to manage and scale your MongoDB databases. Azure Cosmos DB is a fully managed service, which means you do not have to manage any infrastructure or Virtual Machines yourself.
     - **Tunable consistency levels**: Select from five well-defined consistency levels to achieve the optimal trade-off between consistency and performance.
     - **Automatic indexing**: By default, Azure Cosmos DB automatically indexes all the properties within documents in your MongoDB database, and does not expect or require any schema or creation of secondary indices.
-    - **Enterprise grade**: Azure Cosmos DB supports multiple local replicas to deliver 99.99% availability and data protection in the face of local and regional failures. Azure Cosmos DB has enterprise grade compliance certifications and security features.
+    - **Enterprise-grade**: Azure Cosmos DB supports multiple local replicas to deliver 99.99% availability and data protection in the face of local and regional failures. Azure Cosmos DB has enterprise-grade compliance certifications and security features.
 
-7. We would like to understand more about the benefits of a serverless architecture. In Azure does it mean only using Azure Functions or is there more to it?
+7. We would like to understand more about the benefits of a serverless architecture. In Azure, does it mean only using Azure Functions, or is there more to it?
 
     A Serverless Architecture, as the name implies, aims to provide a solution architecture where concern for individual servers is minimized. While the term "Serverless" has varying interpretations, it typically includes the following characteristics:
 
@@ -604,17 +605,17 @@ After reviewing the available options for transitioning their applications to a 
 
     - Focus entirely on scaling the capabilities that support the business logic
 
-    - Capability is scaled transparently at a very granular level (e.g. scaling occurs on a per request or function invocation basis and not on an all up server load basis)
+    - Capability is scaled transparently at a very granular level (e.g., scaling occurs on a per request or function invocation basis and not on an all-up server load basis)
 
     - Cost is typically associated with time spent supporting business logic computation, not on the time server resources are available to handle requests
 
-    In Azure, Functions is a prime component of a serverless architecture, but not the only service that may be utilized in one. Other Azure Services that, by this definition, can be composed into a serverless architecture include: Logic Apps, Azure Storage Blobs, Tables and Queues, Azure Data Lake Store, API Management, CDN, Media Services, Notification Hubs, IoT Hub, and Service Bus.
+    In Azure, Functions is a prime component of a serverless architecture, but not the only service that may be utilized in one. Other Azure Services that, by this definition, can be composed into a serverless architecture include Logic Apps, Azure Storage Blobs, Tables and Queues, Azure Data Lake Store, API Management, CDN, Media Services, Notification Hubs, IoT Hub, and Service Bus.
 
-8. We've read that Visual Studio Code is a free, open source code editor that can be used for OSS development. Can our developers continue to use their IDE, or do they need to switch over to using VS Code to write code destined for the Azure platform? Does VS Code offer any features or integration capabilities that would make it advantageous over a non-Microsoft code editor?
+8. We've read that Visual Studio Code is a free, open-source code editor that can be used for OSS development. Can our developers continue to use their IDE, or do they need to switch over to using VS Code to write code destined for the Azure platform? Does VS Code offer any features or integration capabilities that would make it advantageous over a non-Microsoft code editor?
 
-    Development teams that prefer to use their existing tools for building Azure applications, can continue to do so. Popular code editors, like WebMatrix and IntelliJ, offer integration with Microsoft Azure and Azure DevOps, allowing developers to easily create, develop, test, and deploy Azure applications.
+    Development teams that prefer to use their existing tools for building Azure applications can continue to do so. Popular code editors, like WebMatrix and IntelliJ, offer integration with Microsoft Azure and Azure DevOps, allowing developers to easily create, develop, test, and deploy Azure applications.
 
-    Visual Studio Code is a lightweight open source code editor which runs on your desktop and is available for Windows, macOS, and Linux. At its heart, VS Code features a lightning fast source code editor, with support for hundreds of languages. VS Code helps developer productivity with syntax highlighting, bracket-matching, auto-indentation, box-selection, snippets, and more.
+    Visual Studio Code is a lightweight open-source code editor that runs on your desktop and is available for Windows, macOS, and Linux. At its heart, VS Code features a lightning-fast source code editor with support for hundreds of languages. VS Code helps developer productivity with syntax highlighting, bracket-matching, auto-indentation, box-selection, snippets, and more.
 
     For serious coding, you'll often benefit from tools with more code understanding than just blocks of text. Visual Studio Code includes built-in support for IntelliSense code completion, rich semantic code understanding and navigation, and code refactoring. It also includes an interactive debugger, so you can step through source code, inspect variables, view call stacks, and execute commands in the console.
 
@@ -622,6 +623,6 @@ After reviewing the available options for transitioning their applications to a 
 
 ## Customer quote (to be read back to the attendees at the end)
 
-   "The successful, and seamless, transition of our OSS application to Microsoft Azure demonstrates the flexibility and range of Azure's capabilities. Without being tied to a sunk cost in an enterprise system, this open source on Azure model provides us with the flexibility to address future business needs."
+   "The successful and seamless transition of our OSS application to Microsoft Azure demonstrates the flexibility and range of Azure's capabilities. Without being tied to a sunk cost in an enterprise system, this open-source on Azure model provides us with the flexibility to address future business needs."
 
 Holly Franklin, CIO of Best For You Organics Company
