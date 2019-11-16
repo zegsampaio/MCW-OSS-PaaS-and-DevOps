@@ -25,13 +25,13 @@ At the end of this workshop, you will learn how to provision Web App for Contain
 
 ### Whiteboard design session
 
-In this whiteboard design session, you will work with a group to design a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. Your solution will handle the migration of an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure PaaS services, including migrating an existing MongoDB instance into Cosmos DB, enhancing application functionality using serverless technologies, and fully embracing modern DevOps tools.
+In this whiteboard design session, you work with a group to design a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. Your solution should handle the migration of an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application. The application will be migrated from a hosted environment into Azure PaaS services, including migrating an existing MongoDB instance into Cosmos DB, enhancing application functionality using serverless technologies, and fully embracing modern DevOps tools.
 
 At the end of this whiteboard design session, you will be better able to design solutions for migrating OSS applications into Azure PaaS using modern DevOps methodologies.
 
 ### Hands-on Lab
 
-In this hands-on lab, you will implement a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. You will migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers, migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
+In this hands-on lab, you implement a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. You migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers, migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
 
 At the end of this hands-on lab, you will be better able to migrate and deploy OSS applications into Azure PaaS using modern DevOps methodologies and Docker containers.
 
