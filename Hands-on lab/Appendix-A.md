@@ -16,7 +16,7 @@ In this task, you will create a script file that will be used as a custom extens
 
 In this task, you will provision a Linux virtual machine (VM) running Ubuntu Server 16.04 LTS.
 
-1. In the [Azure Portal](https://portal.azure.com/), select **+Create a resource**, then enter "ubuntu" into the search bar, expand **Ubuntu Server** and select **Ubuntu Server 16.04 LTS** from the results.
+1. In the [Azure Portal](https://portal.azure.com/), expand the portal menu, select **+Create a resource**, then enter "ubuntu" into the search bar, expand **Ubuntu Server** and select **Ubuntu Server 16.04 LTS** from the results.
 
     ![+ Create a resource is highlighted in the navigation pane of the Azure portal, ubuntu is highlighted in the search box, and the Ubuntu Server 16.04 LTS row is highlighted in the search results.](media/create-resource-ubuntu-server-16.04-lts.png "Azure Portal")
 
