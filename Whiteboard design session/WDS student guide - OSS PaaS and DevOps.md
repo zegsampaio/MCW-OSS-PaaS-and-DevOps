@@ -1,5 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
-
+![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
 OSS PaaS and DevOps
@@ -10,7 +9,7 @@ Whiteboard design session student guide
 </div>
 
 <div class="MCWHeader3">
-September 2019
+November 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -41,7 +40,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives
 
-In this whiteboard design session, you will work with a group to design a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. Your solution will handle the migration of an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure PaaS services, including migrating an existing MongoDB instance into Cosmos DB, enhancing application functionality using serverless technologies, and fully embracing modern DevOps tools.
+In this whiteboard design session, you work with a group to design a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. Your solution should handle the migration of an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application. The application will be migrated from a hosted environment into Azure PaaS services, including migrating an existing MongoDB instance into Cosmos DB, enhancing application functionality using serverless technologies, and fully embracing modern DevOps tools.
 
 At the end of this whiteboard design session, you will be better able to design solutions for migrating OSS applications into Azure PaaS using modern DevOps methodologies.
 
@@ -63,32 +62,32 @@ Directions:  With all participants in the session, the facilitator/SME presents 
 
 ### Customer situation
 
-Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service is tailored towards working professionals, who want convenient, reliable access to healthy meal choices, and pre-packaged recipes, without having to spend too much time preparing the meals. Customers can choose from a variety of meal plan options (vegetarian, vegan, gluten-free, high-protein, etc.), along with several options for portion sizes, and the number of meals per week. Meals are delivered weekly directly to the customer's home.
+Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service caters to working professionals, who want convenient, reliable access to healthy meal choices, and pre-packaged recipes, without having to spend too much time preparing the meals. Customers can choose from a variety of meal plan options (e.g., vegetarian, vegan, gluten-free, high-protein), along with several options for portion sizes and the number of meals per week. Meals are delivered weekly directly to the customer's home.
 
-Their current meal plans include only dinner options, but Best For You Organics Company has received feedback from many customers expressing a desire that breakfast and lunch options be included as part of the service offering. They would like to expand their meal services to meet this demand, but feel they first need to address their rising infrastructure costs and management time. They have reached a point where managing their VM and server infrastructure is becoming a real challenge, and are interested in understanding more about Platform as a Service (PaaS) solutions for OSS applications that could help them focus their expenditures and efforts on their core business, rather than infrastructure. "We're finding that with every upgrade, we're spending more time and money on infrastructure, and less on delivering the functionality and features that matter most to our customers," says Holly Franklin, "and we need to rebalance those efforts." The development team at Best For You Organics has some experience with Docker, and is interested in what options might be available for using containers to deploy their application into a cloud environment.
+Their current meal plans include only dinner options. However, Best For You Organics Company has received feedback from many customers expressing a desire for breakfast and lunch options to be included as part of the service offering. They would like to expand their meal services to meet this demand but feel they first need to address their rising infrastructure costs and management time. They have reached a point where managing their VM and server infrastructure is becoming a real challenge. They are interested in learning more about Platform as a Service (PaaS) solutions for OSS applications that could help them focus their expenditures and efforts on their core business rather than infrastructure. "We're finding that with every upgrade, we're spending more time and money on infrastructure and less on delivering the functionality and features that matter most to our customers," says Holly Franklin, "and we need to rebalance those efforts." The development team at Best For You Organics has some experience with Docker and is interested in what options might be available for using containers to deploy their application into a cloud environment.
 
-Their CIO, Holly Franklin, has voiced several concerns about a cloud migration. First, all of their business comes through their website, so high availability and performance are critically important to them, and she would like to see an improvement in this area as the migrate to the cloud. Second, she is a big proponent of open-source software (OSS) and would like to continue to use their open source tools. Development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). Their code is hosted in a private GitHub repository. A point of pride for Best For You Organics Company has been their developers' involvement in the open source community, with most members of the team frequently contributing to React.js on GitHub. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
+Their CIO, Holly Franklin, has voiced several concerns about a cloud migration. First, all of their business comes through their website, so high availability and performance are critically important to them, and she would like to see an improvement in this area as they migrate to the cloud. Second, she is a big proponent of open-source software (OSS) and would like to continue to use their open-source tools. The development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). They host their code in a private GitHub repository. A point of pride for Best For You Organics Company has been their developers' involvement in the open-source community, with most members of the team frequently contributing to React.js on GitHub. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
 
-Another feature she is interested in learning more about is identity management. Their existing web app requires users to register, and log in before subscribing to a meal plan. Today, this is handled via a home-grown solution that stores usernames and passwords in the same database used for storing application information. They have experimented with other third-party solutions in the past, but found them difficult to integrate into their application, and are curious if moving their application into a cloud PaaS platform could help them integrate a better solution.
+Another feature she is interested in learning more about is identity management. Their existing web app requires users to register and log in before subscribing to a meal plan. Today, they handle this via a home-grown solution that stores usernames and passwords in the same database used for storing application information. They have experimented with other third-party solutions in the past, but found them difficult to integrate into their application, and are curious if moving their application into a cloud PaaS platform could help them integrate a better solution.
 
-For their migration to the cloud, they have indicated that they would like to reuse as much code and architecture as possible. "We want the migration to be non-invasive. Although the existing code has its nuances and issues, we do not want to redesign the entire solution to migrate to the cloud. We want to be as efficient as possible with time and cost." Additionally, they want to continue using MongoDB APIs for data storage, to avoid having to rewrite application data access code, but don't want to worry about managing infrastructure, consistency, replication, etc.
+For their migration to the cloud, they have indicated that they would like to reuse as much code and architecture as possible. "We want the migration to be non-invasive. Although the existing code has its nuances and issues, we do not want to redesign the entire solution to migrate to the cloud. We want to be as efficient as possible with time and cost." Additionally, they want to continue using MongoDB APIs for data storage, to avoid having to rewrite application data access code, but don't want to worry about managing infrastructure, consistency, and replication.
 
-The development team has also expressed that they would like to continue using GitHub as their code repository, but is interested in improving upon their DevOps pipeline. They currently use Jenkins for their builds and are interested in any tools available in a cloud offering that could help with release management, or other aspects of a fully-integrated, modern DevOps pipeline. Ultimately, their goal is to automate and simplify deployments through CI/CD capabilities, and deliver updates faster and more reliably.
+The development team has also expressed that they would like to continue using GitHub as their code repository but is interested in improving upon their DevOps pipeline. They currently use Jenkins for their builds and are interested in any tools available in a cloud offering that could help with release management, or other aspects of a fully-integrated, modern DevOps pipeline. Ultimately, their goal is to automate and simplify deployments through CI/CD capabilities and deliver updates faster and more reliably.
 
-They have also expressed interest in gaining a better understanding of how serverless architecture could be leveraged to help their business grow. They have several processes that they are considering adding to their workflow, which they feel would be good candidates for a serverless approach, but are not sure which technologies and tools are right for the job. First, they would like to see if they can automate their daily order processing, queuing up the orders that need to go out each day, and updating their database when the orders have completed processing and been shipped. Next, they would like to implement functionality to send customers an email or SMS text message when their credit card has been charged and their weekly meal delivery has been shipped.
+They have also expressed interest in gaining a better understanding of how serverless architecture could be leveraged to help their business grow. They have several processes that they are considering adding to their workflow, which they feel would be good candidates for a serverless approach, but are not sure which technologies and tools are right for the job. First, they would like to see if they can automate their daily order processing, queuing up the orders that need to go out each day, and updating their database when the orders have completed processing and shipped. Next, they would like to implement functionality to send customers an email or SMS text message when their credit card has been charged, and their weekly meal delivery has shipped.
 
-Best For You Organics is optimistic about the benefits of moving to a PaaS solution, but very concerned about the time and potential changes which might be required to accommodate the transition for an OSS application.
+Best For You Organics is optimistic about the benefits of moving to a PaaS solution but very concerned about the time and potential changes that might be required to accommodate the transition for an OSS application.
 
 ### Customer needs
 
-1. Wants to migrate as much of their infrastructure as possible to the cloud to make it easier to take advantage of the scalability, reliability, and performance of a PaaS solution, and reduce the burden of building out and managing hardware and software.
+1. Best For You Organics wants to migrate as much of their infrastructure as possible to the cloud to make it easier to take advantage of the scalability, reliability, and performance of a PaaS solution, and reduce the burden of building out and managing hardware and software.
 
-2. Would like to reuse as much of their existing code and architecture as possible.
+2. They would like to reuse as much of their existing code and architecture as possible.
 
-    - They want the migration to be non-invasive. Although the existing code has its nuances and issues, we do not want to redesign the entire solution to migrate to the cloud.
-    - Would like to continue using MongoDB APIs for data storage, to avoid having to rewrite application data access code, but don't want to worry about managing infrastructure, consistency, replication, etc.
+   - They want the migration to be non-invasive. Although the existing code has its nuances and issues, we do not want to redesign the entire solution to migrate to the cloud.
+   - The would like to continue using MongoDB APIs for data storage, to avoid having to rewrite application data access code, but don't want to worry about managing infrastructure, consistency, replication, etc.
 
-3. Want to continue to use their GitHub repository for source control, and Jenkins for their builds, but are interested in any value-added functionality available in Azure which improve their ability to rapidly build, test, and deploy application updates, through automated and simplified deployments using continuous Integration/continuous delivery (CI/CD) capabilities.
+3. They want to continue to use their GitHub repository for source control, and Jenkins for their builds. However, they are interested in any value-added functionality available in Azure that might improve their ability to rapidly build, test, and deploy application updates through automated and simplified deployments using continuous integration/continuous delivery (CI/CD) capabilities.
 
 4. Want to maintain a dedication to open source technologies, and maintain those same technologies within the cloud solution, while taking advantage of integrations with the cloud environment, where possible.
 
@@ -104,21 +103,21 @@ Best For You Organics is optimistic about the benefits of moving to a PaaS solut
 
 2. We're interested in using containers, but we're not sure how they work in Azure. Does Azure provide reliable ways to deploy and manage containers? What is the simplest way to move containers to Azure, based on our PaaS experience, while at the same time considering our scale and growth requirements?
 
-3. We would like to improve our current DevOps workflow. What options are available in Azure? Can we implement a CI/CD pipeline? Can we continue to use Jenkins? Does Azure offer any value-added services which we can leverage in our existing Jenkins CI pipeline?
+3. We want to improve our current DevOps workflow. What options are available in Azure? Can we implement a CI/CD pipeline? Can we continue to use Jenkins? Does Azure offer any value-added services which we can leverage in our existing Jenkins CI pipeline?
 
-4. We've heard about Azure Active Directory B2C (Azure AD B2C) to manage application users, but we are not sure how that would work with our open source application.
+4. We've heard about Azure Active Directory B2C (Azure AD B2C) to manage application users, but we are not sure how that would work with our open-source application.
 
-5. Is Azure Search an appropriate solution for improving the search capabilities of our OSS app?
+5. Is Azure Cognitive Search an appropriate solution for improving the search capabilities of our OSS app?
 
-6. We no longer want to maintain VMs for running our MongoDB database. Does Azure offer a solution that will allow us to continue using the MongoDB APIs, while benefiting from the scalability and reliability of a PaaS database platform?
+6. We no longer want to maintain VMs for running our MongoDB database. Does Azure offer a solution that will allow us to continue using the MongoDB APIs while benefiting from the scalability and reliability of a PaaS database platform?
 
-7. We would like to understand more about the benefits of a serverless architecture. In Azure does it mean only using Azure Functions or is there more to it?
+7. We would like to understand more about the benefits of a serverless architecture. In Azure, does it mean only using Azure Functions, or is there more to it?
 
-8. We've read that Visual Studio Code is a free, open source code editor that can be used for OSS development. Can our developers continue to use their IDE, or do they need to switch over to using Visual Studio Code to write code destined for the Azure platform? Does Visual Studio Code offer any features or integration capabilities that would make it advantageous over a non-Microsoft code editor?
+8. We've read that Visual Studio Code is a free, open-source code editor that can be used for OSS development. Can our developers continue to use their IDE, or do they need to switch over to using Visual Studio Code to write code destined for the Azure platform? Does Visual Studio Code offer any features or integration capabilities that would make it advantageous over a non-Microsoft code editor?
 
 ### Infographic for common scenarios
 
-![This data flow diagram illustrates how to build highly scalable e-commerce websites with catalog, checkout, analysis, and forecasting. Fifteen components in this diagram interact with each other between end users and the enterprise, and the components are organized in three tiers: the internet tier, the services tier, and the data tier.](media/image2.png "Common E-Commerce Website scenarios infographic")
+![This data flow diagram illustrates how to build highly scalable e-commerce websites with catalog, checkout, analysis, and forecasting. Fifteen components in this diagram interact with each other between end-users and the enterprise, and the components are organized in three tiers: the internet tier, the services tier, and the data tier.](media/image2.png "Common E-Commerce Website scenarios infographic")
 
 ## Step 2: Design a proof of concept solution
 
@@ -142,15 +141,15 @@ Directions: With all participants at your table, respond to the following questi
 
 *High-level architecture*
 
-1. Without getting into the details, (the following sections will address the details), diagram your initial vision for handling the top-level requirements for the OSS app and migration, serverless architecture integration, search integration, Azure AD B2C implementation, and DevOps pipeline. You will refine this diagram as you proceed.
+1. Without getting into the details (they are addressed in the following sections), diagram your initial vision for handling the top-level requirements for the OSS app and migration, serverless architecture integration, search integration, Azure AD B2C implementation, and DevOps pipeline. You will refine this diagram as you proceed.
 
 *PaaS solution*
 
 1. What PaaS solution would you propose to Best For You Organics Company for moving their application into Azure? Will this solution minimize the number of application code changes required to migrate the application? How will container orchestration be handled?
 
-2. Describe the scalability, high-availability and performance options that are open to Best For Your Organics Company with the PaaS solution you proposed above.
+2. Describe the scalability, high-availability, and performance options that are open to Best For Your Organics Company with the PaaS solution you proposed above.
 
-3. What options does the customer have for a Docker image registry? Which options would you recommend?
+3. What options does the customer have for a Docker image registry? Which option would you recommend?
 
 *Database migration*
 
@@ -172,7 +171,7 @@ Directions: With all participants at your table, respond to the following questi
 
 *Search integration*
 
-1. How could Azure Search be integrated into the OSS application?
+1. How could Azure Cognitive Search be integrated into the OSS application?
 
 *DevOps workflows*
 
@@ -236,6 +235,6 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | Cosmos DB | <https://docs.microsoft.com/azure/cosmos-db> |
 | Deploy to Azure App Service using Jenkins plugin | <https://docs.microsoft.com/azure/jenkins/deploy-jenkins-app-service-plugin> |
 | Create Jenkins server in Azure | <https://docs.microsoft.com/en-us/azure/jenkins/install-jenkins-solution-template> |
-| Azure Search in Node.js | <https://docs.microsoft.com/azure/search/search-get-started-nodejs> |
+| Azure Cognitive Search in Node.js | <https://docs.microsoft.com/azure/search/search-get-started-nodejs> |
 | Visual Studio (VS) cCode for OSS | <https://code.visualstudio.com/docs/nodejs/reactjs-tutorial> |
 | Web App for containers | <https://azure.microsoft.com/blog/webapp-for-containers-overview/> |
