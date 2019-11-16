@@ -49,6 +49,8 @@ At the end of this hands-on lab, you will be better able to migrate and deploy O
 - Logic App
 - Visual Studio Code
 - Web App for Containers
+- Azure Cognitive Search
+- Azure Active Directory B2C
 
 ## Azure solutions
 
