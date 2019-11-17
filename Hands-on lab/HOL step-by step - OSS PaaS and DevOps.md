@@ -42,11 +42,10 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 5: Install Azure Cosmos DB extension for VS Code](#task-5-install-azure-cosmos-db-extension-for-vs-code)
     - [Task 6: Decrease collection throughput](#task-6-decrease-collection-throughput)
   - [Exercise 3: Containerize the app](#exercise-3-containerize-the-app)
-    - [Task 1: Create an Azure Container Registry](#task-1-create-an-azure-container-registry)
-    - [Task 2: Install Docker extension in VS Code](#task-2-install-docker-extension-in-vs-code)
-    - [Task 3: Create Docker image and run the app](#task-3-create-docker-image-and-run-the-app)
-    - [Task 4: Run the containerized app](#task-4-run-the-containerized-app)
-    - [Task 5: Push image to Azure Container Registry](#task-5-push-image-to-azure-container-registry)
+    - [Task 1: Install Docker extension in VS Code](#task-1-install-docker-extension-in-vs-code)
+    - [Task 2: Create Docker image and run the app](#task-2-create-docker-image-and-run-the-app)
+    - [Task 3: Run the containerized app](#task-3-run-the-containerized-app)
+    - [Task 4: Push image to Azure Container Registry](#task-4-push-image-to-azure-container-registry)
   - [Exercise 4: Set up Web App for Containers](#exercise-4-set-up-web-app-for-containers)
     - [Task 1: Provision Web App for Containers](#task-1-provision-web-app-for-containers)
     - [Task 2: Navigate to the deployed app](#task-2-navigate-to-the-deployed-app)
@@ -591,32 +590,11 @@ Duration: 30 minutes
 
 This exercise walks you through containerizing the existing Best For You Organics Company MERN application using Docker, pushing the image to an **Azure Container Registry**, then deploying the image to **Web App for Containers** directly from VS Code.
 
-### Task 1: Create an Azure Container Registry
-
-In this task, you will be creating a private Docker registry in the Azure portal, so you have a place to store the custom Docker image you will create in later steps.
-
-1. In the Azure portal, select **+Create a resource**, **Containers**, and select **Container Registry**.
-
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, Containers is selected and highlighted in the middle, and  Container Registry is highlighted on the right.](media/create-container-registry-resource.png "Azure Portal")
-
-2. On the **Create container registry** blade, enter the following:
-
-    - **Registry name:** Enter "bestforyouregistrySUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
-    - **Subscription:** Select the subscription you are using for this hands-on lab.
-    - **Resource group:** Select the **hands-on-lab-SUFFIX** resource group created previously.
-    - **Location:** Select the location you are using for resources in this hands-on lab.
-    - **Admin user:** Select **Enable**.
-    - **SKU:** Select **Basic**.
-
-    ![The information above is entered on the Create container registry blade.](media/azure-create-resource-container-registry.png "Create container registry blade")
-
-3. Select **Create** to provision the new Azure Container Registry.
-
-### Task 2: Install Docker extension in VS Code
+### Task 1: Install Docker extension in VS Code
 
 The Docker extension for VS Code is used to simplify the management of local Docker images and commands, as well as the deployment of a built app image to Azure.
 
-1. On your Lab VM, return to VS Code, and the open `MCW-OSS-PaaS-and-DevOps` starter project.
+1. On your Lab VM, return to VS Code and the open `MCW-OSS-PaaS-and-DevOps` starter project.
 
 2. Select the **Extensions icon** from the left-hand menu, enter "docker" into the search box, select the **Docker** extension, and in the **Extension: Docker** window, and then select **Install**.
 
@@ -628,7 +606,7 @@ The Docker extension for VS Code is used to simplify the management of local Doc
 
     > **Note**: If you don't see the Docker icon in the left-hand menu, close and reopen VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
 
-### Task 3: Create Docker image and run the app
+### Task 2: Create Docker image and run the app
 
 In this task, you will use VS Code, and the Docker extension, to add the necessary files to the project to create a custom Docker image for the `MCW-OSS-PaaS-and-DevOps` app.
 
@@ -704,13 +682,15 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
 
     ![The docker images command is entered in the terminal window, with the list of images is displayed.](media/vscode-terminal-docker-images.png "Docker images")
 
-### Task 4: Run the containerized app
+### Task 3: Run the containerized app
 
-In this task, you will run the app from the container you built in the previous task.
+In this task, you run the app from the container you built in the previous task.
 
 1. In the **Images** area of the Docker extension in VS Code, expand the `best-for-you-organics` image, and then right-click on the `latest` image, and select **Run Interactive**.
 
     ![The image is selected in the Images area of the Docker extension explorer, and Run Interactive is highlighted in the shortcut menu.](media/vscode-extensions-docker-images-latest.png "Docker extension explorer")
+
+    > **Note**: If you receive an error that the address is already in use, return to the terminal window where you ran the application using the `npm start` command and press `CTRL+C` to stop the application. Then, try the above action again.
 
 2. Notice in the Interactive terminal that a docker run command is issued. Using the VS Code Docker extension, you can issue some docker commands, without needing to work from the command line.
 
@@ -722,7 +702,7 @@ In this task, you will run the app from the container you built in the previous 
 
 4. In the Integrated terminal of VS Code, for the interactive session, press **CTRL+C** to stop the container.
 
-### Task 5: Push image to Azure Container Registry
+### Task 4: Push image to Azure Container Registry
 
 In this task, you are going to push the image to your Azure Container Registry.
 
@@ -774,11 +754,15 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
 
 ### Task 1: Provision Web App for Containers
 
-1. In the Azure portal, select **+Create a resource**, **Web**, and select **Web App for Containers**.
+1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, Web + Mobile is highlighted in the middle, and Web App for Containers is highlighted on the right.](media/create-web-app-for-containers-resource.png "Provision Web App for Containers")
+    ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
 
-2. On the **Web App Create** Basics Tab, enter the following:
+2. Enter "web app for containers" into the Search the Marketplace box, select **Web App for Containers" from the results, and then select **Create**.
+
+    ![Web App for Containers entered into the search box and is highlighted on the search results.](media/create-web-app-for-containers-resource.png "Web App for Containers")
+
+3. On the **Web App Create** Basics Tab, enter the following:
 
     **Project Details**:
 
@@ -799,9 +783,9 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
 
     ![The values specified above are entered into the Create Web App Basics tab.](media/web-app-for-containers-basics-tab.png "Create Web App")
 
-3. Select **Next: Docker**.
+4. Select **Next: Docker**.
 
-4. On the **Docker** tab, enter the following:
+5. On the **Docker** tab, enter the following:
 
      - **Options**: Select **Single Container**.
      - **Image source:** Select **Azure Container Registry**.
@@ -812,11 +796,11 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
 
     ![The values specified above are set in the Docker tab.](media/web-app-for-containers-docker-tab.png "Create Web App")
 
-5. Select **Review + create**, and then select **Create**.
+6. Select **Review + create**, and then select **Create**.
 
 ### Task 2: Navigate to the deployed app
 
-In this task, you will navigate to the deployed app, and log in to verify it is functioning correctly.
+In this task, you navigate to the deployed app, and log in to verify it is functioning correctly.
 
 1. When you receive the notification that the Web App for Containers deployment has completed, navigate to the Web App by selecting the **notifications icon**, and selecting **Go to resource**.
 
