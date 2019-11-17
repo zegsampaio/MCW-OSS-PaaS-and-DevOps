@@ -36,8 +36,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 5: Create an Azure Container Registry](#task-5-create-an-azure-container-registry)
     - [Task 6: Provision a Function App](#task-6-provision-a-function-app)
     - [Task 7: Create Logic App](#task-7-create-logic-app)
-    - [Task 7: Create a GitHub account](#task-7-create-a-github-account)
-    - [Task 8: Fork the starter app](#task-8-fork-the-starter-app)
+    - [Task 8: Create a GitHub account](#task-8-create-a-github-account)
+    - [Task 9: Fork the starter app](#task-9-fork-the-starter-app)
 
 <!-- /TOC -->
 
@@ -285,7 +285,7 @@ In this task, you create a new Logic App, which will use a SendGrid connector to
 
     ![The information above is entered on the Create logic app blade.](media/logic-app-create.png "Logic App blade")
 
-### Task 7: Create a GitHub account
+### Task 8: Create a GitHub account
 
 In this task, you sign up for a free GitHub account, which is used for hosting a copy of the sample application used throughout this lab. This account will be integrated into the CI/CD workflow for pushing updates to the application into Azure.
 
@@ -305,7 +305,7 @@ In this task, you sign up for a free GitHub account, which is used for hosting a
 
     ![Very experienced, Development, and I'm a professional are selected in Step 2 on the Welcome to GitHub screen.](media/github-experience.png "Select options in Step 2")
 
-### Task 8: Fork the starter app
+### Task 9: Fork the starter app
 
 In this task, you will fork the [OSS PaaS and DevOps MCW GitHub repository](https://github.com/Microsoft/MCW-OSS-PaaS-and-DevOps) to create a copy of the starter application in your GitHub account.
 
