@@ -1563,15 +1563,19 @@ In this exercise, you create Logic App which will trigger when an item is added 
 
 In this task, you will create a SendGrid account through the Azure portal to send email notifications to customers, informing them that their order has been processed, and is on its way.
 
-1. In the [Azure portal](https://portal.azure.com), select **+ Create a resource** and enter "SendGrid" into the Search the Marketplace box.
+1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
 
-    ![Create a resource is highlighted on the left-hand navigation menu of the Azure portal, and SendGrid is entered into the Search the Marketplace box.](media/azure-create-resource-send-grid.png "Create SendGrid Resource")
+    ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
 
-2. On the SendGrid blade, select **Create**.
+2. Enter "SendGrid" into the Search the Marketplace box.
+
+    ![SendGrid is entered into the Search the Marketplace box.](media/azure-create-resource-send-grid.png "Create SendGrid Resource")
+
+3. On the SendGrid blade, select **Create**.
 
     ![The Create button is highlighted on the SendGrid blade.](media/sendgrid-create.png "Create SendGrid")
 
-3. On the Create a new SendGrid Account blade, enter the following:
+4. On the Create a new SendGrid Account blade, enter the following:
 
     - **Name**: Enter **bfyoemail**.
     - **Password**: Enter **Password.1!!**
@@ -1583,21 +1587,21 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
     ![The values specified above are entered into the create a new SendGrid account blade.](media/sendgrid-create-settings.png "Create SendGrid account")
 
-4. Select **Create** to provision the SendGrid account.
+5. Select **Create** to provision the SendGrid account.
 
-5. When the SendGrid account finishes provisioning, select **Go to resource** from the notifications pane in the Azure portal.
+6. When the SendGrid account finishes provisioning, select **Go to resource** from the notifications pane in the Azure portal.
 
     ![The Go to resource button in highlighted in the SendGrid deployment notification.](media/go-to-resource-sendgrid.png "Go to resource")
 
-6. On the SendGrid account blade, select **Manage** from the toolbar.
+7. On the SendGrid account blade, select **Manage** from the toolbar.
 
     ![The Manage button is highlighted on the SendGrid account toolbar.](media/sendgrid-manage.png "SendGrid account Manage")
 
-7. On the SendGrid page that opens, expand **Settings** in the left-hand menu, select **API Keys**, and then select **Create API Key**.
+8. On the SendGrid page that opens, expand **Settings** in the left-hand menu, select **API Keys**, and then select **Create API Key**.
 
     ![The Create API Key button is highlighted on the API Keys page.](media/sendgrid-create-api-key.png "SendGrid API Keys")
 
-8. On the Create API Key page, enter the following:
+9. On the Create API Key page, enter the following:
 
     - **API Key Name**: Enter **bfyo-api-key**.
     - **API Key Permissions**: Select **Full Access**.
@@ -1605,7 +1609,7 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
     ![The values specified above are entered into the Create API Key page.](media/sendgrid-create-api-key-page.png "Create API Key")
 
-9. Leave the API Key Created screen that appears open. You will be copying the key and pasting it into your Logic App in the next task.
+10. Leave the API Key Created screen that appears open. You will be copying the key and pasting it into your Logic App in the next task.
 
     ![The API Key Created screen is displayed.](media/sendgrid-api-key-created.png "API Key Created")
 
