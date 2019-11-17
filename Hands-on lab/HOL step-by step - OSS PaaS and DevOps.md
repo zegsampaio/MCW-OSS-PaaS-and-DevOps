@@ -37,10 +37,10 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 5: Launch the starter application](#task-5-launch-the-starter-application)
   - [Exercise 2: Migrate the database to Cosmos DB](#exercise-2-migrate-the-database-to-cosmos-db)
     - [Task 1: Create and scale collections](#task-1-create-and-scale-collections)
-    - [Task 3: Update database connection string](#task-3-update-database-connection-string)
-    - [Task 4: Import data to the API for MongoDB using mongoimport](#task-4-import-data-to-the-api-for-mongodb-using-mongoimport)
-    - [Task 5: Install Azure Cosmos DB extension for VS Code](#task-5-install-azure-cosmos-db-extension-for-vs-code)
-    - [Task 6: Decrease collection throughput](#task-6-decrease-collection-throughput)
+    - [Task 2: Update database connection string](#task-2-update-database-connection-string)
+    - [Task 3: Import data to the API for MongoDB using mongoimport](#task-3-import-data-to-the-api-for-mongodb-using-mongoimport)
+    - [Task 4: Install Azure Cosmos DB extension for VS Code](#task-4-install-azure-cosmos-db-extension-for-vs-code)
+    - [Task 5: Decrease collection throughput](#task-5-decrease-collection-throughput)
   - [Exercise 3: Containerize the app](#exercise-3-containerize-the-app)
     - [Task 1: Install Docker extension in VS Code](#task-1-install-docker-extension-in-vs-code)
     - [Task 2: Create Docker image and run the app](#task-2-create-docker-image-and-run-the-app)
@@ -403,7 +403,7 @@ In this task, you create the collections needed for your database migration and 
 
     ![The best-for-you-organics database is displayed, with orders, plans, and users collections under it.](media/cosmos-db-database-and-collections.png "Cosmos DB Collections")
 
-### Task 3: Update database connection string
+### Task 2: Update database connection string
 
 In this task, you will retrieve the connection string for your Azure Cosmos DB database and update the starter application's database connection string.
 
@@ -451,7 +451,7 @@ In this task, you will retrieve the connection string for your Azure Cosmos DB d
 
 11. Let's move on to copying the data from the local MongoDB instance into Cosmos DB.
 
-### Task 4: Import data to the API for MongoDB using mongoimport
+### Task 3: Import data to the API for MongoDB using mongoimport
 
 In this task, you will use `mongoimport.exe` to import data to your Cosmos DB account. There is a shell script located in the `MCW-OSS-PaaS-and-DevOps` project which handles exporting the data out of your MongoDB into JSON files on the local file system. These files will be used for the import into Cosmos DB.
 
@@ -537,7 +537,7 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 15. Return to the Integrated terminal window of VS Code which is running the application, and press **CTRL+C** to stop the application.
 
-### Task 5: Install Azure Cosmos DB extension for VS Code
+### Task 4: Install Azure Cosmos DB extension for VS Code
 
 In this task, you will install the Azure Cosmos DB extension for VS Code to take advantage of the integration with Azure Cosmos DB. This extension allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
 
@@ -565,7 +565,7 @@ In this task, you will install the Azure Cosmos DB extension for VS Code to take
 
 7. From here, you can view your databases, collections, and documents, as well as edit documents directly in VS Code, and push the updated documents back into your database.
 
-### Task 6: Decrease collection throughput
+### Task 5: Decrease collection throughput
 
 In this task, you will decrease the throughput on your collections. Azure Cosmos DB uses an hourly billing rate, so reducing the throughput after the data migration will help save costs.
 
