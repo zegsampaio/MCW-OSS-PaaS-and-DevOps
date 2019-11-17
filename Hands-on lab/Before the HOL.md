@@ -34,8 +34,10 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 3: Provision a Jenkins server](#task-3-provision-a-jenkins-server)
     - [Task 4: Provision Cosmos DB using the MongoDB API](#task-4-provision-cosmos-db-using-the-mongodb-api)
     - [Task 5: Create an Azure Container Registry](#task-5-create-an-azure-container-registry)
-    - [Task 6: Create a GitHub account](#task-6-create-a-github-account)
-    - [Task 7: Fork the starter app](#task-7-fork-the-starter-app)
+    - [Task 6: Provision a Function App](#task-6-provision-a-function-app)
+    - [Task 7: Create Logic App](#task-7-create-logic-app)
+    - [Task 7: Create a GitHub account](#task-7-create-a-github-account)
+    - [Task 8: Fork the starter app](#task-8-fork-the-starter-app)
 
 <!-- /TOC -->
 
@@ -220,7 +222,70 @@ In this task, you create a private Docker registry in the Azure portal, so you h
 
 4. Select **Create** to provision the new Azure Container Registry.
 
-### Task 6: Create a GitHub account
+### Task 6: Provision a Function App
+
+In this task, you create a Function App in Azure to host your Functions.
+
+1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
+
+    ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
+
+2. Enter "function app" in to the **Search the marketplace** box, and select **Function App** from the results.
+
+    ![Function app is highlighted in the search box, and the Function App row is highlighted in the results below that.](media/create-resource-function-app.png "Azure Portal")
+
+3. On the **Function App** blade, select **Create**.
+
+4. On the **Create Function App** blade, enter the following:
+
+    - **Subscription:** Select the subscription you are using for this hands-on lab.
+    - **Resource group:** Choose **Create new** and enter **hands-on-lab-func-SUFFIX** as resource group name.
+    - **Function App name:** Enter a unique name, such as "bestforyouordersSUFFIX".
+    - **Publish:** Select Code.
+    - **Runtime Stack** Select Node.js.
+    - **Region:** Select the region you have been using for resources in this hands-on lab.
+
+    ![The information above is entered on the Create Function App basics tab.](media/create-function-app-basics-tab.png "Create Function App Settings")
+
+    > **Important**: Make sure you created a new resource group, as outlined above. Failure to do so will result in an error when you attempt to create the Function App.
+
+5. Select **Next: Hosting**.
+
+6. On the Hosting tab, set the following configuration:
+
+    - **Storage account:** Select **Create new** and enter a globally unique name, such as "bestforyouordersSUFFIX."
+    - **Operating System**: Select Windows.
+    - **Plan type:** Choose Consumption.
+
+    ![The information above is entered on the Create Function App hosting tab.](media/create-function-app-hosting-tab.png "Create Function App Settings")
+
+7. Select **Review + create**.
+
+8. Select **Create** to provision the new Function App.
+
+### Task 7: Create Logic App
+
+In this task, you create a new Logic App, which will use a SendGrid connector to send email notifications to users, informing them that their order has processed and shipped.
+
+1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
+
+    ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
+
+2. Enter "logic app" into the Search the Marketplace box, select **Logic App** from the results, and then select **Create**.
+
+    ![Logic app is highlighted in the Search the Marketplace box, and Logic App is selected in the results.](media/create-logic-app-resource.png "Azure Marketplace Logic App")
+
+3. In the **Create logic app** blade, enter the following:
+
+    - **Name:** Enter "OrderNotifications".
+    - **Subscription:** Select the subscription you are using for this hands-on lab.
+    - **Resource group:** Select **Use existing** and choose the **hands-on-lab-SUFFIX** resource group.
+    - **Location:** Select the location you have been using for resources in this hands-on lab.
+    - Select **Create** to provision the new Logic App.
+
+    ![The information above is entered on the Create logic app blade.](media/logic-app-create.png "Logic App blade")
+
+### Task 7: Create a GitHub account
 
 In this task, you sign up for a free GitHub account, which is used for hosting a copy of the sample application used throughout this lab. This account will be integrated into the CI/CD workflow for pushing updates to the application into Azure.
 
@@ -240,7 +305,7 @@ In this task, you sign up for a free GitHub account, which is used for hosting a
 
     ![Very experienced, Development, and I'm a professional are selected in Step 2 on the Welcome to GitHub screen.](media/github-experience.png "Select options in Step 2")
 
-### Task 7: Fork the starter app
+### Task 8: Fork the starter app
 
 In this task, you will fork the [OSS PaaS and DevOps MCW GitHub repository](https://github.com/Microsoft/MCW-OSS-PaaS-and-DevOps) to create a copy of the starter application in your GitHub account.
 
