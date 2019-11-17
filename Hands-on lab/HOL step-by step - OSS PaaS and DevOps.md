@@ -59,10 +59,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 7: Add continuous delivery to Jenkins build job](#task-7-add-continuous-delivery-to-jenkins-build-job)
     - [Task 8: Trigger CI-CD pipeline](#task-8-trigger-ci-cd-pipeline)
   - [Exercise 6: Create Azure Functions for order processing](#exercise-6-create-azure-functions-for-order-processing)
-    - [Task 1: Provision a Function App](#task-1-provision-a-function-app)
-    - [Task 2: Configure storage queues](#task-2-configure-storage-queues)
-    - [Task 3: Create timer triggered function](#task-3-create-timer-triggered-function)
-    - [Task 4: Create Queue function](#task-4-create-queue-function)
+    - [Task 1: Configure storage queues](#task-1-configure-storage-queues)
+    - [Task 2: Create timer triggered function](#task-2-create-timer-triggered-function)
+    - [Task 3: Create Queue function](#task-3-create-queue-function)
   - [Exercise 7: Create Logic App for sending email notifications](#exercise-7-create-logic-app-for-sending-email-notifications)
     - [Task 1: Create SendGrid account](#task-1-create-sendgrid-account)
     - [Task 2: Create Logic App](#task-2-create-logic-app)
@@ -839,9 +838,9 @@ In this task, you will turn Continuous Deployment on for your Web App.
 
 In this task, you will be adding a Jenkins service integration into your GitHub account. This integration will enable a Jenkins CI build job to be triggered when code is checked in to your GitHub repository.
 
-1. On your Lab VM, navigate to your Jenkins VM in the [Azure portal](https://portal.azure.com/) by selecting **Resource groups** from the left-hand menu, entering "hands-on-lab" into the search box, and selecting your **hands-on-lab-SUFFIX** resource group from the list.
+1. On your Lab VM, navigate to your Jenkins VM in the [Azure portal](https://portal.azure.com) by selecting **Resource groups** from the Azure services list, and then selecting your **hands-on-lab-SUFFIX** resource group from the list.
 
-    ![Resource groups is highlighted in the navigation pane of the Azure portal, hands-on-lab is highlighted in the search box, and the hands-on-lab resource group is highlighted in the search results.](media/azure-rg.png "Azure Portal")
+    ![Resource groups is highlighted in the Azure services list.](media/azure-services-resource-groups.png "Azure services")
 
 2. On the hands-on-lab-SUFFIX Resource group blade, select your **Jenkins** virtual machine.
 
@@ -1218,6 +1217,8 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
 
     ![The best-for-you-build project is highlighted on the Jenkins dashboard.](media/jenkins-dashboard-best-for-you-build.png "Jenkins dashboard")
 
+    > **Note**: You may need to login again using the username **jenkins** and password **Password.1!!**.
+
 4. Select **Configure** from the left-hand menu.
 
     ![Configure is highlighted in the left-hand menu.](media/jenkins-project-configure.png "Jenkins left-hand menu")
@@ -1257,9 +1258,6 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
 8. Copy the completed command text and paste it below the `npm run build` line within the Execute shell Command box. The Execute shell command should now look similar to the following:
 
     ![The command above is appended to the execute shell command.](media/jenkins-execute-shell-command-cd.png "Execute shell")
-
-
-    ![In the Jenkins post-build action menu, Publish an Azure Web App is highlighted.](media/jenkins-post-build-action-publish-azure-web-app.png "Jenkins post-build action menu")
 
 9. Select **Save**.
 
@@ -1309,64 +1307,39 @@ In this task, you will commit changes to the `MCW-OSS-PaaS-and-DevOps` starter a
 
 Duration: 45 minutes
 
-In this task, you will create Azure Functions that will handle order processing. The first function will send unprocessed order details into a storage queue. This Function uses a timer trigger and checks the processed field on order documents, ensuring only unprocessed orders are sent to the processing queue. A second function is used to simulate order processing and send notifications to the user who placed the order.
+In this task, you create the Azure Functions that will handle order processing. The first function will send unprocessed order details into a storage queue. This Function uses a timer trigger and checks the processed field on order documents, ensuring only unprocessed orders are sent to the processing queue. A second function is used to simulate order processing and send notifications to the user who placed the order.
 
-### Task 1: Provision a Function App
+### Task 1: Configure storage queues
 
-In this task, you will create a Function App in Azure, which will host your Functions.
+In this task, you add two storage queues to the storage account provisioned when you created your Function App. These queues are used to store orders and notifications that need to be processed.
 
-1. In the Azure portal, select **+Create a resource**, enter "function app" in to the **Search the marketplace** box, and select **Function App** from the results.
+1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the Azure services list and then select the **hands-on-lab-func-SUFFIX** resource group.
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, and Everything is selected and highlighted in the middle under Marketplace. On the right, function app is highlighted in the search box, and the Function App row is highlighted in the results below that.](media/create-resource-function-app.png "Azure Portal")
+    ![Resource groups is highlighted in the Azure services list.](media/azure-services-resource-groups.png "Azure services")
 
-2. On the **Function App** blade, select **Create**.
+2. Select the **bestforyouordersSUFFIX** storage account that was created when you provisioned your Function App.
 
-3. On the **Create Function App** blade, enter the following:
-
-    - **App name:** Enter a unique name, such as "bestforyouordersSUFFIX".
-    - **Subscription:** Select the subscription you are using for this hands-on lab.
-    - **Resource group:** Choose **Create new** and enter **hands-on-lab-func-SUFFIX** as resource group name.
-    - **OS:** Select Windows.
-    - **Hosting Plan:** Choose Consumption Plan.
-    - **Location:** Select the location you have been using for resources in this hands-on lab.
-    - **Runtime Stack** Select Node.js.
-    - **Storage:** Select **Create new** and enter a globally unique name, such as "bestforyouordersSUFFIX."
-    - **Application Insights** Select Disabled.
-    - Select **Create** to provision the new Function App.
-
-    ![The information above is entered on the Create Function App blade.](media/create-function-app-settings.png "Create Function App Settings")
-
-### Task 2: Configure storage queues
-
-In this task, you will add two storage queues to the storage account provisioned when you created your Function App. These queues will be used to store orders and notifications needing to be processed.
-
-1. In the [Azure portal](https://portal.azure.com), navigate to the new **bestforyouordersSUFFIX** storage account that was created when you provisioned your Function App, by selecting **Resource groups** from the left-hand menu, selecting your **hands-on-lab-func-SUFFIX** resource group from the list, and then selecting the **bestforyouordersSUFFIX** storage account.
-
-    ![Resource groups is highlighted in the navigation pane of the Azure portal, and hands-on-labs is selected and highlighted to the right under Resource groups. Overview is selected to the right, and the bestforyouorders storage account row is highlighted on the far right.](media/rg-storage-account.png "Azure Portal")
-
-2. Select **Queues** from the **Services** area of the **Overview** blade.
+3. Select **Queues** from the **Services** area of the **Overview** blade.
 
     ![Queues is highlighted in the Services area of the Overview blade.](media/storage-account-queues.png "Overview blade Services area")
 
-3. On the **Queue service** blade, select **+Queue** to add a new queue.
+4. On the **Queue service** blade, select **+Queue** to add a new queue.
 
     ![+ Queue is highlighted on the Queue service blade.](media/storage-account-queue-add.png "Queue service blade")
 
-4. In the **Add** queue dialog, enter **orderqueue** for the **Queue name**, and select **OK**.
+5. In the **Add** queue dialog, enter **orderqueue** for the **Queue name**, and select **OK**.
 
     ![The name "orderqueue" is entered in the Queue name box in the Add queue dialog box.](media/storage-order-queue.png "Add queue dialog box")
 
-5. Select **+Queue** again, and this time enter "notificationqueue" for the **Queue name**.
+6. Select **+Queue** again, and this time enter "notificationqueue" for the **Queue name**.
 
     ![The name "notificationqueue" is entered in the Queue name box in the Add queue dialog box.](media/storage-notification-queue.png "Add queue dialog box")
 
-### Task 3: Create timer triggered function
+### Task 2: Create timer triggered function
 
 In this task, you will create a function that function sends all new orders to a queue for processing and shipping. The function uses a Timer trigger and an output binding to an Azure Storage Queue.
 
-1. In the [Azure portal](https://portal.azure.com), navigate to your new Function App by selecting the **notifications icon**, then selecting **Go to resource** for the Function App notification.
-
-    ![The Go to resource button is highlighted under a Deployment succeeded message in a Notifications window.](media/go-to-resource-function.png "Notifications window")
+1. In the [Azure portal](https://portal.azure.com), navigate to your Function App by selecting it from the list of resources in the **hands-on-lab-func-SUFFIX** resource group.
 
 2. From the left-hand menu on your **Function Apps** blade, select **Functions**, then select **+New function**.
 
@@ -1452,9 +1425,11 @@ In this task, you will create a function that function sends all new orders to a
 
     ![At the Kudu PowerShell prompt, the command above is entered, and the output of the command is displayed.](media/kudu-powershell.png "PowerShell")
 
+    > **Note**: The addition of the `mongodb` dependency is necessary because the Cosmos DB MongoDB API cannot be used to bind a Function App to Cosmos DB. Only the SQL API is currently compatible with Function App triggers.
+
 17. Return to your Function App blade in the Azure portal and select the **OrdersTimerTrigger** function in the left-hand menu.
 
-    ![The OrdersCosmosTrigger function is selected in the left-hand menu.](media/function-app-orders-timer-trigger.png "Left menu")
+    ![The OrdersTimerTrigger function is selected in the left-hand menu.](media/function-app-orders-timer-trigger.png "Left menu")
 
 18. To get the code for the `OrdersTimerTrigger` function, go into the project is VS Code, expand the `Hands-on lab/lab-files/AzureFunctions` folder, and open the `OrdersTimerTrigger.js` file.
 
@@ -1495,15 +1470,15 @@ In this task, you will create a function that function sends all new orders to a
 
     ![The Refresh button is highlighted in the Azure Storage account, and Message Text appears in the order queue below.](media/storage-queue-items.png "Messages blade")
 
-### Task 4: Create Queue function
+### Task 3: Create Queue function
 
-In this task, you will create a second function which will be triggered by the output of the OrdersCosmosTrigger function. This will simulate the order processing and will add items to the notificationqueue if the order processing is complete and the `sendNotifications` property is true for the order.
+In this task, you will create a second function which will be triggered by the output of the OrdersTimerTrigger function. This will simulate the order processing and will add items to the notificationqueue if the order processing is complete and the `sendNotifications` property is true for the order.
 
 This will use an Azure Storage Queue trigger, and an input dataset from Cosmos DB, pulling in customers. Output dataset will be Azure Cosmos DB orders table, and an update to set `processed = true`, and the `processedDate` to today.
 
-1. Select **Integrate** under the OrdersCosmosTrigger function, then select **Azure Queue Storage (outputQueue)** under **Outputs**.
+1. Select **Integrate** under the OrdersTimerTrigger function, then select **Azure Queue Storage (outputQueue)** under **Outputs**.
 
-    ![Azure Queue Storage (outputQueue) is selected and highlighted under Outputs in the OrdersCosmosTrigger function.](media/function-app-output-storage-queue.png "Outputs section")
+    ![Azure Queue Storage (outputQueue) is selected and highlighted under Outputs in the OrdersTimerTrigger function.](media/function-app-output-storage-queue.png "Outputs section")
 
 2. Under **Actions** for the output, select **Go** next to **Create a new function triggered by this output**.
 
@@ -1582,7 +1557,7 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
 Duration: 30 minutes
 
-In this exercise, you will create Logic App which will trigger when an item is added to the `notificationqueue` Azure Storage Queue. The Logic App will send an email message to the email address included in the `notificationqueue` message.
+In this exercise, you create Logic App which will trigger when an item is added to the `notificationqueue` Azure Storage Queue. The Logic App will send an email message to the email address included in the `notificationqueue` message.
 
 ### Task 1: Create SendGrid account
 
@@ -1638,63 +1613,49 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
 In this task, you will create a new Logic App, which will use the SendGrid connector to send email notifications to users, informing them that their order has processed and shipped.
 
-1. In the Azure portal, select **+Create a resource**, enter "logic app" into the Search the Marketplace box, select **Logic App** from the results, and then select **Create**.
+1. In the Azure portal, navigate to your Logic App in the **hands-on-lab-SUFFIX** resource group.
 
-    ![+ Create a resource is highlighted on the left side of the Azure portal, "logic app" is highlighted in the Search the Marketplace box, and Logic App is selected in the results.](media/create-logic-app-resource.png "Azure Marketplace Logic App")
-
-2. In the **Create logic app** blade, enter the following:
-
-    - **Name:** Enter "OrderNotifications".
-    - **Subscription:** Select the subscription you are using for this hands-on lab.
-    - **Resource group:** Select **Use existing** and choose the **hands-on-lab-SUFFIX** resource group.
-    - **Location:** Select the location you have been using for resources in this hands-on lab.
-    - Select **Create** to provision the new Logic App.
-
-    ![The information above is entered on the Create logic app blade.](media/logic-app-create.png "Logic App blade")
-
-3. Navigate to your newly created Logic App in the Azure portal.
-
-4. In the Logic App Designer, select **Blank Logic App** under **Templates**.
+2. In the Logic App Designer, select **Blank Logic App** under **Templates**.
 
     ![Blank Logic App is highlighted under Templates in Logic App Designer Templates section.](media/logic-app-templates-blank.png "Logic App Designer, Templates section")
 
-5. In the blank logic app template, select **All** and then select **Azure Queues** under **Connectors**.
+3. In the blank logic app template, select **All** and then select **Azure Queues** under **Connectors**.
 
     ![Azure Queues is highlighted under Connectors.](media/logic-app-connectors-azure-queues.png "Connectors section")
 
-6. Select **When there are messages in a queue** under Triggers.
+4. Select **When there are messages in a queue** under Triggers.
 
     ![When there are messages in a queue is highlighted under Triggers.](media/logic-app-triggers-when-there-are-messages-in-a-queue.png "Triggers section")
 
-7. On the When there are messages in a queue dialog, enter **bestforyouorders** for the, **Connection Name** select the bestforyouorders **Storage account** from the list and select **Create**.
+5. On the When there are messages in a queue dialog, enter **bestforyouorders** for the, **Connection Name** select the bestforyouorders **Storage account** from the list and select **Create**.
 
     ![In the When there are messages in a queue dialog box, Bestforyouorders is in the Connection Name box, the bestforyouorders row is highlighted at the top of the list below Storage account, and the Create button is highlighted at the bottom.](media/logic-app-trigger-queues-configure.png "When there are messages in a queue dialog box")
 
-8. In the next **When there are messages in a queue** dialog, select **notificationqueue** from the **Queue Name** list, and set the interval to **1 minute**.
+6. In the next **When there are messages in a queue** dialog, select **notificationqueue** from the **Queue Name** list, and set the interval to **1 minute**.
 
     ![The information above is entered in the When there are messages in a queue dialog box.](media/logic-app-trigger-message-in-queue-configure.png "When there are messages in a queue dialog box")
 
-9. Select **+ New step**.
+7. Select **+ New step**.
 
     ![The New step button is displayed.](media/logic-app-new-step.png "Logic App new step")
 
-10. In the **Choose an action box**, enter "parse," and select **Data Operations**.
+8. In the **Choose an action box**, enter "parse," and select **Data Operations**.
 
     ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box, and Data Operations below in the list.](media/data-operations-parse.png "When there are messages in a queue dialog box")
 
-11. Under Data Operations, select **Parse JSON**.
+9. Under Data Operations, select **Parse JSON**.
 
     ![Parse JSON is highlighted under Data Operations.](media/logic-app-data-operations-parse-json.png "Data Operations")
 
-12. In the Parse JSON box, select the **Content** box, select **Add dynamic content +**, then select **Message Text** from the input parameters list that appears.
+10. In the Parse JSON box, select the **Content** box, select **Add dynamic content +**, then select **Message Text** from the input parameters list that appears.
 
     ![In the Parse JSON window, Message Text is in the Content box, Add dynamic content is highlighted, and Message Text is highlighted below in the input parameters list.](media/logic-app-parse-json-content.png "Parse JSON window")
 
-13. Next, select **Use sample payload to generate schema** below the **Schema** box.
+11. Next, select **Use sample payload to generate schema** below the **Schema** box.
 
     ![In the Parse JSON window, Use sample payload to generate schema is highlighted below the Schema box.](media/logic-app-parse-json-schema.png "Parse JSON window")
 
-14. In the dialog that appears, paste the following JSON into the sample JSON payload box, then select **Done**.
+12. In the dialog that appears, paste the following JSON into the sample JSON payload box, then select **Done**.
 
     ```json
     {"orderId":"5a6748c5d0d3199cfa076ed3","userId":"demouser@bfyo.com","notificationEmail":"demouser@bfyo.com","firstName":"Demo"}
@@ -1702,23 +1663,23 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The JSON above is pasted in the sample JSON payload dialog box, and Done is selected below.](media/logic-app-parse-json-sample-payload.png "Paste the JSON in the dialog box")
 
-15. You will now see the Schema for messages coming from the notification queue in the Schema box.
+13. You will now see the Schema for messages coming from the notification queue in the Schema box.
 
     ![The completed Parse JSON box is displayed.](media/logic-app-parse-json-complete.png "Parse JSON")
 
-16. Select **+ New** **step**.
+14. Select **+ New** **step**.
 
     ![The + New step button is displayed](media/logic-app-new-step.png "Logic App new step")
 
-17. In the **Choose an action box**, enter "sendgrid," and select **SendGrid** under Connectors.
+15. In the **Choose an action box**, enter "sendgrid," and select **SendGrid** under Connectors.
 
     ![SendGrid is entered into the search box, and the SendGrid connection is highlighted under connectors.](media/logic-app-connectors-sendgrid.png "Choose a connector")
 
-18. In the **SendGrid** connector dialog, select **Send email (V3)**.
+16. In the **SendGrid** connector dialog, select **Send email (V3)**.
 
     ![Send email (v2) is highlighted in the list of SendGrid actions.](media/logic-app-sendgrid-send-email.png "SendGrid")
 
-19. In the **SendGrid** box, enter the following:
+17. In the **SendGrid** box, enter the following:
 
     - **Connection Name**: Enter **bfyo-sendgrid**.
     - **SendGrid Api Key**: Return to the **API Key Created** screen in your SendGrid account, and then copy and paste the API key you generated.
@@ -1726,7 +1687,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The SendGrid connection configuration information above is entered into the SendGrid box.](media/logic-app-sendgrid-create.png "SendGrid")
 
-20. In the **Send email (V3)** box, enter the following:
+18. In the **Send email (V3)** box, enter the following:
 
     - **From**: Enter your email address.
     - **To**: Click in the box, select **Add dynamic content**, and then select the **notificationEmail** property. **NOTE**: If under the Parse JSON Dynamic Content section, you see a message that there were not any outputs to match the input format, select **See more** in the message.
@@ -1738,27 +1699,27 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The Send email (V3) dialog is completed with the values specified above.](media/logic-app-send-email-v2-complete.png "Send email (V3)"))
 
-21. Select **+ New step**.
+19. Select **+ New step**.
 
     ![The Add an action button is highlighted under + New step.](media/logic-app-new-step.png "Add an action button")
 
-22. In the **Choose an action** dialog, enter "queues" in to the search box, and select **Delete message** under Actions.
+20. In the **Choose an action** dialog, enter "queues" in to the search box, and select **Delete message** under Actions.
 
     ![Queue is highlighted in the Choose an action search box, and Azure Queues -- Delete message is highlighted below.](media/logic-app-azure-queues-delete-message.png "Choose an action dialog box")
 
-23. Select **notificationqueue** for the Queue Name.
+21. Select **notificationqueue** for the Queue Name.
 
-24. For Message ID, select the **Message ID** parameter from the dynamic content parameter list.
+22. For Message ID, select the **Message ID** parameter from the dynamic content parameter list.
 
-25. For Pop Receipt, select the **Pop Receipt** parameter from the dynamic content parameter list.
+23. For Pop Receipt, select the **Pop Receipt** parameter from the dynamic content parameter list.
 
     ![The settings above are entered into the Delete Message box.](media/logic-app-azure-queue-delete-message-settings.png "Delete message")
 
-26. Select **Save** on the **Logic Apps Designer** toolbar.
+24. Select **Save** on the **Logic Apps Designer** toolbar.
 
     ![Save is highlighted on the Logic Apps Designer blade toolbar.](media/logic-app-save.png "Logic Apps Designer blade")
 
-27. The Logic App will begin running immediately, so if you entered your valid email address when you registered your account in the Best for You Organics starter app, and placed an order, you should receive an email message within a minute or two of selecting Save.
+25. The Logic App will begin running immediately, so if you entered your valid email address when you registered your account in the Best for You Organics starter app, and placed an order, you should receive an email message within a minute or two of selecting Save.
 
     ![The email message from the LogicApp is displayed.](media/order-email-message.png "Email message")
 
