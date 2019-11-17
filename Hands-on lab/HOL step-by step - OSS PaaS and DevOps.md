@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-September 2019
+November 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -36,8 +36,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 4: Clone the starter application](#task-4-clone-the-starter-application)
     - [Task 5: Launch the starter application](#task-5-launch-the-starter-application)
   - [Exercise 2: Migrate the database to Cosmos DB](#exercise-2-migrate-the-database-to-cosmos-db)
-    - [Task 1: Provision Cosmos DB using the MongoDB API](#task-1-provision-cosmos-db-using-the-mongodb-api)
-    - [Task 2: Create and scale collections](#task-2-create-and-scale-collections)
+    - [Task 1: Create and scale collections](#task-1-create-and-scale-collections)
     - [Task 3: Update database connection string](#task-3-update-database-connection-string)
     - [Task 4: Import data to the API for MongoDB using mongoimport](#task-4-import-data-to-the-api-for-mongodb-using-mongoimport)
     - [Task 5: Install Azure Cosmos DB extension for VS Code](#task-5-install-azure-cosmos-db-extension-for-vs-code)
@@ -76,15 +75,19 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives
 
-In this hands-on lab, you will implement a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. You will migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers. You will also migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
+In this hands-on lab, you implement a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. You migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers, migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
 
 At the end of this hands-on lab, you will be better able to migrate and deploy OSS applications into Azure PaaS using modern DevOps methodologies and Docker containers.
 
 ## Overview
 
-Best For You Organics Company is one of the leading health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They have a MERN stack web application that they host on-premises and are looking to migrate their OSS application into Azure. They will be creating a custom Docker image for their application and using a Jenkins continuous integration/continuous delivery (CI/CD) pipeline to deploy the application into a Web App for Containers instance. Also, they will be swapping out the use of MongoDB with Azure Cosmos DB, using the MongoDB APIs.
+Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service targets working professionals looking for convenient, reliable access to healthy meal choices, and pre-packaged recipes without having to spend too much time preparing the meals.
 
-In this hands-on lab, you will assist them with completing the OSS application and database migrations into Azure. You will implement a containerized solution. For this, you will create a custom Docker image and push it to an Azure Container Registry. You will then configure a CI/CD pipeline to deploy the application to a Web App for Containers instance. You will also help them implement functionality enhancements using serverless architecture services in Azure.
+Their CIO is a big proponent of open-source software, and the development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). They host their code in a private GitHub repository. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
+
+As their service has grown, they have found that the management of VM and server infrastructure is a real challenge. They want to learn more about how Platform as a Service (PaaS) solutions for OSS applications on Azure might be able to help. Their goal is to focus their expenditures and efforts on their core business, rather than infrastructure. The development team at Best For You Organics has indicated they have some experience with Docker. They are interested in what options might be available for using containers to deploy their application into a cloud environment. They are also interested in learning more about identity management.
+
+The development team has also expressed that they would like to continue using GitHub as their code repository but is interested in improving upon their DevOps pipeline. They currently use Jenkins for their builds and are interested in any tools available in a cloud offering that could help with release management, or other aspects of a fully-integrated, modern DevOps pipeline. Ultimately, their goal is to automate and simplify deployments through CI/CD capabilities and deliver updates faster and more reliably.
 
 ## Solution architecture
 
@@ -96,7 +99,9 @@ The solution begins with developers using Visual Studio Code (VS Code) as their 
 
 The MongoDB database will be imported into Azure Cosmos DB, using mongoimport.exe, and access the database from the application will continue to use the MongoDB APIs. The database connection string in the application will be updated to point to the new Cosmos DB.
 
-Serverless architecture will be applied to order processing and customer notifications. Azure Functions will be used to automate the processing of orders. Logic Apps will be applied to send SMS notifications, via a Twilio connector, to customers informing them that their order has been processed and shipped.
+A serverless architecture will be applied to order processing and customer notifications. Azure Functions will be used to automate the processing of orders. Logic Apps will be applied to send SMS notifications via a Twilio connector to customers informing them that their order has been processed and shipped.
+
+In this hands-on lab, you will assist them with completing the OSS application and database migrations into Azure. You will implement a containerized solution. For this, you will create a custom Docker image and push it to an Azure Container Registry. You will then configure a CI/CD pipeline to deploy the application to a Web App for Containers instance. You will also help them implement functionality enhancements using serverless architecture services in Azure.
 
 ## Requirements
 
@@ -113,40 +118,46 @@ Serverless architecture will be applied to order processing and customer notific
 
 Duration: 30 minutes
 
-In this exercise, you will create a local copy of the starter application on your Lab VM, add some sample data to the local MongoDB database, and run the application.
+In this exercise, you create a local copy of the starter application on your Lab VM, add some sample data to the local MongoDB database, and run the application.
 
 ### Task 1: Connect to your Lab VM
 
-In this task, you will create an RDP connection to your Lab VM. If you are already connected, skip to [Task 2](#task-2-grant-permissions-to-docker).
+In this task, you create an RDP connection to your Lab VM. If you are already connected, skip to [Task 2](#task-2-grant-permissions-to-docker).
 
-1. Navigate to the Azure portal and select **Resource groups** from the left-hand menu, then select the **hands-on-lab-SUFFIX** resource group from the list. If there are too many, enter "hands-on-lab" into the filter box to reduce the resource groups displayed the list.
+1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the Azure services list.
+
+    ![Resource groups is highlighted in the Azure services list.](media/azure-services-resource-groups.png "Azure services")
+
+2. Select the **hands-on-lab-SUFFIX** resource group from the list.
 
     ![Resource groups is highlighted in the navigation pane of the Azure portal. On the Resource groups blade, hands-on-lab is highlighted in the filter box, and hands-on-lab is highlighted in the search results.](media/azure-resource-groups.png "Azure Portal")
 
-2. Next, select **LabVM** from the list of available resources.
+    > **Tip**: If there are too many resource groups you can enter "hands-on-lab" into the filter box to reduce the resource groups displayed the list.
+
+3. Next, select **LabVM** from the list of available resources.
 
     ![LabVM is highlighted in the list of available resources.](media/rg-labvm.png "Select LabVM")
 
-3. On the **LabVM** blade, copy the Public IP address from the Essentials area on the Overview screen.
+4. On the **LabVM** blade, copy the Public IP address from the Essentials area on the Overview screen.
 
     ![Public IP address is highlighted in the top menu on the LabVM blade.](media/labvm-public-ip-address.png "LabVM blade")
 
-4. Open a Remote Desktop Client (RDP) application and enter or paste the Public IP address of your Lab VM into the computer name field.
+5. Open a Remote Desktop Client (RDP) application and enter or paste the Public IP address of your Lab VM into the computer name field.
 
-5. Select **Connect** on the Remote Desktop Connection dialog.
+6. Select **Connect** on the Remote Desktop Connection dialog.
 
-6. Select **Yes** to connect, if prompted that the identity of the remote computer cannot be verified.
+7. Select **Yes** to connect, if prompted that the identity of the remote computer cannot be verified.
 
     ![This is a screenshot of the Remote Desktop Connection prompt about connecting to the remote despite the identity of the remote computer being unverified. Yes is selected.](media/remote-desktop-connection.png "Remote Desktop Connection dialog box")
 
-7. Enter the following credentials (or the non-default credentials if you changed them):
+8. Enter the following credentials (or the non-default credentials if you changed them):
 
     - **Username:** demouser
     - **Password:** Password.1!!
 
     ![The credentials above are entered in the Login to xrdp dialog box.](media/login-to-xrdp.png "Login to xrdp dialog box")
 
-8. Select **OK** to log into the Lab VM.
+9. Select **OK** to log into the Lab VM.
 
 ### Task 2: Grant permissions to Docker
 
@@ -204,7 +215,7 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
     ![Personal access tokens is highlighted on the Developer settings page.](media/github-personal-access-tokens.png "Select Personal access tokens")
 
-9.  Select **Generate new token**.
+9. Select **Generate new token**.
 
     ![The Generate new token button is highlighted on the Personal access tokens page.](media/github-generate-new-token.png "Select Generate new token")
 
@@ -348,48 +359,21 @@ In this task, you will seed the MongoDB with sample data, then run the applicati
 
 Duration: 30 minutes
 
-In this exercise, you will provision an Azure Cosmos DB account, and then update the starter application's database connection string to point to your new Azure Cosmos DB account. You will then, use `mongoimport.exe` to migrate the data in your MongoDB database into Cosmos DB collections, and verify with the application that you are connected to your Cosmos DB database.
+In this exercise, you update the starter application's database connection string to point to your Azure Cosmos DB account. You then, use `mongoimport.exe` to migrate the data in your MongoDB database into Cosmos DB collections, and verify with the application that you are connected to your Cosmos DB database.
 
-### Task 1: Provision Cosmos DB using the MongoDB API
+### Task 1: Create and scale collections
 
-In this task, you will provision a new Azure Cosmos DB account using the MongoDB API.
+In this task, you create the collections needed for your database migration and increase each collection's throughput from the default 400 RUs to 2,500 RUs. This is done to avoid throttling during the migration, and reduce the time required to import data.
 
-1. In the Azure portal, select **+Create a resource**, **Databases**, enter "cosmos" into the Search the Marketplace box, select **Azure Cosmos DB** in the search results, and then select **Create**.
+> To learn more about RUs and throughput provisioning in Cosmos DB, read [Request Units in Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/request-units).
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, "cosmos" is entered into the Search the Marketplace box, and Azure Cosmos DB is highlighted in the search results.](media/create-resource-cosmos-db.png "Azure Portal")
+1. Navigate to your Azure Cosmos DB account in the Azure portal by selecting **Resource groups** from the Azure home page, and then selecting the **best-for-you-db-SUFFIX** Cosmos DB resource from the list.
 
-2. On the **Azure Cosmos** **DB** blade, enter the following:
-
-    **PROJECT DETAILS**:
-
-    - **Subscription:** Select the subscription you are using for this hands-on lab.
-    - **Resource Group:** Select the **hands-on-lab-SUFFIX** resource group you created previously.
-
-    **INSTANCE DETAILS**:
-
-    - **Account Name**: Enter `best-for-you-db-SUFFIX`, where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
-    - **API:** Select **Azure Cosmos DB for MongoDB API**.
-    - **Location:** Select a location near you from the list (Note: not all locations are available for Cosmos DB).
-    - **Enable geo-redundancy:** Select Disable.
-    - **Multi-region Writes**: Select Disable.
-
-    ![The information above is entered in the Azure Cosmos DB blade.](media/cosmos-db-create-basics.png "Azure Cosmos DB")
-
-3. Select **Review + create** to move to the validation step.
-
-4. Ensure the **Validation Success** message is displayed, and then select **Create** to provision the new Azure Cosmos DB.
-
-### Task 2: Create and scale collections
-
-In this task, you will create the collections needed for your database migration and increase each collection's throughput from the default 400 RUs to 2,500 RUs. This is done to avoid throttling during the migration, and reduce the time required to import data.
-
-> To learn more about RUs and throughput provisioning in Cosmos DB, read [Request Units in Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/request-units).
-
-1. When your Cosmos DB account is provisioned, navigate to it in the Azure portal, select **Data Explorer** from the left-hand menu and then select **New Collection**.
+2. On the Cosmos DB blade, select **Data Explorer** from the left-hand menu and then select **New Collection**.
 
     ![Data Explorer is selected and highlighted in the left-hand menu of the Azure portal, and New Collection is highlighted on the right.](media/cosmos-db-add-collection.png "Azure Cosmos DB")
 
-2. In the **Add Collection** dialog, enter the following:
+3. In the **Add Collection** dialog, enter the following:
 
     - **Database id**: Select **Create new**, and enter **best-for-you-organics**.
     - **Provision database throughput**: Uncheck this box.
@@ -400,11 +384,11 @@ In this task, you will create the collections needed for your database migration
 
     ![The information above is entered in the Add Collection dialog box.](media/cosmos-db-new-collection-orders.png "Add Collection")
 
-3. On the Collections blade, select **New Collection** to create another collection.
+4. On the Collections blade, select **New Collection** to create another collection.
 
     ![The New Collection button is highlighted on the Cosmos DB Collections blade.](media/cosmos-db-new-collection.png "New Collection")
 
-4. On the Add Collection dialog, enter the following:
+5. On the Add Collection dialog, enter the following:
 
     - **Database id**: Select **Use existing** and select the **best-for-you-organics** database from the list.
     - **Collection id**: Enter **users**.
@@ -414,9 +398,9 @@ In this task, you will create the collections needed for your database migration
 
     ![The information for the users collections above is entered into the Add Collection dialog.](media/cosmos-db-new-collection-users.png "Add Collection")
 
-5. Repeat steps 3 and 4, this time entering **plans** as the collection name.
+6. Repeat steps 3 and 4, this time entering **plans** as the collection name.
 
-6. The best-for-you-organics database will have three collections listed under it when you are complete.
+7. The best-for-you-organics database will have three collections listed under it when you are complete.
 
     ![The best-for-you-organics database is displayed, with orders, plans, and users collections under it.](media/cosmos-db-database-and-collections.png "Cosmos DB Collections")
 
