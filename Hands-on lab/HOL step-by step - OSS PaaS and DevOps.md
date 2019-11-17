@@ -375,7 +375,7 @@ In this task, you create the collections needed for your database migration and 
 
 3. In the **Add Collection** dialog, enter the following:
 
-    - **Database id**: Select **Create new**, and enter **best-for-you-organics**.
+    - **Database id**: Choose **Create new**, and enter **best-for-you-organics**.
     - **Provision database throughput**: Uncheck this box.
     - **Collection Id**: Enter **orders**.
     - **Storage capacity**: Select **Fixed (10 GB)**.
@@ -392,13 +392,14 @@ In this task, you create the collections needed for your database migration and 
 
     - **Database id**: Select **Use existing** and select the **best-for-you-organics** database from the list.
     - **Collection id**: Enter **users**.
-    - **Storage capacity**: Select **Fixed (10 GB)**.
+    - **Shared key**: Enter **id_**.
+    - **Provision dedicated throughput for this collection**: Check this box.
     - **Throughput**: Enter **2500**.
     - Select **OK** to create the collection.
 
     ![The information for the users collections above is entered into the Add Collection dialog.](media/cosmos-db-new-collection-users.png "Add Collection")
 
-6. Repeat steps 3 and 4, this time entering **plans** as the collection name.
+6. Repeat steps 4 and 5, this time entering **plans** as the collection name.
 
 7. The best-for-you-organics database will have three collections listed under it when you are complete.
 
