@@ -32,6 +32,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Provision a resource group](#task-1-provision-a-resource-group)
     - [Task 2: Create a development virtual machine](#task-2-create-a-development-virtual-machine)
     - [Task 3: Provision a Jenkins server](#task-3-provision-a-jenkins-server)
+    - [Task 4: Provision Cosmos DB using the MongoDB API](#task-4-provision-cosmos-db-using-the-mongodb-api)
     - [Task 4: Create a GitHub account](#task-4-create-a-github-account)
     - [Task 5: Fork the starter app](#task-5-fork-the-starter-app)
 
@@ -158,6 +159,40 @@ In this task, you provision an Azure Linux VM, which will serve as your Jenkins 
     ![Validation information is displayed on the Review + create tab, with the Validation passed message displayed.](media/create-jenkins-summary.png "Validation passed")
 
 8. It can take 10+ minutes for the VM to provision. You can move on to the next task while you wait.
+
+### Task 4: Provision Cosmos DB using the MongoDB API
+
+In this task, you provision a new Azure Cosmos DB account using the MongoDB API.
+
+1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
+
+    ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
+
+2. Enter "cosmos" into the Search the Marketplace box, select **Azure Cosmos DB** in the search results, and then select **Create**.
+
+    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, "cosmos" is entered into the Search the Marketplace box, and Azure Cosmos DB is highlighted in the search results.](media/create-resource-cosmos-db.png "Azure Portal")
+
+3. On the **Azure Cosmos** **DB** blade, enter the following:
+
+    **PROJECT DETAILS**:
+
+    - **Subscription:** Select the subscription you are using for this hands-on lab.
+    - **Resource Group:** Select the **hands-on-lab-SUFFIX** resource group you created previously.
+
+    **INSTANCE DETAILS**:
+
+    - **Account Name**: Enter `best-for-you-db-SUFFIX`, where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
+    - **API:** Select **Azure Cosmos DB for MongoDB API**.
+    - **Location:** Select a location near you from the list (Note: not all locations are available for Cosmos DB).
+    - **Version**: Accept the default version.
+    - **Enable geo-redundancy:** Select Disable.
+    - **Multi-region Writes**: Select Disable.
+
+    ![The information above is entered in the Azure Cosmos DB blade.](media/cosmos-db-create-basics.png "Azure Cosmos DB")
+
+4. Select **Review + create** to move to the validation step.
+
+5. Ensure the **Validation Success** message is displayed, and then select **Create** to provision the new Azure Cosmos DB.
 
 ### Task 4: Create a GitHub account
 
