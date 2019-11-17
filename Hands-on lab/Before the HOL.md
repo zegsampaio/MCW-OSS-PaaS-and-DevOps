@@ -33,8 +33,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 2: Create a development virtual machine](#task-2-create-a-development-virtual-machine)
     - [Task 3: Provision a Jenkins server](#task-3-provision-a-jenkins-server)
     - [Task 4: Provision Cosmos DB using the MongoDB API](#task-4-provision-cosmos-db-using-the-mongodb-api)
-    - [Task 5: Create a GitHub account](#task-5-create-a-github-account)
-    - [Task 6: Fork the starter app](#task-6-fork-the-starter-app)
+    - [Task 5: Create an Azure Container Registry](#task-5-create-an-azure-container-registry)
+    - [Task 6: Create a GitHub account](#task-6-create-a-github-account)
+    - [Task 7: Fork the starter app](#task-7-fork-the-starter-app)
 
 <!-- /TOC -->
 
@@ -121,7 +122,7 @@ In this task, you provision an Azure Linux VM, which will serve as your Jenkins 
 
 2. Enter "jenkins" into the **Search the Marketplace** box, select the **Jenkins** compute item from the results, and then select **Create**.
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, and Everything is highlighted to the right. On the Everything blade to the right, jenkins is highlighted in the search box, and the Jenkins row is highlighted in the search results.](media/create-resource-jenkins.png "Azure Portal")
+    ![Jenkins is highlighted in the search box, and the Jenkins row is highlighted in the search results.](media/create-resource-jenkins.png "Azure Portal")
 
 3. On the **Create Jenkins Basics** tab, enter the following:
 
@@ -170,7 +171,7 @@ In this task, you provision a new Azure Cosmos DB account using the MongoDB API.
 
 2. Enter "cosmos" into the Search the Marketplace box, select **Azure Cosmos DB** in the search results, and then select **Create**.
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, "cosmos" is entered into the Search the Marketplace box, and Azure Cosmos DB is highlighted in the search results.](media/create-resource-cosmos-db.png "Azure Portal")
+    ![Cosmos is entered into the Search the Marketplace box, and Azure Cosmos DB is highlighted in the search results.](media/create-resource-cosmos-db.png "Azure Portal")
 
 3. On the **Azure Cosmos** **DB** blade, enter the following:
 
@@ -194,7 +195,32 @@ In this task, you provision a new Azure Cosmos DB account using the MongoDB API.
 
 5. Ensure the **Validation Success** message is displayed, and then select **Create** to provision the new Azure Cosmos DB.
 
-### Task 5: Create a GitHub account
+### Task 5: Create an Azure Container Registry
+
+In this task, you create a private Docker registry in the Azure portal, so you have a place to store the custom Docker image you will create during the hands-on lab.
+
+1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
+
+    ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
+
+2. Enter "container registry" into the Search the Marketplace box, select **Container Registry** from the results, and then select **Create**.
+
+    ![Container registry is entered into the search box and Container Registry is selected and highlighted in the search results.](media/create-container-registry-resource.png "Azure Portal")
+
+3. On the **Create container registry** blade, enter the following:
+
+    - **Registry name:** Enter "bestforyouregistrySUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
+    - **Subscription:** Select the subscription you are using for this hands-on lab.
+    - **Resource group:** Select the **hands-on-lab-SUFFIX** resource group created previously.
+    - **Location:** Select the location you are using for resources in this hands-on lab.
+    - **Admin user:** Select **Enable**.
+    - **SKU:** Select **Basic**.
+
+    ![The information above is entered on the Create container registry blade.](media/azure-create-resource-container-registry.png "Create container registry blade")
+
+4. Select **Create** to provision the new Azure Container Registry.
+
+### Task 6: Create a GitHub account
 
 In this task, you sign up for a free GitHub account, which is used for hosting a copy of the sample application used throughout this lab. This account will be integrated into the CI/CD workflow for pushing updates to the application into Azure.
 
@@ -214,7 +240,7 @@ In this task, you sign up for a free GitHub account, which is used for hosting a
 
     ![Very experienced, Development, and I'm a professional are selected in Step 2 on the Welcome to GitHub screen.](media/github-experience.png "Select options in Step 2")
 
-### Task 6: Fork the starter app
+### Task 7: Fork the starter app
 
 In this task, you will fork the [OSS PaaS and DevOps MCW GitHub repository](https://github.com/Microsoft/MCW-OSS-PaaS-and-DevOps) to create a copy of the starter application in your GitHub account.
 
