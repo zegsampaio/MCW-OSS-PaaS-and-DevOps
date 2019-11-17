@@ -33,8 +33,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 2: Create a development virtual machine](#task-2-create-a-development-virtual-machine)
     - [Task 3: Provision a Jenkins server](#task-3-provision-a-jenkins-server)
     - [Task 4: Provision Cosmos DB using the MongoDB API](#task-4-provision-cosmos-db-using-the-mongodb-api)
-    - [Task 4: Create a GitHub account](#task-4-create-a-github-account)
-    - [Task 5: Fork the starter app](#task-5-fork-the-starter-app)
+    - [Task 5: Create a GitHub account](#task-5-create-a-github-account)
+    - [Task 6: Fork the starter app](#task-6-fork-the-starter-app)
 
 <!-- /TOC -->
 
@@ -194,7 +194,7 @@ In this task, you provision a new Azure Cosmos DB account using the MongoDB API.
 
 5. Ensure the **Validation Success** message is displayed, and then select **Create** to provision the new Azure Cosmos DB.
 
-### Task 4: Create a GitHub account
+### Task 5: Create a GitHub account
 
 In this task, you sign up for a free GitHub account, which is used for hosting a copy of the sample application used throughout this lab. This account will be integrated into the CI/CD workflow for pushing updates to the application into Azure.
 
@@ -214,7 +214,7 @@ In this task, you sign up for a free GitHub account, which is used for hosting a
 
     ![Very experienced, Development, and I'm a professional are selected in Step 2 on the Welcome to GitHub screen.](media/github-experience.png "Select options in Step 2")
 
-### Task 5: Fork the starter app
+### Task 6: Fork the starter app
 
 In this task, you will fork the [OSS PaaS and DevOps MCW GitHub repository](https://github.com/Microsoft/MCW-OSS-PaaS-and-DevOps) to create a copy of the starter application in your GitHub account.
 
