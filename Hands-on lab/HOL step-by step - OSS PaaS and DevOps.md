@@ -1285,15 +1285,15 @@ In this task, you will commit changes to the `MCW-OSS-PaaS-and-DevOps` starter a
 
 5. Return to your Jenkins dashboard, and select the **best-for-you-build** project, and select the latest build number under Build History.
 
-    ![The Jenkins build history is displayed, with a progress bar next to #2](media/jenkins-build-history.png "Jenkins build history")
+    ![The Jenkins build history is displayed, with a progress bar next to #2.](media/jenkins-build-history.png "Jenkins build history")
 
 6. On the Build page, select **Console Output** from the left-hand menu.
 
-    ![Console Output is highlighted in the left-hand menu on the Jenkins project build page](media/jenkins-build-console-output.png "Build console output")
+    ![Console Output is highlighted in the left-hand menu on the Jenkins project build page.](media/jenkins-build-console-output.png "Build console output")
 
 7. On the Console Output page, you can monitor the build progress. When it completes after a few minutes, you will see a SUCCESS message similar to the following:
 
-    ![A build and Docker deployment success message is displayed in the console output in Jenkins](media/jenkins-build-console-output-success.png "Build and Docker deployment success")
+    ![A build and Docker deployment success message is displayed in the console output in Jenkins.](media/jenkins-build-console-output-success.png "Build and Docker deployment success")
 
 8. When the deployment is complete, you can verify the changes deployed successfully by navigating to your App Service instance in the Azure portal, and selecting the URL on the overview blade. The deployment of the container can take several minutes to complete so refreshes may take a few minutes to show the new header.
 
@@ -1458,7 +1458,7 @@ In this task, you will create a function that function sends all new orders to a
 
     ![The credentials above are entered in the Login page.](media/bfyo-web-login-page.png "Login page")
 
-25. After logging in, you will be returned to the home page. Select **Select this plan** for any of the plans.
+25. After logging in, you will be returned to the home page. Choose **Select this plan** for any of the plans.
 
     ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the home page, and all three boxes' Select this plan buttons are highlighted.](media/bfyo-web-plans.png "Select a plan")
 
@@ -1549,7 +1549,7 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     ![A notification is highlighted in the logs on the ProcessOrders Function page in the Azure portal.](media/function-app-logs-notification-sent.png "ProcessOrders Function page")
 
-    > **NOTE**: It can take up to five minutes for the OrdersTimerTrigger to fire. The ProcessOrders function will fire immediately after the OrderTimerTrigger function.
+    > **Note**: It can take up to five minutes for the OrdersTimerTrigger to fire. The ProcessOrders function will fire immediately after the OrderTimerTrigger function.
 
 17. The order you placed has been sent to the notificationqueue and is pending the notification being sent to your email address.
 
@@ -1581,7 +1581,7 @@ In this task, you will create a SendGrid account through the Azure portal to sen
     - **Password**: Enter **Password.1!!**
     - **Subscription** Select the subscription you are using for this hands-on lab.
     - **Resource group**: Choose **Use existing** and select the **hands-on-lab-SUFFIX** resource group.
-    - **Pricing tier**: Select **F1 Free** and select **Select**.
+    - **Pricing tier**: Select **F1 Free** and choose **Select**.
     - **Contact information**: Enter your name, company, and email address and select **OK**.
     - **Legal terms**: Review the legal terms and enter a phone number and then select **OK**.
 
