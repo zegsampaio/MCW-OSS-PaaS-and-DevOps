@@ -16,7 +16,7 @@ In this task, you will create a script file that will be used as a custom extens
 
 In this task, you will provision a Linux virtual machine (VM) running Ubuntu Server 16.04 LTS.
 
-1. In the [Azure Portal](https://portal.azure.com/), select **+Create a resource**, then enter "ubuntu" into the search bar, expand **Ubuntu Server** and select **Ubuntu Server 16.04 LTS** from the results.
+1. In the [Azure Portal](https://portal.azure.com/), expand the portal menu, select **+Create a resource**, then enter "ubuntu" into the search bar, expand **Ubuntu Server** and select **Ubuntu Server 16.04 LTS** from the results.
 
     ![+ Create a resource is highlighted in the navigation pane of the Azure portal, ubuntu is highlighted in the search box, and the Ubuntu Server 16.04 LTS row is highlighted in the search results.](media/create-resource-ubuntu-server-16.04-lts.png "Azure Portal")
 
@@ -26,12 +26,12 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
 
 3. Set the following configuration on the **Basics** tab:
 
-    **PROJECT DETAILS**:
+    **Project Details**:
 
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource Group:** Select **Create new**, and enter "hands-on-lab-(SUFFIX)" as the name of the new resource group.
 
-    **INSTANCE DETAILS**:
+    **Instance Details**:
 
     - **Virtual machine name:** Enter **LabVM**.
     - **Region:** Select the region you are using for this hands-on lab.
@@ -39,14 +39,14 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
     - **Image**: Select **Ubuntu Server 16.04 LTS**.
     - **Size**: Select **Standard D2s v3** or **Standard E2s_v3**.
 
-    **ADMINISTRATOR ACCOUNT**:
+    **Administrator Account**:
 
     - **Authentication type:** Select **Password**.
     - **Username:** Enter **demouser**
     - **Password:** Enter **Password.1!!**
     - **Login with Azure Active Directory**: Select **Off**.
 
-    **INBOUND PORT RULES**:
+    **Inbound Port Rules**:
 
      - **Public inbound ports**: Select **Allow selected ports**.
      - **Select inbound ports**: Expand the list and check the box for **RDP (3389)**.

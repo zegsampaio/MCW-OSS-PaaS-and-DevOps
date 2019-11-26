@@ -8,7 +8,7 @@ As their service has grown, they have found that the management of VM and server
 
 The development team has also expressed that they would like to continue using GitHub as their code repository but is interested in improving upon their DevOps pipeline. They currently use Jenkins for their builds and are interested in any tools available in a cloud offering that could help with release management, or other aspects of a fully-integrated, modern DevOps pipeline. Ultimately, their goal is to automate and simplify deployments through CI/CD capabilities and deliver updates faster and more reliably.
 
-September 2019
+November 2019
 
 ## Target audience
 
@@ -25,13 +25,13 @@ At the end of this workshop, you will learn how to provision Web App for Contain
 
 ### Whiteboard design session
 
-In this whiteboard design session, you will work with a group to design a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. Your solution will handle the migration of an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure PaaS services, including migrating an existing MongoDB instance into Cosmos DB, enhancing application functionality using serverless technologies, and fully embracing modern DevOps tools.
+In this whiteboard design session, you work with a group to design a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. Your solution should handle the migration of an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application. The application will be migrated from a hosted environment into Azure PaaS services, including migrating an existing MongoDB instance into Cosmos DB, enhancing application functionality using serverless technologies, and fully embracing modern DevOps tools.
 
 At the end of this whiteboard design session, you will be better able to design solutions for migrating OSS applications into Azure PaaS using modern DevOps methodologies.
 
 ### Hands-on Lab
 
-In this hands-on lab, you will implement a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. You will migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers, migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
+In this hands-on lab, you implement a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. You migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers, migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
 
 At the end of this hands-on lab, you will be better able to migrate and deploy OSS applications into Azure PaaS using modern DevOps methodologies and Docker containers.
 
@@ -49,6 +49,9 @@ At the end of this hands-on lab, you will be better able to migrate and deploy O
 - Logic App
 - Visual Studio Code
 - Web App for Containers
+- Azure Cognitive Search
+- Azure Active Directory B2C
+- SendGrid
 
 ## Azure solutions
 
