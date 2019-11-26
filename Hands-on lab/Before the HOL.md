@@ -289,7 +289,7 @@ In this task, you create a new Logic App, which will use a SendGrid connector to
 
 In this task, you sign up for a free GitHub account, which is used for hosting a copy of the sample application used throughout this lab. This account will be integrated into the CI/CD workflow for pushing updates to the application into Azure.
 
-> **Note**: If you already have a GitHub account, and wish to use that account, you can skip to the [next task](#task-5-fork-the-starter-app).
+> **Note**: If you already have a GitHub account, and wish to use that account, you can skip to the [next task](#task-9-fork-the-starter-app).
 
 1. Navigate to <https://github.com> in a web browser.
 
