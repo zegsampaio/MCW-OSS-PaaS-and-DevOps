@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-September 2019
+November 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -36,18 +36,16 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 4: Clone the starter application](#task-4-clone-the-starter-application)
     - [Task 5: Launch the starter application](#task-5-launch-the-starter-application)
   - [Exercise 2: Migrate the database to Cosmos DB](#exercise-2-migrate-the-database-to-cosmos-db)
-    - [Task 1: Provision Cosmos DB using the MongoDB API](#task-1-provision-cosmos-db-using-the-mongodb-api)
-    - [Task 2: Create and scale collections](#task-2-create-and-scale-collections)
-    - [Task 3: Update database connection string](#task-3-update-database-connection-string)
-    - [Task 4: Import data to the API for MongoDB using mongoimport](#task-4-import-data-to-the-api-for-mongodb-using-mongoimport)
-    - [Task 5: Install Azure Cosmos DB extension for VS Code](#task-5-install-azure-cosmos-db-extension-for-vs-code)
-    - [Task 6: Decrease collection throughput](#task-6-decrease-collection-throughput)
+    - [Task 1: Create and scale collections](#task-1-create-and-scale-collections)
+    - [Task 2: Update database connection string](#task-2-update-database-connection-string)
+    - [Task 3: Import data to the API for MongoDB using mongoimport](#task-3-import-data-to-the-api-for-mongodb-using-mongoimport)
+    - [Task 4: Install Azure Cosmos DB extension for VS Code](#task-4-install-azure-cosmos-db-extension-for-vs-code)
+    - [Task 5: Decrease collection throughput](#task-5-decrease-collection-throughput)
   - [Exercise 3: Containerize the app](#exercise-3-containerize-the-app)
-    - [Task 1: Create an Azure Container Registry](#task-1-create-an-azure-container-registry)
-    - [Task 2: Install Docker extension in VS Code](#task-2-install-docker-extension-in-vs-code)
-    - [Task 3: Create Docker image and run the app](#task-3-create-docker-image-and-run-the-app)
-    - [Task 4: Run the containerized app](#task-4-run-the-containerized-app)
-    - [Task 5: Push image to Azure Container Registry](#task-5-push-image-to-azure-container-registry)
+    - [Task 1: Install Docker extension in VS Code](#task-1-install-docker-extension-in-vs-code)
+    - [Task 2: Create Docker image and run the app](#task-2-create-docker-image-and-run-the-app)
+    - [Task 3: Run the containerized app](#task-3-run-the-containerized-app)
+    - [Task 4: Push image to Azure Container Registry](#task-4-push-image-to-azure-container-registry)
   - [Exercise 4: Set up Web App for Containers](#exercise-4-set-up-web-app-for-containers)
     - [Task 1: Provision Web App for Containers](#task-1-provision-web-app-for-containers)
     - [Task 2: Navigate to the deployed app](#task-2-navigate-to-the-deployed-app)
@@ -61,10 +59,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 7: Add continuous delivery to Jenkins build job](#task-7-add-continuous-delivery-to-jenkins-build-job)
     - [Task 8: Trigger CI-CD pipeline](#task-8-trigger-ci-cd-pipeline)
   - [Exercise 6: Create Azure Functions for order processing](#exercise-6-create-azure-functions-for-order-processing)
-    - [Task 1: Provision a Function App](#task-1-provision-a-function-app)
-    - [Task 2: Configure storage queues](#task-2-configure-storage-queues)
-    - [Task 3: Create timer triggered function](#task-3-create-timer-triggered-function)
-    - [Task 4: Create Queue function](#task-4-create-queue-function)
+    - [Task 1: Configure storage queues](#task-1-configure-storage-queues)
+    - [Task 2: Create timer triggered function](#task-2-create-timer-triggered-function)
+    - [Task 3: Create Queue function](#task-3-create-queue-function)
   - [Exercise 7: Create Logic App for sending email notifications](#exercise-7-create-logic-app-for-sending-email-notifications)
     - [Task 1: Create SendGrid account](#task-1-create-sendgrid-account)
     - [Task 2: Create Logic App](#task-2-create-logic-app)
@@ -76,15 +73,19 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives
 
-In this hands-on lab, you will implement a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. You will migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers. You will also migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
+In this hands-on lab, you implement a solution for integrating and deploying complex open-source software (OSS) workloads into Azure PaaS. You migrate an existing MERN (MongoDB, Express.js, React.js, Node.js) stack application from a hosted environment into Azure Web App for Containers, migrate a MongoDB instance into Cosmos DB, enhance application functionality using serverless technologies, and fully embrace modern DevOps tools.
 
 At the end of this hands-on lab, you will be better able to migrate and deploy OSS applications into Azure PaaS using modern DevOps methodologies and Docker containers.
 
 ## Overview
 
-Best For You Organics Company is one of the leading health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They have a MERN stack web application that they host on-premises and are looking to migrate their OSS application into Azure. They will be creating a custom Docker image for their application and using a Jenkins continuous integration/continuous delivery (CI/CD) pipeline to deploy the application into a Web App for Containers instance. Also, they will be swapping out the use of MongoDB with Azure Cosmos DB, using the MongoDB APIs.
+Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service targets working professionals looking for convenient, reliable access to healthy meal choices, and pre-packaged recipes without having to spend too much time preparing the meals.
 
-In this hands-on lab, you will assist them with completing the OSS application and database migrations into Azure. You will implement a containerized solution. For this, you will create a custom Docker image and push it to an Azure Container Registry. You will then configure a CI/CD pipeline to deploy the application to a Web App for Containers instance. You will also help them implement functionality enhancements using serverless architecture services in Azure.
+Their CIO is a big proponent of open-source software, and the development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). They host their code in a private GitHub repository. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
+
+As their service has grown, they have found that the management of VM and server infrastructure is a real challenge. They want to learn more about how Platform as a Service (PaaS) solutions for OSS applications on Azure might be able to help. Their goal is to focus their expenditures and efforts on their core business, rather than infrastructure. The development team at Best For You Organics has indicated they have some experience with Docker. They are interested in what options might be available for using containers to deploy their application into a cloud environment. They are also interested in learning more about identity management.
+
+The development team has also expressed that they would like to continue using GitHub as their code repository but is interested in improving upon their DevOps pipeline. They currently use Jenkins for their builds and are interested in any tools available in a cloud offering that could help with release management, or other aspects of a fully-integrated, modern DevOps pipeline. Ultimately, their goal is to automate and simplify deployments through CI/CD capabilities and deliver updates faster and more reliably.
 
 ## Solution architecture
 
@@ -96,7 +97,9 @@ The solution begins with developers using Visual Studio Code (VS Code) as their 
 
 The MongoDB database will be imported into Azure Cosmos DB, using mongoimport.exe, and access the database from the application will continue to use the MongoDB APIs. The database connection string in the application will be updated to point to the new Cosmos DB.
 
-Serverless architecture will be applied to order processing and customer notifications. Azure Functions will be used to automate the processing of orders. Logic Apps will be applied to send SMS notifications, via a Twilio connector, to customers informing them that their order has been processed and shipped.
+A serverless architecture will be applied to order processing and customer notifications. Azure Functions will be used to automate the processing of orders. Logic Apps will be applied to send SMS notifications via a Twilio connector to customers informing them that their order has been processed and shipped.
+
+In this hands-on lab, you will assist them with completing the OSS application and database migrations into Azure. You will implement a containerized solution. For this, you will create a custom Docker image and push it to an Azure Container Registry. You will then configure a CI/CD pipeline to deploy the application to a Web App for Containers instance. You will also help them implement functionality enhancements using serverless architecture services in Azure.
 
 ## Requirements
 
@@ -113,40 +116,46 @@ Serverless architecture will be applied to order processing and customer notific
 
 Duration: 30 minutes
 
-In this exercise, you will create a local copy of the starter application on your Lab VM, add some sample data to the local MongoDB database, and run the application.
+In this exercise, you create a local copy of the starter application on your Lab VM, add some sample data to the local MongoDB database, and run the application.
 
 ### Task 1: Connect to your Lab VM
 
-In this task, you will create an RDP connection to your Lab VM. If you are already connected, skip to [Task 2](#task-2-grant-permissions-to-docker).
+In this task, you create an RDP connection to your Lab VM. If you are already connected, skip to [Task 2](#task-2-grant-permissions-to-docker).
 
-1. Navigate to the Azure portal and select **Resource groups** from the left-hand menu, then select the **hands-on-lab-SUFFIX** resource group from the list. If there are too many, enter "hands-on-lab" into the filter box to reduce the resource groups displayed the list.
+1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the Azure services list.
+
+    ![Resource groups is highlighted in the Azure services list.](media/azure-services-resource-groups.png "Azure services")
+
+2. Select the **hands-on-lab-SUFFIX** resource group from the list.
 
     ![Resource groups is highlighted in the navigation pane of the Azure portal. On the Resource groups blade, hands-on-lab is highlighted in the filter box, and hands-on-lab is highlighted in the search results.](media/azure-resource-groups.png "Azure Portal")
 
-2. Next, select **LabVM** from the list of available resources.
+    > **Tip**: If there are too many resource groups you can enter "hands-on-lab" into the filter box to reduce the resource groups displayed the list.
+
+3. Next, select **LabVM** from the list of available resources.
 
     ![LabVM is highlighted in the list of available resources.](media/rg-labvm.png "Select LabVM")
 
-3. On the **LabVM** blade, copy the Public IP address from the Essentials area on the Overview screen.
+4. On the **LabVM** blade, copy the Public IP address from the Essentials area on the Overview screen.
 
     ![Public IP address is highlighted in the top menu on the LabVM blade.](media/labvm-public-ip-address.png "LabVM blade")
 
-4. Open a Remote Desktop Client (RDP) application and enter or paste the Public IP address of your Lab VM into the computer name field.
+5. Open a Remote Desktop Client (RDP) application and enter or paste the Public IP address of your Lab VM into the computer name field.
 
-5. Select **Connect** on the Remote Desktop Connection dialog.
+6. Select **Connect** on the Remote Desktop Connection dialog.
 
-6. Select **Yes** to connect, if prompted that the identity of the remote computer cannot be verified.
+7. Select **Yes** to connect, if prompted that the identity of the remote computer cannot be verified.
 
     ![This is a screenshot of the Remote Desktop Connection prompt about connecting to the remote despite the identity of the remote computer being unverified. Yes is selected.](media/remote-desktop-connection.png "Remote Desktop Connection dialog box")
 
-7. Enter the following credentials (or the non-default credentials if you changed them):
+8. Enter the following credentials (or the non-default credentials if you changed them):
 
     - **Username:** demouser
     - **Password:** Password.1!!
 
     ![The credentials above are entered in the Login to xrdp dialog box.](media/login-to-xrdp.png "Login to xrdp dialog box")
 
-8. Select **OK** to log into the Lab VM.
+9. Select **OK** to log into the Lab VM.
 
 ### Task 2: Grant permissions to Docker
 
@@ -204,7 +213,7 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
     ![Personal access tokens is highlighted on the Developer settings page.](media/github-personal-access-tokens.png "Select Personal access tokens")
 
-9.  Select **Generate new token**.
+9. Select **Generate new token**.
 
     ![The Generate new token button is highlighted on the Personal access tokens page.](media/github-generate-new-token.png "Select Generate new token")
 
@@ -348,50 +357,23 @@ In this task, you will seed the MongoDB with sample data, then run the applicati
 
 Duration: 30 minutes
 
-In this exercise, you will provision an Azure Cosmos DB account, and then update the starter application's database connection string to point to your new Azure Cosmos DB account. You will then, use `mongoimport.exe` to migrate the data in your MongoDB database into Cosmos DB collections, and verify with the application that you are connected to your Cosmos DB database.
+In this exercise, you update the starter application's database connection string to point to your Azure Cosmos DB account. You then, use `mongoimport.exe` to migrate the data in your MongoDB database into Cosmos DB collections, and verify with the application that you are connected to your Cosmos DB database.
 
-### Task 1: Provision Cosmos DB using the MongoDB API
+### Task 1: Create and scale collections
 
-In this task, you will provision a new Azure Cosmos DB account using the MongoDB API.
+In this task, you create the collections needed for your database migration and increase each collection's throughput from the default 400 RUs to 2,500 RUs. This is done to avoid throttling during the migration, and reduce the time required to import data.
 
-1. In the Azure portal, select **+Create a resource**, **Databases**, enter "cosmos" into the Search the Marketplace box, select **Azure Cosmos DB** in the search results, and then select **Create**.
+> To learn more about RUs and throughput provisioning in Cosmos DB, read [Request Units in Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/request-units).
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, "cosmos" is entered into the Search the Marketplace box, and Azure Cosmos DB is highlighted in the search results.](media/create-resource-cosmos-db.png "Azure Portal")
+1. Navigate to your Azure Cosmos DB account in the Azure portal by selecting **Resource groups** from the Azure home page, and then selecting the **best-for-you-db-SUFFIX** Cosmos DB resource from the list.
 
-2. On the **Azure Cosmos** **DB** blade, enter the following:
-
-    **PROJECT DETAILS**:
-
-    - **Subscription:** Select the subscription you are using for this hands-on lab.
-    - **Resource Group:** Select the **hands-on-lab-SUFFIX** resource group you created previously.
-
-    **INSTANCE DETAILS**:
-
-    - **Account Name**: Enter `best-for-you-db-SUFFIX`, where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
-    - **API:** Select **Azure Cosmos DB for MongoDB API**.
-    - **Location:** Select a location near you from the list (Note: not all locations are available for Cosmos DB).
-    - **Enable geo-redundancy:** Select Disable.
-    - **Multi-region Writes**: Select Disable.
-
-    ![The information above is entered in the Azure Cosmos DB blade.](media/cosmos-db-create-basics.png "Azure Cosmos DB")
-
-3. Select **Review + create** to move to the validation step.
-
-4. Ensure the **Validation Success** message is displayed, and then select **Create** to provision the new Azure Cosmos DB.
-
-### Task 2: Create and scale collections
-
-In this task, you will create the collections needed for your database migration and increase each collection's throughput from the default 400 RUs to 2,500 RUs. This is done to avoid throttling during the migration, and reduce the time required to import data.
-
-> To learn more about RUs and throughput provisioning in Cosmos DB, read [Request Units in Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/request-units).
-
-1. When your Cosmos DB account is provisioned, navigate to it in the Azure portal, select **Data Explorer** from the left-hand menu and then select **New Collection**.
+2. On the Cosmos DB blade, select **Data Explorer** from the left-hand menu and then select **New Collection**.
 
     ![Data Explorer is selected and highlighted in the left-hand menu of the Azure portal, and New Collection is highlighted on the right.](media/cosmos-db-add-collection.png "Azure Cosmos DB")
 
-2. In the **Add Collection** dialog, enter the following:
+3. In the **Add Collection** dialog, enter the following:
 
-    - **Database id**: Select **Create new**, and enter **best-for-you-organics**.
+    - **Database id**: Choose **Create new**, and enter **best-for-you-organics**.
     - **Provision database throughput**: Uncheck this box.
     - **Collection Id**: Enter **orders**.
     - **Storage capacity**: Select **Fixed (10 GB)**.
@@ -400,27 +382,28 @@ In this task, you will create the collections needed for your database migration
 
     ![The information above is entered in the Add Collection dialog box.](media/cosmos-db-new-collection-orders.png "Add Collection")
 
-3. On the Collections blade, select **New Collection** to create another collection.
+4. On the Collections blade, select **New Collection** to create another collection.
 
     ![The New Collection button is highlighted on the Cosmos DB Collections blade.](media/cosmos-db-new-collection.png "New Collection")
 
-4. On the Add Collection dialog, enter the following:
+5. On the Add Collection dialog, enter the following:
 
     - **Database id**: Select **Use existing** and select the **best-for-you-organics** database from the list.
     - **Collection id**: Enter **users**.
-    - **Storage capacity**: Select **Fixed (10 GB)**.
+    - **Shared key**: Enter **id_**.
+    - **Provision dedicated throughput for this collection**: Check this box.
     - **Throughput**: Enter **2500**.
     - Select **OK** to create the collection.
 
     ![The information for the users collections above is entered into the Add Collection dialog.](media/cosmos-db-new-collection-users.png "Add Collection")
 
-5. Repeat steps 3 and 4, this time entering **plans** as the collection name.
+6. Repeat steps 4 and 5, this time entering **plans** as the collection name.
 
-6. The best-for-you-organics database will have three collections listed under it when you are complete.
+7. The best-for-you-organics database will have three collections listed under it when you are complete.
 
     ![The best-for-you-organics database is displayed, with orders, plans, and users collections under it.](media/cosmos-db-database-and-collections.png "Cosmos DB Collections")
 
-### Task 3: Update database connection string
+### Task 2: Update database connection string
 
 In this task, you will retrieve the connection string for your Azure Cosmos DB database and update the starter application's database connection string.
 
@@ -468,7 +451,7 @@ In this task, you will retrieve the connection string for your Azure Cosmos DB d
 
 11. Let's move on to copying the data from the local MongoDB instance into Cosmos DB.
 
-### Task 4: Import data to the API for MongoDB using mongoimport
+### Task 3: Import data to the API for MongoDB using mongoimport
 
 In this task, you will use `mongoimport.exe` to import data to your Cosmos DB account. There is a shell script located in the `MCW-OSS-PaaS-and-DevOps` project which handles exporting the data out of your MongoDB into JSON files on the local file system. These files will be used for the import into Cosmos DB.
 
@@ -554,7 +537,7 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 15. Return to the Integrated terminal window of VS Code which is running the application, and press **CTRL+C** to stop the application.
 
-### Task 5: Install Azure Cosmos DB extension for VS Code
+### Task 4: Install Azure Cosmos DB extension for VS Code
 
 In this task, you will install the Azure Cosmos DB extension for VS Code to take advantage of the integration with Azure Cosmos DB. This extension allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
 
@@ -582,7 +565,7 @@ In this task, you will install the Azure Cosmos DB extension for VS Code to take
 
 7. From here, you can view your databases, collections, and documents, as well as edit documents directly in VS Code, and push the updated documents back into your database.
 
-### Task 6: Decrease collection throughput
+### Task 5: Decrease collection throughput
 
 In this task, you will decrease the throughput on your collections. Azure Cosmos DB uses an hourly billing rate, so reducing the throughput after the data migration will help save costs.
 
@@ -606,32 +589,11 @@ Duration: 30 minutes
 
 This exercise walks you through containerizing the existing Best For You Organics Company MERN application using Docker, pushing the image to an **Azure Container Registry**, then deploying the image to **Web App for Containers** directly from VS Code.
 
-### Task 1: Create an Azure Container Registry
-
-In this task, you will be creating a private Docker registry in the Azure portal, so you have a place to store the custom Docker image you will create in later steps.
-
-1. In the Azure portal, select **+Create a resource**, **Containers**, and select **Container Registry**.
-
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, Containers is selected and highlighted in the middle, and  Container Registry is highlighted on the right.](media/create-container-registry-resource.png "Azure Portal")
-
-2. On the **Create container registry** blade, enter the following:
-
-    - **Registry name:** Enter "bestforyouregistrySUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
-    - **Subscription:** Select the subscription you are using for this hands-on lab.
-    - **Resource group:** Select the **hands-on-lab-SUFFIX** resource group created previously.
-    - **Location:** Select the location you are using for resources in this hands-on lab.
-    - **Admin user:** Select **Enable**.
-    - **SKU:** Select **Basic**.
-
-    ![The information above is entered on the Create container registry blade.](media/azure-create-resource-container-registry.png "Create container registry blade")
-
-3. Select **Create** to provision the new Azure Container Registry.
-
-### Task 2: Install Docker extension in VS Code
+### Task 1: Install Docker extension in VS Code
 
 The Docker extension for VS Code is used to simplify the management of local Docker images and commands, as well as the deployment of a built app image to Azure.
 
-1. On your Lab VM, return to VS Code, and the open `MCW-OSS-PaaS-and-DevOps` starter project.
+1. On your Lab VM, return to VS Code and the open `MCW-OSS-PaaS-and-DevOps` starter project.
 
 2. Select the **Extensions icon** from the left-hand menu, enter "docker" into the search box, select the **Docker** extension, and in the **Extension: Docker** window, and then select **Install**.
 
@@ -643,7 +605,7 @@ The Docker extension for VS Code is used to simplify the management of local Doc
 
     > **Note**: If you don't see the Docker icon in the left-hand menu, close and reopen VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
 
-### Task 3: Create Docker image and run the app
+### Task 2: Create Docker image and run the app
 
 In this task, you will use VS Code, and the Docker extension, to add the necessary files to the project to create a custom Docker image for the `MCW-OSS-PaaS-and-DevOps` app.
 
@@ -719,13 +681,15 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
 
     ![The docker images command is entered in the terminal window, with the list of images is displayed.](media/vscode-terminal-docker-images.png "Docker images")
 
-### Task 4: Run the containerized app
+### Task 3: Run the containerized app
 
-In this task, you will run the app from the container you built in the previous task.
+In this task, you run the app from the container you built in the previous task.
 
 1. In the **Images** area of the Docker extension in VS Code, expand the `best-for-you-organics` image, and then right-click on the `latest` image, and select **Run Interactive**.
 
     ![The image is selected in the Images area of the Docker extension explorer, and Run Interactive is highlighted in the shortcut menu.](media/vscode-extensions-docker-images-latest.png "Docker extension explorer")
+
+    > **Note**: If you receive an error that the address is already in use, return to the terminal window where you ran the application using the `npm start` command and press `CTRL+C` to stop the application. Then, try the above action again.
 
 2. Notice in the Interactive terminal that a docker run command is issued. Using the VS Code Docker extension, you can issue some docker commands, without needing to work from the command line.
 
@@ -737,7 +701,7 @@ In this task, you will run the app from the container you built in the previous 
 
 4. In the Integrated terminal of VS Code, for the interactive session, press **CTRL+C** to stop the container.
 
-### Task 5: Push image to Azure Container Registry
+### Task 4: Push image to Azure Container Registry
 
 In this task, you are going to push the image to your Azure Container Registry.
 
@@ -789,11 +753,15 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
 
 ### Task 1: Provision Web App for Containers
 
-1. In the Azure portal, select **+Create a resource**, **Web**, and select **Web App for Containers**.
+1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, Web + Mobile is highlighted in the middle, and Web App for Containers is highlighted on the right.](media/create-web-app-for-containers-resource.png "Provision Web App for Containers")
+    ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
 
-2. On the **Web App Create** Basics Tab, enter the following:
+2. Enter "web app for containers" into the Search the Marketplace box, select **Web App for Containers" from the results, and then select **Create**.
+
+    ![Web App for Containers entered into the search box and is highlighted on the search results.](media/create-web-app-for-containers-resource.png "Web App for Containers")
+
+3. On the **Web App Create** Basics Tab, enter the following:
 
     **Project Details**:
 
@@ -814,9 +782,9 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
 
     ![The values specified above are entered into the Create Web App Basics tab.](media/web-app-for-containers-basics-tab.png "Create Web App")
 
-3. Select **Next: Docker**.
+4. Select **Next: Docker**.
 
-4. On the **Docker** tab, enter the following:
+5. On the **Docker** tab, enter the following:
 
      - **Options**: Select **Single Container**.
      - **Image source:** Select **Azure Container Registry**.
@@ -827,11 +795,11 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
 
     ![The values specified above are set in the Docker tab.](media/web-app-for-containers-docker-tab.png "Create Web App")
 
-5. Select **Review + create**, and then select **Create**.
+6. Select **Review + create**, and then select **Create**.
 
 ### Task 2: Navigate to the deployed app
 
-In this task, you will navigate to the deployed app, and log in to verify it is functioning correctly.
+In this task, you navigate to the deployed app, and log in to verify it is functioning correctly.
 
 1. When you receive the notification that the Web App for Containers deployment has completed, navigate to the Web App by selecting the **notifications icon**, and selecting **Go to resource**.
 
@@ -870,9 +838,9 @@ In this task, you will turn Continuous Deployment on for your Web App.
 
 In this task, you will be adding a Jenkins service integration into your GitHub account. This integration will enable a Jenkins CI build job to be triggered when code is checked in to your GitHub repository.
 
-1. On your Lab VM, navigate to your Jenkins VM in the [Azure portal](https://portal.azure.com/) by selecting **Resource groups** from the left-hand menu, entering "hands-on-lab" into the search box, and selecting your **hands-on-lab-SUFFIX** resource group from the list.
+1. On your Lab VM, navigate to your Jenkins VM in the [Azure portal](https://portal.azure.com) by selecting **Resource groups** from the Azure services list, and then selecting your **hands-on-lab-SUFFIX** resource group from the list.
 
-    ![Resource groups is highlighted in the navigation pane of the Azure portal, hands-on-lab is highlighted in the search box, and the hands-on-lab resource group is highlighted in the search results.](media/azure-rg.png "Azure Portal")
+    ![Resource groups is highlighted in the Azure services list.](media/azure-services-resource-groups.png "Azure services")
 
 2. On the hands-on-lab-SUFFIX Resource group blade, select your **Jenkins** virtual machine.
 
@@ -1249,6 +1217,8 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
 
     ![The best-for-you-build project is highlighted on the Jenkins dashboard.](media/jenkins-dashboard-best-for-you-build.png "Jenkins dashboard")
 
+    > **Note**: You may need to login again using the username **jenkins** and password **Password.1!!**.
+
 4. Select **Configure** from the left-hand menu.
 
     ![Configure is highlighted in the left-hand menu.](media/jenkins-project-configure.png "Jenkins left-hand menu")
@@ -1288,9 +1258,6 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
 8. Copy the completed command text and paste it below the `npm run build` line within the Execute shell Command box. The Execute shell command should now look similar to the following:
 
     ![The command above is appended to the execute shell command.](media/jenkins-execute-shell-command-cd.png "Execute shell")
-
-
-    ![In the Jenkins post-build action menu, Publish an Azure Web App is highlighted.](media/jenkins-post-build-action-publish-azure-web-app.png "Jenkins post-build action menu")
 
 9. Select **Save**.
 
@@ -1340,64 +1307,39 @@ In this task, you will commit changes to the `MCW-OSS-PaaS-and-DevOps` starter a
 
 Duration: 45 minutes
 
-In this task, you will create Azure Functions that will handle order processing. The first function will send unprocessed order details into a storage queue. This Function uses a timer trigger and checks the processed field on order documents, ensuring only unprocessed orders are sent to the processing queue. A second function is used to simulate order processing and send notifications to the user who placed the order.
+In this task, you create the Azure Functions that will handle order processing. The first function will send unprocessed order details into a storage queue. This Function uses a timer trigger and checks the processed field on order documents, ensuring only unprocessed orders are sent to the processing queue. A second function is used to simulate order processing and send notifications to the user who placed the order.
 
-### Task 1: Provision a Function App
+### Task 1: Configure storage queues
 
-In this task, you will create a Function App in Azure, which will host your Functions.
+In this task, you add two storage queues to the storage account provisioned when you created your Function App. These queues are used to store orders and notifications that need to be processed.
 
-1. In the Azure portal, select **+Create a resource**, enter "function app" in to the **Search the marketplace** box, and select **Function App** from the results.
+1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the Azure services list and then select the **hands-on-lab-func-SUFFIX** resource group.
 
-    ![+ Create a resource is highlighted in the navigation pane of the Azure portal, and Everything is selected and highlighted in the middle under Marketplace. On the right, function app is highlighted in the search box, and the Function App row is highlighted in the results below that.](media/create-resource-function-app.png "Azure Portal")
+    ![Resource groups is highlighted in the Azure services list.](media/azure-services-resource-groups.png "Azure services")
 
-2. On the **Function App** blade, select **Create**.
+2. Select the **bestforyouordersSUFFIX** storage account that was created when you provisioned your Function App.
 
-3. On the **Create Function App** blade, enter the following:
-
-    - **App name:** Enter a unique name, such as "bestforyouordersSUFFIX".
-    - **Subscription:** Select the subscription you are using for this hands-on lab.
-    - **Resource group:** Choose **Create new** and enter **hands-on-lab-func-SUFFIX** as resource group name.
-    - **OS:** Select Windows.
-    - **Hosting Plan:** Choose Consumption Plan.
-    - **Location:** Select the location you have been using for resources in this hands-on lab.
-    - **Runtime Stack** Select Node.js.
-    - **Storage:** Select **Create new** and enter a globally unique name, such as "bestforyouordersSUFFIX."
-    - **Application Insights** Select Disabled.
-    - Select **Create** to provision the new Function App.
-
-    ![The information above is entered on the Create Function App blade.](media/create-function-app-settings.png "Create Function App Settings")
-
-### Task 2: Configure storage queues
-
-In this task, you will add two storage queues to the storage account provisioned when you created your Function App. These queues will be used to store orders and notifications needing to be processed.
-
-1. In the [Azure portal](https://portal.azure.com), navigate to the new **bestforyouordersSUFFIX** storage account that was created when you provisioned your Function App, by selecting **Resource groups** from the left-hand menu, selecting your **hands-on-lab-func-SUFFIX** resource group from the list, and then selecting the **bestforyouordersSUFFIX** storage account.
-
-    ![Resource groups is highlighted in the navigation pane of the Azure portal, and hands-on-labs is selected and highlighted to the right under Resource groups. Overview is selected to the right, and the bestforyouorders storage account row is highlighted on the far right.](media/rg-storage-account.png "Azure Portal")
-
-2. Select **Queues** from the **Services** area of the **Overview** blade.
+3. Select **Queues** from the **Services** area of the **Overview** blade.
 
     ![Queues is highlighted in the Services area of the Overview blade.](media/storage-account-queues.png "Overview blade Services area")
 
-3. On the **Queue service** blade, select **+Queue** to add a new queue.
+4. On the **Queue service** blade, select **+Queue** to add a new queue.
 
     ![+ Queue is highlighted on the Queue service blade.](media/storage-account-queue-add.png "Queue service blade")
 
-4. In the **Add** queue dialog, enter **orderqueue** for the **Queue name**, and select **OK**.
+5. In the **Add** queue dialog, enter **orderqueue** for the **Queue name**, and select **OK**.
 
     ![The name "orderqueue" is entered in the Queue name box in the Add queue dialog box.](media/storage-order-queue.png "Add queue dialog box")
 
-5. Select **+Queue** again, and this time enter "notificationqueue" for the **Queue name**.
+6. Select **+Queue** again, and this time enter "notificationqueue" for the **Queue name**.
 
     ![The name "notificationqueue" is entered in the Queue name box in the Add queue dialog box.](media/storage-notification-queue.png "Add queue dialog box")
 
-### Task 3: Create timer triggered function
+### Task 2: Create timer triggered function
 
 In this task, you will create a function that function sends all new orders to a queue for processing and shipping. The function uses a Timer trigger and an output binding to an Azure Storage Queue.
 
-1. In the [Azure portal](https://portal.azure.com), navigate to your new Function App by selecting the **notifications icon**, then selecting **Go to resource** for the Function App notification.
-
-    ![The Go to resource button is highlighted under a Deployment succeeded message in a Notifications window.](media/go-to-resource-function.png "Notifications window")
+1. In the [Azure portal](https://portal.azure.com), navigate to your Function App by selecting it from the list of resources in the **hands-on-lab-func-SUFFIX** resource group.
 
 2. From the left-hand menu on your **Function Apps** blade, select **Functions**, then select **+New function**.
 
@@ -1483,9 +1425,11 @@ In this task, you will create a function that function sends all new orders to a
 
     ![At the Kudu PowerShell prompt, the command above is entered, and the output of the command is displayed.](media/kudu-powershell.png "PowerShell")
 
+    > **Note**: The addition of the `mongodb` dependency is necessary because the Cosmos DB MongoDB API cannot be used to bind a Function App to Cosmos DB. Only the SQL API is currently compatible with Function App triggers.
+
 17. Return to your Function App blade in the Azure portal and select the **OrdersTimerTrigger** function in the left-hand menu.
 
-    ![The OrdersCosmosTrigger function is selected in the left-hand menu.](media/function-app-orders-timer-trigger.png "Left menu")
+    ![The OrdersTimerTrigger function is selected in the left-hand menu.](media/function-app-orders-timer-trigger.png "Left menu")
 
 18. To get the code for the `OrdersTimerTrigger` function, go into the project is VS Code, expand the `Hands-on lab/lab-files/AzureFunctions` folder, and open the `OrdersTimerTrigger.js` file.
 
@@ -1526,15 +1470,15 @@ In this task, you will create a function that function sends all new orders to a
 
     ![The Refresh button is highlighted in the Azure Storage account, and Message Text appears in the order queue below.](media/storage-queue-items.png "Messages blade")
 
-### Task 4: Create Queue function
+### Task 3: Create Queue function
 
-In this task, you will create a second function which will be triggered by the output of the OrdersCosmosTrigger function. This will simulate the order processing and will add items to the notificationqueue if the order processing is complete and the `sendNotifications` property is true for the order.
+In this task, you will create a second function which will be triggered by the output of the OrdersTimerTrigger function. This will simulate the order processing and will add items to the notificationqueue if the order processing is complete and the `sendNotifications` property is true for the order.
 
 This will use an Azure Storage Queue trigger, and an input dataset from Cosmos DB, pulling in customers. Output dataset will be Azure Cosmos DB orders table, and an update to set `processed = true`, and the `processedDate` to today.
 
-1. Select **Integrate** under the OrdersCosmosTrigger function, then select **Azure Queue Storage (outputQueue)** under **Outputs**.
+1. Select **Integrate** under the OrdersTimerTrigger function, then select **Azure Queue Storage (outputQueue)** under **Outputs**.
 
-    ![Azure Queue Storage (outputQueue) is selected and highlighted under Outputs in the OrdersCosmosTrigger function.](media/function-app-output-storage-queue.png "Outputs section")
+    ![Azure Queue Storage (outputQueue) is selected and highlighted under Outputs in the OrdersTimerTrigger function.](media/function-app-output-storage-queue.png "Outputs section")
 
 2. Under **Actions** for the output, select **Go** next to **Create a new function triggered by this output**.
 
@@ -1613,21 +1557,25 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
 Duration: 30 minutes
 
-In this exercise, you will create Logic App which will trigger when an item is added to the `notificationqueue` Azure Storage Queue. The Logic App will send an email message to the email address included in the `notificationqueue` message.
+In this exercise, you create Logic App which will trigger when an item is added to the `notificationqueue` Azure Storage Queue. The Logic App will send an email message to the email address included in the `notificationqueue` message.
 
 ### Task 1: Create SendGrid account
 
 In this task, you will create a SendGrid account through the Azure portal to send email notifications to customers, informing them that their order has been processed, and is on its way.
 
-1. In the [Azure portal](https://portal.azure.com), select **+ Create a resource** and enter "SendGrid" into the Search the Marketplace box.
+1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
 
-    ![Create a resource is highlighted on the left-hand navigation menu of the Azure portal, and SendGrid is entered into the Search the Marketplace box.](media/azure-create-resource-send-grid.png "Create SendGrid Resource")
+    ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
 
-2. On the SendGrid blade, select **Create**.
+2. Enter "SendGrid" into the Search the Marketplace box.
+
+    ![SendGrid is entered into the Search the Marketplace box.](media/azure-create-resource-send-grid.png "Create SendGrid Resource")
+
+3. On the SendGrid blade, select **Create**.
 
     ![The Create button is highlighted on the SendGrid blade.](media/sendgrid-create.png "Create SendGrid")
 
-3. On the Create a new SendGrid Account blade, enter the following:
+4. On the Create a new SendGrid Account blade, enter the following:
 
     - **Name**: Enter **bfyoemail**.
     - **Password**: Enter **Password.1!!**
@@ -1639,21 +1587,21 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
     ![The values specified above are entered into the create a new SendGrid account blade.](media/sendgrid-create-settings.png "Create SendGrid account")
 
-4. Select **Create** to provision the SendGrid account.
+5. Select **Create** to provision the SendGrid account.
 
-5. When the SendGrid account finishes provisioning, select **Go to resource** from the notifications pane in the Azure portal.
+6. When the SendGrid account finishes provisioning, select **Go to resource** from the notifications pane in the Azure portal.
 
     ![The Go to resource button in highlighted in the SendGrid deployment notification.](media/go-to-resource-sendgrid.png "Go to resource")
 
-6. On the SendGrid account blade, select **Manage** from the toolbar.
+7. On the SendGrid account blade, select **Manage** from the toolbar.
 
     ![The Manage button is highlighted on the SendGrid account toolbar.](media/sendgrid-manage.png "SendGrid account Manage")
 
-7. On the SendGrid page that opens, expand **Settings** in the left-hand menu, select **API Keys**, and then select **Create API Key**.
+8. On the SendGrid page that opens, expand **Settings** in the left-hand menu, select **API Keys**, and then select **Create API Key**.
 
     ![The Create API Key button is highlighted on the API Keys page.](media/sendgrid-create-api-key.png "SendGrid API Keys")
 
-8. On the Create API Key page, enter the following:
+9. On the Create API Key page, enter the following:
 
     - **API Key Name**: Enter **bfyo-api-key**.
     - **API Key Permissions**: Select **Full Access**.
@@ -1661,7 +1609,7 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
     ![The values specified above are entered into the Create API Key page.](media/sendgrid-create-api-key-page.png "Create API Key")
 
-9. Leave the API Key Created screen that appears open. You will be copying the key and pasting it into your Logic App in the next task.
+10. Leave the API Key Created screen that appears open. You will be copying the key and pasting it into your Logic App in the next task.
 
     ![The API Key Created screen is displayed.](media/sendgrid-api-key-created.png "API Key Created")
 
@@ -1669,63 +1617,49 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
 In this task, you will create a new Logic App, which will use the SendGrid connector to send email notifications to users, informing them that their order has processed and shipped.
 
-1. In the Azure portal, select **+Create a resource**, enter "logic app" into the Search the Marketplace box, select **Logic App** from the results, and then select **Create**.
+1. In the Azure portal, navigate to your Logic App in the **hands-on-lab-SUFFIX** resource group.
 
-    ![+ Create a resource is highlighted on the left side of the Azure portal, "logic app" is highlighted in the Search the Marketplace box, and Logic App is selected in the results.](media/create-logic-app-resource.png "Azure Marketplace Logic App")
-
-2. In the **Create logic app** blade, enter the following:
-
-    - **Name:** Enter "OrderNotifications".
-    - **Subscription:** Select the subscription you are using for this hands-on lab.
-    - **Resource group:** Select **Use existing** and choose the **hands-on-lab-SUFFIX** resource group.
-    - **Location:** Select the location you have been using for resources in this hands-on lab.
-    - Select **Create** to provision the new Logic App.
-
-    ![The information above is entered on the Create logic app blade.](media/logic-app-create.png "Logic App blade")
-
-3. Navigate to your newly created Logic App in the Azure portal.
-
-4. In the Logic App Designer, select **Blank Logic App** under **Templates**.
+2. In the Logic App Designer, select **Blank Logic App** under **Templates**.
 
     ![Blank Logic App is highlighted under Templates in Logic App Designer Templates section.](media/logic-app-templates-blank.png "Logic App Designer, Templates section")
 
-5. In the blank logic app template, select **All** and then select **Azure Queues** under **Connectors**.
+3. In the blank logic app template, select **All** and then select **Azure Queues** under **Connectors**.
 
     ![Azure Queues is highlighted under Connectors.](media/logic-app-connectors-azure-queues.png "Connectors section")
 
-6. Select **When there are messages in a queue** under Triggers.
+4. Select **When there are messages in a queue** under Triggers.
 
     ![When there are messages in a queue is highlighted under Triggers.](media/logic-app-triggers-when-there-are-messages-in-a-queue.png "Triggers section")
 
-7. On the When there are messages in a queue dialog, enter **bestforyouorders** for the, **Connection Name** select the bestforyouorders **Storage account** from the list and select **Create**.
+5. On the When there are messages in a queue dialog, enter **bestforyouorders** for the, **Connection Name** select the bestforyouorders **Storage account** from the list and select **Create**.
 
     ![In the When there are messages in a queue dialog box, Bestforyouorders is in the Connection Name box, the bestforyouorders row is highlighted at the top of the list below Storage account, and the Create button is highlighted at the bottom.](media/logic-app-trigger-queues-configure.png "When there are messages in a queue dialog box")
 
-8. In the next **When there are messages in a queue** dialog, select **notificationqueue** from the **Queue Name** list, and set the interval to **1 minute**.
+6. In the next **When there are messages in a queue** dialog, select **notificationqueue** from the **Queue Name** list, and set the interval to **1 minute**.
 
     ![The information above is entered in the When there are messages in a queue dialog box.](media/logic-app-trigger-message-in-queue-configure.png "When there are messages in a queue dialog box")
 
-9. Select **+ New step**.
+7. Select **+ New step**.
 
     ![The New step button is displayed.](media/logic-app-new-step.png "Logic App new step")
 
-10. In the **Choose an action box**, enter "parse," and select **Data Operations**.
+8. In the **Choose an action box**, enter "parse," and select **Data Operations**.
 
     ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box, and Data Operations below in the list.](media/data-operations-parse.png "When there are messages in a queue dialog box")
 
-11. Under Data Operations, select **Parse JSON**.
+9. Under Data Operations, select **Parse JSON**.
 
     ![Parse JSON is highlighted under Data Operations.](media/logic-app-data-operations-parse-json.png "Data Operations")
 
-12. In the Parse JSON box, select the **Content** box, select **Add dynamic content +**, then select **Message Text** from the input parameters list that appears.
+10. In the Parse JSON box, select the **Content** box, select **Add dynamic content +**, then select **Message Text** from the input parameters list that appears.
 
     ![In the Parse JSON window, Message Text is in the Content box, Add dynamic content is highlighted, and Message Text is highlighted below in the input parameters list.](media/logic-app-parse-json-content.png "Parse JSON window")
 
-13. Next, select **Use sample payload to generate schema** below the **Schema** box.
+11. Next, select **Use sample payload to generate schema** below the **Schema** box.
 
     ![In the Parse JSON window, Use sample payload to generate schema is highlighted below the Schema box.](media/logic-app-parse-json-schema.png "Parse JSON window")
 
-14. In the dialog that appears, paste the following JSON into the sample JSON payload box, then select **Done**.
+12. In the dialog that appears, paste the following JSON into the sample JSON payload box, then select **Done**.
 
     ```json
     {"orderId":"5a6748c5d0d3199cfa076ed3","userId":"demouser@bfyo.com","notificationEmail":"demouser@bfyo.com","firstName":"Demo"}
@@ -1733,23 +1667,23 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The JSON above is pasted in the sample JSON payload dialog box, and Done is selected below.](media/logic-app-parse-json-sample-payload.png "Paste the JSON in the dialog box")
 
-15. You will now see the Schema for messages coming from the notification queue in the Schema box.
+13. You will now see the Schema for messages coming from the notification queue in the Schema box.
 
     ![The completed Parse JSON box is displayed.](media/logic-app-parse-json-complete.png "Parse JSON")
 
-16. Select **+ New** **step**.
+14. Select **+ New** **step**.
 
     ![The + New step button is displayed](media/logic-app-new-step.png "Logic App new step")
 
-17. In the **Choose an action box**, enter "sendgrid," and select **SendGrid** under Connectors.
+15. In the **Choose an action box**, enter "sendgrid," and select **SendGrid** under Connectors.
 
     ![SendGrid is entered into the search box, and the SendGrid connection is highlighted under connectors.](media/logic-app-connectors-sendgrid.png "Choose a connector")
 
-18. In the **SendGrid** connector dialog, select **Send email (V3)**.
+16. In the **SendGrid** connector dialog, select **Send email (V3)**.
 
     ![Send email (v2) is highlighted in the list of SendGrid actions.](media/logic-app-sendgrid-send-email.png "SendGrid")
 
-19. In the **SendGrid** box, enter the following:
+17. In the **SendGrid** box, enter the following:
 
     - **Connection Name**: Enter **bfyo-sendgrid**.
     - **SendGrid Api Key**: Return to the **API Key Created** screen in your SendGrid account, and then copy and paste the API key you generated.
@@ -1757,7 +1691,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The SendGrid connection configuration information above is entered into the SendGrid box.](media/logic-app-sendgrid-create.png "SendGrid")
 
-20. In the **Send email (V3)** box, enter the following:
+18. In the **Send email (V3)** box, enter the following:
 
     - **From**: Enter your email address.
     - **To**: Click in the box, select **Add dynamic content**, and then select the **notificationEmail** property. **NOTE**: If under the Parse JSON Dynamic Content section, you see a message that there were not any outputs to match the input format, select **See more** in the message.
@@ -1769,27 +1703,27 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The Send email (V3) dialog is completed with the values specified above.](media/logic-app-send-email-v2-complete.png "Send email (V3)"))
 
-21. Select **+ New step**.
+19. Select **+ New step**.
 
     ![The Add an action button is highlighted under + New step.](media/logic-app-new-step.png "Add an action button")
 
-22. In the **Choose an action** dialog, enter "queues" in to the search box, and select **Delete message** under Actions.
+20. In the **Choose an action** dialog, enter "queues" in to the search box, and select **Delete message** under Actions.
 
     ![Queue is highlighted in the Choose an action search box, and Azure Queues -- Delete message is highlighted below.](media/logic-app-azure-queues-delete-message.png "Choose an action dialog box")
 
-23. Select **notificationqueue** for the Queue Name.
+21. Select **notificationqueue** for the Queue Name.
 
-24. For Message ID, select the **Message ID** parameter from the dynamic content parameter list.
+22. For Message ID, select the **Message ID** parameter from the dynamic content parameter list.
 
-25. For Pop Receipt, select the **Pop Receipt** parameter from the dynamic content parameter list.
+23. For Pop Receipt, select the **Pop Receipt** parameter from the dynamic content parameter list.
 
     ![The settings above are entered into the Delete Message box.](media/logic-app-azure-queue-delete-message-settings.png "Delete message")
 
-26. Select **Save** on the **Logic Apps Designer** toolbar.
+24. Select **Save** on the **Logic Apps Designer** toolbar.
 
     ![Save is highlighted on the Logic Apps Designer blade toolbar.](media/logic-app-save.png "Logic Apps Designer blade")
 
-27. The Logic App will begin running immediately, so if you entered your valid email address when you registered your account in the Best for You Organics starter app, and placed an order, you should receive an email message within a minute or two of selecting Save.
+25. The Logic App will begin running immediately, so if you entered your valid email address when you registered your account in the Best for You Organics starter app, and placed an order, you should receive an email message within a minute or two of selecting Save.
 
     ![The email message from the LogicApp is displayed.](media/order-email-message.png "Email message")
 
