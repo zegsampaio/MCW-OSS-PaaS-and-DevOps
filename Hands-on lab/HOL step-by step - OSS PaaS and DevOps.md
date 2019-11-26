@@ -390,7 +390,7 @@ In this task, you create the collections needed for your database migration and 
 
     - **Database id**: Select **Use existing** and select the **best-for-you-organics** database from the list.
     - **Collection id**: Enter **users**.
-    - **Shared key**: Enter **id_**.
+    - **Shared key**: Enter **_id**.
     - **Provision dedicated throughput for this collection**: Check this box.
     - **Throughput**: Enter **2500**.
     - Select **OK** to create the collection.
@@ -1231,7 +1231,7 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
     - **Username**: Copy the Username value for your Azure Container Registry, and paste into the command below as the `ACR_USERNAME` value.
     - **Password**: Enter the password value for your Azure Container Registry, and paste into the command below as the `ACR_PASSWORD` value.
 
-        ![In the Container Registry Access keys blade, ](media/azure-container-registry-access-keys.png "Container Registry Access keys")
+        ![In the Container Registry Access keys blade, the Login Server, Username, and password fields are highlighted.](media/azure-container-registry-access-keys.png "Container Registry Access keys")
 
     ```bash
     ACR_URL="<your-container-registry-login-server>"
