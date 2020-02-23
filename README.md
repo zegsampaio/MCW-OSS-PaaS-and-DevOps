@@ -1,14 +1,14 @@
 # OSS PaaS and DevOps
 
-Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service targets working professionals looking for convenient, reliable access to healthy meal choices, and pre-packaged recipes without having to spend too much time preparing the meals.
+Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service caters to working professionals looking for convenient, reliable access to healthy meal choices, and pre-packaged recipes without having to spend too much time preparing the meals.
 
-Their CIO is a big proponent of open-source software, and the development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). They host their code in a private GitHub repository. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
+Their CIO is a big proponent of open-source software, and their web application uses the MERN stack (MongoDB, Express.js, React.JS, Node.js). They host their code in a private GitHub repository. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
 
 As their service has grown, they have found that the management of VM and server infrastructure is a real challenge. They want to learn more about how Platform as a Service (PaaS) solutions for OSS applications on Azure might be able to help. Their goal is to focus their expenditures and efforts on their core business, rather than infrastructure. The development team at Best For You Organics has indicated they have some experience with Docker. They are interested in what options might be available for using containers to deploy their application into a cloud environment. They are also interested in learning more about identity management.
 
 The development team has also expressed that they would like to continue using GitHub as their code repository but is interested in improving upon their DevOps pipeline. They currently use Jenkins for their builds and are interested in any tools available in a cloud offering that could help with release management, or other aspects of a fully-integrated, modern DevOps pipeline. Ultimately, their goal is to automate and simplify deployments through CI/CD capabilities and deliver updates faster and more reliably.
 
-November 2019
+February 2020
 
 ## Target audience
 
