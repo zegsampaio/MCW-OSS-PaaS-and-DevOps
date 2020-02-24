@@ -427,7 +427,7 @@ After reviewing the available options for transitioning their applications to a 
 
     The MongoDB database is imported into Azure Cosmos DB, using *mongoimport* or *mongorestore*, and access to the database from the application continues to use the MongoDB APIs. Database connection strings in the application are updated to point to the new Cosmos DB.
 
-    Serverless architecture is applied to order processing and customer notifications. Azure Functions are used to automate the processing of orders, billing credit cards, and updating the database as order processing is complete. Logic Apps are applied to send SMS notifications via a Twilio connector to customers, informing them that their order has been processed and shipped. Azure Search is integrated into the application to provide enhanced search functionality.
+    Serverless architecture is applied to order processing and customer notifications. Azure Functions are used to automate the processing of orders, billing credit cards, and updating the database as order processing is completed. Logic Apps are applied to send SMS notifications via a Twilio connector to customers, informing them that their order has been processed and shipped. Azure Search is integrated into the application to provide enhanced search functionality.
 
     Identity management for the application is handled via Azure Active Directory B2C. AAD B2C is used for both sign-up and sign in actions, and to secure access to the containerized web app.
 
