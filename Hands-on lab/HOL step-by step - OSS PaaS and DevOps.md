@@ -43,9 +43,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 5: Decrease collection throughput](#task-5-decrease-collection-throughput)
   - [Exercise 3: Containerize the app](#exercise-3-containerize-the-app)
     - [Task 1: Install Docker extension in VS Code](#task-1-install-docker-extension-in-vs-code)
-    - [Task 2: Create Docker image and run the app](#task-2-create-docker-image-and-run-the-app)
+    - [Task 2: Create a Docker image and run the app](#task-2-create-a-docker-image-and-run-the-app)
     - [Task 3: Run the containerized app](#task-3-run-the-containerized-app)
-    - [Task 4: Push image to Azure Container Registry](#task-4-push-image-to-azure-container-registry)
+    - [Task 4: Push the image to Azure Container Registry](#task-4-push-the-image-to-azure-container-registry)
   - [Exercise 4: Set up Web App for Containers](#exercise-4-set-up-web-app-for-containers)
     - [Task 1: Provision Web App for Containers](#task-1-provision-web-app-for-containers)
     - [Task 2: Navigate to the deployed app](#task-2-navigate-to-the-deployed-app)
@@ -615,9 +615,9 @@ The Docker extension for VS Code is used to simplify the management of local Doc
 
     > **Note**: If you don't see the Docker icon in the left-hand menu, close and reopen VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
 
-### Task 2: Create Docker image and run the app
+### Task 2: Create a Docker image and run the app
 
-In this task, you will use VS Code, and the Docker extension, to add the necessary files to the project to create a custom Docker image for the `MCW-OSS-PaaS-and-DevOps` app.
+In this task, you use VS Code and the Docker extension to add the necessary files to the project to create a custom Docker image for the `MCW-OSS-PaaS-and-DevOps` app.
 
 1. On your Lab VM, return to VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
 
@@ -631,41 +631,45 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
 
     ![Node.js is highlighted at the Select Application Platform prompt.](media/vscode-command-palette-app-platform.png "Select Node.js")
 
-5. Ensure port "3000" is entered on the next screen, and press **Enter**.
+5. At the **Include optional Docker Compose files?** prompt, select **Yes**.
+
+    ![Yes is highlighted at the Include optional Docker Compose files prompt.](media/vscode-command-palette-docker-compose.png "Include optional Docker Compose files")
+
+6. Ensure port "3000" is entered on the next screen, and press **Enter**.
 
     ![3000 is selected in the field above What port does your app listen on?](media/vscode-command-palette-docker-port.png "Explorer")
 
-6. This will add Dockerfile, along with several configuration files for Docker compose to the project.
+7. This will add Dockerfile, along with several configuration files for Docker compose to the project.
 
     ![Dockerfile and several configuration files are highlighted in the Explorer pane.](media/vscode-docker-files.png "Explorer pane")
 
-7. Select **Dockerfile** from the file navigator and observe the contents. This file provides the commands required to assemble a Docker image for the `MCW-OSS-PaaS-and-DevOps` application.
+8. Select **Dockerfile** from the file navigator and observe the contents. This file provides the commands required to assemble a Docker image for the `MCW-OSS-PaaS-and-DevOps` application.
 
     ![This is a screenshot of the Dockerfile contents. At this time, we are unable to capture all of the information in the window. Future versions of this course should address this.](media/vscode-docker-file.png "Dockerfile screenshot")
 
-8. Currently, the Docker extension for Visual Studio Code places the generated Docker files in the root directory of the project. Because the project files are all located in the `lab-files` directory, we need to move the generated files into that folder. Select the `.dockerignore`, `docker-compose.debug.yml`, `docker-compose.yml`, and `Dockerfile` files, and then drag and drop them into the `Hands-on lab/lab-files` folder. Respond Yes if prompted about moving the files.
+9. Currently, the Docker extension for Visual Studio Code places the generated Docker files in the root directory of the project. Because the project files are all located in the `lab-files` directory, we need to move the generated files into that folder. Select the `.dockerignore`, `docker-compose.debug.yml`, `docker-compose.yml`, and `Dockerfile` files, and then drag and drop them into the `Hands-on lab/lab-files` folder. Respond Yes if prompted about moving the files.
 
     ![The docker files specified above are highlighted within the Hands-on lab/lab-files folder.](media/vscode-docker-move-files.png "Visual Studio Code files")
 
-9. Next, you will tell Docker to build and image for your app. Select the **Terminal** menu in Visual Studio Code, and then select **New Terminal**.
+10. Next, you will tell Docker to build an image for your app. Select the **Terminal** menu in Visual Studio Code, and then select **New Terminal**.
 
     ![New Terminal is highlighted in the Terminal menu in Visual Studio Code.](media/vscode-terminal-menu.png "Visual Studio Code Terminal menu")
 
-10. In the new terminal window, change the directory to the `Hands-on lab/lab-files` folder by executing the following command:
+11. In the new terminal window, change the directory to the `Hands-on lab/lab-files` folder by executing the following command:
 
     ```bash
     cd "Hands-on lab/lab-files"
     ```
 
-11. With the next command you will provide a **registry**, **image name**, and **tag**, using the following format. This format will allow the image to be pushed to your container registry.
+12. With the next command you will provide a **registry**, **image name**, and **tag**, using the following format. This format will allow the image to be pushed to your container registry.
 
     > `[registry]/[image name]:[tag]`
 
-12. For this, you will need the Login server value from your Azure Container registry's **Access keys** blade.
+13. For this, you will need the Login server value from your Azure Container registry's **Access keys** blade.
 
     ![Access keys is selected under Settings on the Azure Container registry's Access keys blade, and on the right, bestforyouregistry.azurecr.io is highlighted in the Login server box on the right.](media/acr-login-server.png "Container registry blade")
 
-13. At the terminal prompt, enter the following, where `[Login server]` is the Login server value from Azure:
+14. At the terminal prompt, enter the following, where `[Login server]` is the Login server value from Azure:
 
     ```bash
     docker build --rm -f "Dockerfile" -t [Login server]/best-for-you-organics:latest .
@@ -673,21 +677,21 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
 
     > **Note**: Be sure to include the "." at the end of the line.
 
-14. For example:
+15. For example:
 
     ```bash
     docker build --rm -f "Dockerfile" -t bestforyouregistry.azurecr.io/best-for-you-organics:latest .
     ```
 
-15. Press **Enter**, which will trigger the build of the image. You will see the following output in the terminal window:
+16. Press **Enter**, which will trigger the build of the image. You will see the following output in the terminal window:
 
     ![The docker build command above is entered into the VS Code terminal window.](media/vscode-terminal-docker-build.png "Docker build")
 
-16. Once the build completes, select the **Docker** icon in the left-hand menu of Visual Studio Code and then expand **Images**. You will see the `best-for-you-organics` image.
+17. Once the build completes, select the **Docker** icon in the left-hand menu of Visual Studio Code and then expand **Images**. You will see the `best-for-you-organics` image.
 
     ![The image is highlighted in the DOCKER extension explorer under Images.](media/vscode-extensions-docker-images.png "Docker extension explorer")
 
-17. You can also use the `docker images` command in the Integrated terminal to list the images.
+18. You can also use the `docker images` command in the Integrated terminal to list the images.
 
     ![The docker images command is entered in the terminal window, with the list of images is displayed.](media/vscode-terminal-docker-images.png "Docker images")
 
@@ -695,13 +699,13 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
 
 In this task, you run the app from the container you built in the previous task.
 
-1. In the **Images** area of the Docker extension in VS Code, expand the `best-for-you-organics` image, and then right-click on the `latest` image, and select **Run Interactive**.
+1. In the **Images** area of the Docker extension in VS Code, expand the `best-for-you-organics` image and then right-click on the `latest` image and select **Run Interactive**.
 
     ![The image is selected in the Images area of the Docker extension explorer, and Run Interactive is highlighted in the shortcut menu.](media/vscode-extensions-docker-images-latest.png "Docker extension explorer")
 
     > **Note**: If you receive an error that the address is already in use, return to the terminal window where you ran the application using the `npm start` command and press `CTRL+C` to stop the application. Then, try the above action again.
 
-2. Notice in the Interactive terminal that a docker run command is issued. Using the VS Code Docker extension, you can issue some docker commands, without needing to work from the command line.
+2. Notice in the Interactive terminal that a docker run command is issued. Using the VS Code Docker extension, you can issue some docker commands without needing to work from the command line.
 
     ![The docker run command is highlighted in the Interactive terminal window.](media/vscode-terminal-docker-run.png "Interactive terminal window")
 
@@ -711,7 +715,7 @@ In this task, you run the app from the container you built in the previous task.
 
 4. In the Integrated terminal of VS Code, for the interactive session, press **CTRL+C** to stop the container.
 
-### Task 4: Push image to Azure Container Registry
+### Task 4: Push the image to Azure Container Registry
 
 In this task, you are going to push the image to your Azure Container Registry.
 
@@ -723,7 +727,7 @@ In this task, you are going to push the image to your Azure Container Registry.
 
     ![Access keys is selected under Settings on the Azure Container registry's Access keys blade, and the values in the Login server, Username, and Name boxes are highlighted on the right.](media/acr-access-keys.png "Container Registry blade")
 
-3. Return to the Integrated terminal window in VS Code and enter the following command to log in to your Azure Container registry, replacing the bracketed values with those from the container registry access keys page.
+3. Return to the Integrated terminal window in VS Code and enter the following command to log in to your Azure Container Registry, replacing the bracketed values with those from the container registry access keys page.
 
     ```bash
     docker login [Login Server] -u [Username]
