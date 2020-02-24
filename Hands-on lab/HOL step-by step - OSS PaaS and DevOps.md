@@ -549,7 +549,7 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 ### Task 4: Install Azure Cosmos DB extension for VS Code
 
-In this task, you will install the Azure Cosmos DB extension for VS Code to take advantage of the integration with Azure Cosmos DB. This extension allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
+In this task, you install the Azure Cosmos DB extension for VS Code to take advantage of the integration with Azure Cosmos DB. This extension allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
 
 1. Select the **Extensions** icon, enter "azure cosmos db" into the search box, select the **Azure Cosmos DB** extension, and then select **Install** in the Extension: Azure Cosmos DB window.
 
@@ -563,7 +563,7 @@ In this task, you will install the Azure Cosmos DB extension for VS Code to take
 
 3. Enter your Azure account credentials in the browser window that appears.
 
-4. If presented with a prompt to enter a password for a new keyring, enter "**Password.1!!**" as the password, and select **Continue**.
+4. If presented with a prompt to enter a password for a new keyring, enter "**Password.1!!**" as the password and select **Continue**.
 
     ![Choose password for new keyring dialog, with Password.1!! entered in the password and confirm boxes.](media/ubuntu-new-keyring.png "Choose password window")
 
@@ -577,7 +577,7 @@ In this task, you will install the Azure Cosmos DB extension for VS Code to take
 
 ### Task 5: Decrease collection throughput
 
-In this task, you will decrease the throughput on your collections. Azure Cosmos DB uses an hourly billing rate, so reducing the throughput after the data migration will help save costs.
+In this task, you will decrease the throughput of your collections. Azure Cosmos DB uses an hourly billing rate, so reducing the throughput after the data migration will help save costs.
 
 1. From the Azure Cosmos DB menu pane in Visual Studio Code, right-click on the **best-for-you-db** database and then select **Open in Portal**.
 
