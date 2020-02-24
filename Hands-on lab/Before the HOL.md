@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-November 2019
+February 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2019 Microsoft Corporation. All rights reserved.
+© 2020 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -90,11 +90,13 @@ In this task, you create an Azure resource group for the resources used througho
 
 In this task, you provision a Linux virtual machine (VM) running Ubuntu Server 16.04 LTS, which is used as your development machine throughout this lab. The VM is created using an Azure Resource Manager (ARM) template from a GitHub repository. The ARM template includes a custom extension script that installs Docker, Visual Studio Code (VS Code), MongoDB, and other required software on the VM. The ARM template also adds an inbound port rule that opens port 3389 on the network security group for the VM to allow RDP connections.
 
-> If you would like to review the steps to manually provision the VM and installed software, see [Appendix A](./Appendix-A.md).
+> If you would like to review the steps to manually provision the VM and installed software, see the [Manual resource setup guide](./Manual-resource-setup.md).
 
 1. To open a custom deployment screen in the Azure portal, select the Deploy to Azure button below:
 
-    <a href ="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FMCW-OSS-PaaS-and-DevOps%2Fmaster%2FHands-on%20lab%2Flab-files%2FLabVM%2Fazure-deploy.json" target="_blank" title="Deploy to Azure">
+    > TODO: Revert back to the Microsoft repo
+
+    <a href ="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fkylebunting%2FMCW-OSS-PaaS-and-DevOps%2Fmaster%2FHands-on%20lab%2Flab-files%2FLabVM%2Fazure-deploy.json" target="_blank" title="Deploy to Azure">
     <img src="http://azuredeploy.net/deploybutton.png"/>
     </a>
 
@@ -277,13 +279,23 @@ In this task, you create a new Logic App, which will use a SendGrid connector to
 
 3. In the **Create logic app** blade, enter the following:
 
-    - **Name:** Enter "OrderNotifications".
+    **Project details**:
+
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource group:** Select **Use existing** and choose the **hands-on-lab-SUFFIX** resource group.
-    - **Location:** Select the location you have been using for resources in this hands-on lab.
-    - Select **Create** to provision the new Logic App.
 
-    ![The information above is entered on the Create logic app blade.](media/logic-app-create.png "Logic App blade")
+    **Instance details**:
+
+    - **Name:** Enter "OrderNotifications".
+    - **Select the location**: Choose Region.
+    - **Location:** Select the location you have been using for resources in this hands-on lab.
+    - **Log Analytics**: Select Off.
+
+    ![The information above is entered on the Create logic app blade.](media/logic-app-create-basics-tab.png "Logic App blade")
+
+4. Select **Review + create**.
+
+5. Select **Create** on the Review + create tab.
 
 ### Task 8: Create a GitHub account
 
