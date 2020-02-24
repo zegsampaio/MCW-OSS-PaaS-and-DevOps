@@ -376,7 +376,7 @@ In this task, you create the collections needed for your database migration and 
 
 > To learn more about RUs and throughput provisioning in Cosmos DB, read [Request Units in Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/request-units).
 
-1. Navigate to your Azure Cosmos DB account in the Azure portal by selecting **Resource groups** from the Azure home page, and then selecting the **best-for-you-db-SUFFIX** Cosmos DB resource from the list.
+1. Navigate to your Azure Cosmos DB account in the Azure portal by selecting **Resource groups** from the Azure home page, and then select the **best-for-you-db-SUFFIX** Cosmos DB resource from the list.
 
 2. On the Cosmos DB blade, select **Data Explorer** from the left-hand menu and then select **New Collection**.
 
@@ -386,14 +386,14 @@ In this task, you create the collections needed for your database migration and 
 
     - **Database id**: Choose **Create new**, and enter **best-for-you-organics**.
     - **Provision database throughput**: Uncheck this box.
-    - **Collection Id**: Enter **orders**.
+    - **Collection id**: Enter **orders**.
     - **Storage capacity**: Select **Fixed (10 GB)**.
     - **Throughput**: Enter **2500**.
     - Select **OK** to create the collection.
 
     ![The information above is entered in the Add Collection dialog box.](media/cosmos-db-new-collection-orders.png "Add Collection")
 
-4. On the Collections blade, select **New Collection** to create another collection.
+4. On the Collections blade, select **New Collection** again to create another collection.
 
     ![The New Collection button is highlighted on the Cosmos DB Collections blade.](media/cosmos-db-new-collection.png "New Collection")
 
@@ -401,12 +401,11 @@ In this task, you create the collections needed for your database migration and 
 
     - **Database id**: Select **Use existing** and select the **best-for-you-organics** database from the list.
     - **Collection id**: Enter **users**.
-    - **Shared key**: Enter **_id**.
-    - **Provision dedicated throughput for this collection**: Check this box.
+    - **Storage capacity**: Select **Fixed (10 GB)**.
     - **Throughput**: Enter **2500**.
     - Select **OK** to create the collection.
 
-    ![The information for the users collections above is entered into the Add Collection dialog.](media/cosmos-db-new-collection-users.png "Add Collection")
+    ![The information for the users collection above is entered into the Add Collection dialog.](media/cosmos-db-new-collection-users.png "Add Collection")
 
 6. Repeat steps 4 and 5, this time entering **plans** as the collection name.
 
@@ -458,13 +457,13 @@ In this task, you will retrieve the connection string for your Azure Cosmos DB d
 
     ![This is a screenshot of the refreshed application page.](media/bfyo-web-home-empty.png "Refreshed application screenshot")
 
-    > **Note**: Notice the three plans that were displayed on the page previously are no longer there. This is because the application is now pointed to your Azure Cosmos DB, and the plans collection does not contain any data yet.
+    > **Note**: Notice the three plans that were displayed on the page previously are no longer there. The application is now pointing to your Azure Cosmos DB, and the plans collection does not contain any data yet.
 
-11. Let's move on to copying the data from the local MongoDB instance into Cosmos DB.
+11. Now, let's move on to copying the data from the local MongoDB instance into Cosmos DB.
 
 ### Task 3: Import data to the API for MongoDB using mongoimport
 
-In this task, you will use `mongoimport.exe` to import data to your Cosmos DB account. There is a shell script located in the `MCW-OSS-PaaS-and-DevOps` project which handles exporting the data out of your MongoDB into JSON files on the local file system. These files will be used for the import into Cosmos DB.
+In this task, you will use `mongoimport.exe` to import data to your Cosmos DB account. There is a shell script located in the `MCW-OSS-PaaS-and-DevOps` project, which handles exporting the data out of your MongoDB into JSON files on the local file system. These files will be used for the import into Cosmos DB.
 
 1. On your Lab VM, open a new integrated bash prompt in VS Code by selecting the **+** next to the shell dropdown in the integrated terminal pane.
 
@@ -546,7 +545,7 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 14. You have successfully migrated the application and data to use Azure Cosmos DB with MongoDB APIs.
 
-15. Return to the Integrated terminal window of VS Code which is running the application, and press **CTRL+C** to stop the application.
+15. Return to the Integrated terminal window of VS Code, which is running the application, and press **CTRL+C** to stop the application.
 
 ### Task 4: Install Azure Cosmos DB extension for VS Code
 
