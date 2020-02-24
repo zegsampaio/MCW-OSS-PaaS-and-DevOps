@@ -29,7 +29,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 - [OSS PaaS and DevOps before the hands-on lab setup guide](#oss-paas-and-devops-before-the-hands-on-lab-setup-guide)
   - [Requirements](#requirements)
   - [Before the hands-on lab](#before-the-hands-on-lab)
-    - [Task 1: Provision a resource group](#task-1-provision-a-resource-group)
+    - [Task 1: Create a resource group](#task-1-create-a-resource-group)
     - [Task 2: Create a development virtual machine](#task-2-create-a-development-virtual-machine)
     - [Task 3: Provision a Jenkins server](#task-3-provision-a-jenkins-server)
     - [Task 4: Provision Cosmos DB using the MongoDB API](#task-4-provision-cosmos-db-using-the-mongodb-api)
@@ -60,9 +60,9 @@ Duration: 30 minutes
 
 In this exercise, you set up the Azure environment for use throughout the rest of the hands-on lab. You should follow all steps provided *before* attending the Hands-on lab.
 
-> **IMPORTANT**: Many Azure resources require unique names. Throughout these steps, you will see the word "SUFFIX" as part of resource names. You should replace this with your Microsoft alias, initials, or another value to ensure the resource is uniquely named.
+> **IMPORTANT**: Many Azure resources require globally unique names. Throughout these steps, you will see the word "SUFFIX" as part of resource names. You should replace this with your Microsoft alias, initials, or another value to ensure the resource is uniquely named.
 
-### Task 1: Provision a resource group
+### Task 1: Create a resource group
 
 In this task, you create an Azure resource group for the resources used throughout this lab.
 
@@ -88,13 +88,13 @@ In this task, you create an Azure resource group for the resources used througho
 
 ### Task 2: Create a development virtual machine
 
-In this task, you provision a Linux virtual machine (VM) running Ubuntu Server 16.04 LTS, which is used as your development machine throughout this lab. The VM is created using an Azure Resource Manager (ARM) template from a GitHub repository. The ARM template includes a custom extension script that installs Docker, Visual Studio Code (VS Code), MongoDB, and other required software on the VM. The ARM template also adds an inbound port rule that opens port 3389 on the network security group for the VM to allow RDP connections.
+In this task, you provision a Linux virtual machine (VM) running Ubuntu Server 16.04 LTS, which serves as your development machine throughout this lab. The VM is created using an Azure Resource Manager (ARM) template from a GitHub repository. The ARM template includes a custom extension script that installs Docker, Visual Studio Code (VS Code), MongoDB, and other required software on the VM. The ARM template also adds an inbound port rule that opens port 3389 on the network security group for the VM to allow RDP connections.
 
-> If you would like to review the steps to manually provision the VM and installed software, see the [Manual resource setup guide](./Manual-resource-setup.md).
+> If you would like to review the steps to provision the VM manually and install the required software, see the [Manual resource setup guide](./Manual-resource-setup.md).
 
 1. To open a custom deployment screen in the Azure portal, select the Deploy to Azure button below:
 
-    > TODO: Revert back to the Microsoft repo
+    > TODO: Revert back to the Microsoft repo (Replace "kylebunting" with "Microsoft" in the entire project.)
 
     <a href ="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fkylebunting%2FMCW-OSS-PaaS-and-DevOps%2Fmaster%2FHands-on%20lab%2Flab-files%2FLabVM%2Fazure-deploy.json" target="_blank" title="Deploy to Azure">
     <img src="http://azuredeploy.net/deploybutton.png"/>
@@ -110,7 +110,7 @@ In this task, you provision a Linux virtual machine (VM) running Ubuntu Server 1
     - **Admin Password**: Accept the default value, Password.1!!
     - Check the box to agree to the Azure Marketplace terms and conditions.
 
-    ![The Custom deployment blade is display, and the information above is entered into it.](media/azure-custom-deployment.png "Custom deployment blade")
+    ![The Custom deployment blade is displayed, and the information above is entered into it.](media/azure-custom-deployment.png "Custom deployment blade")
 
 3. Select **Purchase**.
 
@@ -211,11 +211,11 @@ In this task, you create a private Docker registry in the Azure portal, so you h
 
 2. Enter "container registry" into the Search the Marketplace box, select **Container Registry** from the results, and then select **Create**.
 
-    ![Container registry is entered into the search box and Container Registry is selected and highlighted in the search results.](media/create-container-registry-resource.png "Azure Portal")
+    ![Container registry is entered into the search box, and Container Registry is selected and highlighted in the search results.](media/create-container-registry-resource.png "Azure Portal")
 
 3. On the **Create container registry** blade, enter the following:
 
-    - **Registry name:** Enter "bestforyouregistrySUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
+    - **Registry name:** Enter "bestforyouregistrySUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green checkmark).
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource group:** Select the **hands-on-lab-SUFFIX** resource group created previously.
     - **Location:** Select the location you are using for resources in this hands-on lab.
@@ -234,7 +234,7 @@ In this task, you create a Function App in Azure to host your Functions.
 
     ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
 
-2. Enter "function app" in to the **Search the marketplace** box, and select **Function App** from the results.
+2. Enter "function app" into the **Search the marketplace** box and select **Function App** from the results.
 
     ![Function app is highlighted in the search box, and the Function App row is highlighted in the results below that.](media/create-resource-function-app.png "Azure Portal")
 
