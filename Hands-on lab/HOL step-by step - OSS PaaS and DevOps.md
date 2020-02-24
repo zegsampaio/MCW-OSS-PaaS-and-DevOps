@@ -122,46 +122,48 @@ In this exercise, you create a local copy of the starter application on your Lab
 
 In this task, you create an RDP connection to your Lab VM. If you are already connected, skip to [Task 2](#task-2-grant-permissions-to-docker).
 
-1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the Azure services list.
+1. In the [Azure portal](https://portal.azure.com) and select **Resource groups** from the Azure services list.
 
     ![Resource groups is highlighted in the Azure services list.](media/azure-services-resource-groups.png "Azure services")
 
-2. Select the **hands-on-lab-SUFFIX** resource group from the list.
+2. Select the hands-on-lab-SUFFIX resource group from the list.
 
-    ![Resource groups is highlighted in the navigation pane of the Azure portal. On the Resource groups blade, hands-on-lab is highlighted in the filter box, and hands-on-lab is highlighted in the search results.](media/azure-resource-groups.png "Azure Portal")
+    ![Resource groups is selected in the Azure navigation pane, and the "hands-on-lab-SUFFIX" resource group is highlighted.](./media/resource-groups.png "Resource groups list")
 
-    > **Tip**: If there are too many resource groups you can enter "hands-on-lab" into the filter box to reduce the resource groups displayed the list.
-
-3. Next, select **LabVM** from the list of available resources.
+3. Select **LabVM** from the list of available resources.
 
     ![LabVM is highlighted in the list of available resources.](media/rg-labvm.png "Select LabVM")
 
-4. On the **LabVM** blade, copy the Public IP address from the Essentials area on the Overview screen.
+4. On the **LabVM** Overview blade, select **Connect** from the toolbar and then select **RDP** from the drop-down menu.
 
-    ![Public IP address is highlighted in the top menu on the LabVM blade.](media/labvm-public-ip-address.png "LabVM blade")
+    ![Connect -> RDP is highlighted in the toolbar for the LabVM.](media/labvm-connect-rdp.png "LabVM toolbar")
 
-5. Open a Remote Desktop Client (RDP) application and enter or paste the Public IP address of your Lab VM into the computer name field.
+5. On the Connect with RDP screen, select **Download RDP File**.
 
-6. Select **Connect** on the Remote Desktop Connection dialog.
+    ![The Download RDP File button is highlighted on the Connect with RDP dialog.](media/labvm-connect-with-rdp.png "Connect with RDP")
 
-7. Select **Yes** to connect, if prompted that the identity of the remote computer cannot be verified.
+6. Open the download file to launch a Remote Desktop Client (RDP) application.
+
+7. Select **Connect** on the Remote Desktop Connection dialog.
+
+8. Select **Yes** to connect, if prompted that the identity of the remote computer cannot be verified.
 
     ![This is a screenshot of the Remote Desktop Connection prompt about connecting to the remote despite the identity of the remote computer being unverified. Yes is selected.](media/remote-desktop-connection.png "Remote Desktop Connection dialog box")
 
-8. Enter the following credentials (or the non-default credentials if you changed them):
+9. Enter the following credentials (or the non-default credentials if you changed them):
 
     - **Username:** demouser
     - **Password:** Password.1!!
 
     ![The credentials above are entered in the Login to xrdp dialog box.](media/login-to-xrdp.png "Login to xrdp dialog box")
 
-9. Select **OK** to log into the Lab VM.
+10. Select **OK** to log into the Lab VM.
 
 ### Task 2: Grant permissions to Docker
 
 In this task, you will grant permissions to the demouser account to access the Unix socket needed to communicate with the Docker engine.
 
-1. On your Lab VM, open a **Bash** shell by selecting the Start menu, and then expanding Debian, Applications, and Shells.
+1. On your Lab VM, open a **Bash** shell by selecting the Start menu and then expanding Debian, Applications, and Shells.
 
     ![In the Lab VM start menu, Debian -> Applications -> Shells is expanded, and Bash is highlighted in the Shells menu.](media/labvm-menu-bash-shell.png "Start menu")
 
@@ -171,9 +173,18 @@ In this task, you will grant permissions to the demouser account to access the U
     sudo usermod -a -G docker $USER
     ```
 
-3. After running the command, you will need **completely log out of the Lab VM** and log back in (if in doubt, reboot).
+3. After running the command, reboot the Lab VM using the following command at the bash shell:
 
-4. After logging back in, run the following command to test that the demouser account has proper permissions:
+    ```bash
+    sudo reboot
+    ```
+
+4. Log back in using the same credentials:
+
+    - **Username:** demouser
+    - **Password:** Password.1!!
+
+5. After logging back in, relaunch the bash shell and run the following command to test that the demouser account has proper permissions:
 
     ```bash
     docker run hello-world
@@ -183,7 +194,7 @@ In this task, you will grant permissions to the demouser account to access the U
 
 ### Task 3: Integrate GitHub into VS Code
 
-In this task, you will install the GitHub extension in VS Code, and configure a service integration with your GitHub account. This integration will allow you to push your code changes to GitHub directly from VS Code.
+In this task, you will install the GitHub extension in VS Code and configure a service integration with your GitHub account. This integration will allow you to push your code changes to GitHub directly from VS Code.
 
 1. On your Lab VM, open **VS Code** under Programming on the Start menu.
 
@@ -219,7 +230,7 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
 10. Enter a token description, such as "VS Code Integration", and then check the box next to **repo** under **Select scopes**, which will select all the boxes under it.
 
-    ![On the New personal access token page, VS Code Integration is entered under Token description, and the check boxes next to and under repo are selected under Select scopes.](media/github-new-personal-access-token.png "Select the scopes")
+    ![On the New personal access token page, VS Code Integration is entered under Token description, and the checkboxes next to and under repo are selected under Select scopes.](media/github-new-personal-access-token.png "Select the scopes")
 
 11. Select **Generate token** near the bottom of the screen.
 
@@ -241,7 +252,7 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
     ![GitHub: Set Personal Access Token is highlighted below Set Personal.](media/vscode-command-palette-set-personal-access-token.png "Select GitHub: Set Personal Access Token")
 
-16. Paste the Personal access token you copied from GitHub into the box, and press **Enter**.
+16. Paste the Personal access token you copied from GitHub into the box and press **Enter**.
 
     ![The Personal access token is pasted in the box.](media/github-paste-personal-access-token.png "Paste the Personal access token")
 
@@ -253,7 +264,7 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
 In this task, you will clone the starter application, creating a local copy on your Lab VM.
 
-1. On your Lab VM, open a browser, and navigate to your GitHub account (<https://github.com>).
+1. On your Lab VM, open a browser and navigate to your GitHub account (<https://github.com>).
 
 2. Within your GitHub account, navigate to the forked copy of the `MCW-OSS-PaaS-and-Devops` application page, select **Clone or download**, then select the **copy** link next to the web URL.
 
@@ -303,7 +314,7 @@ In this task, you will clone the starter application, creating a local copy on y
 
 ### Task 5: Launch the starter application
 
-In this task, you will seed the MongoDB with sample data, then run the application locally, connected to your MongoDB instance. This task is to verify the connection to MongoDB and that it contains the seeded plan data, before we migrate the application and data to Azure Cosmos DB.
+In this task, you will seed the MongoDB with sample data, then run the application locally, connected to your MongoDB instance. This task is to verify the connection to MongoDB and that it contains the seeded plan data before we migrate the application and data to Azure Cosmos DB.
 
 1. Return to VS Code, select **Terminal** from the menu, and select **New Terminal**.
 
