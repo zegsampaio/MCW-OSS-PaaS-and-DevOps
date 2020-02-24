@@ -60,7 +60,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 8: Trigger CI-CD pipeline](#task-8-trigger-ci-cd-pipeline)
   - [Exercise 6: Create Azure Functions for order processing](#exercise-6-create-azure-functions-for-order-processing)
     - [Task 1: Configure storage queues](#task-1-configure-storage-queues)
-    - [Task 2: Create timer triggered function](#task-2-create-timer-triggered-function)
+    - [Task 2: Create a timer triggered function](#task-2-create-a-timer-triggered-function)
     - [Task 3: Create Queue function](#task-3-create-queue-function)
   - [Exercise 7: Create Logic App for sending email notifications](#exercise-7-create-logic-app-for-sending-email-notifications)
     - [Task 1: Create SendGrid account](#task-1-create-sendgrid-account)
@@ -1333,7 +1333,7 @@ In this task, you commit changes to the `MCW-OSS-PaaS-and-DevOps` starter applic
 
 Duration: 45 minutes
 
-In this task, you create the Azure Functions that will handle order processing. The first function will send unprocessed order details into a storage queue. This Function uses a timer trigger and checks the processed field on order documents, ensuring only unprocessed orders are sent to the processing queue. A second function is used to simulate order processing and send notifications to the user who placed the order.
+In this task, you create the Azure Functions that handle order processing. The first function sends unprocessed order details into a storage queue. This function uses a timer trigger and checks the processed field on order documents, ensuring only unprocessed orders are sent to the processing queue. A second function simulates order processing and sends notifications to the user who placed the order.
 
 ### Task 1: Configure storage queues
 
@@ -1361,9 +1361,9 @@ In this task, you add two storage queues to the storage account provisioned when
 
     ![The name "notificationqueue" is entered in the Queue name box in the Add queue dialog box.](media/storage-notification-queue.png "Add queue dialog box")
 
-### Task 2: Create timer triggered function
+### Task 2: Create a timer triggered function
 
-In this task, you will create a function that function sends all new orders to a queue for processing and shipping. The function uses a Timer trigger and an output binding to an Azure Storage Queue.
+In this task, you create a function that function sends all new orders to a queue for processing and shipping. The function uses a Timer trigger and an output binding to an Azure Storage Queue.
 
 1. In the [Azure portal](https://portal.azure.com), navigate to your Function App by selecting it from the list of resources in the **hands-on-lab-func-SUFFIX** resource group.
 
@@ -1420,7 +1420,7 @@ In this task, you will create a function that function sends all new orders to a
 
 12. In the `wwwroot` folder, select **+** and then select **New file** to add a new file.
 
-    ![The new file (+) icon is highlighted and New file is highlighted in the context menu.](media/kudu-file-browser-new-file.png "New file")
+    ![The new file (+) icon is highlighted, and New file is highlighted in the context menu.](media/kudu-file-browser-new-file.png "New file")
 
 13. Enter `package.json` as the name of the file and press Enter.
 
@@ -1457,7 +1457,7 @@ In this task, you will create a function that function sends all new orders to a
 
     ![The OrdersTimerTrigger function is selected in the left-hand menu.](media/function-app-orders-timer-trigger.png "Left menu")
 
-18. To get the code for the `OrdersTimerTrigger` function, go into the project is VS Code, expand the `Hands-on lab/lab-files/AzureFunctions` folder, and open the `OrdersTimerTrigger.js` file.
+18. To get the code for the `OrdersTimerTrigger` function, go into the project in VS Code, expand the `Hands-on lab/lab-files/AzureFunctions` folder, and open the `OrdersTimerTrigger.js` file.
 
 19. Replace the `uri` variable value on line 4 of the `OrdersTriggerTimer.js` file with the primary connection string for your Cosmos DB, which you can retrieve from the Connection String blade of your Azure Cosmos DB account.
 
@@ -1488,7 +1488,7 @@ In this task, you will create a function that function sends all new orders to a
 
     ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the home page, and all three boxes' Select this plan buttons are highlighted.](media/bfyo-web-plans.png "Select a plan")
 
-26. On the **Place Order** screen, select **Place Order**. This will create a new order in the Cosmos DB `orders` collection. Within 5 minutes the Timer trigger of your function will fire, and then send the order on to the `orderqueue` for processing.
+26. On the **Place Order** screen, select **Place Order**. This will create a new order in the Cosmos DB `orders` collection. Within 5 minutes, the Timer trigger of your function will fire and then send the order on to the `orderqueue` for processing.
 
     ![The Place Order button is highlighted at the bottom of the Place Order page.](media/bfyo-place-order.png "Place your order page")
 
@@ -1498,9 +1498,9 @@ In this task, you will create a function that function sends all new orders to a
 
 ### Task 3: Create Queue function
 
-In this task, you will create a second function which will be triggered by the output of the OrdersTimerTrigger function. This will simulate the order processing and will add items to the notificationqueue if the order processing is complete and the `sendNotifications` property is true for the order.
+In this task, you create a second function, which is triggered by the output of the OrdersTimerTrigger function. This simulates the order processing and adds items to the notificationqueue if the order processing is complete, and the `sendNotifications` property is true for the order.
 
-This will use an Azure Storage Queue trigger, and an input dataset from Cosmos DB, pulling in customers. Output dataset will be Azure Cosmos DB orders table, and an update to set `processed = true`, and the `processedDate` to today.
+This uses an Azure Storage Queue trigger, and an input dataset from Cosmos DB, pulling in customers. The output dataset is the Azure Cosmos DB orders table. The update sets `processed = true` and the `processedDate` to today's date.
 
 1. Select **Integrate** under the OrdersTimerTrigger function, then select **Azure Queue Storage (outputQueue)** under **Outputs**.
 
@@ -1554,7 +1554,7 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     ![Logs is highlighted below the code block.](media/function-app-logs-bar.png "Select Logs")
 
-12. To trigger the function, return to the starter application in your browser window, select **Sign In**, and on the **Sign In** screen, select **Register**.
+12. To trigger the function, return to the starter application in your browser window. If you are still logged in, select **Logout**. Then, select **Sign In**, and on the **Sign In** screen, select **Register**.
 
     ![In this screenshot of the starter application, Sign In is highlighted at the top, and the Register button is highlighted below.](media/bfyo-web-register.png "Sign in to the starter application")
 
@@ -1577,7 +1577,7 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     > **Note**: It can take up to five minutes for the OrdersTimerTrigger to fire. The ProcessOrders function will fire immediately after the OrderTimerTrigger function.
 
-17. The order you placed has been sent to the notificationqueue and is pending the notification being sent to your email address.
+17. Your order was sent to the notificationqueue and is pending the notification being sent to your email address.
 
 ## Exercise 7: Create Logic App for sending email notifications
 
