@@ -133,7 +133,7 @@ In this task, you provision an Azure Linux VM, which will serve as your Jenkins 
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource group:** Select the hands-on-lab-SUFFIX resource group from the list.
     - **Region:** Select the region you are using for resources in this hands-on lab.
-    - **Name:** Enter **Jenkins**.
+    - **Name:** Enter **jenkins**.
     - **User name:** Enter **jenkinsadmin**.
     - **Authentication type:** Select **Password**
     - **Password:** Enter **Password.1!!**
@@ -199,6 +199,8 @@ In this task, you provision a new Azure Cosmos DB account using the MongoDB API.
 
 5. Ensure the **Validation Success** message is displayed, and then select **Create** to provision the new Azure Cosmos DB.
 
+6. It takes about 10 minutes for the new Cosmos DB account to be created. You can move on to the next task while you wait.
+
 ### Task 5: Create an Azure Container Registry
 
 In this task, you create a private Docker registry in the Azure portal, so you have a place to store the custom Docker image you will create during the hands-on lab.
@@ -240,8 +242,13 @@ In this task, you create a Function App in Azure to host your Functions.
 
 4. On the **Create Function App** blade, enter the following:
 
+    **Project details**:
+
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource group:** Choose **Create new** and enter **hands-on-lab-func-SUFFIX** as resource group name.
+
+    **Instance details**:
+
     - **Function App name:** Enter a unique name, such as "bestforyouordersSUFFIX".
     - **Publish:** Select Code.
     - **Runtime Stack** Select Node.js.
