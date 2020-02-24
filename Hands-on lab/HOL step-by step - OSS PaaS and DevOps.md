@@ -763,7 +763,7 @@ In this task, you are going to push the image to your Azure Container Registry.
 
 Duration: 10 minutes
 
-In this exercise, you will deploy the containerized app to a Web App for Containers instance from the image stored in your Azure Container Registry.
+In this exercise, you deploy the containerized app to a Web App for Containers instance from the image stored in your Azure Container Registry.
 
 ### Task 1: Provision Web App for Containers
 
@@ -780,7 +780,7 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
     **Project Details**:
 
     - **Subscription**: Select the subscription you are using for this lab.
-    - **Resource group**: Select **Use existing** and choose the hands-on-lab-SUFFIX resource group.
+    - **Resource group**: Select **Create new** and enter hands-on-lab-web-SUFFIX for the name of the new resource group.
 
     **Instance Details**:
 
@@ -813,7 +813,7 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
 
 ### Task 2: Navigate to the deployed app
 
-In this task, you navigate to the deployed app, and log in to verify it is functioning correctly.
+In this task, you navigate to the deployed app and log in to verify it is functioning correctly.
 
 1. When you receive the notification that the Web App for Containers deployment has completed, navigate to the Web App by selecting the **notifications icon**, and selecting **Go to resource**.
 
@@ -1753,6 +1753,7 @@ In this exercise, you will de-provision all Azure resources that were created in
 
     - hands-on-lab-SUFFIX
     - hands-on-lab-func-SUFFIX
+    - hands-on-lab-web-SUFFIX
 
 ### Task 2: Delete WebHooks and Service Integrations
 
