@@ -4,11 +4,11 @@ This guide provides step-by-step instructions for manually provisioning and sett
 
 February 2020
 
-## Task 1: Create VM config script
+## Task 1: Create a VM config script
 
-In this task, you will create a script file that will be used as a custom extension for configuring your Linux virtual machine in Azure. This script contains commands to install all the required software and configure a desktop on the Linux VM. These commands could also be run from an SSH shell manually.
+In this task, you create a script file that serves as a custom extension for configuring your Linux virtual machine in Azure. This script contains commands to install all the required software and configure a desktop on the Linux VM. These commands could also be run from an SSH shell manually.
 
-1. Open a web browser, and navigate to <https://raw.githubusercontent.com/Microsoft/MCW-OSS-PaaS-and-DevOps/master/Hands-on%20lab/lab-files/LabVM/labvmconfig.sh>.
+1. Open a web browser and navigate to <https://raw.githubusercontent.com/Microsoft/MCW-OSS-PaaS-and-DevOps/master/Hands-on%20lab/lab-files/LabVM/labvmconfig.sh>.
 
 2. Copy the contents displayed in the browser into a text editor, such as Visual Studio Code or Notepad, and save the file as `labvmconfig.sh`.
 
@@ -22,9 +22,9 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
 
     ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
 
-2. Enter "ubuntu" into the search bar, expand **Ubuntu Server** and select **Ubuntu Server 16.04 LTS** from the results.
+2. Enter "ubuntu" into the search bar, expand **Ubuntu Server**, and select **Ubuntu Server 16.04 LTS** from the results.
 
-    !["Ubuntu" is entered into the search box and the Ubuntu Server is highlighted in the search results.](media/create-resource-ubuntu-server-16.04-lts.png "Azure Portal")
+    !["Ubuntu" is entered into the search box, and the Ubuntu Server is highlighted in the search results.](media/create-resource-ubuntu-server-16.04-lts.png "Azure Portal")
 
 3. On the **Ubuntu Server** blade, select **Ubuntu Server 16.04 LTS** from the Select a software plan drop-down list and then select **Create**.
 
@@ -67,9 +67,9 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
 
 7. Select **Next: Networking**.
 
-8. On the **Networking** tab, accept all the defaults and select **Next : Management**.
+8. On the **Networking** tab, accept all the defaults and select **Next: Management**.
 
-9. On the **Management** tab, accept all the defaults and select **Next : Advanced**.
+9. On the **Management** tab, accept all the defaults and select **Next: Advanced**.
 
 10. On the **Advanced** tab, click on the **Select an extension to install** link.
 
@@ -87,7 +87,7 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
 
     - Select **OK**.
 
-    ![The Install extension blade is displayed and the information above are entered into the fields.](media/create-ubuntu-server-install-extension.png "Install extension blade")
+    ![The Install extension blade is displayed, and the information above are entered into the fields.](media/create-ubuntu-server-install-extension.png "Install extension blade")
 
 13. Select **OK** on the Install extension blade.
 
