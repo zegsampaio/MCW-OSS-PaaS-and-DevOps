@@ -63,8 +63,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 2: Create a timer triggered function](#task-2-create-a-timer-triggered-function)
     - [Task 3: Create Queue function](#task-3-create-queue-function)
   - [Exercise 7: Create Logic App for sending email notifications](#exercise-7-create-logic-app-for-sending-email-notifications)
-    - [Task 1: Create SendGrid account](#task-1-create-sendgrid-account)
-    - [Task 2: Create Logic App](#task-2-create-logic-app)
+    - [Task 1: Create a SendGrid account](#task-1-create-a-sendgrid-account)
+    - [Task 2: Create a Logic App](#task-2-create-a-logic-app)
   - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Delete Azure resource groups](#task-1-delete-azure-resource-groups)
     - [Task 2: Delete WebHooks and Service Integrations](#task-2-delete-webhooks-and-service-integrations)
@@ -1583,11 +1583,11 @@ This uses an Azure Storage Queue trigger, and an input dataset from Cosmos DB, p
 
 Duration: 30 minutes
 
-In this exercise, you create Logic App which will trigger when an item is added to the `notificationqueue` Azure Storage Queue. The Logic App will send an email message to the email address included in the `notificationqueue` message.
+In this exercise, you create Logic App, which triggers whenever an item is added to the `notificationqueue` Azure Storage Queue. The Logic App sends an email message to the email address included in the `notificationqueue` message.
 
-### Task 1: Create SendGrid account
+### Task 1: Create a SendGrid account
 
-In this task, you will create a SendGrid account through the Azure portal to send email notifications to customers, informing them that their order has been processed, and is on its way.
+In this task, you will create a SendGrid account through the Azure portal to send email notifications to customers, informing them that their order has been processed and is on its way.
 
 1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
 
@@ -1601,33 +1601,45 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
     ![The Create button is highlighted on the SendGrid blade.](media/sendgrid-create.png "Create SendGrid")
 
-4. On the Create a new SendGrid Account blade, enter the following:
+4. On the Create a new SendGrid Account **Basics** tab, enter the following:
+
+    **Project details**:
+
+    - **Subscription** Select the subscription you are using for this hands-on lab.
+    - **Resource group**: Choose **Use existing** and select the **hands-on-lab-SUFFIX** resource group.
+    - **Location**: Select the location you are using for resources in this hands-on lab.
+
+    **Account details**:
 
     - **Name**: Enter **bfyoemail**.
     - **Password**: Enter **Password.1!!**
-    - **Subscription** Select the subscription you are using for this hands-on lab.
-    - **Resource group**: Choose **Use existing** and select the **hands-on-lab-SUFFIX** resource group.
-    - **Pricing tier**: Select **F1 Free** and choose **Select**.
-    - **Contact information**: Enter your name, company, and email address and select **OK**.
-    - **Legal terms**: Review the legal terms and enter a phone number and then select **OK**.
+    - **Pricing tier**: Select the **Free** plan.
 
-    ![The values specified above are entered into the create a new SendGrid account blade.](media/sendgrid-create-settings.png "Create SendGrid account")
+    **Contact details**:
 
-5. Select **Create** to provision the SendGrid account.
+    - Enter your information into the required fields (First Name, Last Name, Email, Company, and Website)
+
+        > **Note**: Website is not listed as a required field, but currently, the deployment fails if this is not populated.
+
+    ![The SendGrid configuration values specified above are entered into the create a new SendGrid account blade.](media/sendgrid-create-settings.png "Create SendGrid account")
+
+5. Select **Review + create** and then select **Create** to provision the SendGrid account.
 
 6. When the SendGrid account finishes provisioning, select **Go to resource** from the notifications pane in the Azure portal.
 
-    ![The Go to resource button in highlighted in the SendGrid deployment notification.](media/go-to-resource-sendgrid.png "Go to resource")
+    ![The Go to resource button is highlighted in the SendGrid deployment notification.](media/go-to-resource-sendgrid.png "Go to resource")
 
 7. On the SendGrid account blade, select **Manage** from the toolbar.
 
     ![The Manage button is highlighted on the SendGrid account toolbar.](media/sendgrid-manage.png "SendGrid account Manage")
 
-8. On the SendGrid page that opens, expand **Settings** in the left-hand menu, select **API Keys**, and then select **Create API Key**.
+8. If prompted, select **Send Confirmation Email** and follow the prompts in the email you receive to confirm your account.
+
+9. On the SendGrid page that opens, expand **Settings** in the left-hand menu, select **API Keys**, and then select **Create API Key**.
 
     ![The Create API Key button is highlighted on the API Keys page.](media/sendgrid-create-api-key.png "SendGrid API Keys")
 
-9. On the Create API Key page, enter the following:
+10. On the Create API Key page, enter the following:
 
     - **API Key Name**: Enter **bfyo-api-key**.
     - **API Key Permissions**: Select **Full Access**.
@@ -1635,13 +1647,13 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
     ![The values specified above are entered into the Create API Key page.](media/sendgrid-create-api-key-page.png "Create API Key")
 
-10. Leave the API Key Created screen that appears open. You will be copying the key and pasting it into your Logic App in the next task.
+11. Leave the API Key Created screen that appears open. You will be copying the key and pasting it into your Logic App in the next task.
 
     ![The API Key Created screen is displayed.](media/sendgrid-api-key-created.png "API Key Created")
 
-### Task 2: Create Logic App
+### Task 2: Create a Logic App
 
-In this task, you will create a new Logic App, which will use the SendGrid connector to send email notifications to users, informing them that their order has processed and shipped.
+In this task, you create a new Logic App, which uses the SendGrid connector to send email notifications to users, informing them that their order has processed and shipped.
 
 1. In the Azure portal, navigate to your Logic App in the **hands-on-lab-SUFFIX** resource group.
 
@@ -1671,7 +1683,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
 8. In the **Choose an action box**, enter "parse," and select **Data Operations**.
 
-    ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box, and Data Operations below in the list.](media/data-operations-parse.png "When there are messages in a queue dialog box")
+    ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box and Data Operations below in the list.](media/data-operations-parse.png "When there are messages in a queue dialog box")
 
 9. Under Data Operations, select **Parse JSON**.
 
@@ -1693,7 +1705,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The JSON above is pasted in the sample JSON payload dialog box, and Done is selected below.](media/logic-app-parse-json-sample-payload.png "Paste the JSON in the dialog box")
 
-13. You will now see the Schema for messages coming from the notification queue in the Schema box.
+13. You will now see the schema for messages coming from the notification queue in the Schema box.
 
     ![The completed Parse JSON box is displayed.](media/logic-app-parse-json-complete.png "Parse JSON")
 
@@ -1705,9 +1717,9 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![SendGrid is entered into the search box, and the SendGrid connection is highlighted under connectors.](media/logic-app-connectors-sendgrid.png "Choose a connector")
 
-16. In the **SendGrid** connector dialog, select **Send email (V3)**.
+16. In the **SendGrid** connector dialog, select **Send email (V4)**.
 
-    ![Send email (v2) is highlighted in the list of SendGrid actions.](media/logic-app-sendgrid-send-email.png "SendGrid")
+    ![Send email (v4) is highlighted in the list of SendGrid actions.](media/logic-app-sendgrid-send-email.png "SendGrid")
 
 17. In the **SendGrid** box, enter the following:
 
@@ -1717,7 +1729,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The SendGrid connection configuration information above is entered into the SendGrid box.](media/logic-app-sendgrid-create.png "SendGrid")
 
-18. In the **Send email (V3)** box, enter the following:
+18. In the **Send email (V4)** box, enter the following:
 
     - **From**: Enter your email address.
     - **To**: Click in the box, select **Add dynamic content**, and then select the **notificationEmail** property. **NOTE**: If under the Parse JSON Dynamic Content section, you see a message that there were not any outputs to match the input format, select **See more** in the message.
@@ -1733,7 +1745,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The Add an action button is highlighted under + New step.](media/logic-app-new-step.png "Add an action button")
 
-20. In the **Choose an action** dialog, enter "queues" in to the search box, and select **Delete message** under Actions.
+20. In the **Choose an action** dialog, enter "queues" into the search box, and select **Delete message** under Actions.
 
     ![Queue is highlighted in the Choose an action search box, and Azure Queues -- Delete message is highlighted below.](media/logic-app-azure-queues-delete-message.png "Choose an action dialog box")
 
@@ -1757,14 +1769,13 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
 Duration: 10 minutes
 
-In this exercise, you will de-provision all Azure resources that were created in support of this hands-on lab.
+In this exercise, you will de-provision all Azure resources that you created in support of this hands-on lab.
 
 ### Task 1: Delete Azure resource groups
 
-1. In the Azure portal, select **Resource groups** from the left-hand menu, and locate and delete the following resource groups.
+1. In the Azure portal, select **Resource groups** from the left-hand menu and locate and delete the following resource groups.
 
     - hands-on-lab-SUFFIX
-    - hands-on-lab-func-SUFFIX
     - hands-on-lab-web-SUFFIX
 
 ### Task 2: Delete WebHooks and Service Integrations
