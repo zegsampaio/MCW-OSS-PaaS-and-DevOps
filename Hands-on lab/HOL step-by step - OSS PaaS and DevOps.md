@@ -22,7 +22,7 @@ The names of manufacturers, products, or URLs are provided for informational pur
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
-**Contents**
+### Contents
 
 - [OSS PaaS and DevOps hands-on lab step-by-step](#oss-paas-and-devops-hands-on-lab-step-by-step)
   - [Abstract and learning objectives](#abstract-and-learning-objectives)
@@ -103,14 +103,14 @@ In this hands-on lab, you will assist them with completing the OSS application a
 
 ## Requirements
 
-1. Microsoft Azure subscription must be pay-as-you-go or MSDN
+1. Microsoft Azure subscription must be pay-as-you-go or MSDN.
     - Trial subscriptions will *not* work.
 2. Linux virtual machine configured with:
-    - Visual Studio Code
-    - Azure CLI
-    - Docker
-    - Node.js and npm
-    - MongoDB Community Edition
+    - Visual Studio Code.
+    - Azure CLI.
+    - Docker.
+    - Node.js and npm.
+    - MongoDB Community Edition.
 
 ## Exercise 1: Run starter application
 
@@ -161,7 +161,7 @@ In this task, you create an RDP connection to your Lab VM. If you are already co
 
 ### Task 2: Grant permissions to Docker
 
-In this task, you will grant permissions to the demouser account to access the Unix socket needed to communicate with the Docker engine.
+In this task, you will grant permissions to the _demouser_ account to access the Unix socket needed to communicate with the Docker engine.
 
 1. On your Lab VM, open a **Bash** shell by selecting the Start menu and then expanding Debian, Applications, and Shells.
 
@@ -214,7 +214,7 @@ In this task, you will install the GitHub extension in VS Code and configure a s
 
 6. Within your GitHub account, select **your user profile icon** in the top right, then select **Settings** from the menu.
 
-    ![The user profile icon is highlighted at the top left of the GitHub account page, and Settings is highlighted in the submenu.](media/github-profile-settings.png "Select your account settings")
+    ![The user profile icon is highlighted at the top left of the GitHub account page, and Settings is highlighted in the sub-menu.](media/github-profile-settings.png "Select your account settings")
 
 7. On the Settings screen, select **Developer settings** at the bottom of the Personal settings menu on the left-hand side of the screen.
 
@@ -234,7 +234,7 @@ In this task, you will install the GitHub extension in VS Code and configure a s
 
 11. Select **Generate token** near the bottom of the screen.
 
-    ![Generate token button](media/github-generate-token.png "Generate token button")
+    ![The Generate token button is displayed.](media/github-generate-token.png "Generate token button")
 
 12. Select the **copy** button next to the token that is generated.
 
@@ -250,7 +250,7 @@ In this task, you will install the GitHub extension in VS Code and configure a s
 
 15. In the box that appears at the top center of the VS Code window, enter "Set Personal Access Token," then select **GitHub: Set Personal Access Token**, when it appears.
 
-    ![GitHub: Set Personal Access Token is highlighted below Set Personal.](media/vscode-command-palette-set-personal-access-token.png "Select GitHub: Set Personal Access Token")
+    ![The VS Code command palette displays Set Personal text in the textbox and the GitHub: Set Personal Access Token item is selected in the suggested commands list.](media/vscode-command-palette-set-personal-access-token.png "Select GitHub: Set Personal Access Token")
 
 16. Paste the Personal access token you copied from GitHub into the box and press **Enter**.
 
@@ -527,13 +527,13 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 12. Repeat step 8 for the users and orders collections, replacing the `<your_collection>` values with:
 
-    - users
+    - users:
 
     ```bash
     mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection users --ssl --sslAllowInvalidCertificates --type json --file users.json
     ```
 
-    - orders
+    - orders:
 
     ```bash
     mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection orders --ssl --sslAllowInvalidCertificates --type json --file orders.json
@@ -625,7 +625,7 @@ In this task, you use VS Code and the Docker extension to add the necessary file
 
 3. Enter "add docker" into the Command Palette and select **Docker: Add docker files to workspace**.
 
-    ![Docker: Add docker files to workspace is selected under add docker in the Command Palette.](media/vscode-command-palette-add-docker.png "Select Docker: Add docker files to workspace")
+    ![Docker: Add docker files to workspace is selected under add docker that is entered in the Command Palette.](media/vscode-command-palette-add-docker.png "Select Docker: Add docker files to workspace")
 
 4. At the **Select Application Platform** prompt, select **Node.js**.
 
@@ -711,7 +711,7 @@ In this task, you run the app from the container you built in the previous task.
 
 3. Verify the web app and container are functioning by opening a browser window and navigating to <http://localhost:3000>.
 
-    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the web app, and localhost:3000/ is highlighted.](media/bfyo-web-home.png "View the web app")
+    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the web app.](media/bfyo-web-home.png "View the web app")
 
 4. In the Integrated terminal of VS Code, for the interactive session, press **CTRL+C** to stop the container.
 
@@ -1516,8 +1516,8 @@ This uses an Azure Storage Queue trigger, and an input dataset from Cosmos DB, p
 
 4. On the **Queue trigger New Function** dialog, enter the following:
 
-    - **Name:** Enter ProcessOrders.
-    - **Queue name:** orderqueue
+    - **Name:** Enter `ProcessOrders`.
+    - **Queue name:** Enter `orderqueue`.
     - **Storage account connection:** Select **AzureWebJobsStorage**.
     - Select **Create**.
 
@@ -1533,8 +1533,8 @@ This uses an Azure Storage Queue trigger, and an input dataset from Cosmos DB, p
 
 7. For the **Azure Queue Storage output**, enter the following:
 
-    - **Message parameter name**: "outputQueue"
-    - **Queue name:** "notificationqueue" (all lowercase, as casing matters)
+    - **Message parameter name**: Enter `outputQueue`
+    - **Queue name:** Enter `notificationqueue` (all lowercase, as casing matters)
     - **Storage account collection:** Select **AzureWebJobsStorage** from the list.
     - Select **Save**.
 
@@ -1611,8 +1611,8 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
     **Account details**:
 
-    - **Name**: Enter **bfyoemail**.
-    - **Password**: Enter **Password.1!!**
+    - **Name**: Enter `bfyoemail`.
+    - **Password**: Enter `Password.1!!`.
     - **Pricing tier**: Select the **Free** plan.
 
     **Contact details**:
@@ -1641,7 +1641,7 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
 10. On the Create API Key page, enter the following:
 
-    - **API Key Name**: Enter **bfyo-api-key**.
+    - **API Key Name**: Enter `bfyo-api-key`.
     - **API Key Permissions**: Select **Full Access**.
     - Select **Create & View**.
 
@@ -1723,7 +1723,7 @@ In this task, you create a new Logic App, which uses the SendGrid connector to s
 
 17. In the **SendGrid** box, enter the following:
 
-    - **Connection Name**: Enter **bfyo-sendgrid**.
+    - **Connection Name**: Enter `bfyo-sendgrid`.
     - **SendGrid Api Key**: Return to the **API Key Created** screen in your SendGrid account, and then copy and paste the API key you generated.
     - Select **Create**.
 

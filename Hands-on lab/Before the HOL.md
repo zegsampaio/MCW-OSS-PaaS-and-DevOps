@@ -22,7 +22,7 @@ The names of manufacturers, products, or URLs are provided for informational pur
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
-**Contents**
+### Contents
 
 <!-- TOC -->
 
@@ -48,11 +48,11 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 1. Microsoft Azure subscription must be pay-as-you-go or MSDN.
    - Trial subscriptions will *not* work.
 2. Linux virtual machine configured with:
-   - Visual Studio Code
-   - Azure CLI
-   - Docker
-   - Node.js and npm
-   - MongoDB Community Edition
+   - Visual Studio Code.
+   - Azure CLI.
+   - Docker.
+   - Node.js and npm.
+   - MongoDB Community Edition.
 
 ## Before the hands-on lab
 
@@ -72,7 +72,7 @@ In this task, you create an Azure resource group for the resources used througho
 
 2. On the Resource groups blade, select **+Add**.
 
-    ![+Add is highlighted in the toolbar on Resource groups blade.t](media/resource-groups-add.png "Resource groups")
+    ![+Add is highlighted in the toolbar on Resource groups blade.](media/resource-groups-add.png "Resource groups")
 
 3. On the Create a resource group **Basics** tab, enter the following:
 
@@ -133,7 +133,7 @@ In this task, you provision an Azure Linux VM, which will serve as your Jenkins 
     - **Region:** Select the region you are using for resources in this hands-on lab.
     - **Name:** Enter **jenkins**.
     - **User name:** Enter **jenkinsadmin**.
-    - **Authentication type:** Select **Password**
+    - **Authentication type:** Select **Password**.
     - **Password:** Enter **Password.1!!**
 
     ![The Create Jenkins Basic tab is displayed, and the information above is entered into the form.](media/create-jenkins-basics.png "Configure settings on the Create Jenkins Basics blade")
