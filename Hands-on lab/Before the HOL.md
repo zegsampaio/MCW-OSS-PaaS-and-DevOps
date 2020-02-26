@@ -22,7 +22,7 @@ The names of manufacturers, products, or URLs are provided for informational pur
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
-### Contents
+**Contents**
 
 <!-- TOC -->
 
@@ -48,11 +48,11 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 1. Microsoft Azure subscription must be pay-as-you-go or MSDN.
    - Trial subscriptions will *not* work.
 2. Linux virtual machine configured with:
-   - Visual Studio Code.
-   - Azure CLI.
-   - Docker.
-   - Node.js and npm.
-   - MongoDB Community Edition.
+   - Visual Studio Code
+   - Azure CLI
+   - Docker
+   - Node.js and npm
+   - MongoDB Community Edition
 
 ## Before the hands-on lab
 
