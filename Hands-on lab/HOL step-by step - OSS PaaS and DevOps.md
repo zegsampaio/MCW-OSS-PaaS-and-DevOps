@@ -106,11 +106,11 @@ In this hands-on lab, you will assist them with completing the OSS application a
 1. Microsoft Azure subscription must be pay-as-you-go or MSDN.
     - Trial subscriptions will *not* work.
 2. Linux virtual machine configured with:
-    - Visual Studio Code.
-    - Azure CLI.
-    - Docker.
-    - Node.js and npm.
-    - MongoDB Community Edition.
+    - Visual Studio Code
+    - Azure CLI
+    - Docker
+    - Node.js and npm
+    - MongoDB Community Edition
 
 ## Exercise 1: Run starter application
 
@@ -384,11 +384,11 @@ In this task, you create the collections needed for your database migration and 
 
 3. In the **Add Collection** dialog, enter the following:
 
-    - **Database id**: Choose **Create new**, and enter **best-for-you-organics**.
+    - **Database id**: Choose **Create new**, and enter **best-for-you-organics**
     - **Provision database throughput**: Uncheck this box.
-    - **Collection id**: Enter **orders**.
+    - **Collection id**: Enter **orders**
     - **Storage capacity**: Select **Fixed (10 GB)**.
-    - **Throughput**: Enter **2500**.
+    - **Throughput**: Enter **2500**
     - Select **OK** to create the collection.
 
     ![The information above is entered in the Add Collection dialog box.](media/cosmos-db-new-collection-orders.png "Add Collection")
@@ -400,9 +400,9 @@ In this task, you create the collections needed for your database migration and 
 5. On the Add Collection dialog, enter the following:
 
     - **Database id**: Select **Use existing** and select the **best-for-you-organics** database from the list.
-    - **Collection id**: Enter **users**.
+    - **Collection id**: Enter **users**
     - **Storage capacity**: Select **Fixed (10 GB)**.
-    - **Throughput**: Enter **2500**.
+    - **Throughput**: Enter **2500**
     - Select **OK** to create the collection.
 
     ![The information for the users collection above is entered into the Add Collection dialog.](media/cosmos-db-new-collection-users.png "Add Collection")
@@ -506,7 +506,7 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
     - `<your_hostname>`: Copy and paste the **Host** value from your **Cosmos DB Connection String** blade.
     - `<your_username>`: Copy and paste the **Username** value from your **Cosmos DB Connection String** blade.
     - `<your_password>`: Copy and paste the **Primary Password** value from your **Cosmos DB Connection** **String** blade.
-    - `<your_database>`: Enter "best-for-you-organics".
+    - `<your_database>`: Enter "best-for-you-organics"
     - `<your_collection>`: Enter "plans" (Note there are two instances of `<your-collection>` in the template command).
 
 9. Your final command should look something like:
@@ -1010,10 +1010,10 @@ In this task, you create an SSH tunnel to the Jenkins server and configure it fo
 
 14. On the Create First Admin User screen, enter the following:
 
-    - **Username**: Enter **jenkins**.
+    - **Username**: Enter **jenkins**
     - **Password**: Password.1!!
     - **Confirm Password**: Password.1!!
-    - **Full name**: Enter **jenkins**.
+    - **Full name**: Enter **jenkins**
     - **E-mail address**: Enter your email address.
     - Select **Save and Continue**.
 
@@ -1377,7 +1377,7 @@ In this task, you create a function that function sends all new orders to a queu
 
 4. In the **Timer trigger** dialog, enter the following:
 
-    - **Name**: Enter "OrdersTimerTrigger".
+    - **Name**: Enter "OrdersTimerTrigger"
     - **Schedule**: Leave the default value, `0 */5 * * * *`. This will execute the trigger every 5 minutes.
     - Select **Create**.
 
@@ -1516,8 +1516,8 @@ This uses an Azure Storage Queue trigger, and an input dataset from Cosmos DB, p
 
 4. On the **Queue trigger New Function** dialog, enter the following:
 
-    - **Name:** Enter `ProcessOrders`.
-    - **Queue name:** Enter `orderqueue`.
+    - **Name:** Enter `ProcessOrders`
+    - **Queue name:** Enter `orderqueue`
     - **Storage account connection:** Select **AzureWebJobsStorage**.
     - Select **Create**.
 
@@ -1611,8 +1611,8 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
     **Account details**:
 
-    - **Name**: Enter `bfyoemail`.
-    - **Password**: Enter `Password.1!!`.
+    - **Name**: Enter `bfyoemail`
+    - **Password**: Enter `Password.1!!`
     - **Pricing tier**: Select the **Free** plan.
 
     **Contact details**:
@@ -1641,7 +1641,7 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
 10. On the Create API Key page, enter the following:
 
-    - **API Key Name**: Enter `bfyo-api-key`.
+    - **API Key Name**: Enter `bfyo-api-key`
     - **API Key Permissions**: Select **Full Access**.
     - Select **Create & View**.
 
@@ -1723,7 +1723,7 @@ In this task, you create a new Logic App, which uses the SendGrid connector to s
 
 17. In the **SendGrid** box, enter the following:
 
-    - **Connection Name**: Enter `bfyo-sendgrid`.
+    - **Connection Name**: Enter `bfyo-sendgrid`
     - **SendGrid Api Key**: Return to the **API Key Created** screen in your SendGrid account, and then copy and paste the API key you generated.
     - Select **Create**.
 

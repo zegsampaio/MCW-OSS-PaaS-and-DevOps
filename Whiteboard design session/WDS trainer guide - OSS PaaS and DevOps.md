@@ -576,13 +576,13 @@ After reviewing the available options for transitioning their applications to a 
 
     Azure Search Features:
 
-    - Powerful, reliable performance
-    - Connect business goals to the application
-    - Scale-out easily
-    - Sophisticated search functionality
-    - Fast time to market
-    - Simplify search index management
-    - AI-enabled enrichments
+    - Powerful, reliable performance.
+    - Connect business goals to the application.
+    - Scale-out easily.
+    - Sophisticated search functionality.
+    - Fast time to market.
+    - Simplify search index management.
+    - AI-enabled enrichments.
 
 6. We no longer want to maintain VMs for running our MongoDB database. Does Azure offer a solution that will allow us to continue using the MongoDB APIs while benefiting from the scalability and reliability of a PaaS database platform?
 

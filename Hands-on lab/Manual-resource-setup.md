@@ -39,7 +39,7 @@ In this task, you will provision a Linux virtual machine (VM) running Ubuntu Ser
 
     **Instance Details**:
 
-    - **Virtual machine name:** Enter **LabVM**.
+    - **Virtual machine name:** Enter **LabVM**
     - **Region:** Select the region you are using for this hands-on lab.
     - **Availability options**: Select **No infrastructure redundancy required**.
     - **Image**: Select **Ubuntu Server 16.04 LTS**.
@@ -132,7 +132,7 @@ In this task, you create a firewall rule for the LabVM to open port 3389 and all
     - **Service**: Select RDP.
     - **Port ranges**: 3389 will be entered by the Service selection.
     - **Priority**: Accept the default priority value (310).
-    - **Name**: Enter RDP.
+    - **Name**: Enter RDP
 
     ![The settings specified above to create a basic RDP rule are entered into the Add inbound security rule dialog.](media/labvm-add-inbound-rule-rdp.png "Add inbound security rule")
 

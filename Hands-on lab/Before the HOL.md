@@ -131,8 +131,8 @@ In this task, you provision an Azure Linux VM, which will serve as your Jenkins 
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource group:** Select the hands-on-lab-SUFFIX resource group from the list.
     - **Region:** Select the region you are using for resources in this hands-on lab.
-    - **Name:** Enter **jenkins**.
-    - **User name:** Enter **jenkinsadmin**.
+    - **Name:** Enter **jenkins**
+    - **User name:** Enter **jenkinsadmin**
     - **Authentication type:** Select **Password**.
     - **Password:** Enter **Password.1!!**
 
@@ -145,7 +145,7 @@ In this task, you provision an Azure Linux VM, which will serve as your Jenkins 
     - **Virtual network**: Accept the default value of **(new) jenkins-vnet**.
     - **Subnet**: Accept the default value of **(new) jenkins (10.x.0.0/24)**.
     - **Public IP address**: Accept the default value of **(new) jenkins-pip**.
-    - **Domain name label**: Enter a globally unique value, such as **jenkins-SUFFIX**.
+    - **Domain name label**: Enter a globally unique value, such as **jenkins-SUFFIX**
     - **Jenkins release type**: Select **LTS**.
     - **JDK Type**: Select **Zulu**.
 
@@ -213,7 +213,7 @@ In this task, you create a private Docker registry in the Azure portal, so you h
 
 3. On the **Create container registry** blade, enter the following:
 
-    - **Registry name:** Enter "bestforyouregistrySUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green checkmark).
+    - **Registry name:** Enter "bestforyouregistrySUFFIX", where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green checkmark).
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource group:** Select the **hands-on-lab-SUFFIX** resource group created previously.
     - **Location:** Select the location you are using for resources in this hands-on lab.
@@ -291,7 +291,7 @@ In this task, you create a new Logic App, which will use a SendGrid connector to
 
     **Instance details**:
 
-    - **Name:** Enter "OrderNotifications".
+    - **Name:** Enter "OrderNotifications"
     - **Select the location**: Choose Region.
     - **Location:** Select the location you have been using for resources in this hands-on lab.
     - **Log Analytics**: Select Off.
