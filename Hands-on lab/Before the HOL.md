@@ -184,7 +184,7 @@ In this task, you provision a new Azure Cosmos DB account using the MongoDB API.
 
     **INSTANCE DETAILS**:
 
-    - **Account Name**: Enter `best-for-you-db-SUFFIX`, where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
+    - **Account Name**: Enter `best-for-you-db-SUFFIX`, where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green checkmark).
     - **API:** Select **Azure Cosmos DB for MongoDB API**.
     - **Location:** Select a location near you from the list (Note: not all locations are available for Cosmos DB).
     - **Version**: Accept the default version.
