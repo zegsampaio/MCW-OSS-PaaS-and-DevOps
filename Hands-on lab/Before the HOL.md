@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-November 2019
+February 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2019 Microsoft Corporation. All rights reserved.
+© 2020 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -29,7 +29,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 - [OSS PaaS and DevOps before the hands-on lab setup guide](#oss-paas-and-devops-before-the-hands-on-lab-setup-guide)
   - [Requirements](#requirements)
   - [Before the hands-on lab](#before-the-hands-on-lab)
-    - [Task 1: Provision a resource group](#task-1-provision-a-resource-group)
+    - [Task 1: Create a resource group](#task-1-create-a-resource-group)
     - [Task 2: Create a development virtual machine](#task-2-create-a-development-virtual-machine)
     - [Task 3: Provision a Jenkins server](#task-3-provision-a-jenkins-server)
     - [Task 4: Provision Cosmos DB using the MongoDB API](#task-4-provision-cosmos-db-using-the-mongodb-api)
@@ -60,9 +60,9 @@ Duration: 30 minutes
 
 In this exercise, you set up the Azure environment for use throughout the rest of the hands-on lab. You should follow all steps provided *before* attending the Hands-on lab.
 
-> **IMPORTANT**: Many Azure resources require unique names. Throughout these steps, you will see the word "SUFFIX" as part of resource names. You should replace this with your Microsoft alias, initials, or another value to ensure the resource is uniquely named.
+> **IMPORTANT**: Many Azure resources require globally unique names. Throughout these steps, you will see the word "SUFFIX" as part of resource names. You should replace this with your Microsoft alias, initials, or another value to ensure the resource is uniquely named.
 
-### Task 1: Provision a resource group
+### Task 1: Create a resource group
 
 In this task, you create an Azure resource group for the resources used throughout this lab.
 
@@ -72,7 +72,7 @@ In this task, you create an Azure resource group for the resources used througho
 
 2. On the Resource groups blade, select **+Add**.
 
-    ![+Add is highlighted in the toolbar on Resource groups blade.t](media/resource-groups-add.png "Resource groups")
+    ![+Add is highlighted in the toolbar on Resource groups blade.](media/resource-groups-add.png "Resource groups")
 
 3. On the Create a resource group **Basics** tab, enter the following:
 
@@ -88,9 +88,9 @@ In this task, you create an Azure resource group for the resources used througho
 
 ### Task 2: Create a development virtual machine
 
-In this task, you provision a Linux virtual machine (VM) running Ubuntu Server 16.04 LTS, which is used as your development machine throughout this lab. The VM is created using an Azure Resource Manager (ARM) template from a GitHub repository. The ARM template includes a custom extension script that installs Docker, Visual Studio Code (VS Code), MongoDB, and other required software on the VM. The ARM template also adds an inbound port rule that opens port 3389 on the network security group for the VM to allow RDP connections.
+In this task, you provision a Linux virtual machine (VM) running Ubuntu Server 16.04 LTS, which serves as your development machine throughout this lab. The VM is created using an Azure Resource Manager (ARM) template from a GitHub repository. The ARM template includes a custom extension script that installs Docker, Visual Studio Code (VS Code), MongoDB, and other required software on the VM. The ARM template also adds an inbound port rule that opens port 3389 on the network security group for the VM to allow RDP connections.
 
-> If you would like to review the steps to manually provision the VM and installed software, see [Appendix A](./Appendix-A.md).
+> If you would like to review the steps to provision the VM manually and install the required software, see the [Manual resource setup guide](./Manual-resource-setup.md).
 
 1. To open a custom deployment screen in the Azure portal, select the Deploy to Azure button below:
 
@@ -108,7 +108,7 @@ In this task, you provision a Linux virtual machine (VM) running Ubuntu Server 1
     - **Admin Password**: Accept the default value, Password.1!!
     - Check the box to agree to the Azure Marketplace terms and conditions.
 
-    ![The Custom deployment blade is display, and the information above is entered into it.](media/azure-custom-deployment.png "Custom deployment blade")
+    ![The Custom deployment blade is displayed, and the information above is entered into it.](media/azure-custom-deployment.png "Custom deployment blade")
 
 3. Select **Purchase**.
 
@@ -131,9 +131,9 @@ In this task, you provision an Azure Linux VM, which will serve as your Jenkins 
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource group:** Select the hands-on-lab-SUFFIX resource group from the list.
     - **Region:** Select the region you are using for resources in this hands-on lab.
-    - **Name:** Enter **Jenkins**.
-    - **User name:** Enter **jenkinsadmin**.
-    - **Authentication type:** Select **Password**
+    - **Name:** Enter **jenkins**
+    - **User name:** Enter **jenkinsadmin**
+    - **Authentication type:** Select **Password**.
     - **Password:** Enter **Password.1!!**
 
     ![The Create Jenkins Basic tab is displayed, and the information above is entered into the form.](media/create-jenkins-basics.png "Configure settings on the Create Jenkins Basics blade")
@@ -145,7 +145,7 @@ In this task, you provision an Azure Linux VM, which will serve as your Jenkins 
     - **Virtual network**: Accept the default value of **(new) jenkins-vnet**.
     - **Subnet**: Accept the default value of **(new) jenkins (10.x.0.0/24)**.
     - **Public IP address**: Accept the default value of **(new) jenkins-pip**.
-    - **Domain name label**: Enter a globally unique value, such as **jenkins-SUFFIX**.
+    - **Domain name label**: Enter a globally unique value, such as **jenkins-SUFFIX**
     - **Jenkins release type**: Select **LTS**.
     - **JDK Type**: Select **Zulu**.
 
@@ -184,7 +184,7 @@ In this task, you provision a new Azure Cosmos DB account using the MongoDB API.
 
     **INSTANCE DETAILS**:
 
-    - **Account Name**: Enter `best-for-you-db-SUFFIX`, where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
+    - **Account Name**: Enter `best-for-you-db-SUFFIX`, where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green checkmark).
     - **API:** Select **Azure Cosmos DB for MongoDB API**.
     - **Location:** Select a location near you from the list (Note: not all locations are available for Cosmos DB).
     - **Version**: Accept the default version.
@@ -197,6 +197,8 @@ In this task, you provision a new Azure Cosmos DB account using the MongoDB API.
 
 5. Ensure the **Validation Success** message is displayed, and then select **Create** to provision the new Azure Cosmos DB.
 
+6. It takes about 10 minutes for the new Cosmos DB account to be created. You can move on to the next task while you wait.
+
 ### Task 5: Create an Azure Container Registry
 
 In this task, you create a private Docker registry in the Azure portal, so you have a place to store the custom Docker image you will create during the hands-on lab.
@@ -207,11 +209,11 @@ In this task, you create a private Docker registry in the Azure portal, so you h
 
 2. Enter "container registry" into the Search the Marketplace box, select **Container Registry** from the results, and then select **Create**.
 
-    ![Container registry is entered into the search box and Container Registry is selected and highlighted in the search results.](media/create-container-registry-resource.png "Azure Portal")
+    ![Container registry is entered into the search box, and Container Registry is selected and highlighted in the search results.](media/create-container-registry-resource.png "Azure Portal")
 
 3. On the **Create container registry** blade, enter the following:
 
-    - **Registry name:** Enter "bestforyouregistrySUFFIX," where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green check mark).
+    - **Registry name:** Enter "bestforyouregistrySUFFIX", where SUFFIX is your Microsoft alias, initials, or another value to ensure the name is unique (indicated by a green checkmark).
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource group:** Select the **hands-on-lab-SUFFIX** resource group created previously.
     - **Location:** Select the location you are using for resources in this hands-on lab.
@@ -230,7 +232,7 @@ In this task, you create a Function App in Azure to host your Functions.
 
     ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
 
-2. Enter "function app" in to the **Search the marketplace** box, and select **Function App** from the results.
+2. Enter "function app" into the **Search the marketplace** box and select **Function App** from the results.
 
     ![Function app is highlighted in the search box, and the Function App row is highlighted in the results below that.](media/create-resource-function-app.png "Azure Portal")
 
@@ -238,8 +240,13 @@ In this task, you create a Function App in Azure to host your Functions.
 
 4. On the **Create Function App** blade, enter the following:
 
+    **Project details**:
+
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource group:** Choose **Create new** and enter **hands-on-lab-func-SUFFIX** as resource group name.
+
+    **Instance details**:
+
     - **Function App name:** Enter a unique name, such as "bestforyouordersSUFFIX".
     - **Publish:** Select Code.
     - **Runtime Stack** Select Node.js.
@@ -277,13 +284,23 @@ In this task, you create a new Logic App, which will use a SendGrid connector to
 
 3. In the **Create logic app** blade, enter the following:
 
-    - **Name:** Enter "OrderNotifications".
+    **Project details**:
+
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource group:** Select **Use existing** and choose the **hands-on-lab-SUFFIX** resource group.
-    - **Location:** Select the location you have been using for resources in this hands-on lab.
-    - Select **Create** to provision the new Logic App.
 
-    ![The information above is entered on the Create logic app blade.](media/logic-app-create.png "Logic App blade")
+    **Instance details**:
+
+    - **Name:** Enter "OrderNotifications"
+    - **Select the location**: Choose Region.
+    - **Location:** Select the location you have been using for resources in this hands-on lab.
+    - **Log Analytics**: Select Off.
+
+    ![The information above is entered on the Create logic app blade.](media/logic-app-create-basics-tab.png "Logic App blade")
+
+4. Select **Review + create**.
+
+5. Select **Create** on the Review + create tab.
 
 ### Task 8: Create a GitHub account
 

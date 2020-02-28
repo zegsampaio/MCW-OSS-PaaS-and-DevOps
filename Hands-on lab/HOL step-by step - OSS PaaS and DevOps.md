@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-November 2019
+February 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2019 Microsoft Corporation. All rights reserved.
+© 2020 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -43,16 +43,16 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 5: Decrease collection throughput](#task-5-decrease-collection-throughput)
   - [Exercise 3: Containerize the app](#exercise-3-containerize-the-app)
     - [Task 1: Install Docker extension in VS Code](#task-1-install-docker-extension-in-vs-code)
-    - [Task 2: Create Docker image and run the app](#task-2-create-docker-image-and-run-the-app)
+    - [Task 2: Create a Docker image and run the app](#task-2-create-a-docker-image-and-run-the-app)
     - [Task 3: Run the containerized app](#task-3-run-the-containerized-app)
-    - [Task 4: Push image to Azure Container Registry](#task-4-push-image-to-azure-container-registry)
+    - [Task 4: Push the image to Azure Container Registry](#task-4-push-the-image-to-azure-container-registry)
   - [Exercise 4: Set up Web App for Containers](#exercise-4-set-up-web-app-for-containers)
     - [Task 1: Provision Web App for Containers](#task-1-provision-web-app-for-containers)
     - [Task 2: Navigate to the deployed app](#task-2-navigate-to-the-deployed-app)
   - [Exercise 5: Configure CI/CD pipeline](#exercise-5-configure-cicd-pipeline)
     - [Task 1: Enable Continuous Deployment on Web App](#task-1-enable-continuous-deployment-on-web-app)
     - [Task 2: Prepare GitHub account for service integrations](#task-2-prepare-github-account-for-service-integrations)
-    - [Task 3: Open connection to Jenkins](#task-3-open-connection-to-jenkins)
+    - [Task 3: Open a connection to Jenkins](#task-3-open-a-connection-to-jenkins)
     - [Task 4: Configure Continuous Integration with Jenkins](#task-4-configure-continuous-integration-with-jenkins)
     - [Task 5: Trigger CI build](#task-5-trigger-ci-build)
     - [Task 6: Install Docker on the Jenkins VM](#task-6-install-docker-on-the-jenkins-vm)
@@ -60,11 +60,11 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 8: Trigger CI-CD pipeline](#task-8-trigger-ci-cd-pipeline)
   - [Exercise 6: Create Azure Functions for order processing](#exercise-6-create-azure-functions-for-order-processing)
     - [Task 1: Configure storage queues](#task-1-configure-storage-queues)
-    - [Task 2: Create timer triggered function](#task-2-create-timer-triggered-function)
+    - [Task 2: Create a timer triggered function](#task-2-create-a-timer-triggered-function)
     - [Task 3: Create Queue function](#task-3-create-queue-function)
   - [Exercise 7: Create Logic App for sending email notifications](#exercise-7-create-logic-app-for-sending-email-notifications)
-    - [Task 1: Create SendGrid account](#task-1-create-sendgrid-account)
-    - [Task 2: Create Logic App](#task-2-create-logic-app)
+    - [Task 1: Create a SendGrid account](#task-1-create-a-sendgrid-account)
+    - [Task 2: Create a Logic App](#task-2-create-a-logic-app)
   - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Delete Azure resource groups](#task-1-delete-azure-resource-groups)
     - [Task 2: Delete WebHooks and Service Integrations](#task-2-delete-webhooks-and-service-integrations)
@@ -79,9 +79,9 @@ At the end of this hands-on lab, you will be better able to migrate and deploy O
 
 ## Overview
 
-Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service targets working professionals looking for convenient, reliable access to healthy meal choices, and pre-packaged recipes without having to spend too much time preparing the meals.
+Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service caters to working professionals looking for convenient, reliable access to healthy meal choices, and pre-packaged recipes without having to spend too much time preparing the meals.
 
-Their CIO is a big proponent of open-source software, and the development of their web application was done using the MERN stack (MongoDB, Express.js, React.JS, Node.js). They host their code in a private GitHub repository. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
+Their CIO is a big proponent of open-source software, and their web application uses the MERN stack (MongoDB, Express.js, React.JS, Node.js). They host their code in a private GitHub repository. They currently have a continuous integration workflow, triggered by each code check-in/commit in GitHub, using Jenkins.
 
 As their service has grown, they have found that the management of VM and server infrastructure is a real challenge. They want to learn more about how Platform as a Service (PaaS) solutions for OSS applications on Azure might be able to help. Their goal is to focus their expenditures and efforts on their core business, rather than infrastructure. The development team at Best For You Organics has indicated they have some experience with Docker. They are interested in what options might be available for using containers to deploy their application into a cloud environment. They are also interested in learning more about identity management.
 
@@ -91,19 +91,19 @@ The development team has also expressed that they would like to continue using G
 
 Below is a diagram of the solution architecture you will build in this lab. Please study this carefully, so you understand the whole of the solution as you are working on the various components.
 
-![This diagram consists of icons that are connected by arrows. On the left, the Developer icon (VS Code) points linearly to the GitHub Repo and Jenkins icons. The previous two icons are enclosed in a box labeled CI/CD Pipeline. Jenkins points to Web App for Containers on the right. Various arrows point from Web App for Container to: Azure Container Registry (a double-sided arrow); Logic Apps (a linear arrow that also points from Logic Apps to Customers); Customers (a linear arrow); and Azure Cosmos DB (a double-sided arrow that also points from Azure Cosmos DB to Azure Functions with another double-sided arrow).](media/solution-architecture-diagram.png "Solution architecture diagram")
+![This diagram consists of icons that are connected by arrows. On the left, the Developer icon (VS Code) points linearly to the GitHub Repo and Jenkins icons. The previous two icons are enclosed in a box labeled CI/CD Pipeline. Jenkins points to Web App for Containers on the right. Various arrows point from Web App for Containers to Azure Container Registry (a double-sided arrow); Logic Apps (a linear arrow that also points from Logic Apps to Customers); Customers (a linear arrow); and Azure Cosmos DB (a double-sided arrow that also points from Azure Cosmos DB to Azure Functions with another double-sided arrow).](media/solution-architecture-diagram.png "Solution architecture diagram")
 
 The solution begins with developers using Visual Studio Code (VS Code) as their code editor. In VS Code, they can leverage rich integrations with GitHub, Docker, and Azure. From a high level, developers will package the entire OSS application inside a custom Docker container using the Docker extension in VS Code. The image will be pushed to an Azure Container Registry as part of a continuous integration/continuous delivery (CI/CD) pipeline using GitHub and Jenkins. This Docker image will then be deployed to a Web App for Containers instance, as part of their continuous delivery process using The Azure App Service Jenkins plugin.
 
 The MongoDB database will be imported into Azure Cosmos DB, using mongoimport.exe, and access the database from the application will continue to use the MongoDB APIs. The database connection string in the application will be updated to point to the new Cosmos DB.
 
-A serverless architecture will be applied to order processing and customer notifications. Azure Functions will be used to automate the processing of orders. Logic Apps will be applied to send SMS notifications via a Twilio connector to customers informing them that their order has been processed and shipped.
+Serverless architecture is applied to order processing and customer notifications. Azure Functions are used to automate the processing of orders, billing credit cards, and updating the database as order processing is completed. Logic Apps are applied to send SMS notifications via a Twilio connector to customers, informing them that their order has been processed and shipped.
 
 In this hands-on lab, you will assist them with completing the OSS application and database migrations into Azure. You will implement a containerized solution. For this, you will create a custom Docker image and push it to an Azure Container Registry. You will then configure a CI/CD pipeline to deploy the application to a Web App for Containers instance. You will also help them implement functionality enhancements using serverless architecture services in Azure.
 
 ## Requirements
 
-1. Microsoft Azure subscription must be pay-as-you-go or MSDN
+1. Microsoft Azure subscription must be pay-as-you-go or MSDN.
     - Trial subscriptions will *not* work.
 2. Linux virtual machine configured with:
     - Visual Studio Code
@@ -122,46 +122,48 @@ In this exercise, you create a local copy of the starter application on your Lab
 
 In this task, you create an RDP connection to your Lab VM. If you are already connected, skip to [Task 2](#task-2-grant-permissions-to-docker).
 
-1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the Azure services list.
+1. In the [Azure portal](https://portal.azure.com) and select **Resource groups** from the Azure services list.
 
     ![Resource groups is highlighted in the Azure services list.](media/azure-services-resource-groups.png "Azure services")
 
-2. Select the **hands-on-lab-SUFFIX** resource group from the list.
+2. Select the hands-on-lab-SUFFIX resource group from the list.
 
-    ![Resource groups is highlighted in the navigation pane of the Azure portal. On the Resource groups blade, hands-on-lab is highlighted in the filter box, and hands-on-lab is highlighted in the search results.](media/azure-resource-groups.png "Azure Portal")
+    ![Resource groups is selected in the Azure navigation pane, and the "hands-on-lab-SUFFIX" resource group is highlighted.](./media/resource-groups.png "Resource groups list")
 
-    > **Tip**: If there are too many resource groups you can enter "hands-on-lab" into the filter box to reduce the resource groups displayed the list.
-
-3. Next, select **LabVM** from the list of available resources.
+3. Select **LabVM** from the list of available resources.
 
     ![LabVM is highlighted in the list of available resources.](media/rg-labvm.png "Select LabVM")
 
-4. On the **LabVM** blade, copy the Public IP address from the Essentials area on the Overview screen.
+4. On the **LabVM** Overview blade, select **Connect** from the toolbar and then select **RDP** from the drop-down menu.
 
-    ![Public IP address is highlighted in the top menu on the LabVM blade.](media/labvm-public-ip-address.png "LabVM blade")
+    ![Connect -> RDP is highlighted in the toolbar for the LabVM.](media/labvm-connect-rdp.png "LabVM toolbar")
 
-5. Open a Remote Desktop Client (RDP) application and enter or paste the Public IP address of your Lab VM into the computer name field.
+5. On the Connect with RDP screen, select **Download RDP File**.
 
-6. Select **Connect** on the Remote Desktop Connection dialog.
+    ![The Download RDP File button is highlighted on the Connect with RDP dialog.](media/labvm-connect-with-rdp.png "Connect with RDP")
 
-7. Select **Yes** to connect, if prompted that the identity of the remote computer cannot be verified.
+6. Open the download file to launch a Remote Desktop Client (RDP) application.
+
+7. Select **Connect** on the Remote Desktop Connection dialog.
+
+8. Select **Yes** to connect, if prompted that the identity of the remote computer cannot be verified.
 
     ![This is a screenshot of the Remote Desktop Connection prompt about connecting to the remote despite the identity of the remote computer being unverified. Yes is selected.](media/remote-desktop-connection.png "Remote Desktop Connection dialog box")
 
-8. Enter the following credentials (or the non-default credentials if you changed them):
+9. Enter the following credentials (or the non-default credentials if you changed them):
 
     - **Username:** demouser
     - **Password:** Password.1!!
 
     ![The credentials above are entered in the Login to xrdp dialog box.](media/login-to-xrdp.png "Login to xrdp dialog box")
 
-9. Select **OK** to log into the Lab VM.
+10. Select **OK** to log into the Lab VM.
 
 ### Task 2: Grant permissions to Docker
 
-In this task, you will grant permissions to the demouser account to access the Unix socket needed to communicate with the Docker engine.
+In this task, you will grant permissions to the _demouser_ account to access the Unix socket needed to communicate with the Docker engine.
 
-1. On your Lab VM, open a **Bash** shell by selecting the Start menu, and then expanding Debian, Applications, and Shells.
+1. On your Lab VM, open a **Bash** shell by selecting the Start menu and then expanding Debian, Applications, and Shells.
 
     ![In the Lab VM start menu, Debian -> Applications -> Shells is expanded, and Bash is highlighted in the Shells menu.](media/labvm-menu-bash-shell.png "Start menu")
 
@@ -171,9 +173,18 @@ In this task, you will grant permissions to the demouser account to access the U
     sudo usermod -a -G docker $USER
     ```
 
-3. After running the command, you will need **completely log out of the Lab VM** and log back in (if in doubt, reboot).
+3. After running the command, reboot the Lab VM using the following command at the bash shell:
 
-4. After logging back in, run the following command to test that the demouser account has proper permissions:
+    ```bash
+    sudo reboot
+    ```
+
+4. Log back in using the same credentials:
+
+    - **Username:** demouser
+    - **Password:** Password.1!!
+
+5. After logging back in, relaunch the bash shell and run the following command to test that the demouser account has proper permissions:
 
     ```bash
     docker run hello-world
@@ -183,7 +194,7 @@ In this task, you will grant permissions to the demouser account to access the U
 
 ### Task 3: Integrate GitHub into VS Code
 
-In this task, you will install the GitHub extension in VS Code, and configure a service integration with your GitHub account. This integration will allow you to push your code changes to GitHub directly from VS Code.
+In this task, you will install the GitHub extension in VS Code and configure a service integration with your GitHub account. This integration will allow you to push your code changes to GitHub directly from VS Code.
 
 1. On your Lab VM, open **VS Code** under Programming on the Start menu.
 
@@ -203,7 +214,7 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
 6. Within your GitHub account, select **your user profile icon** in the top right, then select **Settings** from the menu.
 
-    ![The user profile icon is highlighted at the top left of the GitHub account page, and Settings is highlighted in the submenu.](media/github-profile-settings.png "Select your account settings")
+    ![The user profile icon is highlighted at the top left of the GitHub account page, and Settings is highlighted in the sub-menu.](media/github-profile-settings.png "Select your account settings")
 
 7. On the Settings screen, select **Developer settings** at the bottom of the Personal settings menu on the left-hand side of the screen.
 
@@ -219,11 +230,11 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
 10. Enter a token description, such as "VS Code Integration", and then check the box next to **repo** under **Select scopes**, which will select all the boxes under it.
 
-    ![On the New personal access token page, VS Code Integration is entered under Token description, and the check boxes next to and under repo are selected under Select scopes.](media/github-new-personal-access-token.png "Select the scopes")
+    ![On the New personal access token page, VS Code Integration is entered under Token description, and the checkboxes next to and under repo are selected under Select scopes.](media/github-new-personal-access-token.png "Select the scopes")
 
 11. Select **Generate token** near the bottom of the screen.
 
-    ![Generate token button](media/github-generate-token.png "Generate token button")
+    ![The Generate token button is displayed.](media/github-generate-token.png "Generate token button")
 
 12. Select the **copy** button next to the token that is generated.
 
@@ -239,9 +250,9 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
 15. In the box that appears at the top center of the VS Code window, enter "Set Personal Access Token," then select **GitHub: Set Personal Access Token**, when it appears.
 
-    ![GitHub: Set Personal Access Token is highlighted below Set Personal.](media/vscode-command-palette-set-personal-access-token.png "Select GitHub: Set Personal Access Token")
+    ![The VS Code command palette displays Set Personal text in the textbox and the GitHub: Set Personal Access Token item is selected in the suggested commands list.](media/vscode-command-palette-set-personal-access-token.png "Select GitHub: Set Personal Access Token")
 
-16. Paste the Personal access token you copied from GitHub into the box, and press **Enter**.
+16. Paste the Personal access token you copied from GitHub into the box and press **Enter**.
 
     ![The Personal access token is pasted in the box.](media/github-paste-personal-access-token.png "Paste the Personal access token")
 
@@ -253,7 +264,7 @@ In this task, you will install the GitHub extension in VS Code, and configure a 
 
 In this task, you will clone the starter application, creating a local copy on your Lab VM.
 
-1. On your Lab VM, open a browser, and navigate to your GitHub account (<https://github.com>).
+1. On your Lab VM, open a browser and navigate to your GitHub account (<https://github.com>).
 
 2. Within your GitHub account, navigate to the forked copy of the `MCW-OSS-PaaS-and-Devops` application page, select **Clone or download**, then select the **copy** link next to the web URL.
 
@@ -303,7 +314,7 @@ In this task, you will clone the starter application, creating a local copy on y
 
 ### Task 5: Launch the starter application
 
-In this task, you will seed the MongoDB with sample data, then run the application locally, connected to your MongoDB instance. This task is to verify the connection to MongoDB and that it contains the seeded plan data, before we migrate the application and data to Azure Cosmos DB.
+In this task, you will seed the MongoDB with sample data, then run the application locally, connected to your MongoDB instance. This task is to verify the connection to MongoDB and that it contains the seeded plan data before we migrate the application and data to Azure Cosmos DB.
 
 1. Return to VS Code, select **Terminal** from the menu, and select **New Terminal**.
 
@@ -365,7 +376,7 @@ In this task, you create the collections needed for your database migration and 
 
 > To learn more about RUs and throughput provisioning in Cosmos DB, read [Request Units in Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/request-units).
 
-1. Navigate to your Azure Cosmos DB account in the Azure portal by selecting **Resource groups** from the Azure home page, and then selecting the **best-for-you-db-SUFFIX** Cosmos DB resource from the list.
+1. Navigate to your Azure Cosmos DB account in the Azure portal by selecting **Resource groups** from the Azure home page, and then select the **best-for-you-db-SUFFIX** Cosmos DB resource from the list.
 
 2. On the Cosmos DB blade, select **Data Explorer** from the left-hand menu and then select **New Collection**.
 
@@ -373,29 +384,28 @@ In this task, you create the collections needed for your database migration and 
 
 3. In the **Add Collection** dialog, enter the following:
 
-    - **Database id**: Choose **Create new**, and enter **best-for-you-organics**.
+    - **Database id**: Choose **Create new**, and enter **best-for-you-organics**
     - **Provision database throughput**: Uncheck this box.
-    - **Collection Id**: Enter **orders**.
+    - **Collection id**: Enter **orders**
     - **Storage capacity**: Select **Fixed (10 GB)**.
-    - **Throughput**: Enter **2500**.
+    - **Throughput**: Enter **2500**
     - Select **OK** to create the collection.
 
     ![The information above is entered in the Add Collection dialog box.](media/cosmos-db-new-collection-orders.png "Add Collection")
 
-4. On the Collections blade, select **New Collection** to create another collection.
+4. On the Collections blade, select **New Collection** again to create another collection.
 
     ![The New Collection button is highlighted on the Cosmos DB Collections blade.](media/cosmos-db-new-collection.png "New Collection")
 
 5. On the Add Collection dialog, enter the following:
 
     - **Database id**: Select **Use existing** and select the **best-for-you-organics** database from the list.
-    - **Collection id**: Enter **users**.
-    - **Shared key**: Enter **_id**.
-    - **Provision dedicated throughput for this collection**: Check this box.
-    - **Throughput**: Enter **2500**.
+    - **Collection id**: Enter **users**
+    - **Storage capacity**: Select **Fixed (10 GB)**.
+    - **Throughput**: Enter **2500**
     - Select **OK** to create the collection.
 
-    ![The information for the users collections above is entered into the Add Collection dialog.](media/cosmos-db-new-collection-users.png "Add Collection")
+    ![The information for the users collection above is entered into the Add Collection dialog.](media/cosmos-db-new-collection-users.png "Add Collection")
 
 6. Repeat steps 4 and 5, this time entering **plans** as the collection name.
 
@@ -447,13 +457,13 @@ In this task, you will retrieve the connection string for your Azure Cosmos DB d
 
     ![This is a screenshot of the refreshed application page.](media/bfyo-web-home-empty.png "Refreshed application screenshot")
 
-    > **Note**: Notice the three plans that were displayed on the page previously are no longer there. This is because the application is now pointed to your Azure Cosmos DB, and the plans collection does not contain any data yet.
+    > **Note**: Notice the three plans that were displayed on the page previously are no longer there. The application is now pointing to your Azure Cosmos DB, and the plans collection does not contain any data yet.
 
-11. Let's move on to copying the data from the local MongoDB instance into Cosmos DB.
+11. Now, let's move on to copying the data from the local MongoDB instance into Cosmos DB.
 
 ### Task 3: Import data to the API for MongoDB using mongoimport
 
-In this task, you will use `mongoimport.exe` to import data to your Cosmos DB account. There is a shell script located in the `MCW-OSS-PaaS-and-DevOps` project which handles exporting the data out of your MongoDB into JSON files on the local file system. These files will be used for the import into Cosmos DB.
+In this task, you will use `mongoimport.exe` to import data to your Cosmos DB account. There is a shell script located in the `MCW-OSS-PaaS-and-DevOps` project, which handles exporting the data out of your MongoDB into JSON files on the local file system. These files will be used for the import into Cosmos DB.
 
 1. On your Lab VM, open a new integrated bash prompt in VS Code by selecting the **+** next to the shell dropdown in the integrated terminal pane.
 
@@ -496,7 +506,7 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
     - `<your_hostname>`: Copy and paste the **Host** value from your **Cosmos DB Connection String** blade.
     - `<your_username>`: Copy and paste the **Username** value from your **Cosmos DB Connection String** blade.
     - `<your_password>`: Copy and paste the **Primary Password** value from your **Cosmos DB Connection** **String** blade.
-    - `<your_database>`: Enter "best-for-you-organics".
+    - `<your_database>`: Enter "best-for-you-organics"
     - `<your_collection>`: Enter "plans" (Note there are two instances of `<your-collection>` in the template command).
 
 9. Your final command should look something like:
@@ -517,13 +527,13 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 12. Repeat step 8 for the users and orders collections, replacing the `<your_collection>` values with:
 
-    - users
+    - users:
 
     ```bash
     mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection users --ssl --sslAllowInvalidCertificates --type json --file users.json
     ```
 
-    - orders
+    - orders:
 
     ```bash
     mongoimport --host best-for-you-db.documents.azure.com:10255 -u best-for-you-db -p miZiDmNrn8TnSAufBvTQsghbYPiQOY69hIHgFhSn7Gf10cvbRLXvqxaherSKY6vQTDrvHHqYyICP4OcLncqWew== --db best-for-you-organics --collection orders --ssl --sslAllowInvalidCertificates --type json --file orders.json
@@ -535,11 +545,11 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 14. You have successfully migrated the application and data to use Azure Cosmos DB with MongoDB APIs.
 
-15. Return to the Integrated terminal window of VS Code which is running the application, and press **CTRL+C** to stop the application.
+15. Return to the Integrated terminal window of VS Code, which is running the application, and press **CTRL+C** to stop the application.
 
 ### Task 4: Install Azure Cosmos DB extension for VS Code
 
-In this task, you will install the Azure Cosmos DB extension for VS Code to take advantage of the integration with Azure Cosmos DB. This extension allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
+In this task, you install the Azure Cosmos DB extension for VS Code to take advantage of the integration with Azure Cosmos DB. This extension allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
 
 1. Select the **Extensions** icon, enter "azure cosmos db" into the search box, select the **Azure Cosmos DB** extension, and then select **Install** in the Extension: Azure Cosmos DB window.
 
@@ -553,7 +563,7 @@ In this task, you will install the Azure Cosmos DB extension for VS Code to take
 
 3. Enter your Azure account credentials in the browser window that appears.
 
-4. If presented with a prompt to enter a password for a new keyring, enter "**Password.1!!**" as the password, and select **Continue**.
+4. If presented with a prompt to enter a password for a new keyring, enter "**Password.1!!**" as the password and select **Continue**.
 
     ![Choose password for new keyring dialog, with Password.1!! entered in the password and confirm boxes.](media/ubuntu-new-keyring.png "Choose password window")
 
@@ -567,7 +577,7 @@ In this task, you will install the Azure Cosmos DB extension for VS Code to take
 
 ### Task 5: Decrease collection throughput
 
-In this task, you will decrease the throughput on your collections. Azure Cosmos DB uses an hourly billing rate, so reducing the throughput after the data migration will help save costs.
+In this task, you will decrease the throughput of your collections. Azure Cosmos DB uses an hourly billing rate, so reducing the throughput after the data migration will help save costs.
 
 1. From the Azure Cosmos DB menu pane in Visual Studio Code, right-click on the **best-for-you-db** database and then select **Open in Portal**.
 
@@ -605,9 +615,9 @@ The Docker extension for VS Code is used to simplify the management of local Doc
 
     > **Note**: If you don't see the Docker icon in the left-hand menu, close and reopen VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
 
-### Task 2: Create Docker image and run the app
+### Task 2: Create a Docker image and run the app
 
-In this task, you will use VS Code, and the Docker extension, to add the necessary files to the project to create a custom Docker image for the `MCW-OSS-PaaS-and-DevOps` app.
+In this task, you use VS Code and the Docker extension to add the necessary files to the project to create a custom Docker image for the `MCW-OSS-PaaS-and-DevOps` app.
 
 1. On your Lab VM, return to VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
 
@@ -615,47 +625,51 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
 
 3. Enter "add docker" into the Command Palette and select **Docker: Add docker files to workspace**.
 
-    ![Docker: Add docker files to workspace is selected under add docker in the Command Palette.](media/vscode-command-palette-add-docker.png "Select Docker: Add docker files to workspace")
+    ![Docker: Add docker files to workspace is selected under add docker that is entered in the Command Palette.](media/vscode-command-palette-add-docker.png "Select Docker: Add docker files to workspace")
 
 4. At the **Select Application Platform** prompt, select **Node.js**.
 
     ![Node.js is highlighted at the Select Application Platform prompt.](media/vscode-command-palette-app-platform.png "Select Node.js")
 
-5. Ensure port "3000" is entered on the next screen, and press **Enter**.
+5. At the **Include optional Docker Compose files?** prompt, select **Yes**.
+
+    ![Yes is highlighted at the Include optional Docker Compose files prompt.](media/vscode-command-palette-docker-compose.png "Include optional Docker Compose files")
+
+6. Ensure port "3000" is entered on the next screen, and press **Enter**.
 
     ![3000 is selected in the field above What port does your app listen on?](media/vscode-command-palette-docker-port.png "Explorer")
 
-6. This will add Dockerfile, along with several configuration files for Docker compose to the project.
+7. This will add Dockerfile, along with several configuration files for Docker compose to the project.
 
     ![Dockerfile and several configuration files are highlighted in the Explorer pane.](media/vscode-docker-files.png "Explorer pane")
 
-7. Select **Dockerfile** from the file navigator and observe the contents. This file provides the commands required to assemble a Docker image for the `MCW-OSS-PaaS-and-DevOps` application.
+8. Select **Dockerfile** from the file navigator and observe the contents. This file provides the commands required to assemble a Docker image for the `MCW-OSS-PaaS-and-DevOps` application.
 
     ![This is a screenshot of the Dockerfile contents. At this time, we are unable to capture all of the information in the window. Future versions of this course should address this.](media/vscode-docker-file.png "Dockerfile screenshot")
 
-8. Currently, the Docker extension for Visual Studio Code places the generated Docker files in the root directory of the project. Because the project files are all located in the `lab-files` directory, we need to move the generated files into that folder. Select the `.dockerignore`, `docker-compose.debug.yml`, `docker-compose.yml`, and `Dockerfile` files, and then drag and drop them into the `Hands-on lab/lab-files` folder. Respond Yes if prompted about moving the files.
+9. Currently, the Docker extension for Visual Studio Code places the generated Docker files in the root directory of the project. Because the project files are all located in the `lab-files` directory, we need to move the generated files into that folder. Select the `.dockerignore`, `docker-compose.debug.yml`, `docker-compose.yml`, and `Dockerfile` files, and then drag and drop them into the `Hands-on lab/lab-files` folder. Respond Yes if prompted about moving the files.
 
     ![The docker files specified above are highlighted within the Hands-on lab/lab-files folder.](media/vscode-docker-move-files.png "Visual Studio Code files")
 
-9. Next, you will tell Docker to build and image for your app. Select the **Terminal** menu in Visual Studio Code, and then select **New Terminal**.
+10. Next, you will tell Docker to build an image for your app. Select the **Terminal** menu in Visual Studio Code, and then select **New Terminal**.
 
     ![New Terminal is highlighted in the Terminal menu in Visual Studio Code.](media/vscode-terminal-menu.png "Visual Studio Code Terminal menu")
 
-10. In the new terminal window, change the directory to the `Hands-on lab/lab-files` folder by executing the following command:
+11. In the new terminal window, change the directory to the `Hands-on lab/lab-files` folder by executing the following command:
 
     ```bash
     cd "Hands-on lab/lab-files"
     ```
 
-11. With the next command you will provide a **registry**, **image name**, and **tag**, using the following format. This format will allow the image to be pushed to your container registry.
+12. With the next command you will provide a **registry**, **image name**, and **tag**, using the following format. This format will allow the image to be pushed to your container registry.
 
     > `[registry]/[image name]:[tag]`
 
-12. For this, you will need the Login server value from your Azure Container registry's **Access keys** blade.
+13. For this, you will need the Login server value from your Azure Container registry's **Access keys** blade.
 
     ![Access keys is selected under Settings on the Azure Container registry's Access keys blade, and on the right, bestforyouregistry.azurecr.io is highlighted in the Login server box on the right.](media/acr-login-server.png "Container registry blade")
 
-13. At the terminal prompt, enter the following, where `[Login server]` is the Login server value from Azure:
+14. At the terminal prompt, enter the following, where `[Login server]` is the Login server value from Azure:
 
     ```bash
     docker build --rm -f "Dockerfile" -t [Login server]/best-for-you-organics:latest .
@@ -663,21 +677,21 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
 
     > **Note**: Be sure to include the "." at the end of the line.
 
-14. For example:
+15. For example:
 
     ```bash
     docker build --rm -f "Dockerfile" -t bestforyouregistry.azurecr.io/best-for-you-organics:latest .
     ```
 
-15. Press **Enter**, which will trigger the build of the image. You will see the following output in the terminal window:
+16. Press **Enter**, which will trigger the build of the image. You will see the following output in the terminal window:
 
     ![The docker build command above is entered into the VS Code terminal window.](media/vscode-terminal-docker-build.png "Docker build")
 
-16. Once the build completes, select the **Docker** icon in the left-hand menu of Visual Studio Code and then expand **Images**. You will see the `best-for-you-organics` image.
+17. Once the build completes, select the **Docker** icon in the left-hand menu of Visual Studio Code and then expand **Images**. You will see the `best-for-you-organics` image.
 
     ![The image is highlighted in the DOCKER extension explorer under Images.](media/vscode-extensions-docker-images.png "Docker extension explorer")
 
-17. You can also use the `docker images` command in the Integrated terminal to list the images.
+18. You can also use the `docker images` command in the Integrated terminal to list the images.
 
     ![The docker images command is entered in the terminal window, with the list of images is displayed.](media/vscode-terminal-docker-images.png "Docker images")
 
@@ -685,23 +699,23 @@ In this task, you will use VS Code, and the Docker extension, to add the necessa
 
 In this task, you run the app from the container you built in the previous task.
 
-1. In the **Images** area of the Docker extension in VS Code, expand the `best-for-you-organics` image, and then right-click on the `latest` image, and select **Run Interactive**.
+1. In the **Images** area of the Docker extension in VS Code, expand the `best-for-you-organics` image and then right-click on the `latest` image and select **Run Interactive**.
 
     ![The image is selected in the Images area of the Docker extension explorer, and Run Interactive is highlighted in the shortcut menu.](media/vscode-extensions-docker-images-latest.png "Docker extension explorer")
 
     > **Note**: If you receive an error that the address is already in use, return to the terminal window where you ran the application using the `npm start` command and press `CTRL+C` to stop the application. Then, try the above action again.
 
-2. Notice in the Interactive terminal that a docker run command is issued. Using the VS Code Docker extension, you can issue some docker commands, without needing to work from the command line.
+2. Notice in the Interactive terminal that a docker run command is issued. Using the VS Code Docker extension, you can issue some docker commands without needing to work from the command line.
 
     ![The docker run command is highlighted in the Interactive terminal window.](media/vscode-terminal-docker-run.png "Interactive terminal window")
 
 3. Verify the web app and container are functioning by opening a browser window and navigating to <http://localhost:3000>.
 
-    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the web app, and localhost:3000/ is highlighted.](media/bfyo-web-home.png "View the web app")
+    ![Two Person Plan, Four Person Plan, and High-Pro Plan boxes are visible in this screenshot of the web app.](media/bfyo-web-home.png "View the web app")
 
 4. In the Integrated terminal of VS Code, for the interactive session, press **CTRL+C** to stop the container.
 
-### Task 4: Push image to Azure Container Registry
+### Task 4: Push the image to Azure Container Registry
 
 In this task, you are going to push the image to your Azure Container Registry.
 
@@ -713,7 +727,7 @@ In this task, you are going to push the image to your Azure Container Registry.
 
     ![Access keys is selected under Settings on the Azure Container registry's Access keys blade, and the values in the Login server, Username, and Name boxes are highlighted on the right.](media/acr-access-keys.png "Container Registry blade")
 
-3. Return to the Integrated terminal window in VS Code and enter the following command to log in to your Azure Container registry, replacing the bracketed values with those from the container registry access keys page.
+3. Return to the Integrated terminal window in VS Code and enter the following command to log in to your Azure Container Registry, replacing the bracketed values with those from the container registry access keys page.
 
     ```bash
     docker login [Login Server] -u [Username]
@@ -749,7 +763,7 @@ In this task, you are going to push the image to your Azure Container Registry.
 
 Duration: 10 minutes
 
-In this exercise, you will deploy the containerized app to a Web App for Containers instance from the image stored in your Azure Container Registry.
+In this exercise, you deploy the containerized app to a Web App for Containers instance from the image stored in your Azure Container Registry.
 
 ### Task 1: Provision Web App for Containers
 
@@ -766,7 +780,7 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
     **Project Details**:
 
     - **Subscription**: Select the subscription you are using for this lab.
-    - **Resource group**: Select **Use existing** and choose the hands-on-lab-SUFFIX resource group.
+    - **Resource group**: Select **Create new** and enter hands-on-lab-web-SUFFIX for the name of the new resource group.
 
     **Instance Details**:
 
@@ -799,7 +813,7 @@ In this exercise, you will deploy the containerized app to a Web App for Contain
 
 ### Task 2: Navigate to the deployed app
 
-In this task, you navigate to the deployed app, and log in to verify it is functioning correctly.
+In this task, you navigate to the deployed app and log in to verify it is functioning correctly.
 
 1. When you receive the notification that the Web App for Containers deployment has completed, navigate to the Web App by selecting the **notifications icon**, and selecting **Go to resource**.
 
@@ -828,7 +842,7 @@ In this exercise, you are going to use Jenkins to implement a continuous integra
 
 In this task, you will turn Continuous Deployment on for your Web App.
 
-1. Return to your Web App blade in the Azure portal, select **Container settings** from the left-hand menu, and then select **On** under Continuous Deployment.
+1. Return to your Web App for Containers blade in the Azure portal, select **Container settings** from the left-hand menu, and then select **On** under Continuous Deployment.
 
     ![The Web App blade is displayed, with Container settings selected and highlighted on the left, the On button for Continuous Deployment selected and highlighted, and the Save button highlighted.](media/web-app-continuous-deployment.png "Continuous Deployment")
 
@@ -836,7 +850,7 @@ In this task, you will turn Continuous Deployment on for your Web App.
 
 ### Task 2: Prepare GitHub account for service integrations
 
-In this task, you will be adding a Jenkins service integration into your GitHub account. This integration will enable a Jenkins CI build job to be triggered when code is checked in to your GitHub repository.
+In this task, you add a Jenkins service integration into your GitHub account. This integration enables a Jenkins CI build job to be triggered when code is checked in to your GitHub repository.
 
 1. On your Lab VM, navigate to your Jenkins VM in the [Azure portal](https://portal.azure.com) by selecting **Resource groups** from the Azure services list, and then selecting your **hands-on-lab-SUFFIX** resource group from the list.
 
@@ -854,7 +868,7 @@ In this task, you will be adding a Jenkins service integration into your GitHub 
   
    ![Webhooks is highlighted on the left-hand menu, and Add webhook is highlighted at the top.](media/github-settings-webhooks.png "Select Webhooks")
 
-5. When prompted, enter your GitHub account password to continue.
+5. If prompted, enter your GitHub account password to continue.
 
     ![A password is entered in the Confirm password to continue dialog box.](media/github-password.png "Confirm password dialog box")
 
@@ -866,77 +880,85 @@ In this task, you will be adding a Jenkins service integration into your GitHub 
     - Under **Which events would you like to trigger this webhook?**, select **Just the _push_ event.**
     - **Active**: Check this box.
 
-    ![The value in the Jenkins hook url box is highlighted in the Webhooks / Add Webhook  dialog box.](media/github-add-webhook-settings.png "Jenkins webhook settings")
+    ![The value in the Payload URL box is highlighted in the Webhooks / Add Webhook dialog box.](media/github-add-webhook-settings.png "Jenkins webhook settings")
 
 7. Select **Add webhook**.
 
 8. A warning will be displayed. This is a permissions error that will be resolved in a later step.
 
-    ![A warning icon is displayed due to a http 403 error.](media/github-webhook-403-warning.png "Http Forbidden warning")
+    ![A warning icon is displayed due to an HTTP 403 error.](media/github-webhook-403-warning.png "Http Forbidden warning")
 
-9. Next, you need to grant the Jenkins user access to your GitHub repository by adding a deploy key in the GitHub settings. Return to your Jenkins virtual machine page in the Azure portal, select **Connect**.
+9. Next, you need to grant the Jenkins user access to your GitHub repository by adding a deploy key in the GitHub settings. Return to your Jenkins virtual machine page in the Azure portal, select **Connect**, and then **SSH** from the drop-down menu.
 
-    ![The Connect button on the Jenkins VM overview blade is highlighted.](media/jenkins-connect.png "Connect")
+    ![The SSH option of the Connect button on the Jenkins VM overview blade is highlighted.](media/jenkins-connect.png "Connect")
 
-10. On the Connect to virtual machine dialog, select the **SSH** tab and copy the **Login using VM local account** value.
+10. On the Connect via SSH with client dialog, copy the **Run the example command below to connect to your VM** value.
 
-    ![The Connect icon is highlighted on the Azure portal, and the SSH command is highlighted below.](media/jenkins-connect-ssh.png "Jenkins virtual machine page")
+    ![The copy button for the specified SSH command is highlighted.](media/jenkins-connect-ssh.png "Connect via SSH with client")
 
-11. Open a new bash shell and paste the SSH command you copied above at the prompt. Enter "yes" if prompted about continuing to connect, and enter the jenkinsadmin password, `Password.1!!`, when prompted.
+11. Paste the copied command into a text edit so that it can be modified prior to execution.
+
+12. Edit the command to remove `-i <private key path>`, since the Jenkins instance was configured to use password authentication. The command should now look something like the following:
+
+    ```bash
+    ssh jenkinsadmin@jenkins-mcw.westus2.cloudapp.azure.com
+    ```
+
+13. Open a new bash shell and paste the modified SSH command at the prompt. Enter "yes" if prompted about continuing to connect and enter the jenkinsadmin password, `Password.1!!`, when prompted.
 
     ![The information above is displayed in this screenshot of the bash terminal.](media/bash-jenkins-ssh.png "bash terminal screenshot")
 
-12. At the `jenkinsadmin@Jenkins` prompt, enter:
+14. At the `jenkinsadmin@Jenkins` prompt, enter:
 
     ```bash
     ssh-keygen
     ```
 
-13. Press **Enter** to accept the default file in which to save the key.
+15. Press **Enter** to accept the default file in which to save the key.
 
-14. Press **Enter** to use an empty passphrase, and re-enter it to confirm.
+16. Press **Enter** to use an empty passphrase, and re-enter it to confirm.
 
     > **Note**: The use of an empty password is done only for simplicity in this hands-on lab. This is not recommended for actual environments.
 
-15. Copy the location into which your public key has been saved.
+17. Copy the location into which your public key has been saved.
 
     ![In this screenshot of the bash terminal, ssh-keygen and the location into which your public key has been saved are highlighted.](media/bash-jenkins-ssh-keygen.png "bash terminal screenshot")
 
-16. Show the public key using the following command, replacing `[KEY-PATH]` with the location of your public key.
+18. Show the public key using the following command, replacing `[KEY-PATH]` with the location of your public key.
 
     ```bash
     cat [KEY-PATH]
     ```
 
-17. Copy the key displayed, so it can be added to GitHub.
+19. Copy the key displayed so that it can be added to GitHub.
 
     ![The displayed key is highlighted in this screenshot of the bash terminal.](media/bash-jenkins-rsa-key.png "bash terminal screenshot")
 
-18. Return to the Settings page of your GitHub account in the browser, select the **Deploy keys** option from the left-hand menu, and then select **Add deploy key**.
+20. Return to the Settings page of your forked repo in your GitHub account in the browser, select the **Deploy keys** option from the left-hand menu, and then select **Add deploy key**.
 
     ![Deploy keys banner is displayed, and the Add deploy key button is highlighted.](media/github-deploy-keys.png "Deploy keys")
 
-19. Enter "Jenkins" for the title, paste the SSH key you copied above into the Key field, removing any trailing spaces, and select **Add key**.
+21. Enter "Jenkins" for the title, paste the SSH key you copied above into the Key field, removing any trailing spaces, and select **Add key**.
 
     ![On the GitHub account page, Deploy keys is selected in the left-hand menu, Jenkins is in the Title box, and the SSH key that you copied is in the Key field.](media/github-deploy-keys-add.png "Add key")
 
-20. To ensure that everything is working, return to the Jenkin's bash shell, and enter the below command which will check the connection to GitHub.
+22. To ensure that everything is working, return to the Jenkin's bash shell, and enter the below command which will check the connection to GitHub.
 
     ```bash
     ssh git@github.com
     ```
 
-21. Enter "yes" when prompted about continuing.
+23. Enter "yes" when prompted about continuing.
 
-22. You should see a message like the following, indicating a successful authentication and closed connection.
+24. You should see a message like the following, indicating a successful authentication and closed connection.
 
     ![A message indicating a successful connection is highlighted in this screenshot of the Jenkins bash terminal.](media/bash-jenkins-ssh-git.png "bash terminal")
 
-23. The GitHub side of the integration with Jenkins is complete. Next, you will configure Jenkins as part of your CI/CD pipeline.
+25. The GitHub side of the integration with Jenkins is complete. Next, you will configure Jenkins as part of your CI/CD pipeline.
 
-### Task 3: Open connection to Jenkins
+### Task 3: Open a connection to Jenkins
 
-In this task, you will create an SSH tunnel to the Jenkins server, and configure the Jenkins server for use with the MERN application.
+In this task, you create an SSH tunnel to the Jenkins server and configure it for use with the MERN application.
 
 1. Return to your **Jenkins** VM blade in the Azure portal.
 
@@ -946,9 +968,9 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
 3. Open a new browser window or tab and paste the copied DNS name into the browser's address bar to navigate to your Jenkins server.
 
-4. On the Jenkins on Azure screen, you will see a message that this Jenkins instance does not support https, so logging in through a public IP address has been disabled. You will need to create an SSH tunnel to securely connect to the Jenkins instance.
+4. On the Jenkins on Azure screen, you will see a message that this Jenkins instance does not support https, so logging in through a public IP address has been disabled. You will need to create an SSH tunnel to connect to the Jenkins instance securely.
 
-5. To set up an SSH tunnel to Jenkins, copy the ssh command provided in the Jenkins on Azure window, as highlighted in the screen shot below.
+5. To set up an SSH tunnel to Jenkins, copy the ssh command provided in the Jenkins on Azure window, as highlighted in the screenshot below.
 
     ![The ssh command that Jenkins provides is highlighted in the Jenkins on Azure window.](media/jenkins-on-azure.png "Jenkins On Azure window")
 
@@ -988,10 +1010,10 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
 14. On the Create First Admin User screen, enter the following:
 
-    - **Username**: Enter **jenkins**.
+    - **Username**: Enter **jenkins**
     - **Password**: Password.1!!
     - **Confirm Password**: Password.1!!
-    - **Full name**: Enter **jenkins**.
+    - **Full name**: Enter **jenkins**
     - **E-mail address**: Enter your email address.
     - Select **Save and Continue**.
 
@@ -1013,7 +1035,7 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
     ![On the Manage Plugins screen, the Available tab is selected, \"nodejs\" is entered into the filter box, and NodeJS is checked in the filter results. The Install without restart button is highlighted.](media/jenkins-plugins-nodejs.png "Manage Plugins page")
 
-19. Scroll up to the top the screen, and select **Manage Jenkins** from the left-hand menu.
+19. Scroll up to the top of the screen, and select **Manage Jenkins** from the left-hand menu.
 
     ![Screenshot of the Jenkins left-hand menu with Manage Jenkins link highlighted.](media/jenkins-manage.png "Jenkins menu")
 
@@ -1033,7 +1055,7 @@ In this task, you will create an SSH tunnel to the Jenkins server, and configure
 
 ### Task 4: Configure Continuous Integration with Jenkins
 
-In this task, you will set up a simple Jenkins continuous integration (CI) pipeline, which will build the `MCW-OSS-PaaS-and-DevOps` application with every code commit into GitHub.
+In this task, you create a simple Jenkins continuous integration (CI) pipeline, which builds the `MCW-OSS-PaaS-and-DevOps` application with every code commit into GitHub.
 
 1. Return to the **Jenkins** dashboard, and select **New Item** from the left-hand menu.
 
@@ -1056,9 +1078,9 @@ In this task, you will set up a simple Jenkins continuous integration (CI) pipel
 
     ![The GitHub hook trigger for GITScm polling is selected and highlighted in the Build Triggers section.](media/jenkins-project-build-triggers.png "Build Triggers section")
 
-6. Scroll down to the **Build Environment** section and select **Provide Node & npm bin/ folder to PATH**, select your NodeJS Installation from the list, and leave the default value for npmrc file.
+6. Scroll down to the **Build Environment** section, and select **Provide Node & npm bin/ folder to PATH**, select your NodeJS Installation from the list, and leave the default values for npmrc file and Cache location.
 
-    ![In the Jenkins Build Environment section, Provide Node & npm /bin folder to PATH is checked, the NodeJS Installation is specified, and the default value is set for npmrc](media/jenkins-project-build-environment.png "Jenkins Build Environment")
+    ![In the Jenkins Build Environment section, Provide Node & npm /bin folder to PATH is checked, the NodeJS Installation is specified, and the default values are set for npmrc file and Cache location.](media/jenkins-project-build-environment.png "Jenkins Build Environment")
 
 7. In the **Build** section, select **Add build step**, and select **Execute shell** from the options.
 
@@ -1082,7 +1104,7 @@ In this task, you will set up a simple Jenkins continuous integration (CI) pipel
 
 ### Task 5: Trigger CI build
 
-In this task you will commit your pending changes in VS Code to you GitHub repo, and trigger the Jenkins CI build job.
+In this task, you commit your pending changes in VS Code to your GitHub repo and trigger the Jenkins CI build job.
 
 1. Return to VS Code on your Lab VM, and the open `MCW-OSS-PaaS-and-DevOps` project.
 
@@ -1090,35 +1112,39 @@ In this task you will commit your pending changes in VS Code to you GitHub repo,
 
     ![The Source Control icon is highlighted on the Visual Studio Code Activity Bar.](media/vscode-source-control.png "Visual Studio Code Activity Bar")
 
-3. In the **SOURCE CONTROL: GIT** pane, enter a commit message, such as "Added Docker configuration," and select **+** next to **CHANGES** to stage all the pending changes.
+3. In the **SOURCE CONTROL: GIT** pane enter a commit message, such as "Added Docker configuration," and select **+** next to **CHANGES** to stage all the pending changes.
 
     ![Added Docker configuration is highlighted in the SOURCE CONTROL: GIT pane, and the plus sign (+) next to CHANGES is highlighted on the right.](media/vscode-source-control-stage-changes.png "Visual Studio Code Activity Bar")
 
 4. Select the **checkmark** to commit the changes.
 
-    ![The check mark next to commit the changes is highlighted in the SOURCE CONTROL: GIT pane.](media/vscode-source-control-commit.png "Visual Studio Code Activity Bar")
+    ![The checkmark next to commit the changes is highlighted in the SOURCE CONTROL: GIT pane.](media/vscode-source-control-commit.png "Visual Studio Code Activity Bar")
 
-5. Next, select the **ellipsis** to the right of the check mark, and select **Push** from the dropdown.
+5. Next, select the **ellipsis** to the right of the checkmark, and select **Push** from the dropdown.
 
-    ![The ellipsis (...) to the right of the check mark is highlighted in the SOURCE CONTROL: GIT pane, and Push is highlighted in the submenu.](media/vscode-source-control-push.png "Visual Studio Code Activity Bar")
+    ![The ellipsis (...) to the right of the checkmark is highlighted in the SOURCE CONTROL: GIT pane, and Push is highlighted in the submenu.](media/vscode-source-control-push.png "Visual Studio Code Activity Bar")
 
 6. If prompted, enter your GitHub account credentials to log into your GitHub account.
 
-    > **Note**: You will need to user your GitHub username (not your email address) here, and the password will be the Personal Access Token you created and saved previously.
+    > **Note**: You will need to use your GitHub username (not your email address) here, and the password will be the Personal Access Token you created and saved previously.
 
 7. Return to your best-for-you-build job in Jenkins, and locate the **Build History** block on the left-hand side. Select **#1** to view the details of the build job, caused by your GitHub commit.
 
     ![Screenshot of Build History on the best-for-you-organics project page, with build job \#1 highlighted.](media/jenkins-build-history-list.png "Build History section")
 
-8. On the build page, you can see the changes you committed.
+8. If the build is still running, you can select **Console Output** from the left-hand menu to view the ongoing build activities.
+
+    ![The Console Output option is highlighted and selected in the left-hand menu, and the build output is displayed.](media/jenkins-build-active-console-output.png "Console output")
+
+9. Once the build completes, you can see the changes you committed on the build page.
 
     ![The committed changes are displayed on the build page.](media/jenkins-build-history-details.png "Build page")
 
-9. You have successfully set up your CI pipeline.
+10. You have successfully set up your CI pipeline.
 
 ### Task 6: Install Docker on the Jenkins VM
 
-In this task, you will install Docker CE on your Jenkins VM, so it can be used to build images from the build artifacts produced by your CI build.
+In this task, you install Docker CE on your Jenkins VM, so it can be used to build images from the build artifacts produced by your CI build.
 
 1. The first step is to ensure no older versions of Docker are installed on your Jenkins VM. Using the SSH tunnel bash terminal you opened previously, navigate to the command prompt, and enter:
 
@@ -1148,7 +1174,7 @@ In this task, you will install Docker CE on your Jenkins VM, so it can be used t
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     ```
 
-5. Verify that you now have the key with fingerprint `9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88`, by searching for the last 8 characters of the fingerprint:
+5. Verify that you now have the key with fingerprint `9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88`, by searching for the last eight characters of the fingerprint:
 
     ```bash
     sudo apt-key fingerprint 0EBFCD88
@@ -1207,9 +1233,9 @@ In this task, you will install Docker CE on your Jenkins VM, so it can be used t
 
 ### Task 7: Add continuous delivery to Jenkins build job
 
-In this task, you will use the [Azure App Service Jenkins plugin](https://plugins.jenkins.io/azure-app-service) to add continuous deployment (CD) to the Jenkins build pipeline. This will use a post-build action to create a new Docker image from the build, push that image to your Azure Container Registry, and deploy the image to your Web App for Containers instance. This post-build action will run under the credentials of the SP you created in the previous task.
+In this task, you add continuous deployment (CD) to the Jenkins build pipeline. This uses a post-build action to create a new Docker image from the build, push that image to your Azure Container Registry, and deploy the image to your Web App for Containers instance.
 
-1. In a new browser window, navigate to your Container registry in the [Azure portal](https://portal.azure.com) by selecting **Resource groups** from the Azure navigation menu, selecting the **hands-on-lab-SUFFIX** resource group from the list, and then selecting the **Container registry** resource.
+1. In a new browser window, navigate to your Container registry in the [Azure portal](https://portal.azure.com) by selecting **Resource groups** from the Azure services list, selecting the **hands-on-lab-SUFFIX** resource group from the list, and then selecting the **Container registry** resource.
 
 2. On the Container registry blade, select **Access keys** from the left-hand menu and leave this page open for the following steps.
 
@@ -1217,7 +1243,7 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
 
     ![The best-for-you-build project is highlighted on the Jenkins dashboard.](media/jenkins-dashboard-best-for-you-build.png "Jenkins dashboard")
 
-    > **Note**: You may need to login again using the username **jenkins** and password **Password.1!!**.
+    > **Note**: You may need to log in again using the username **jenkins** and password **Password.1!!**.
 
 4. Select **Configure** from the left-hand menu.
 
@@ -1265,7 +1291,7 @@ In this task, you will use the [Azure App Service Jenkins plugin](https://plugin
 
 ### Task 8: Trigger CI-CD pipeline
 
-In this task, you will commit changes to the `MCW-OSS-PaaS-and-DevOps` starter application and trigger the full CI/CD pipeline through Jenkins, resulting in the updated application being added to a new Docker image, pushed to ACR, and deployed to Web App for Containers.
+In this task, you commit changes to the `MCW-OSS-PaaS-and-DevOps` starter application and trigger the full CI/CD pipeline through Jenkins, resulting in the updated application being added to a new Docker image, pushed to ACR, and deployed to Web App for Containers.
 
 1. Return to VS Code on your Lab VM, open the `.dockerignore` file, and delete the line containing __DockerFile*__ from the file. This will allow Jenkins to use the file to build the container in the Jenkins CI/CD pipeline.
 
@@ -1295,19 +1321,19 @@ In this task, you will commit changes to the `MCW-OSS-PaaS-and-DevOps` starter a
 
     ![A build and Docker deployment success message is displayed in the console output in Jenkins.](media/jenkins-build-console-output-success.png "Build and Docker deployment success")
 
-8. When the deployment is complete, you can verify the changes deployed successfully by navigating to your App Service instance in the Azure portal, and selecting the URL on the overview blade. The deployment of the container can take several minutes to complete so refreshes may take a few minutes to show the new header.
+8. When the deployment is complete, you can verify the changes deployed successfully by navigating to your App Service instance in the Azure portal and selecting the URL on the overview blade. The deployment of the container can take several minutes to complete, so refreshes may take a few minutes to show the new header.
 
     >**Tip**: It may help to open the app in an Incognito or InPrivate browser window, as the old page may be cached.
 
 9. You should see the home page, with a new header above the three plans on the page.
 
-    ![Welcome to Best for You Organics Company! is highlighted above the Two Person Plan, Four Person Plan, and High-Pro Plan boxes in this screenshot of the home page.](media/bfyo-web-welcome.png "Home page")
+    ![Welcome to Best for You Organics Company! is highlighted above the Two-Person Plan, Four-Person Plan, and High-Pro Plan boxes in this screenshot of the home page.](media/bfyo-web-welcome.png "Home page")
 
 ## Exercise 6: Create Azure Functions for order processing
 
 Duration: 45 minutes
 
-In this task, you create the Azure Functions that will handle order processing. The first function will send unprocessed order details into a storage queue. This Function uses a timer trigger and checks the processed field on order documents, ensuring only unprocessed orders are sent to the processing queue. A second function is used to simulate order processing and send notifications to the user who placed the order.
+In this task, you create the Azure Functions that handle order processing. The first function sends unprocessed order details into a storage queue. This function uses a timer trigger and checks the processed field on order documents, ensuring only unprocessed orders are sent to the processing queue. A second function simulates order processing and sends notifications to the user who placed the order.
 
 ### Task 1: Configure storage queues
 
@@ -1335,9 +1361,9 @@ In this task, you add two storage queues to the storage account provisioned when
 
     ![The name "notificationqueue" is entered in the Queue name box in the Add queue dialog box.](media/storage-notification-queue.png "Add queue dialog box")
 
-### Task 2: Create timer triggered function
+### Task 2: Create a timer triggered function
 
-In this task, you will create a function that function sends all new orders to a queue for processing and shipping. The function uses a Timer trigger and an output binding to an Azure Storage Queue.
+In this task, you create a function that function sends all new orders to a queue for processing and shipping. The function uses a Timer trigger and an output binding to an Azure Storage Queue.
 
 1. In the [Azure portal](https://portal.azure.com), navigate to your Function App by selecting it from the list of resources in the **hands-on-lab-func-SUFFIX** resource group.
 
@@ -1351,7 +1377,7 @@ In this task, you will create a function that function sends all new orders to a
 
 4. In the **Timer trigger** dialog, enter the following:
 
-    - **Name**: Enter "OrdersTimerTrigger".
+    - **Name**: Enter "OrdersTimerTrigger"
     - **Schedule**: Leave the default value, `0 */5 * * * *`. This will execute the trigger every 5 minutes.
     - Select **Create**.
 
@@ -1394,7 +1420,7 @@ In this task, you will create a function that function sends all new orders to a
 
 12. In the `wwwroot` folder, select **+** and then select **New file** to add a new file.
 
-    ![The new file (+) icon is highlighted and New file is highlighted in the context menu.](media/kudu-file-browser-new-file.png "New file")
+    ![The new file (+) icon is highlighted, and New file is highlighted in the context menu.](media/kudu-file-browser-new-file.png "New file")
 
 13. Enter `package.json` as the name of the file and press Enter.
 
@@ -1431,7 +1457,7 @@ In this task, you will create a function that function sends all new orders to a
 
     ![The OrdersTimerTrigger function is selected in the left-hand menu.](media/function-app-orders-timer-trigger.png "Left menu")
 
-18. To get the code for the `OrdersTimerTrigger` function, go into the project is VS Code, expand the `Hands-on lab/lab-files/AzureFunctions` folder, and open the `OrdersTimerTrigger.js` file.
+18. To get the code for the `OrdersTimerTrigger` function, go into the project in VS Code, expand the `Hands-on lab/lab-files/AzureFunctions` folder, and open the `OrdersTimerTrigger.js` file.
 
 19. Replace the `uri` variable value on line 4 of the `OrdersTriggerTimer.js` file with the primary connection string for your Cosmos DB, which you can retrieve from the Connection String blade of your Azure Cosmos DB account.
 
@@ -1462,7 +1488,7 @@ In this task, you will create a function that function sends all new orders to a
 
     ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the home page, and all three boxes' Select this plan buttons are highlighted.](media/bfyo-web-plans.png "Select a plan")
 
-26. On the **Place Order** screen, select **Place Order**. This will create a new order in the Cosmos DB `orders` collection. Within 5 minutes the Timer trigger of your function will fire, and then send the order on to the `orderqueue` for processing.
+26. On the **Place Order** screen, select **Place Order**. This will create a new order in the Cosmos DB `orders` collection. Within 5 minutes, the Timer trigger of your function will fire and then send the order on to the `orderqueue` for processing.
 
     ![The Place Order button is highlighted at the bottom of the Place Order page.](media/bfyo-place-order.png "Place your order page")
 
@@ -1472,9 +1498,9 @@ In this task, you will create a function that function sends all new orders to a
 
 ### Task 3: Create Queue function
 
-In this task, you will create a second function which will be triggered by the output of the OrdersTimerTrigger function. This will simulate the order processing and will add items to the notificationqueue if the order processing is complete and the `sendNotifications` property is true for the order.
+In this task, you create a second function, which is triggered by the output of the OrdersTimerTrigger function. This simulates the order processing and adds items to the notificationqueue if the order processing is complete, and the `sendNotifications` property is true for the order.
 
-This will use an Azure Storage Queue trigger, and an input dataset from Cosmos DB, pulling in customers. Output dataset will be Azure Cosmos DB orders table, and an update to set `processed = true`, and the `processedDate` to today.
+This uses an Azure Storage Queue trigger, and an input dataset from Cosmos DB, pulling in customers. The output dataset is the Azure Cosmos DB orders table. The update sets `processed = true` and the `processedDate` to today's date.
 
 1. Select **Integrate** under the OrdersTimerTrigger function, then select **Azure Queue Storage (outputQueue)** under **Outputs**.
 
@@ -1490,8 +1516,8 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
 4. On the **Queue trigger New Function** dialog, enter the following:
 
-    - **Name:** Enter ProcessOrders.
-    - **Queue name:** orderqueue
+    - **Name:** Enter `ProcessOrders`
+    - **Queue name:** Enter `orderqueue`
     - **Storage account connection:** Select **AzureWebJobsStorage**.
     - Select **Create**.
 
@@ -1507,8 +1533,8 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
 7. For the **Azure Queue Storage output**, enter the following:
 
-    - **Message parameter name**: "outputQueue"
-    - **Queue name:** "notificationqueue" (all lowercase, as casing matters)
+    - **Message parameter name**: Enter `outputQueue`
+    - **Queue name:** Enter `notificationqueue` (all lowercase, as casing matters)
     - **Storage account collection:** Select **AzureWebJobsStorage** from the list.
     - Select **Save**.
 
@@ -1528,7 +1554,7 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     ![Logs is highlighted below the code block.](media/function-app-logs-bar.png "Select Logs")
 
-12. To trigger the function, return to the starter application in your browser window, select **Sign In**, and on the **Sign In** screen, select **Register**.
+12. To trigger the function, return to the starter application in your browser window. If you are still logged in, select **Logout**. Then, select **Sign In**, and on the **Sign In** screen, select **Register**.
 
     ![In this screenshot of the starter application, Sign In is highlighted at the top, and the Register button is highlighted below.](media/bfyo-web-register.png "Sign in to the starter application")
 
@@ -1551,17 +1577,17 @@ This will use an Azure Storage Queue trigger, and an input dataset from Cosmos D
 
     > **Note**: It can take up to five minutes for the OrdersTimerTrigger to fire. The ProcessOrders function will fire immediately after the OrderTimerTrigger function.
 
-17. The order you placed has been sent to the notificationqueue and is pending the notification being sent to your email address.
+17. Your order was sent to the notificationqueue and is pending the notification being sent to your email address.
 
 ## Exercise 7: Create Logic App for sending email notifications
 
 Duration: 30 minutes
 
-In this exercise, you create Logic App which will trigger when an item is added to the `notificationqueue` Azure Storage Queue. The Logic App will send an email message to the email address included in the `notificationqueue` message.
+In this exercise, you create Logic App, which triggers whenever an item is added to the `notificationqueue` Azure Storage Queue. The Logic App sends an email message to the email address included in the `notificationqueue` message.
 
-### Task 1: Create SendGrid account
+### Task 1: Create a SendGrid account
 
-In this task, you will create a SendGrid account through the Azure portal to send email notifications to customers, informing them that their order has been processed, and is on its way.
+In this task, you will create a SendGrid account through the Azure portal to send email notifications to customers, informing them that their order has been processed and is on its way.
 
 1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
 
@@ -1575,47 +1601,59 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
     ![The Create button is highlighted on the SendGrid blade.](media/sendgrid-create.png "Create SendGrid")
 
-4. On the Create a new SendGrid Account blade, enter the following:
+4. On the Create a new SendGrid Account **Basics** tab, enter the following:
 
-    - **Name**: Enter **bfyoemail**.
-    - **Password**: Enter **Password.1!!**
+    **Project details**:
+
     - **Subscription** Select the subscription you are using for this hands-on lab.
     - **Resource group**: Choose **Use existing** and select the **hands-on-lab-SUFFIX** resource group.
-    - **Pricing tier**: Select **F1 Free** and choose **Select**.
-    - **Contact information**: Enter your name, company, and email address and select **OK**.
-    - **Legal terms**: Review the legal terms and enter a phone number and then select **OK**.
+    - **Location**: Select the location you are using for resources in this hands-on lab.
 
-    ![The values specified above are entered into the create a new SendGrid account blade.](media/sendgrid-create-settings.png "Create SendGrid account")
+    **Account details**:
 
-5. Select **Create** to provision the SendGrid account.
+    - **Name**: Enter `bfyoemail`
+    - **Password**: Enter `Password.1!!`
+    - **Pricing tier**: Select the **Free** plan.
+
+    **Contact details**:
+
+    - Enter your information into the required fields (First Name, Last Name, Email, Company, and Website)
+
+        > **Note**: Website is not listed as a required field, but currently, the deployment fails if this is not populated.
+
+    ![The SendGrid configuration values specified above are entered into the create a new SendGrid account blade.](media/sendgrid-create-settings.png "Create SendGrid account")
+
+5. Select **Review + create** and then select **Create** to provision the SendGrid account.
 
 6. When the SendGrid account finishes provisioning, select **Go to resource** from the notifications pane in the Azure portal.
 
-    ![The Go to resource button in highlighted in the SendGrid deployment notification.](media/go-to-resource-sendgrid.png "Go to resource")
+    ![The Go to resource button is highlighted in the SendGrid deployment notification.](media/go-to-resource-sendgrid.png "Go to resource")
 
 7. On the SendGrid account blade, select **Manage** from the toolbar.
 
     ![The Manage button is highlighted on the SendGrid account toolbar.](media/sendgrid-manage.png "SendGrid account Manage")
 
-8. On the SendGrid page that opens, expand **Settings** in the left-hand menu, select **API Keys**, and then select **Create API Key**.
+8. If prompted, select **Send Confirmation Email** and follow the prompts in the email you receive to confirm your account.
+
+9. On the SendGrid page that opens, expand **Settings** in the left-hand menu, select **API Keys**, and then select **Create API Key**.
 
     ![The Create API Key button is highlighted on the API Keys page.](media/sendgrid-create-api-key.png "SendGrid API Keys")
 
-9. On the Create API Key page, enter the following:
+10. On the Create API Key page, enter the following:
 
-    - **API Key Name**: Enter **bfyo-api-key**.
+    - **API Key Name**: Enter `bfyo-api-key`
     - **API Key Permissions**: Select **Full Access**.
     - Select **Create & View**.
 
     ![The values specified above are entered into the Create API Key page.](media/sendgrid-create-api-key-page.png "Create API Key")
 
-10. Leave the API Key Created screen that appears open. You will be copying the key and pasting it into your Logic App in the next task.
+11. Leave the API Key Created screen that appears open. You will be copying the key and pasting it into your Logic App in the next task.
 
     ![The API Key Created screen is displayed.](media/sendgrid-api-key-created.png "API Key Created")
 
-### Task 2: Create Logic App
+### Task 2: Create a Logic App
 
-In this task, you will create a new Logic App, which will use the SendGrid connector to send email notifications to users, informing them that their order has processed and shipped.
+In this task, you create a new Logic App, which uses the SendGrid connector to send email notifications to users, informing them that their order has processed and shipped.
 
 1. In the Azure portal, navigate to your Logic App in the **hands-on-lab-SUFFIX** resource group.
 
@@ -1645,7 +1683,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
 8. In the **Choose an action box**, enter "parse," and select **Data Operations**.
 
-    ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box, and Data Operations below in the list.](media/data-operations-parse.png "When there are messages in a queue dialog box")
+    ![In the When there are messages in a queue dialog box, Parse is in the Choose an action box and Data Operations below in the list.](media/data-operations-parse.png "When there are messages in a queue dialog box")
 
 9. Under Data Operations, select **Parse JSON**.
 
@@ -1667,7 +1705,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The JSON above is pasted in the sample JSON payload dialog box, and Done is selected below.](media/logic-app-parse-json-sample-payload.png "Paste the JSON in the dialog box")
 
-13. You will now see the Schema for messages coming from the notification queue in the Schema box.
+13. You will now see the schema for messages coming from the notification queue in the Schema box.
 
     ![The completed Parse JSON box is displayed.](media/logic-app-parse-json-complete.png "Parse JSON")
 
@@ -1679,19 +1717,19 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![SendGrid is entered into the search box, and the SendGrid connection is highlighted under connectors.](media/logic-app-connectors-sendgrid.png "Choose a connector")
 
-16. In the **SendGrid** connector dialog, select **Send email (V3)**.
+16. In the **SendGrid** connector dialog, select **Send email (V4)**.
 
-    ![Send email (v2) is highlighted in the list of SendGrid actions.](media/logic-app-sendgrid-send-email.png "SendGrid")
+    ![Send email (v4) is highlighted in the list of SendGrid actions.](media/logic-app-sendgrid-send-email.png "SendGrid")
 
 17. In the **SendGrid** box, enter the following:
 
-    - **Connection Name**: Enter **bfyo-sendgrid**.
+    - **Connection Name**: Enter `bfyo-sendgrid`
     - **SendGrid Api Key**: Return to the **API Key Created** screen in your SendGrid account, and then copy and paste the API key you generated.
     - Select **Create**.
 
     ![The SendGrid connection configuration information above is entered into the SendGrid box.](media/logic-app-sendgrid-create.png "SendGrid")
 
-18. In the **Send email (V3)** box, enter the following:
+18. In the **Send email (V4)** box, enter the following:
 
     - **From**: Enter your email address.
     - **To**: Click in the box, select **Add dynamic content**, and then select the **notificationEmail** property. **NOTE**: If under the Parse JSON Dynamic Content section, you see a message that there were not any outputs to match the input format, select **See more** in the message.
@@ -1707,7 +1745,7 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
     ![The Add an action button is highlighted under + New step.](media/logic-app-new-step.png "Add an action button")
 
-20. In the **Choose an action** dialog, enter "queues" in to the search box, and select **Delete message** under Actions.
+20. In the **Choose an action** dialog, enter "queues" into the search box, and select **Delete message** under Actions.
 
     ![Queue is highlighted in the Choose an action search box, and Azure Queues -- Delete message is highlighted below.](media/logic-app-azure-queues-delete-message.png "Choose an action dialog box")
 
@@ -1731,14 +1769,14 @@ In this task, you will create a new Logic App, which will use the SendGrid conne
 
 Duration: 10 minutes
 
-In this exercise, you will de-provision all Azure resources that were created in support of this hands-on lab.
+In this exercise, you will de-provision all Azure resources that you created in support of this hands-on lab.
 
 ### Task 1: Delete Azure resource groups
 
-1. In the Azure portal, select **Resource groups** from the left-hand menu, and locate and delete the following resource groups.
+1. In the Azure portal, select **Resource groups** from the left-hand menu and locate and delete the following resource groups.
 
     - hands-on-lab-SUFFIX
-    - hands-on-lab-func-SUFFIX
+    - hands-on-lab-web-SUFFIX
 
 ### Task 2: Delete WebHooks and Service Integrations
 
