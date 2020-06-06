@@ -2,7 +2,7 @@
 
 This guide provides step-by-step instructions for manually provisioning and setting up the Lab VM used as a development machine for this lab.
 
-February 2020
+June 2020
 
 ## Task 1: Create a VM config script
 
