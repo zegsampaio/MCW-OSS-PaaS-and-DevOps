@@ -785,7 +785,7 @@ In this exercise, you deploy the containerized app to a Web App for Containers i
    **Instance Details**:
 
    - **Name**: Enter **best-for-you-app-SUFFIX** (the name must be globally unique).
-   - **Publish**: Select **Docker Image**.
+   - **Publish**: Select **Docker Container**.
    - **Operating System**: Select **Linux**.
    - **Region**: Select the region you are using for resources in this hands-on lab.
 
