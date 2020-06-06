@@ -42,7 +42,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 4: Install Azure Tools extensions for VS Code](#task-4-install-azure-tools-extensions-for-vs-code)
     - [Task 5: Decrease collection throughput](#task-5-decrease-collection-throughput)
   - [Exercise 3: Containerize the app](#exercise-3-containerize-the-app)
-    - [Task 1: Install Docker extension in VS Code](#task-1-install-docker-extension-in-vs-code)
+    - [Task 1: Open Azure Container Registry with Docker extension in VS Code](#task-1-open-azure-container-registry-with-docker-extension-in-vs-code)
     - [Task 2: Create a Docker image and run the app](#task-2-create-a-docker-image-and-run-the-app)
     - [Task 3: Run the containerized app](#task-3-run-the-containerized-app)
     - [Task 4: Push the image to Azure Container Registry](#task-4-push-the-image-to-azure-container-registry)
@@ -599,21 +599,17 @@ Duration: 30 minutes
 
 This exercise walks you through containerizing the existing Best For You Organics Company MERN application using Docker, pushing the image to an **Azure Container Registry**, then deploying the image to **Web App for Containers** directly from VS Code.
 
-### Task 1: Install Docker extension in VS Code
+### Task 1: Open Azure Container Registry with Docker extension in VS Code
 
 The Docker extension for VS Code is used to simplify the management of local Docker images and commands, as well as the deployment of a built app image to Azure.
 
 1. On your Lab VM, return to VS Code and the open `MCW-OSS-PaaS-and-DevOps` starter project.
 
-2. Select the **Extensions icon** from the left-hand menu, enter "docker" into the search box, select the **Docker** extension, and in the **Extension: Docker** window, and then select **Install**.
-
-   ![Extensions is highlighted in the Visual Studio Code navigation pane, docker is entered in the Extensions search box, Docker is highlighted below, and Install is highlighted on the right.](media/vscode-extensions-docker.png "Visual Studio Code window")
-
-3. You should now see a Docker icon appear in the left-hand menu of Visual Studio Code. Select the **Docker** icon. Expand **Registries** and then expand **Azure**. If you do not see Azure listed, select **Connect registry** and select **Azure** from the list of registries. You should see the **bestforyouregistry** you created above listed.
+2. You should see a Containers icon in the left-hand menu of Visual Studio Code. Select the **Containers** icon. Expand **Registries** and then expand **Azure**. If you do not see Azure listed, select **Connect registry** and select **Azure** from the list of registries. You should see the **bestforyouregistry** you created above listed.
 
    ![In the Docker VS Code extension, Registries and Azure are expanded, and the bestforyouregistry is highlighted.](media/vscode-extension-docker-registries.png "Docker extension")
 
-   > **Note**: If you don't see the Docker icon in the left-hand menu, close and reopen VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
+   > **Note**: If you don't see the Containers icon in the left-hand menu, close and reopen VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
 
 ### Task 2: Create a Docker image and run the app
 
@@ -723,39 +719,43 @@ In this task, you are going to push the image to your Azure Container Registry.
 
    ![The bestforyouregistry Container registry is highlighted in the list of resources on the Azure portal.](media/azure-rg-bestforyouregistry.png "List of resources")
 
-2. On the **bestforyouregistrySUFFIX** blade, select **Access keys** under settings in the left-hand menu, and leave this page up as you will be referencing the **Login server**, **Username**, and **password** in the next task.
+2. On the **bestforyouregistrySUFFIX** blade, select **Access keys** under settings in the left-hand menu and then select **Enable** under **Admin user**.
+
+    ![The Enable option is selected and highlighted for the Admin user on the Container registry Access keys blade.](media/container-registry-enable-admin-user.png "Enable admin user")
+
+3. Leave this page up as you will be referencing the **Login server**, **Username**, and **password** in the next task.
 
    ![Access keys is selected under Settings on the Azure Container registry's Access keys blade, and the values in the Login server, Username, and Name boxes are highlighted on the right.](media/acr-access-keys.png "Container Registry blade")
 
-3. Return to the Integrated terminal window in VS Code and enter the following command to log in to your Azure Container Registry, replacing the bracketed values with those from the container registry access keys page.
+4. Return to the Integrated terminal window in VS Code and enter the following command to log in to your Azure Container Registry, replacing the bracketed values with those from the container registry access keys page.
 
    ```bash
    docker login [Login Server] -u [Username]
    ```
 
-4. For example:
+5. For example:
 
    ```bash
    docker login bestforyouregistry.azurecr.io -u bestforyouregistry
    ```
 
-5. Copy and paste the Container registry password when prompted to complete the login process.
+6. Copy and paste the Container registry password when prompted to complete the login process.
 
    ![This is a screenshot of the password prompt in the Visual Studio Code Integrated terminal window.](media/vscode-terminal-docker-login.png "Integrated terminal window")
 
-6. Once you are successfully logged in, expand the bestforyouregistry image in the Docker extension section of the VS Code, right-click on the latest image, and select **Push**.
+7. Once you are successfully logged in, expand the bestforyouregistry image in the Docker extension section of the VS Code, right-click on the latest image, and select **Push**.
 
    ![The image is selected in the Images area of the Docker extension explorer, and Push is highlighted in the shortcut menu.](media/vscode-docker-push.png "Docker extension explorer")
 
-7. If prompted to set the default registry path, select **Yes**.
+8. If prompted to set the default registry path, select **Yes**.
 
    ![Yes is highlighted on the dialog to set the default registry path.](media/vscode-extensions-docker-push.png "Set default registry path")
 
-8. Note the "docker push" command issued in the terminal window.
+9.  Note the "docker push" command issued in the terminal window.
 
    ![This is a screenshot of the docker push command in the Visual Studio Code Integrated terminal window.](media/vscode-terminal-docker-push.png "Integrated terminal window")
 
-9. To verify the push, return to the **bestforyouregistry** Registry container blade in the Azure portal, and select **Repositories** under **Services** on the left-hand side, and note the **best-for-you-organics** repository.
+11. To verify the push, return to the **bestforyouregistry** Registry container blade in the Azure portal, and select **Repositories** under **Services** on the left-hand side, and note the **best-for-you-organics** repository.
 
    ![In your Azure Container Registry's repository, Repositories is selected and highlighted under Services, and best-for-you-organics is highlighted under Repositories.](media/acr-repositories.png "Container registry blade")
 
