@@ -39,7 +39,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Create and scale collections](#task-1-create-and-scale-collections)
     - [Task 2: Update database connection string](#task-2-update-database-connection-string)
     - [Task 3: Import data to the API for MongoDB using mongoimport](#task-3-import-data-to-the-api-for-mongodb-using-mongoimport)
-    - [Task 4: Install Azure Cosmos DB extension for VS Code](#task-4-install-azure-cosmos-db-extension-for-vs-code)
+    - [Task 4: Install Azure Tools extensions for VS Code](#task-4-install-azure-tools-extensions-for-vs-code)
     - [Task 5: Decrease collection throughput](#task-5-decrease-collection-throughput)
   - [Exercise 3: Containerize the app](#exercise-3-containerize-the-app)
     - [Task 1: Install Docker extension in VS Code](#task-1-install-docker-extension-in-vs-code)
@@ -376,7 +376,7 @@ In this task, you create the collections needed for your database migration and 
 
 > To learn more about RUs and throughput provisioning in Cosmos DB, read [Request Units in Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/request-units).
 
-1. Navigate to your Azure Cosmos DB account in the Azure portal by selecting **Resource groups** from the Azure home page, and then select the **best-for-you-db-SUFFIX** Cosmos DB resource from the list.
+1. Navigate to your Azure Cosmos DB account in the Azure portal by selecting **Resource groups** from the Azure home page, and then select the **best-for-you-db-SUFFIX** Azure Cosmos DB account resource from the list.
 
 2. On the Cosmos DB blade, select **Data Explorer** from the left-hand menu and then select **New Collection**.
 
@@ -547,13 +547,13 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 15. Return to the Integrated terminal window of VS Code, which is running the application, and press **CTRL+C** to stop the application.
 
-### Task 4: Install Azure Cosmos DB extension for VS Code
+### Task 4: Install Azure Tools extensions for VS Code
 
-In this task, you install the Azure Cosmos DB extension for VS Code to take advantage of the integration with Azure Cosmos DB. This extension allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
+In this task, you install the Azure Tools extensions for VS Code to take advantage of the integration with Azure Cosmos DB. This extension pack allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
 
-1. Select the **Extensions** icon, enter "azure cosmos db" into the search box, select the **Azure Cosmos DB** extension, and then select **Install** in the Extension: Azure Cosmos DB window.
+1. Select the **Extensions** icon, enter "azure tools" into the search box, select the **Azure Tools** extension, and then select **Install** in the Extension: Azure Account window.
 
-   ![The Extensions icon is highlighted on the left side of the Extension: Azure Cosmos DB window. On the right, azure cosmos db is in the search box, Azure Cosmos DB is highlighted below it, and Install is highlighted on the right side.](media/vscode-extensions-cosmosdb.png "Install the Azure Cosmos DB extension")
+   ![The Extensions icon is highlighted on the left side of the VS Code window. On the right, "azure tools" is in the search box, Azure Tools is highlighted below it, and Install is highlighted on the right side.](media/vscode-extensions-cosmosdb.png "Install the Azure Tools extensions")
 
 2. In the left-hand menu of VS Code, you should now see an Azure icon. Select that, and then select **Sign in to Azure**.
 
