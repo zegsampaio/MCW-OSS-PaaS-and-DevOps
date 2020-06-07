@@ -133,7 +133,7 @@ In this task, you provision an Azure Linux VM, which will serve as your Jenkins 
     - **Subscription:** Select the subscription you are using for this hands-on lab.
     - **Resource group:** Select the hands-on-lab-SUFFIX resource group from the list.
 
-    > **Note**: If you receive a message that the hands-on-lab-SUFFIX resource group contains existing resources, select **Create new** and enter **hands-on-lab-SUFFIX-jenkins** as the resource group name.
+    > **Note**: If you receive a message that the hands-on-lab-SUFFIX resource group contains existing resources, select **Create new** and enter **hands-on-lab-jenkins-SUFFIX** as the resource group name.
 
     ![Create new is selected under Resource group and hands-on-lab-SUFFIX-jenkins is entered into the Name textbox.](media/jenkins-create-resource-group.png "Create Jenkins resource group")
 
