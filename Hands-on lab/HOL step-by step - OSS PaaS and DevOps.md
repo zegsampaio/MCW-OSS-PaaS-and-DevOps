@@ -384,11 +384,11 @@ In this task, you create the collections needed for your database migration and 
 
 3. In the **Add Collection** dialog, enter the following:
 
-   - **Database id**: Choose **Create new**, and enter **best-for-you-organics**
+   - **Database id**: Choose **Create new**, and enter **best-for-you-organics**.
    - **Provision database throughput**: Uncheck this box.
-   - **Collection id**: Enter **orders**
+   - **Collection id**: Enter **orders**.
    - **Storage capacity**: Select **Fixed (10 GB)**.
-   - **Throughput**: Enter **2500**
+   - **Throughput**: Enter **2500**.
    - Select **OK** to create the collection.
 
    ![The information above is entered in the Add Collection dialog box.](media/cosmos-db-new-collection-orders.png "Add Collection")
@@ -400,9 +400,9 @@ In this task, you create the collections needed for your database migration and 
 5. On the Add Collection dialog, enter the following:
 
    - **Database id**: Select **Use existing** and select the **best-for-you-organics** database from the list.
-   - **Collection id**: Enter **users**
+   - **Collection id**: Enter **users**.
    - **Storage capacity**: Select **Fixed (10 GB)**.
-   - **Throughput**: Enter **2500**
+   - **Throughput**: Enter **2500**.
    - Select **OK** to create the collection.
 
    ![The information for the users collection above is entered into the Add Collection dialog.](media/cosmos-db-new-collection-users.png "Add Collection")
@@ -1389,7 +1389,7 @@ In this task, you create a function that function sends all new orders to a queu
 
 4. In the **Timer trigger** dialog, enter the following:
 
-   - **Name**: Enter "OrdersTimerTrigger"
+   - **Name**: Enter **OrdersTimerTrigger**.
    - **Schedule**: Leave the default value, `0 */5 * * * *`. This will execute the trigger every 5 minutes.
    - Select **Create Function**.
 
@@ -1559,8 +1559,8 @@ This uses an Azure Storage Queue trigger, and an input dataset from Cosmos DB, p
 8. On the Create Output dialog, enter the following:
 
    - **Binding Type**: Select **Azure Queue Storage**.
-   - **Message parameter name**: Enter `outputQueue`
-   - **Queue name:** Enter `notificationqueue` (all lowercase, as casing matters)
+   - **Message parameter name**: Enter `outputQueue`.
+   - **Queue name:** Enter `notificationqueue` (all lowercase, as casing matters).
    - **Storage account collection:** Select **AzureWebJobsStorage** from the list.
    - Select **OK**.
 
@@ -1637,8 +1637,8 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
    **Account details**:
 
-   - **Name**: Enter `bfyoemail`
-   - **Password**: Enter `Password.1!!`
+   - **Name**: **bfyoemail**
+   - **Password**: **Password.1!!**
    - **Pricing tier**: Select the **Free** plan.
 
    **Contact details**:
@@ -1667,7 +1667,7 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
 10. On the Create API Key page, enter the following:
 
-    - **API Key Name**: Enter `bfyo-api-key`
+    - **API Key Name**: Enter `bfyo-api-key`.
     - **API Key Permissions**: Select **Full Access**.
     - Select **Create & View**.
 
@@ -1754,7 +1754,7 @@ In this task, you create a new Logic App, which uses the SendGrid connector to s
 
 17. In the **SendGrid** box, enter the following:
 
-    - **Connection Name**: Enter `bfyo-sendgrid`
+    - **Connection Name**: Enter `bfyo-sendgrid`.
     - **SendGrid Api Key**: Return to the **API Key Created** screen in your SendGrid account, and then copy and paste the API key you generated.
     - Select **Create**.
 

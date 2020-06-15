@@ -140,7 +140,7 @@ In this task, you provision an Azure Linux VM, which will serve as your Jenkins 
     **Instance Details**:
 
     - **Region:** Select the region you are using for resources in this hands-on lab.
-    - **Name:** Enter **jenkins**
+    - **Name:** Enter **jenkins**..
     - **User name:** Enter **jenkinsadmin**
     - **Authentication type:** Select **Password**.
     - **Password:** Enter **Password.1!!**
