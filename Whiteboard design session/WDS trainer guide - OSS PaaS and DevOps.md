@@ -363,7 +363,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | Deploy to Azure App Service using Jenkins plugin | <https://docs.microsoft.com/azure/jenkins/deploy-jenkins-app-service-plugin> |
 | Create Jenkins server in Azure | <https://docs.microsoft.com/en-us/azure/jenkins/install-jenkins-solution-template> |
 | Azure Cognitive Search in Node.js | <https://docs.microsoft.com/azure/search/search-get-started-nodejs> |
-| Visual Studio (VS) cCode for OSS | <https://code.visualstudio.com/docs/nodejs/reactjs-tutorial> |
+| Visual Studio (VS) Code for OSS | <https://code.visualstudio.com/docs/nodejs/reactjs-tutorial> |
 | Web App for containers | <https://azure.microsoft.com/blog/webapp-for-containers-overview/> |
 
 # OSS PaaS and DevOps whiteboard design session trainer guide

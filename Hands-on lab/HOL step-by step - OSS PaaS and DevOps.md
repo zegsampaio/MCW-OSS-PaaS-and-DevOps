@@ -1767,7 +1767,7 @@ In this task, you create a new Logic App, which uses the SendGrid connector to s
 
     ![See more is highlighted under Parse JSON in the dynamic content dialog.](media/logic-app-dynamic-content-see-more.png "Dynamic content")
 
-    - **Subject**: Enter "Order #: " and then select **orderId** from the dynamic content dialog.
+    - **Subject**: Enter "Order: " and then select **orderId** from the dynamic content dialog.
     - **Email body**: Select **firstName** from the dynamic content dialog, and then enter ", Your Best For You Organics Company order has shipped."
 
     ![The Send email (V3) dialog is completed with the values specified above.](media/logic-app-send-email-v2-complete.png "Send email (V3)"))
