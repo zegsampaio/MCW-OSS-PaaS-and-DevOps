@@ -9,7 +9,7 @@ Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-February 2020
+June 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -353,7 +353,8 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 |----------|-------------|
 | **Description** | **Links** |
 | Azure Cosmos DB API for MongoDB | <https://docs.microsoft.com/azure/cosmos-db/mongodb-introduction/> |
-| Import MongoDB data into Cosmos DB | <https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-migrate/> |
+| Migrate MongoDB to Azure Cosmos DB's API for MongoDB online using DMS | <https://docs.microsoft.com/azure/dms/tutorial-mongodb-cosmos-db-online> |
+| Migrate MongoDB to Azure Cosmos DB's API for MongoDB offline using DMS | <https://docs.microsoft.com/azure/dms/tutorial-mongodb-cosmos-db?toc=/azure/cosmos-db/toc.json> |
 | Azure Container Registry | <https://azure.microsoft.comservices/container-registry> |
 | Azure functions | <https://docs.microsoft.com/azure/azure-functions> |
 | Logic Apps | <https://docs.microsoft.com/azure/logic-apps/logic-apps-what-are-logic-apps> |
@@ -362,7 +363,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | Deploy to Azure App Service using Jenkins plugin | <https://docs.microsoft.com/azure/jenkins/deploy-jenkins-app-service-plugin> |
 | Create Jenkins server in Azure | <https://docs.microsoft.com/en-us/azure/jenkins/install-jenkins-solution-template> |
 | Azure Cognitive Search in Node.js | <https://docs.microsoft.com/azure/search/search-get-started-nodejs> |
-| Visual Studio (VS) cCode for OSS | <https://code.visualstudio.com/docs/nodejs/reactjs-tutorial> |
+| Visual Studio (VS) Code for OSS | <https://code.visualstudio.com/docs/nodejs/reactjs-tutorial> |
 | Web App for containers | <https://azure.microsoft.com/blog/webapp-for-containers-overview/> |
 
 # OSS PaaS and DevOps whiteboard design session trainer guide
@@ -425,7 +426,7 @@ After reviewing the available options for transitioning their applications to a 
 
     From a high level, developers package the entire OSS application inside a custom Docker container using VS Code or another editor. The container image is pushed to an Azure Container Registry as part of a continuous integration process using GitHub and Jenkins. This Docker image is then be deployed to a Web App for Containers instance, as part of their continuous delivery process using Jenkins with the Azure App Service Jenkins plugin.
 
-    The MongoDB database is imported into Azure Cosmos DB, using *mongoimport* or *mongorestore*, and access to the database from the application continues to use the MongoDB APIs. Database connection strings in the application are updated to point to the new Cosmos DB.
+    The MongoDB database is migrated to Azure Cosmos DB using Azure Database Migration Service to perform an online (minimal downtime) or offline (one-time) migration of the database from the on-premises instance of MongoDB to Azure Cosmos DB's API for MongoDB. Another option for smaller databases, is to use *mongoimport* or *mongorestore*. Access to the database from the application continues to use the MongoDB APIs. Database connection strings in the application are updated to point to the new Cosmos DB.
 
     Serverless architecture is applied to order processing and customer notifications. Azure Functions are used to automate the processing of orders, billing credit cards, and updating the database as order processing is completed. Logic Apps are applied to send SMS notifications via a Twilio connector to customers, informing them that their order has been processed and shipped. Azure Search is integrated into the application to provide enhanced search functionality.
 
@@ -447,7 +448,7 @@ After reviewing the available options for transitioning their applications to a 
 
     Configuring web apps to scale is simple using Azure App Services. A set of criteria is easy to define, and then Azure handles the hard work of ensuring that the web app is always responsive. Administrators can easily complete this set of steps based on a few different metrics, such as CPU or memory.
 
-    Using an Azure CDN Standard or Premium from Verizon, we can preload files into nodes that are located closer to customers. This ensures that the load times for static content will be less than if they were served directly by the web application. All static content will be preloaded, including images and PDFs, among other items on the site.
+    Using an Azure CDN Standard or Premium from Verizon, we can pre-load files into nodes that are located closer to customers. This ensures that the load times for static content will be less than if they were served directly by the web application. All static content will be preloaded, including images and PDFs, among other items on the site.
 
 3. What options does the customer have for a Docker image registry? Which option would you recommend?
 
@@ -477,11 +478,13 @@ After reviewing the available options for transitioning their applications to a 
 
 3. How would you handle importing their existing data into Azure Cosmos DB? What factors do you need to consider when doing the import?
 
-    Data from MongoDB can be imported into Azure Cosmos DB using either mongoimport.exe or mongorestore.exe, both available from the MongoDB Download Center. With either, you will need to retrieve your Cosmos DB connection string information (host, port, username, and password) to complete the import.
+    The MongoDB database can be migrated to Azure Cosmos DB using Azure Database Migration Service (DMS). DMS allows for both [online](https://docs.microsoft.com/azure/dms/tutorial-mongodb-cosmos-db-online) (minimal downtime) and [offline](https://docs.microsoft.com/azure/dms/tutorial-mongodb-cosmos-db?toc=/azure/cosmos-db/toc.json) (one-time) migration of the database.
+
+    Another option that could be used for smaller databases is to import data from MongoDB into Azure Cosmos DB using either *mongoimport.exe* or *mongorestore.exe*, both available from the MongoDB Download Center. With either, you will need to retrieve your Cosmos DB connection string information (host, port, username, and password) to complete the import.
 
     Things to consider:
 
-    - **Throughput**: The duration of your data migration depends on the amount of throughput you set up for your collections. For larger data migrations, you should increase the throughput to speed up the process. After the migration is complete, you can decrease the throughput to save costs.
+    - **Throughput**: The duration of your data migration depends on the amount of throughput you set up for your collections. For larger data migrations, you should increase the container throughput in Cosmos DB to speed up the process. After the migration is complete, you can decrease the throughput to save costs.
 
     - **SSL**: Azure Cosmos DB has strict security requirements and standards. Be sure to enable SSL when you interact with your account.
 

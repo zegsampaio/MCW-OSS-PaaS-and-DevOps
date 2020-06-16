@@ -9,7 +9,7 @@ Whiteboard design session student guide
 </div>
 
 <div class="MCWHeader3">
-February 2020
+June 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -227,7 +227,8 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 |----------|-------------|
 | **Description** | **Links** |
 | Azure Cosmos DB API for MongoDB | <https://docs.microsoft.com/azure/cosmos-db/mongodb-introduction/> |
-| Import MongoDB data into Cosmos DB | <https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-migrate/> |
+| Migrate MongoDB to Azure Cosmos DB's API for MongoDB online using DMS | <https://docs.microsoft.com/azure/dms/tutorial-mongodb-cosmos-db-online> |
+| Migrate MongoDB to Azure Cosmos DB's API for MongoDB offline using DMS | <https://docs.microsoft.com/azure/dms/tutorial-mongodb-cosmos-db?toc=/azure/cosmos-db/toc.json> |
 | Azure Container Registry | <https://azure.microsoft.comservices/container-registry> |
 | Azure functions | <https://docs.microsoft.com/azure/azure-functions> |
 | Logic Apps | <https://docs.microsoft.com/azure/logic-apps/logic-apps-what-are-logic-apps> |
@@ -236,5 +237,5 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | Deploy to Azure App Service using Jenkins plugin | <https://docs.microsoft.com/azure/jenkins/deploy-jenkins-app-service-plugin> |
 | Create Jenkins server in Azure | <https://docs.microsoft.com/en-us/azure/jenkins/install-jenkins-solution-template> |
 | Azure Cognitive Search in Node.js | <https://docs.microsoft.com/azure/search/search-get-started-nodejs> |
-| Visual Studio (VS) cCode for OSS | <https://code.visualstudio.com/docs/nodejs/reactjs-tutorial> |
+| Visual Studio (VS) Code for OSS | <https://code.visualstudio.com/docs/nodejs/reactjs-tutorial> |
 | Web App for containers | <https://azure.microsoft.com/blog/webapp-for-containers-overview/> |

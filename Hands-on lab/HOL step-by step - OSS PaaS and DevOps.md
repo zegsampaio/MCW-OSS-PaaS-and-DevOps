@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-February 2020
+June 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -39,10 +39,10 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Create and scale collections](#task-1-create-and-scale-collections)
     - [Task 2: Update database connection string](#task-2-update-database-connection-string)
     - [Task 3: Import data to the API for MongoDB using mongoimport](#task-3-import-data-to-the-api-for-mongodb-using-mongoimport)
-    - [Task 4: Install Azure Cosmos DB extension for VS Code](#task-4-install-azure-cosmos-db-extension-for-vs-code)
+    - [Task 4: Install Azure Tools extensions for VS Code](#task-4-install-azure-tools-extensions-for-vs-code)
     - [Task 5: Decrease collection throughput](#task-5-decrease-collection-throughput)
   - [Exercise 3: Containerize the app](#exercise-3-containerize-the-app)
-    - [Task 1: Install Docker extension in VS Code](#task-1-install-docker-extension-in-vs-code)
+    - [Task 1: Open Azure Container Registry with Docker extension in VS Code](#task-1-open-azure-container-registry-with-docker-extension-in-vs-code)
     - [Task 2: Create a Docker image and run the app](#task-2-create-a-docker-image-and-run-the-app)
     - [Task 3: Run the containerized app](#task-3-run-the-containerized-app)
     - [Task 4: Push the image to Azure Container Registry](#task-4-push-the-image-to-azure-container-registry)
@@ -376,7 +376,7 @@ In this task, you create the collections needed for your database migration and 
 
 > To learn more about RUs and throughput provisioning in Cosmos DB, read [Request Units in Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/request-units).
 
-1. Navigate to your Azure Cosmos DB account in the Azure portal by selecting **Resource groups** from the Azure home page, and then select the **best-for-you-db-SUFFIX** Cosmos DB resource from the list.
+1. Navigate to your Azure Cosmos DB account in the Azure portal by selecting **Resource groups** from the Azure home page, and then select the **best-for-you-db-SUFFIX** Azure Cosmos DB account resource from the list.
 
 2. On the Cosmos DB blade, select **Data Explorer** from the left-hand menu and then select **New Collection**.
 
@@ -384,11 +384,11 @@ In this task, you create the collections needed for your database migration and 
 
 3. In the **Add Collection** dialog, enter the following:
 
-   - **Database id**: Choose **Create new**, and enter **best-for-you-organics**
+   - **Database id**: Choose **Create new**, and enter **best-for-you-organics**.
    - **Provision database throughput**: Uncheck this box.
-   - **Collection id**: Enter **orders**
+   - **Collection id**: Enter **orders**.
    - **Storage capacity**: Select **Fixed (10 GB)**.
-   - **Throughput**: Enter **2500**
+   - **Throughput**: Enter **2500**.
    - Select **OK** to create the collection.
 
    ![The information above is entered in the Add Collection dialog box.](media/cosmos-db-new-collection-orders.png "Add Collection")
@@ -400,9 +400,9 @@ In this task, you create the collections needed for your database migration and 
 5. On the Add Collection dialog, enter the following:
 
    - **Database id**: Select **Use existing** and select the **best-for-you-organics** database from the list.
-   - **Collection id**: Enter **users**
+   - **Collection id**: Enter **users**.
    - **Storage capacity**: Select **Fixed (10 GB)**.
-   - **Throughput**: Enter **2500**
+   - **Throughput**: Enter **2500**.
    - Select **OK** to create the collection.
 
    ![The information for the users collection above is entered into the Add Collection dialog.](media/cosmos-db-new-collection-users.png "Add Collection")
@@ -547,13 +547,13 @@ In this task, you will use `mongoimport.exe` to import data to your Cosmos DB ac
 
 15. Return to the Integrated terminal window of VS Code, which is running the application, and press **CTRL+C** to stop the application.
 
-### Task 4: Install Azure Cosmos DB extension for VS Code
+### Task 4: Install Azure Tools extensions for VS Code
 
-In this task, you install the Azure Cosmos DB extension for VS Code to take advantage of the integration with Azure Cosmos DB. This extension allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
+In this task, you install the Azure Tools extensions for VS Code to take advantage of the integration with Azure Cosmos DB. This extension pack allows you to view and interact with your Cosmos DB databases, collections, and documents directly from VS Code.
 
-1. Select the **Extensions** icon, enter "azure cosmos db" into the search box, select the **Azure Cosmos DB** extension, and then select **Install** in the Extension: Azure Cosmos DB window.
+1. Select the **Extensions** icon, enter "azure tools" into the search box, select the **Azure Tools** extension, and then select **Install** in the Extension: Azure Account window.
 
-   ![The Extensions icon is highlighted on the left side of the Extension: Azure Cosmos DB window. On the right, azure cosmos db is in the search box, Azure Cosmos DB is highlighted below it, and Install is highlighted on the right side.](media/vscode-extensions-cosmosdb.png "Install the Azure Cosmos DB extension")
+   ![The Extensions icon is highlighted on the left side of the VS Code window. On the right, "azure tools" is in the search box, Azure Tools is highlighted below it, and Install is highlighted on the right side.](media/vscode-extensions-cosmosdb.png "Install the Azure Tools extensions")
 
 2. In the left-hand menu of VS Code, you should now see an Azure icon. Select that, and then select **Sign in to Azure**.
 
@@ -599,21 +599,17 @@ Duration: 30 minutes
 
 This exercise walks you through containerizing the existing Best For You Organics Company MERN application using Docker, pushing the image to an **Azure Container Registry**, then deploying the image to **Web App for Containers** directly from VS Code.
 
-### Task 1: Install Docker extension in VS Code
+### Task 1: Open Azure Container Registry with Docker extension in VS Code
 
 The Docker extension for VS Code is used to simplify the management of local Docker images and commands, as well as the deployment of a built app image to Azure.
 
 1. On your Lab VM, return to VS Code and the open `MCW-OSS-PaaS-and-DevOps` starter project.
 
-2. Select the **Extensions icon** from the left-hand menu, enter "docker" into the search box, select the **Docker** extension, and in the **Extension: Docker** window, and then select **Install**.
-
-   ![Extensions is highlighted in the Visual Studio Code navigation pane, docker is entered in the Extensions search box, Docker is highlighted below, and Install is highlighted on the right.](media/vscode-extensions-docker.png "Visual Studio Code window")
-
-3. You should now see a Docker icon appear in the left-hand menu of Visual Studio Code. Select the **Docker** icon. Expand **Registries** and then expand **Azure**. If you do not see Azure listed, select **Connect registry** and select **Azure** from the list of registries. You should see the **bestforyouregistry** you created above listed.
+2. You should see a Containers icon in the left-hand menu of Visual Studio Code. Select the **Containers** icon. Expand **Registries** and then expand **Azure**. If you do not see Azure listed, select **Connect registry** and select **Azure** from the list of registries. You should see the **bestforyouregistry** you created above listed.
 
    ![In the Docker VS Code extension, Registries and Azure are expanded, and the bestforyouregistry is highlighted.](media/vscode-extension-docker-registries.png "Docker extension")
 
-   > **Note**: If you don't see the Docker icon in the left-hand menu, close and reopen VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
+   > **Note**: If you don't see the Containers icon in the left-hand menu, close and reopen VS Code, and the `MCW-OSS-PaaS-and-DevOps` project.
 
 ### Task 2: Create a Docker image and run the app
 
@@ -723,39 +719,43 @@ In this task, you are going to push the image to your Azure Container Registry.
 
    ![The bestforyouregistry Container registry is highlighted in the list of resources on the Azure portal.](media/azure-rg-bestforyouregistry.png "List of resources")
 
-2. On the **bestforyouregistrySUFFIX** blade, select **Access keys** under settings in the left-hand menu, and leave this page up as you will be referencing the **Login server**, **Username**, and **password** in the next task.
+2. On the **bestforyouregistrySUFFIX** blade, select **Access keys** under settings in the left-hand menu and then select **Enable** under **Admin user**.
+
+    ![The Enable option is selected and highlighted for the Admin user on the Container registry Access keys blade.](media/container-registry-enable-admin-user.png "Enable admin user")
+
+3. Leave this page up as you will be referencing the **Login server**, **Username**, and **password** in the next task.
 
    ![Access keys is selected under Settings on the Azure Container registry's Access keys blade, and the values in the Login server, Username, and Name boxes are highlighted on the right.](media/acr-access-keys.png "Container Registry blade")
 
-3. Return to the Integrated terminal window in VS Code and enter the following command to log in to your Azure Container Registry, replacing the bracketed values with those from the container registry access keys page.
+4. Return to the Integrated terminal window in VS Code and enter the following command to log in to your Azure Container Registry, replacing the bracketed values with those from the container registry access keys page.
 
    ```bash
    docker login [Login Server] -u [Username]
    ```
 
-4. For example:
+5. For example:
 
    ```bash
    docker login bestforyouregistry.azurecr.io -u bestforyouregistry
    ```
 
-5. Copy and paste the Container registry password when prompted to complete the login process.
+6. Copy and paste the Container registry password when prompted to complete the login process.
 
    ![This is a screenshot of the password prompt in the Visual Studio Code Integrated terminal window.](media/vscode-terminal-docker-login.png "Integrated terminal window")
 
-6. Once you are successfully logged in, expand the bestforyouregistry image in the Docker extension section of the VS Code, right-click on the latest image, and select **Push**.
+7. Once you are successfully logged in, expand the bestforyouregistry image in the Docker extension section of the VS Code, right-click on the latest image, and select **Push**.
 
    ![The image is selected in the Images area of the Docker extension explorer, and Push is highlighted in the shortcut menu.](media/vscode-docker-push.png "Docker extension explorer")
 
-7. If prompted to set the default registry path, select **Yes**.
+8. If prompted to set the default registry path, select **Yes**.
 
    ![Yes is highlighted on the dialog to set the default registry path.](media/vscode-extensions-docker-push.png "Set default registry path")
 
-8. Note the "docker push" command issued in the terminal window.
+9. Note the "docker push" command issued in the terminal window.
 
    ![This is a screenshot of the docker push command in the Visual Studio Code Integrated terminal window.](media/vscode-terminal-docker-push.png "Integrated terminal window")
 
-9. To verify the push, return to the **bestforyouregistry** Registry container blade in the Azure portal, and select **Repositories** under **Services** on the left-hand side, and note the **best-for-you-organics** repository.
+10. To verify the push, return to the **bestforyouregistry** Registry container blade in the Azure portal, and select **Repositories** under **Services** on the left-hand side, and note the **best-for-you-organics** repository.
 
    ![In your Azure Container Registry's repository, Repositories is selected and highlighted under Services, and best-for-you-organics is highlighted under Repositories.](media/acr-repositories.png "Container registry blade")
 
@@ -785,7 +785,7 @@ In this exercise, you deploy the containerized app to a Web App for Containers i
    **Instance Details**:
 
    - **Name**: Enter **best-for-you-app-SUFFIX** (the name must be globally unique).
-   - **Publish**: Select **Docker Image**.
+   - **Publish**: Select **Docker Container**.
    - **Operating System**: Select **Linux**.
    - **Region**: Select the region you are using for resources in this hands-on lab.
 
@@ -852,11 +852,11 @@ In this task, you will turn Continuous Deployment on for your Web App.
 
 In this task, you add a Jenkins service integration into your GitHub account. This integration enables a Jenkins CI build job to be triggered when code is checked in to your GitHub repository.
 
-1. On your Lab VM, navigate to your Jenkins VM in the [Azure portal](https://portal.azure.com) by selecting **Resource groups** from the Azure services list, and then selecting your **hands-on-lab-SUFFIX** resource group from the list.
+1. On your Lab VM, navigate to your Jenkins VM in the [Azure portal](https://portal.azure.com) by selecting **Resource groups** from the Azure services list, and then selecting your **hands-on-lab-SUFFIX** or **hands-on-lab-jenkins-SUFFIX** resource group from the list.
 
    ![Resource groups is highlighted in the Azure services list.](media/azure-services-resource-groups.png "Azure services")
 
-2. On the hands-on-lab-SUFFIX Resource group blade, select your **Jenkins** virtual machine.
+2. On the resource group blade, select your **Jenkins** virtual machine.
 
    ![The Jenkins VM is highlighted in this of resources in the hand-on-lab resource group.](media/rg-jenkins-vm.png "Resource group blade")
 
@@ -968,98 +968,81 @@ In this task, you create an SSH tunnel to the Jenkins server and configure it fo
 
 3. Open a new browser window or tab and paste the copied DNS name into the browser's address bar to navigate to your Jenkins server.
 
-4. On the Jenkins on Azure screen, you will see a message that this Jenkins instance does not support https, so logging in through a public IP address has been disabled. You will need to create an SSH tunnel to connect to the Jenkins instance securely.
+4. Select **Log in** on the Welcome to Jenkins screen.
 
-5. To set up an SSH tunnel to Jenkins, copy the ssh command provided in the Jenkins on Azure window, as highlighted in the screenshot below.
+   ![The Log in link is highlighted on the Welcome to Jenkins dialog.](media/jenkins-welcome-login.png "Welcome to Jenkins!")
+
+5. On the Jenkins on Azure screen, you will see a message that this Jenkins instance does not support https, so logging in through a public IP address has been disabled. You will need to create an SSH tunnel to connect to the Jenkins instance securely.
+
+6. To set up an SSH tunnel to Jenkins, copy the ssh command provided in the Jenkins on Azure window, as highlighted in the screenshot below.
 
    ![The ssh command that Jenkins provides is highlighted in the Jenkins on Azure window.](media/jenkins-on-azure.png "Jenkins On Azure window")
 
-6. Open a new bash shell, and at the command prompt paste the copied ssh command, replacing "username" with **jenkinsadmin**. The command will resemble the following:
+7. Open a new bash shell, and at the command prompt paste the copied ssh command, replacing "username" with **jenkinsadmin**. The command will resemble the following:
 
    ```bash
    ssh -L 127.0.0.1:8080:localhost:8080 jenkinsadmin@jenkins-kb.westus.cloudapp.azure.com
    ```
 
-7. If prompted that authenticity of the Jenkins host cannot be established, enter "yes" to continue.
+8. If prompted that authenticity of the Jenkins host cannot be established, enter "yes" to continue.
 
-8. Enter the **jenkinsadmin** password, "Password.1!!"
+9. Enter the **jenkinsadmin** password, "Password.1!!"
 
    ![The ssh command above is highlighted in the bash window, and yes is highlighted next to Are you sure you want to continue connecting (yes/no)?](media/bash-jenkins-ssh-tunnel.png "bash window")
 
-9. After you have started the SSH tunnel, open a new browser tab or window, and navigate to <http://localhost:8080/>.
+10. After you have started the SSH tunnel, open a new browser tab or window, and navigate to <http://localhost:8080/>.
 
-   ![After navigating to http://localhost:8080, the Getting Started page is displayed, providing the path to the initial administrator password, /var/lib/jenkins/secrets/initialAdminPassword.](media/jenkins-unlock.png "Unlock Jenkins window")
+11. As you did above, select **Log in** on the Welcome to Jenkins screen. This will launch the Getting Started dialog.
 
-10. To get the initial password, return to the SSH tunnel bash window, and run the following command:
+    ![After navigating to http://localhost:8080, the Getting Started page is displayed, providing the path to the initial administrator password, /var/lib/jenkins/secrets/initialAdminPassword.](media/jenkins-unlock.png "Unlock Jenkins window")
+
+12. To get the initial password, return to the SSH tunnel bash window, and run the following command:
 
     ```bash
     sudo cat /var/lib/jenkins/secrets/initialAdminPassword
     ```
 
-11. Copy the password returned.
+13. Copy the password returned and paste it into a text editor, such as Notepad.exe or Leafpad on the LabVM.
 
     ![The returned password is highlighted in the bash window.](media/bash-jenkins-initial-password.png "bash window")
 
-12. Return to the Getting Started screen in your browser, paste the password into the **Administrator password** box, and select **Continue**.
+14. Return to the Getting Started screen in your browser, paste the password into the **Administrator password** box, and select **Continue**.
 
     ![Screenshot of the Administrator password pasted into the box on the Getting Started screen, and Continue selected.](media/jenkins-admin-password.png "Administrator password field")
 
-13. On the Customize Jenkins screen, select **Install suggested plugins**.
-
-    ![Screenshot of the Customize Jenkins page, with Install suggested plugins highlighted and selected.](media/jenkins-customize.png "Customize Jenkins page")
-
-14. On the Create First Admin User screen, enter the following:
-
-    - **Username**: Enter **jenkins**
-    - **Password**: Password.1!!
-    - **Confirm Password**: Password.1!!
-    - **Full name**: Enter **jenkins**
-    - **E-mail address**: Enter your email address.
-    - Select **Save and Continue**.
-
-    ![The Create First Admin User page, with the values specified above entered into the appropriate fields, and Save and Finish highlighted.](media/create-first-admin-user-jenkins.png "Create First Admin User page")
-
-15. You may be required to restart Jenkins and log in again. Otherwise, select **Start using Jenkins** on the Jenkins is ready screen.
-
-    ![Screenshot of the Jenkins is ready page, with the Start using Jenkins button highlighted.](media/jenkins-is-ready.png "Jenkins is ready page")
-
-16. You will be redirected to the Jenkins dashboard.
-
-    ![Screenshot of the Jenkins dashboard.](media/jenkins-dashboard.png "Jenkins dashboard")
-
-17. From the Jenkins dashboard, select **Manage Jenkins** from the left-hand menu and then select **Manage Plugins**.
+15. From the Jenkins dashboard, select **Manage Jenkins** from the left-hand menu and then select **Manage Plugins**.
 
     ![Manage Jenkins is highlighted in the left-hand menu of the Jenkins window, and Manage Plugins is highlighted on the right.](media/jenkins-dashboard-manage.png "Jenkins window")
 
-18. With the **Available** tab selected, install the **NodeJS** plug-in by entering **nodejs** into the Filter box, and selecting the **NodeJS** plug-in in the results, and then selecting **Install without restart**.
+16. With the **Available** tab selected, install the **NodeJS** plug-in by entering **nodejs** into the Filter box, and selecting the **NodeJS** plug-in in the results, and then selecting **Install without restart**.
 
     ![On the Manage Plugins screen, the Available tab is selected, "nodejs" is entered into the filter box, and NodeJS is checked in the filter results. The Install without restart button is highlighted.](media/jenkins-plugins-nodejs.png "Manage Plugins page")
 
-19. With the **Available** tab still selected, enter **GitHub** into the Filter box.
+17. With the **Available** tab still selected, enter **GitHub** into the Filter box.
 
     ![On the Manage Plugins screen, "GitHub" is entered into the filter box.](media/jenkins-plugins-github.png "Manage Plugins page")
 
-20. Locate and select the **GitHub** plugin.
+18. Locate and select the **GitHub** plugin.
 
     ![The GitHub plugin is checked.](media/jenkins-plugins-github-checked.png "GitHub plugin")
 
-21. Select **Install without restart**.
+19. Select **Install without restart**.
 
-22. Scroll up to the top of the screen, and select **Manage Jenkins** from the left-hand menu.
+20. Select **Manage Jenkins** from the left-hand menu.
 
     ![Screenshot of the Jenkins left-hand menu with Manage Jenkins link highlighted.](media/jenkins-manage.png "Jenkins menu")
 
-23. Select **Global Tool Configuration**.
+21. Select **Global Tool Configuration**.
 
     ![Screenshot of Manage Jenkins page, with Global Tool Configuration option highlighted.](media/jenkins-global-tool-configuration.png "Manage Jenkins page")
 
-24. Find **NodeJS** and select **Add NodeJS** next to NodeJS installations.
+22. Find **NodeJS** and select **Add NodeJS** next to NodeJS installations.
 
-25. Enter **bestforyounode** as the Name, ensure **Install automatically** is checked, and accept the default (latest) version of nodejs.
+23. Enter **bestforyounode** as the Name, ensure **Install automatically** is checked, and accept the default (latest) version of nodejs.
 
     ![In the NodeJS dialog box, bestforyounode is in the Name box, and Install automatically is selected below it.](media/jenkins-nodejs-install.png "NodeJS dialog box")
 
-26. Select **Save**.
+24. Select **Save**.
 
     ![This is a screenshot of the Save (selected) and Apply buttons.](media/jenkins-global-tool-configuration-save.png "Select Save")
 
@@ -1134,23 +1117,35 @@ In this task, you commit your pending changes in VS Code to your GitHub repo and
 
    ![The ellipsis (...) to the right of the checkmark is highlighted in the SOURCE CONTROL: GIT pane, and Push is highlighted in the submenu.](media/vscode-source-control-push.png "Visual Studio Code Activity Bar")
 
-6. If prompted, enter your GitHub account credentials to log into your GitHub account.
+6. When prompted, select **Allow** to authorize Visual Studio Code to access Github.
 
-   > **Note**: You will need to use your GitHub username (not your email address) here, and the password will be the Personal Access Token you created and saved previously.
+7. Select **Continue** in the browser window that opens to authorize access to your GitHub account.
 
-7. Return to your best-for-you-build job in Jenkins, and locate the **Build History** block on the left-hand side. Select **#1** to view the details of the build job, caused by your GitHub commit.
+   ![The Continue button is highlighted on the Authorize Visual Studio Code to access GitHub dialog.](media/github-authorize-access-from-vs-code.png "Authorize Visual Studio Code to access GitHub")
 
-   ![Screenshot of Build History on the best-for-you-organics project page, with build job #1 highlighted.](media/jenkins-build-history-list.png "Build History section")
+8. On the Authorize GitHub for VSCode window, select **Authorize github**.
 
-8. If the build is still running, you can select **Console Output** from the left-hand menu to view the ongoing build activities.
+   ![The Authorize github button is highlighted on the Authorize GitHub for VSCode dialog.](media/github-authorize.png "Authorize GitHub for VSCode")
 
-   ![The Console Output option is highlighted and selected in the left-hand menu, and the build output is displayed.](media/jenkins-build-active-console-output.png "Console output")
+9. Ensure you see "Success!" in the following screen.
 
-9. Once the build completes, you can see the changes you committed on the build page.
+   ![A message that authorization was successful is displayed, with a Success header.](media/github-authorize-success.png "GitHub authorization was successful")
 
-   ![The committed changes are displayed on the build page.](media/jenkins-build-history-details.png "Build page")
+10. Select **Allow** in the dialog that appears and follow any additional prompts to complete the authorization within Visual Studio Code.
 
-10. You have successfully set up your CI pipeline.
+11. Return to your best-for-you-build job in Jenkins, and locate the **Build History** block on the left-hand side. Select **#1** to view the details of the build job, caused by your GitHub commit.
+
+    ![Screenshot of Build History on the best-for-you-organics project page, with build job #1 highlighted.](media/jenkins-build-history-list.png "Build History section")
+
+12. If the build is still running, you can select **Console Output** from the left-hand menu to view the ongoing build activities.
+
+    ![The Console Output option is highlighted and selected in the left-hand menu, and the build output is displayed.](media/jenkins-build-active-console-output.png "Console output")
+
+13. Once the build completes, you can see the changes you committed on the build page.
+
+    ![The committed changes are displayed on the build page.](media/jenkins-build-history-details.png "Build page")
+
+14. You have successfully set up your CI pipeline.
 
 ### Task 6: Install Docker on the Jenkins VM
 
@@ -1249,19 +1244,26 @@ In this task, you add continuous deployment (CD) to the Jenkins build pipeline. 
 
 2. On the Container registry blade, select **Access keys** from the left-hand menu and leave this page open for the following steps.
 
-3. Return to your **Jenkins** dashboard, and select the **best-for-you-build** project.
+3. Restarting the Jenkins service terminates any existing connections. Return to your **Jenkins** dashboard and select **Log in** on the toolbar.
+
+4. On the login screen, enter the following:
+
+   - **Username**: admin
+   - **Password**: Enter the initial admin password you copied into a text editor previously.
+
+   > As a reminder, the initial admin password was retrieved by executing the following command from the SSH tunnel bash window: `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
+
+5. Once logged back in, select the **best-for-you-build** project. When prompted to log in, use the initial admin password you retrieve in the bash shell previously and copied into a text editor.
 
    ![The best-for-you-build project is highlighted on the Jenkins dashboard.](media/jenkins-dashboard-best-for-you-build.png "Jenkins dashboard")
 
-   > **Note**: You may need to log in again using the username **jenkins** and password **Password.1!!**.
-
-4. Select **Configure** from the left-hand menu.
+6. Select **Configure** from the left-hand menu.
 
    ![Configure is highlighted in the left-hand menu.](media/jenkins-project-configure.png "Jenkins left-hand menu")
 
-5. On the configure screen, scroll down to the Build section and select the Execute shell block you created previously.
+7. On the configure screen, scroll down to the Build section and select the Execute shell block you created previously.
 
-6. Return to the Container registry Access keys blade in the Azure portal, copy the values specified below and paste them into the appropriate values in the `docker build` command below.
+8. Return to the Container registry Access keys blade in the Azure portal, copy the values specified below and paste them into the appropriate values in the `docker build` command below.
 
    - **Login server**: Copy the Azure Container Registry's Login server value, and paste into the command below as the `ACR_URL` value.
    - **Username**: Copy the Username value for your Azure Container Registry, and paste into the command below as the `ACR_USERNAME` value.
@@ -1279,7 +1281,7 @@ In this task, you add continuous deployment (CD) to the Jenkins build pipeline. 
    docker push "${ACR_URL}/best-for-you-organics:latest"
    ```
 
-7. You final command should look similar to the following:
+9. You final command should look similar to the following:
 
    ```bash
    ACR_URL="bestforyouregistrykb.azurecr.io"
@@ -1291,11 +1293,11 @@ In this task, you add continuous deployment (CD) to the Jenkins build pipeline. 
    docker push "${ACR_URL}/best-for-you-organics:latest"
    ```
 
-8. Copy the completed command text and paste it below the `npm run build` line within the Execute shell Command box. The Execute shell command should now look similar to the following:
+10. Copy the completed command text and paste it below the `npm run build` line within the Execute shell Command box. The Execute shell command should now look similar to the following:
 
-   ![The command above is appended to the execute shell command.](media/jenkins-execute-shell-command-cd.png "Execute shell")
+    ![The command above is appended to the execute shell command.](media/jenkins-execute-shell-command-cd.png "Execute shell")
 
-9. Select **Save**.
+11. Select **Save**.
 
    ![This is a screenshot of the Save (selected) and Apply buttons.](media/jenkins-save.png "Select Save")
 
@@ -1331,7 +1333,7 @@ In this task, you commit changes to the `MCW-OSS-PaaS-and-DevOps` starter applic
 
    ![A build and Docker deployment success message is displayed in the console output in Jenkins.](media/jenkins-build-console-output-success.png "Build and Docker deployment success")
 
-8. When the deployment is complete, you can verify the changes deployed successfully by navigating to your App Service instance in the Azure portal and selecting the URL on the overview blade. The deployment of the container can take several minutes to complete, so refreshes may take a few minutes to show the new header.
+8. When the deployment is complete, you can verify the changes deployed successfully by navigating to your Web App for Containers instance in **hands-on-lab-web-SUFFIX** resource group in the Azure portal and selecting the URL on the overview blade. The deployment of the container can take several minutes to complete, so refreshes may take a few minutes to show the new header.
 
    > **Tip**: It may help to open the app in an Incognito or InPrivate browser window, as the old page may be cached.
 
@@ -1377,70 +1379,67 @@ In this task, you create a function that function sends all new orders to a queu
 
 1. In the [Azure portal](https://portal.azure.com), navigate to your Function App by selecting it from the list of resources in the **hands-on-lab-func-SUFFIX** resource group.
 
-2. From the left-hand menu on your **Function Apps** blade, select **Functions**, then select **+New function**.
+2. From the left-hand menu on your **Function Apps** blade, select **Functions**, then select **+ Add**.
 
-   ![Functions is selected and highlighted in the left-hand menu on the Function Apps blade, and + New function is highlighted on the right.](media/function-app-new.png "Function Apps blade")
+   ![Functions is selected and highlighted in the left-hand menu on the Function Apps blade, and + Add is highlighted on the right.](media/function-app-new.png "Function Apps blade")
 
-3. In the trigger search box, select the **Timer trigger**.
+3. In the trigger search box, enter "timer" and select the **Timer trigger**.
 
-   ![The Timer trigger box is displayed.](media/function-timer-trigger.png "Timer trigger")
+   ![Timer is entered into the search box and the Timer trigger box is highlighted.](media/function-timer-trigger.png "Timer trigger")
 
 4. In the **Timer trigger** dialog, enter the following:
 
-   - **Name**: Enter "OrdersTimerTrigger"
+   - **Name**: Enter **OrdersTimerTrigger**.
    - **Schedule**: Leave the default value, `0 */5 * * * *`. This will execute the trigger every 5 minutes.
-   - Select **Create**.
+   - Select **Create Function**.
 
    ![The information above is entered in the Timer trigger blade.](media/function-app-new-function.png "Timer trigger blade")
 
-5. After the function is created, select **Integrate** under the new function.
+5. After the function is created, select **Integration** under Developer on the new function's left-hand menu.
 
-   ![Integrate is selected and highlighted under the new function.](media/function-app-integrate.png "New function menu")
+   ![Integration is selected and highlighted under the new function.](media/function-app-integrate.png "New function menu")
 
-6. Next, select **+New Output**, select **Azure Queue Storage**, and choose **Select**.
+6. Next, select **+ Add Output**.
 
-   ![+ New Output is highlighted under Outputs, Azure Queue Storage is selected below it, and Select is selected at the bottom.](media/function-app-new-output.png "Select Azure Queue Storage")
+   ![+ Add Output is highlighted under Outputs, Azure Queue Storage is selected below it, and Select is selected at the bottom.](media/function-app-new-output.png "Select Azure Queue Storage")
 
-7. Install extensions, if prompted to do so.
+7. In the **Create Output** dialog, enter the following:
 
-   ![Extensions not installed warning.](media/function-app-install-extensions.png "Install")
-
-8. For the **Azure Queue Storage output**, enter the following:
-
-   - **Message parameter name**: outputQueue
-   - **Queue name:** orderqueue (all lowercase, as casing matters)
+   - **Binding Type**: Select Azure Queue Storage.
+   - **Message parameter name**: Enter `outputQueue`.
+   - **Queue name**: Enter `orderqueue` (all lowercase, as casing matters)
    - **Storage account collection:** Select **AzureWebJobsStorage** from the list (this is the bestforyouordersSUFFIX storage account you created when you provisioned your Function App).
-   - Select **Save**.
+   - Select **OK**.
 
    ![The information above is entered in the Azure Queue Storage output dialog box, and Save is selected at the bottom.](media/function-app-storage-queue-output.png "Azure Queue Storage output page")
 
-9. Now, select the **bestforyouorders** Function App in the left-hand menu, and then select the **Platform features** tab. On the Platform features tab, select **Advanced tools (Kudu)** under Development tools.
+8. Now, return to the **bestforyouorders** Function App page in the Azure portal and in the left-hand menu, and then select **Advanced Tools** under the **Development Tools** section. On the Advanced Tools blade, select **Go**.
 
-   ![The bestforyouorders Function App is selected and highlighted in the left-hand menu, the Platform features tab is selected, and the Advanced tools (Kudu) link is highlighted under Development tools.](media/function-app-platform-features-kudu.png "Platform features tab")
+   ![Advanced Tools in selected and highlighted under Development tools on the bestforyouorders Function App blade. The Advanced tools blade is displayed with the Go link highlighted.](media/function-app-platform-features-kudu.png "Function App Advanced Tools")
 
-10. In the new browser window that opens, select **Debug console -> PowerShell** from the top menu.
+9. In the new browser window that opens, select **Debug console -> PowerShell** from the top menu.
 
     ![The Kudu window is displayed with Debug console, PowerShell highlighted in the menu.](media/kudu-debug-console.png "Kudu")
 
-11. In the Kudu file browser, navigate to `home\site\wwwroot`.
+10. In the Kudu file browser, navigate to `home\site\wwwroot`.
 
     ![The site folder is highlighted in the Kudu file browser.](media/kudu-file-browser-site.png "Site")
 
     ![The wwwroot folder is highlighted in the Kudu file browser.](media/kudu-file-browser-wwwroot.png "wwwroot")
 
-12. In the `wwwroot` folder, select **+** and then select **New file** to add a new file.
+11. In the `wwwroot` folder, select **+** and then select **New file** to add a new file.
 
     ![The new file (+) icon is highlighted, and New file is highlighted in the context menu.](media/kudu-file-browser-new-file.png "New file")
 
-13. Enter `package.json` as the name of the file and press Enter.
+12. Enter `package.json` as the name of the file and press Enter.
 
     ![The name of the new file is entered as package.json.](media/kudu-file-browser-package-json.png "package.json")
 
-14. After creating the new file, select the pencil (Edit) icon next to it.
+13. After creating the new file, select the pencil (Edit) icon next to it.
 
     ![The pencil icon is highlighted next to package.json.](media/kudu-file-browser-edit-package-json.png "package.json")
 
-15. Copy and paste the following JSON into the file editor and then select **Save**.
+14. Copy and paste the following JSON into the file editor and then select **Save**.
 
     ```json
     {
@@ -1453,7 +1452,7 @@ In this task, you create a function that function sends all new orders to a queu
 
     ![The JSON above is entered into the file editor screen, and the Save button is highlighted.](media/kudu-file-editor.png "File editor")
 
-16. In the Kudu Remote Execution Console, run the following at the command prompt:
+15. In the Kudu Remote Execution Console, run the following at the command prompt:
 
     ```powershell
     npm install
@@ -1463,9 +1462,13 @@ In this task, you create a function that function sends all new orders to a queu
 
     > **Note**: The addition of the `mongodb` dependency is necessary because the Cosmos DB MongoDB API cannot be used to bind a Function App to Cosmos DB. Only the SQL API is currently compatible with Function App triggers.
 
-17. Return to your Function App blade in the Azure portal and select the **OrdersTimerTrigger** function in the left-hand menu.
+16. Return to your Function App blade in the Azure portal, select **Functions** from the left-hand menu and then select the **OrdersTimerTrigger** function in the list of functions.
 
-    ![The OrdersTimerTrigger function is selected in the left-hand menu.](media/function-app-orders-timer-trigger.png "Left menu")
+    ![Functions is selected in the left-hand menu and the OrdersTimerTrigger is highlighted in the functions list.](media/function-app-orders-timer-trigger.png "Functions list")
+
+17. On the OrdersTimerTrigger blade, select **Code + Test** from the left-hand menu.
+
+    ![Code + Test is highlighted under Developer on the Azure Function menu.](media/function-app-code-test.png "Function Code + Test")
 
 18. To get the code for the `OrdersTimerTrigger` function, go into the project in VS Code, expand the `Hands-on lab/lab-files/AzureFunctions` folder, and open the `OrdersTimerTrigger.js` file.
 
@@ -1479,30 +1482,38 @@ In this task, you create a function that function sends all new orders to a queu
 
     ![This is a screenshot of the index.js block.](media/function-app-index-js.png "Index.js block")
 
-22. Next, select **Save and run** above the code block to trigger the function and observe it running in the Logs block.
+22. Select **Save** on the Function toolbar.
+
+    ![The Save button is highlighted on the Function toolbar.](media/function-app-save-code.png "Function App toolbar")
+
+23. Next, select **Test/Run** on the toolbar.
+
+    ![The Test/Run button is highlighted on the Function toolbar.](media/function-app-test-run.png "Function App toolbar")
+
+24. Observe the function running in the Logs block.
 
     ![Logs is highlighted below the code block.](media/function-app-logs.png "Select Logs")
 
-23. Return to the starter application in your browser window, and select **Sign In**.
+25. Return to the starter application in your browser window, and select **Sign In**.
 
     ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the starter application, and Sign In is highlighted at the top.](media/bfyo-web-sign-in.png "Sign in to the starter application")
 
-24. On the Login screen, enter the following credentials, and select **Login**:
+26. On the Login screen, enter the following credentials, and select **Login**:
 
     - **Email address:** <demouser@bfyo.com>
     - **Password:** Password.1!!
 
     ![The credentials above are entered in the Login page.](media/bfyo-web-login-page.png "Login page")
 
-25. After logging in, you will be returned to the home page. Choose **Select this plan** for any of the plans.
+27. After logging in, you will be returned to the home page. Choose **Select this plan** for any of the plans.
 
     ![Two Person Plan, High-Pro Plan, and Four Person Plan boxes are visible in this screenshot of the home page, and all three boxes' Select this plan buttons are highlighted.](media/bfyo-web-plans.png "Select a plan")
 
-26. On the **Place Order** screen, select **Place Order**. This will create a new order in the Cosmos DB `orders` collection. Within 5 minutes, the Timer trigger of your function will fire and then send the order on to the `orderqueue` for processing.
+28. On the **Place Order** screen, select **Place Order**. This will create a new order in the Cosmos DB `orders` collection. Within 5 minutes, the Timer trigger of your function will fire and then send the order on to the `orderqueue` for processing.
 
     ![The Place Order button is highlighted at the bottom of the Place Order page.](media/bfyo-place-order.png "Place your order page")
 
-27. Finally, verify items are being written to the order queue, by going to the queue in the Azure Storage account, and observing that items have been added to the `orderqueue`.
+29. Finally, verify items are being written to the order queue, by going to the queue in the Azure Storage account, and observing that items have been added to the `orderqueue`.
 
     ![The Refresh button is highlighted in the Azure Storage account, and Message Text appears in the order queue below.](media/storage-queue-items.png "Messages blade")
 
@@ -1512,82 +1523,87 @@ In this task, you create a second function, which is triggered by the output of 
 
 This uses an Azure Storage Queue trigger, and an input dataset from Cosmos DB, pulling in customers. The output dataset is the Azure Cosmos DB orders table. The update sets `processed = true` and the `processedDate` to today's date.
 
-1. Select **Integrate** under the OrdersTimerTrigger function, then select **Azure Queue Storage (outputQueue)** under **Outputs**.
+1. In the Azure portal, navigate to the **bestforyouorders** Function app, select **Functions** from the left-hand menu and then select **+ Add**.
 
-   ![Azure Queue Storage (outputQueue) is selected and highlighted under Outputs in the OrdersTimerTrigger function.](media/function-app-output-storage-queue.png "Outputs section")
+   ![Functions is selected and highlighted in the left-hand menu on the Function Apps blade, and + Add is highlighted on the right.](media/function-app-new.png "Function Apps blade")
 
-2. Under **Actions** for the output, select **Go** next to **Create a new function triggered by this output**.
-
-   ![The Go button is next to Create a new function triggered by this output under Actions.](media/function-app-actions-go.png "Actions section")
-
-3. Select **Azure Queue Storage trigger** from the list.
+2. On the New Function dialog, enter "queue" onto the search filter and select **Azure Queue Storage trigger** from the list.
 
    ![This is a screenshot of the Queue trigger box.](media/azure-queue-storage-trigger.png "Queue trigger box")
 
-4. On the **Queue trigger New Function** dialog, enter the following:
+3. On the **Queue trigger New Function** dialog, enter the following:
 
-   - **Name:** Enter `ProcessOrders`
-   - **Queue name:** Enter `orderqueue`
+   - **New Function:** Enter `ProcessOrders`.
+   - **Queue name:** Enter `orderqueue`.
    - **Storage account connection:** Select **AzureWebJobsStorage**.
-   - Select **Create**.
+   - Select **Create Function**.
 
    ![The information above is entered in the Queue trigger New Function dialog box.](media/process-orders-function.png "Queue trigger New Function dialog box")
 
-5. When the function has been created, select **Integrate** under the **ProcessOrders** function, change the Message parameter name to "orderToProcess" for the **Azure Queue storage trigger**, and select **Save**.
+4. When the function has been created, select **Integration** on the ProcessOrders Function blade.
 
-   ![Integrate is selected and highlighted under the ProcessOrders function on the left, and orderToProcess is highlighted in the Message parameter name box on the right.](media/function-app-integrate-process-orders.png "Azure Queue Storage trigger section")
+   ![Integration is selected and highlighted under the new function.](media/function-app-integrate.png "New function menu")
 
-6. Now, select **+New Output**, select **Azure Queue Storage**, and choose **Select**.
+5. On the Integration blade, select **Azure Queue Storage (myQueueItem)** under **Trigger**.
 
-   ![+ New Output is highlighted under Outputs, Azure Queue Storage is selected below it, and Select is selected at the bottom.](media/function-app-new-output-storage-queue.png "Outputs section")
+   ![The Integration blade of the ProcessOrders function is displayed and the Azure Queue Storage (myQueueItem) trigger is highlighted.](media/function-integration-process-orders.png "Function Integration")
 
-7. For the **Azure Queue Storage output**, enter the following:
+6. On the Edit Trigger dialog, change the Message parameter name to "orderToProcess" and select **Save**.
 
-   - **Message parameter name**: Enter `outputQueue`
-   - **Queue name:** Enter `notificationqueue` (all lowercase, as casing matters)
+   ![The value of "orderToProcess" is highlighted in the Message parameter name box on the Edit Trigger dialog.](media/function-app-integrate-process-orders.png "Azure Queue Storage trigger section")
+
+7. Now, select **+ Add output**
+
+   ![+ Add output in highlighted under Outputs on the Integration blade of the ProcessOrders function.](media/function-app-process-orders-add-output.png "Integration Outputs")
+
+8. On the Create Output dialog, enter the following:
+
+   - **Binding Type**: Select **Azure Queue Storage**.
+   - **Message parameter name**: Enter `outputQueue`.
+   - **Queue name:** Enter `notificationqueue` (all lowercase, as casing matters).
    - **Storage account collection:** Select **AzureWebJobsStorage** from the list.
-   - Select **Save**.
+   - Select **OK**.
 
    ![The information above is entered in the Azure Queue Storage output dialog box.](media/function-app-azure-queue-storage-output.png "Azure Queue Storage output dialog box")
 
-8. Now, select the **ProcessOrders** function in the left-hand menu.
+9. Now, select the **ProcessOrders** function on the Integration blade.
 
-   ![The ProcessOrders function is selected and highlighted in the left-hand menu.](media/function-app-process-orders.png "Left menu")
+   ![The ProcessOrders function is selected and highlighted on the Integration blade.](media/function-app-process-orders.png "Integration Function")
 
-9. To get the code for the **ProcessOrders** function, go into the project in VS Code, expand the `Hands-on lab/lab-files/AzureFunctions` folder, select `ProcessOrders.js`, and copy all the code in the file.
+10. To get the code for the **ProcessOrders** function, go into the project in VS Code, expand the `Hands-on lab/lab-files/AzureFunctions` folder, select `ProcessOrders.js`, and copy all the code in the file.
 
-10. Return to the **ProcessOrders** Function in the Azure portal and paste the code into the `index.js` block, overwriting all the existing code, and select **Save**. Your `index.js` file should now look like the following:
+11. Return to the **ProcessOrders** Function in the Azure portal and paste the code into the `index.js` block, overwriting all the existing code, and select **Save**. Your `index.js` file should now look like the following:
 
     ![The code for the ProcessOrders function is pasted in the index.js block.](media/function-app-code-process-orders.png "Index.js block")
 
-11. Next, select **Logs** below the code block, so you can observe the Function being called during the next steps.
+12. Next, select **Logs** below the code block, so you can observe the Function being called during the next steps.
 
     ![Logs is highlighted below the code block.](media/function-app-logs-bar.png "Select Logs")
 
-12. To trigger the function, return to the starter application in your browser window. If you are still logged in, select **Logout**. Then, select **Sign In**, and on the **Sign In** screen, select **Register**.
+13. To trigger the function, return to the starter application in your browser window. If you are still logged in, select **Logout**. Then, select **Sign In**, and on the **Sign In** screen, select **Register**.
 
     ![In this screenshot of the starter application, Sign In is highlighted at the top, and the Register button is highlighted below.](media/bfyo-web-register.png "Sign in to the starter application")
 
     > **Note**: You may need to select **Logout** if you are still logged in with the demouser account.
 
-13. Complete the registration form. Be sure to include a valid email address so you can receive notifications of order processing in the next exercise. (If you opt not to enter a valid email address, you can still complete the next Exercise, but will not receive the email notifications that your order has been processed.)
+14. Complete the registration form. Be sure to include a valid email address so you can receive notifications of order processing in the next exercise. (If you opt not to enter a valid email address, you can still complete the next Exercise, but will not receive the email notifications that your order has been processed.)
 
     - You only need to enter data into the **First name**, **Last name**, and **email address** fields. All other fields have been pre-populated to save time.
     - The password has been set to `Password.1!!`. If you choose to enter a different password, note that when you log into the account.
 
-14. After registering, you should be automatically logged into the site. If not, select **Sign In** from the Home page, enter the email address you provided during registration and the password (`Password.1!!`) on the login screen, and then select **Login**.
+15. After registering, you should be automatically logged into the site. If not, select **Sign In** from the Home page, enter the email address you provided during registration and the password (`Password.1!!`) on the login screen, and then select **Login**.
 
-15. Select the **Select this plan** button for any plan on the home page, and on the Order screen, select **Place Order**.
+16. Select the **Select this plan** button for any plan on the home page, and on the Order screen, select **Place Order**.
 
     ![The Place Order button is highlighted on the Order page.](media/bfyo-place-order.png "Order page")
 
-16. Return to your **ProcessOrders** function page in the Azure portal and observe the logs.
+17. Return to your **ProcessOrders** function page in the Azure portal and observe the logs.
 
     ![A notification is highlighted in the logs on the ProcessOrders Function page in the Azure portal.](media/function-app-logs-notification-sent.png "ProcessOrders Function page")
 
     > **Note**: It can take up to five minutes for the OrdersTimerTrigger to fire. The ProcessOrders function will fire immediately after the OrderTimerTrigger function.
 
-17. Your order was sent to the notificationqueue and is pending the notification being sent to your email address.
+18. Your order was sent to the notificationqueue and is pending the notification being sent to your email address.
 
 ## Exercise 7: Create Logic App for sending email notifications
 
@@ -1621,8 +1637,8 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
    **Account details**:
 
-   - **Name**: Enter `bfyoemail`
-   - **Password**: Enter `Password.1!!`
+   - **Name**: **bfyoemail**
+   - **Password**: **Password.1!!**
    - **Pricing tier**: Select the **Free** plan.
 
    **Contact details**:
@@ -1651,7 +1667,7 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
 10. On the Create API Key page, enter the following:
 
-    - **API Key Name**: Enter `bfyo-api-key`
+    - **API Key Name**: Enter `bfyo-api-key`.
     - **API Key Permissions**: Select **Full Access**.
     - Select **Create & View**.
 
@@ -1665,7 +1681,7 @@ In this task, you will create a SendGrid account through the Azure portal to sen
 
 In this task, you create a new Logic App, which uses the SendGrid connector to send email notifications to users, informing them that their order has processed and shipped.
 
-1. In the Azure portal, navigate to your Logic App in the **hands-on-lab-SUFFIX** resource group.
+1. In the Azure portal, navigate to the **OrderNotifications** Logic App in the **hands-on-lab-SUFFIX** resource group.
 
 2. In the Logic App Designer, select **Blank Logic App** under **Templates**.
 
@@ -1738,7 +1754,7 @@ In this task, you create a new Logic App, which uses the SendGrid connector to s
 
 17. In the **SendGrid** box, enter the following:
 
-    - **Connection Name**: Enter `bfyo-sendgrid`
+    - **Connection Name**: Enter `bfyo-sendgrid`.
     - **SendGrid Api Key**: Return to the **API Key Created** screen in your SendGrid account, and then copy and paste the API key you generated.
     - Select **Create**.
 
@@ -1751,7 +1767,7 @@ In this task, you create a new Logic App, which uses the SendGrid connector to s
 
     ![See more is highlighted under Parse JSON in the dynamic content dialog.](media/logic-app-dynamic-content-see-more.png "Dynamic content")
 
-    - **Subject**: Enter "Order #: " and then select **orderId** from the dynamic content dialog.
+    - **Subject**: Enter "Order: " and then select **orderId** from the dynamic content dialog.
     - **Email body**: Select **firstName** from the dynamic content dialog, and then enter ", Your Best For You Organics Company order has shipped."
 
     ![The Send email (V3) dialog is completed with the values specified above.](media/logic-app-send-email-v2-complete.png "Send email (V3)"))
@@ -1791,6 +1807,8 @@ In this exercise, you will de-provision all Azure resources that you created in 
 1. In the Azure portal, select **Resource groups** from the left-hand menu and locate and delete the following resource groups.
 
    - hands-on-lab-SUFFIX
+   - hands-on-lab-func-SUFFIX
+   - hands-on-lab-jenkins-SUFFIX
    - hands-on-lab-web-SUFFIX
 
 ### Task 2: Delete WebHooks and Service Integrations
