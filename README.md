@@ -1,3 +1,5 @@
+## Effective December 1, 2020 this workshop will be archived.  Materials remain available through November but are no longer being maintained.
+
 # OSS PaaS and DevOps
 
 Best For You Organics Company is one of the leading online health food suppliers in North America, serving customers in Canada, Mexico, and the United States. They launched their highly-successful e-commerce website, which sells subscriptions to their meal service, in 2016, and have been steadily increasing their subscriber-base since. Their service caters to working professionals looking for convenient, reliable access to healthy meal choices, and pre-packaged recipes without having to spend too much time preparing the meals.
@@ -61,16 +63,3 @@ At the end of this hands-on lab, you will be better able to migrate and deploy O
 ## Related references
 
 - [MCW](https://github.com/Microsoft/MCW)
-
-## Help & Support
-
-We welcome feedback and comments from Microsoft SMEs & learning partners who deliver MCWs.  
-
-***Having trouble?***
-- First, verify you have followed all written lab instructions (including the Before the Hands-on lab document).
-- Next, submit an issue with a detailed description of the problem.
-- Do not submit pull requests. Our content authors will make all changes and submit pull requests for approval.  
-
-If you are planning to present a workshop, *review and test the materials early*! We recommend at least two weeks prior.
-
-### Please allow 5 - 10 business days for review and resolution of issues.
