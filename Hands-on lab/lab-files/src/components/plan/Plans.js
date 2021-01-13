@@ -58,6 +58,7 @@ export default class Plans extends Component {
 
         return (
             <div class="container">
+                <h3>Welcome to handsonlabjps3 Miguel</h3>
                 <Grid>
                     <div class="plans">
                         <Row>{planCatalog}</Row>
